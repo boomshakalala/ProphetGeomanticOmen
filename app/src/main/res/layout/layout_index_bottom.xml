@@ -16,7 +16,7 @@
         android:drawablePadding="5px"
         android:textSize="24px"
         android:textColor="@drawable/selector_index_tab_text_color"
-        android:text="@string/text_index_home_tab"/>
+        android:text="@string/text_home"/>
     <TextView
         android:id="@+id/btn_index_discover"
         android:layout_width="0px"
@@ -27,7 +27,7 @@
         android:drawablePadding="5px"
         android:textSize="24px"
         android:textColor="@drawable/selector_index_tab_text_color"
-        android:text="@string/text_index_discover_tab"/>
+        android:text="@string/text_discover"/>
     <TextView
         android:id="@+id/btn_index_shop"
         android:layout_width="0px"
@@ -38,7 +38,7 @@
         android:drawablePadding="5px"
         android:textSize="24px"
         android:textColor="@drawable/selector_index_tab_text_color"
-        android:text="@string/text_index_shop_tab"/>
+        android:text="@string/text_shop"/>
     <TextView
         android:id="@+id/btn_index_mine"
         android:layout_width="0px"
@@ -49,5 +49,5 @@
         android:drawablePadding="5px"
         android:textSize="24px"
         android:textColor="@drawable/selector_index_tab_text_color"
-        android:text="@string/text_index_mine_tab"/>
+        android:text="@string/text_me"/>
 </LinearLayout>

@@ -98,11 +98,11 @@ public class AutoTabLayout extends TabLayout
         ViewGroup tabContainer = (ViewGroup) tabGroup.getChildAt(tab.getPosition());
         TextView textView = (TextView) tabContainer.getChildAt(1);
 
-
-        if (AutoUtils.autoed(textView))
-        {
-            return;
-        }
+//
+//        if (AutoUtils.autoed(textView))
+//        {
+//            return;
+//        }
         int autoTextSize = 0 ;
         if (mTextSizeBaseWidth)
         {

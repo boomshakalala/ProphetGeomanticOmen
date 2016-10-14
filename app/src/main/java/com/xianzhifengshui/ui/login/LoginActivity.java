@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.base.BaseActivity;
+import com.xianzhifengshui.ui.register.RegisterActivity;
 
 /**
  * 作者: 陈冠希
@@ -30,16 +31,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,Vi
     private Button loginBtn;
     private ImageButton backBtn;
     private TextView forgetPwdBtn;
-    private TextView signBtn;
+    private TextView registerBtn;
     /*========================*/
     private LoginContract.Presenter presenter;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initData();
-        initViews();
-    }
 
     @Override
     protected void initData() {
@@ -53,14 +47,14 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,Vi
         passwordEt = (EditText) findViewById(R.id.edit_password_login);
         loginBtn = (Button) findViewById(R.id.btn_login);
         forgetPwdBtn = (TextView) findViewById(R.id.btn_login_forget_pwd);
-        signBtn = (TextView) findViewById(R.id.btn_login_sign);
+        registerBtn = (TextView) findViewById(R.id.btn_login_register);
         backBtn.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
         forgetPwdBtn.setOnClickListener(this);
-        signBtn.setOnClickListener(this);
+        registerBtn.setOnClickListener(this);
     }
 
-    public static void launcher(Activity context,int requestCode,int resultCode){
+    public static void launcher(Activity context,int requestCode){
         Intent intent = new Intent(context,LoginActivity.class);
         context.startActivityForResult(intent,requestCode);
     }
@@ -93,9 +87,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,Vi
                 //TODO:跳转到忘记密码页面
 
                 break;
-            case R.id.btn_login_sign:
-                //TODO:跳转到注册页面
-
+            case R.id.btn_login_register:
+                //跳转到注册页面
+                RegisterActivity.luncher(this);
                 break;
             default:
                 break;

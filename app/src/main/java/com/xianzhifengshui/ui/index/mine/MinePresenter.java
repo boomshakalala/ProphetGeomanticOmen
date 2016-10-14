@@ -29,7 +29,7 @@ public class MinePresenter extends BasePresenter implements MineContract.Present
             if (needUpdateUI)
                 view.showDefaultInfo();
             if (needJump)
-                view.toLoginActivity();
+                view.toLoginActivity(opt);
         }
     }
 

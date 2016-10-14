@@ -11,4 +11,6 @@ public class AppConfig {
     public static String SP_NAME = "config";
 
     public static int PAGE_SIZE = 10;
+
+    public static int RESULT_LOGIN = 1;
 }

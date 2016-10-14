@@ -1,5 +1,6 @@
 package com.xianzhifengshui.ui.index.mine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +9,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xianzhifengshui.R;
+import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.ui.login.LoginActivity;
 import com.xianzhifengshui.widget.CircleImageView;
+
+import java.util.IllegalFormatCodePointException;
+import java.util.concurrent.BrokenBarrierException;
 
 /**
  * 作者: 陈冠希
@@ -19,6 +24,11 @@ import com.xianzhifengshui.widget.CircleImageView;
  */
 public class MineFragment extends BaseFragment implements View.OnClickListener,MineContract.View {
 
+
+    public static final int OPT_MY_MASTER = 1;//跳转到我的大师页
+    public static final int OPT_MY_LECTURE = 2;//跳转到我的讲座页
+    public static final int OPT_MY_TOPIC = 3;//跳转到我的话题页
+    public static final int OPT_BECOME_MASTER = 4;//跳转到成为大师页
     /*======= 控件声明区 =======*/
     private RelativeLayout loginBtn;
     private RelativeLayout myMastBtn;
@@ -27,9 +37,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
     private RelativeLayout becomeMasterBtn;
     private RelativeLayout helpBtn;
     private RelativeLayout settingBtn;
-    private CircleImageView avatarImage;
-    private TextView nickNameText;
-    private TextView userNameText;
+    private CircleImageView avatarIv;
+    private TextView nickNameTv;
+    private TextView userNameTv;
     /*=========================*/
 
     private MineContract.Presenter presenter;
@@ -47,9 +57,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
         becomeMasterBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_become_master);
         helpBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_help);
         settingBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_setting);
-        avatarImage = (CircleImageView) rootView.findViewById(R.id.image_mine_avatar);
-        userNameText = (TextView) rootView.findViewById(R.id.text_mine_user_name);
-        nickNameText = (TextView) rootView.findViewById(R.id.text_mine_nick_name);
+        avatarIv = (CircleImageView) rootView.findViewById(R.id.image_mine_avatar);
+        userNameTv = (TextView) rootView.findViewById(R.id.text_mine_user_name);
+        nickNameTv = (TextView) rootView.findViewById(R.id.text_mine_nick_name);
         loginBtn.setOnClickListener(this);
         myMastBtn.setOnClickListener(this);
         myLectureBtn.setOnClickListener(this);
@@ -80,58 +90,75 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
         if (v.getId() == R.id.btn_mine_setting){
             //TODO:跳转到设置页面
 
-        }else{
-            presenter.checkIsLoginJump(sp,v.getId());
+        }else if (v.getId() == R.id.btn_mine_help){
+            //TODO:跳转到帮助与反馈页面
+
+        }else {
+            int opt = 0;
+            switch (v.getId()){
+                case R.id.btn_mine_my_master:
+                    //TODO:跳转到我的大师页面
+                    opt = OPT_MY_MASTER;
+                    break;
+                case R.id.btn_mine_my_lecture:
+                    //TODO:跳转到我的讲座页面
+                    opt = OPT_MY_LECTURE;
+                    break;
+                case R.id.btn_mine_my_topic:
+                    //TODO:跳转到我的话题页面
+                    opt = OPT_MY_TOPIC;
+                    break;
+                case R.id.btn_mine_become_master:
+                    //TODO:跳转到成为大师页面
+                    opt = OPT_BECOME_MASTER;
+                    break;
+                default:
+                    opt = 0;
+                    break;
+            }
+            presenter.checkIsLoginJump(sp,opt);
         }
     }
 
     @Override
     protected void initToolbar() {
         super.initToolbar();
-        toolbar.setTitle(R.string.text_index_mine_tab);
+        toolbar.setTitle(R.string.text_me);
     }
 
     @Override
-    public void toLoginActivity() {
-        LoginActivity.launcher(getContext());
+    public void toLoginActivity(int opt) {
+        LoginActivity.launcher(activity,opt);
     }
 
     @Override
     public void showLoginInfo() {
-        nickNameText.setText("屎蛋儿");
-        userNameText.setText("18631565231");
-        avatarImage.setImageResource(R.drawable.pic);
+        nickNameTv.setText("屎蛋儿");
+        userNameTv.setText("18631565231");
+        avatarIv.setImageResource(R.drawable.pic);
     }
 
     @Override
     public void showDefaultInfo() {
-        nickNameText.setText("点击登录");
-        userNameText.setText("登录后更精彩哦~");
-        avatarImage.setImageResource(R.drawable.avatar_not_login_icon);
+        nickNameTv.setText("点击登录");
+        userNameTv.setText("登录后更精彩哦~");
+        avatarIv.setImageResource(R.drawable.avatar_not_login_icon);
     }
 
     @Override
-    public void jumpToActivity(int id) {
-        switch (id){
-            case R.id.btn_mine_my_master:
-                //TODO:跳转到我的大师页面
-
+    public void jumpToActivity(int opt) {
+        switch (opt){
+            case OPT_MY_MASTER:
+                log("跳转到我的大师页面");
                 break;
-            case R.id.btn_mine_my_lecture:
-                //TODO:跳转到我的讲座页面
-
+            case OPT_MY_LECTURE:
+                log("跳转到我的讲座页面");
                 break;
-            case R.id.btn_mine_my_topic:
-                //TODO:跳转到我的话题页面
-
+            case OPT_MY_TOPIC:
+                log("跳转到我的话题页面");
                 break;
-            case R.id.btn_mine_become_master:
-                //TODO:跳转到成为大师页面
-
-                break;
-            case R.id.btn_mine_help:
-                //TODO:跳转到帮助反馈页面
-
+            case OPT_BECOME_MASTER:
+                log("跳转到成为大师页面");
                 break;
         }
     }
@@ -151,5 +178,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
         showToast(text);
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == AppConfig.RESULT_LOGIN){
+            presenter.checkIsLogin(sp,true,true,requestCode);
+        }
+    }
 }

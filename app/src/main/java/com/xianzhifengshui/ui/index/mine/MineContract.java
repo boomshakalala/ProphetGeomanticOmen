@@ -11,7 +11,7 @@ import com.xianzhifengshui.utils.SPUtils;
  */
 public interface MineContract {
     interface View extends IView<Presenter>{
-        void toLoginActivity();
+        void toLoginActivity(int id);
         void showLoginInfo();
         void showDefaultInfo();
         void jumpToActivity(int id);
