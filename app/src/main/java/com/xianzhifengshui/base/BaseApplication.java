@@ -8,7 +8,7 @@ import com.xianzhifengshui.utils.XImageLoader;
 import com.zhy.autolayout.config.AutoLayoutConifg;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/9/27.
  * 描述: 自定义应用入口
  */

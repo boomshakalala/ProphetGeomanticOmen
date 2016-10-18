@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import com.xianzhifengshui.R;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/9/29.
  * 描述: 进度条动画效果
  */

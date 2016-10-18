@@ -4,7 +4,7 @@ import com.xianzhifengshui.base.BasePresenter;
 import com.xianzhifengshui.utils.SPUtils;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/10/13.
  * 描述: 个人中心页面控制器
  */
@@ -19,7 +19,7 @@ public class MinePresenter extends BasePresenter implements MineContract.Present
     @Override
     public void checkIsLogin(SPUtils sp,boolean needUpdateUI,boolean needJump,int opt) {
         boolean isLogin = sp.getBoolean("isLogin");
-        if (isLogin){
+        if (!isLogin){
             if (needUpdateUI)
                 view.showLoginInfo();
             if (needJump){

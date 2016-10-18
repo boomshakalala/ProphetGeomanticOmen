@@ -8,7 +8,7 @@ import com.xianzhifengshui.common.RecyclerViewHolder;
 import java.util.List;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/10/11.
  * 描述: 话题分类列表适配器
  */

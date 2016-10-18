@@ -33,5 +33,16 @@
     <string name="please_input_verify_code">请输入验证码</string>
     <string name="please_input_your_phone_number">请输入手机号</string>
     <string name="text_get_verify_code">获取验证码</string>
+    <string name="text_avatar">头像</string>
+    <string name="text_nickname">昵称</string>
+    <string name="text_real_name">真实姓名</string>
+    <string name="text_gender">性别</string>
+    <string name="text_age">年龄</string>
+    <string name="text_address">所在城市</string>
+    <string name="text_job">行业及个人简历</string>
+    <string name="text_edit_user_info">编辑资料</string>
+    <string name="text_save">保存</string>
+    <string name="text_zhibi">知币</string>
+    <string name="text_lecture">我的讲座</string>
 
 </resources>

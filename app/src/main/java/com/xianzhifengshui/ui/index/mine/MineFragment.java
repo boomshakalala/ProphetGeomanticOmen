@@ -11,14 +11,17 @@ import android.widget.TextView;
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BaseFragment;
+import com.xianzhifengshui.ui.edituserinfo.EditUserInfoActivity;
 import com.xianzhifengshui.ui.login.LoginActivity;
+import com.xianzhifengshui.ui.mylecture.MyLectureActivity;
+import com.xianzhifengshui.ui.mymaster.MyMasterActivity;
 import com.xianzhifengshui.widget.CircleImageView;
 
 import java.util.IllegalFormatCodePointException;
 import java.util.concurrent.BrokenBarrierException;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/10/10.
  * 描述: 个人中心页
  */
@@ -29,6 +32,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
     public static final int OPT_MY_LECTURE = 2;//跳转到我的讲座页
     public static final int OPT_MY_TOPIC = 3;//跳转到我的话题页
     public static final int OPT_BECOME_MASTER = 4;//跳转到成为大师页
+    public static final int OPT_EDIT_USER_INFO = 5;//
     /*======= 控件声明区 =======*/
     private RelativeLayout loginBtn;
     private RelativeLayout myMastBtn;
@@ -112,6 +116,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
                     //TODO:跳转到成为大师页面
                     opt = OPT_BECOME_MASTER;
                     break;
+                case R.id.btn_mine_login:
+                    //TODO:跳转到编辑个人信息页面
+                    opt = OPT_EDIT_USER_INFO;
+                    break;
                 default:
                     opt = 0;
                     break;
@@ -149,16 +157,19 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
     public void jumpToActivity(int opt) {
         switch (opt){
             case OPT_MY_MASTER:
-                log("跳转到我的大师页面");
+                MyMasterActivity.launcher(activity);
                 break;
             case OPT_MY_LECTURE:
-                log("跳转到我的讲座页面");
+                MyLectureActivity.launcher(activity);
                 break;
             case OPT_MY_TOPIC:
                 log("跳转到我的话题页面");
                 break;
             case OPT_BECOME_MASTER:
                 log("跳转到成为大师页面");
+                break;
+            case OPT_EDIT_USER_INFO:
+                EditUserInfoActivity.launcher(activity);
                 break;
         }
     }

@@ -1,7 +1,7 @@
 package com.xianzhifengshui.common;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/10/11.
  * 描述: MultiItemCommonAdapter 辅助接口
  */

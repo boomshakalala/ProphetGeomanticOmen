@@ -19,7 +19,7 @@ import com.zhy.autolayout.utils.DimenUtils;
 import java.lang.reflect.Field;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2015/12/28.
  * 描述: 支持auto的Toolbar
  */

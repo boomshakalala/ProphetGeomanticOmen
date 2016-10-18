@@ -10,7 +10,7 @@ import com.zhy.autolayout.utils.AutoLayoutHelper;
 import com.zhy.autolayout.utils.AutoUtils;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/10/11.
  * 描述: 标签布局
  */

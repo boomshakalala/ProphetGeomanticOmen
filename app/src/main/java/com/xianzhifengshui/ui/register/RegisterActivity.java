@@ -64,6 +64,21 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_register_back:
+                //返回上一级页面
+                this.finish();
+                break;
+            case R.id.btn_register:
+                //TODO:注册
 
+                break;
+            case R.id.btn_register_get_verify_code:
+                //TODO:获取验证码
+
+                break;
+            default:
+                break;
+        }
     }
 }

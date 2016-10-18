@@ -5,7 +5,7 @@ import com.xianzhifengshui.base.IView;
 import com.xianzhifengshui.utils.SPUtils;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/10/13.
  * 描述: 个人中心mvp接口
  */

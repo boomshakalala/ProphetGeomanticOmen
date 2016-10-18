@@ -18,7 +18,7 @@ import com.zhy.autolayout.AutoLayoutActivity;
 
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/9/28.
  * 描述: 自定义Activity基类
  */
@@ -58,7 +58,7 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
      */
     protected abstract void initData();
 
-    private void initToolbar() {
+    protected void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
     }

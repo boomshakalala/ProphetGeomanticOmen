@@ -13,7 +13,7 @@ import com.xianzhifengshui.utils.XImageLoader;
 import com.zhy.autolayout.utils.AutoUtils;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/10/11.
  * 描述: 通用的ViewHolder RecyclerView 拓展
  */

@@ -17,7 +17,7 @@ import com.xianzhifengshui.ui.index.mine.MineFragment;
 import com.xianzhifengshui.ui.index.shop.ShopFragment;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/10/10.
  * 描述: 先知主页
  */

@@ -19,7 +19,7 @@ import com.xianzhifengshui.base.BaseActivity;
 import com.xianzhifengshui.ui.register.RegisterActivity;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/10/9.
  * 描述: 用户登录页
  */

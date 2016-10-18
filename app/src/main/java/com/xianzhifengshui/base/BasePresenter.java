@@ -5,7 +5,7 @@ import com.xianzhifengshui.api.ApiImpl;
 import com.xianzhifengshui.utils.SPUtils;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/9/29.
  * 描述: Presenter基类
  */

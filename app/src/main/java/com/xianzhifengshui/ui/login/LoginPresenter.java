@@ -10,7 +10,7 @@ import com.xianzhifengshui.utils.SPUtils;
 import com.xianzhifengshui.utils.StringUtils;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/10/9.
  * 描述: 登录页面控制器
  */

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/9/28.
  * 描述: taost封装工具类
  */

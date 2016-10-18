@@ -9,7 +9,7 @@ import com.xianzhifengshui.base.BaseFragment;
 import java.util.List;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/10/10.
  * 描述: 通用的PagerAdapter
  */

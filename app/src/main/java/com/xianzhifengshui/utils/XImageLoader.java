@@ -8,7 +8,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xianzhifengshui.R;
 
 /**
- * 作者: 陈冠希
+ * 作者: chengx
  * 日期: 2016/9/27.
  * 描述: universal-imageloader二次封装类
  */

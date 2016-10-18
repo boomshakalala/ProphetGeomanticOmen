@@ -8,11 +8,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="30px"
-        android:paddingBottom="30px"
-        android:paddingLeft="40px"
-        android:paddingRight="40px"
         android:background="@color/white_dark"
+        android:minHeight="90px"
         >
         <TextView
             android:id="@+id/title"

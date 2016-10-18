@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.xianzhifengshui.ui.mymaster.MyMasterActivity">
+    <include
+        layout="@layout/layout_base_toolbar"/>
+    <com.xianzhifengshui.widget.auto.AutoTabLayout
+        android:id="@+id/tab_my_master"
+        android:layout_width="match_parent"
+        android:layout_height="64px"
+        android:background="@color/white_dark"
+        app:tabIndicatorColor="@color/orange"
+        app:tabSelectedTextColor="@color/orange"
+        app:tabTextColor="@color/black"
+        app:tabTextAppearance="@style/LargeTabLayoutTextStyle"
+        app:auto_textSize_base_width="true"
+        />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager_my_master"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+</LinearLayout>
