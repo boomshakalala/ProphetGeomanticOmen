@@ -95,4 +95,12 @@ public class EditUserInfoActivity extends BaseActivity implements EditUserInfoCo
     public void onClick(View v) {
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (presenter != null) {
+
+        }
+    }
 }

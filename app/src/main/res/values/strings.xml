@@ -14,8 +14,6 @@
     <string name="text_discover">发现</string>
     <string name="text_shop">商城</string>
     <string name="text_me">我</string>
-
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_hot">最火</string>
     <string name="text_local">本地</string>
@@ -44,5 +42,21 @@
     <string name="text_save">保存</string>
     <string name="text_zhibi">知币</string>
     <string name="text_lecture">我的讲座</string>
+    <string name="text_phone_number">手机号码</string>
+    <string name="text_modify_password">修改密码</string>
+    <string name="text_logout">退出登录</string>
+    <string name="text_original_password">原密码</string>
+    <string name="please_input_your_original_password">请输入原始密码</string>
+    <string name="text_new_password">新密码</string>
+    <string name="text_password_rule">6–20字符，区分大小写</string>
+    <string name="text_confirm_password">确认密码</string>
+    <string name="text_please_input_password_again">请再次输入密码</string>
+    <string name="text_help_and_feed">帮助与反馈</string>
+    <string name="text_about_proohet">关于先知</string>
+    <string name="text_use_help">使用帮助</string>
+    <string name="text_user_feed">用户反馈</string>
+    <string name="text_email">邮箱</string>
+    <string name="text_submit_feed">提交反馈</string>
+    <string name="text_tip_feed">请输入您的意见和建议，我们将为您提供更好的服务</string>
 
 </resources>

@@ -25,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_gray"
+                android:minEms="6"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/text_size_smaller"
                 android:text="@string/text_avatar"/>
@@ -60,6 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_gray"
+                android:minEms="6"
                 android:textSize="@dimen/text_size_smaller"
                 android:text="@string/text_nickname"/>
             <EditText
@@ -98,6 +100,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minEms="6"
                 android:textColor="@color/text_gray"
                 android:textSize="@dimen/text_size_smaller"
                 android:text="@string/text_real_name"/>
@@ -137,6 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_gray"
+                android:minEms="6"
                 android:textSize="@dimen/text_size_smaller"
                 android:text="@string/text_gender"/>
             <EditText
@@ -175,6 +179,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_gray"
+                android:minEms="6"
                 android:textSize="@dimen/text_size_smaller"
                 android:text="@string/text_age"/>
             <EditText
@@ -214,6 +219,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_gray"
+                android:minEms="6"
                 android:textSize="@dimen/text_size_smaller"
                 android:text="@string/text_address"/>
             <EditText
@@ -253,6 +259,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_gray"
+                android:minEms="6"
                 android:textSize="@dimen/text_size_smaller"
                 android:text="@string/text_job"/>
             <EditText

@@ -60,7 +60,6 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
 
     protected void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-
     }
 
     private void init() {
