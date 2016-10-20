@@ -163,6 +163,31 @@
 
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/btn_mine_recharge"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="88px"
+                android:layout_marginTop="8px"
+                android:background="@drawable/selector_commen_btn"
+                android:paddingLeft="40px"
+                android:paddingRight="40px"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/text_size_normal"
+                    android:text="@string/text_recharge"/>
+                <ImageView
+                    android:layout_width="16px"
+                    android:layout_height="30px"
+                    android:src="@drawable/arrow_right_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+            <RelativeLayout
                 android:id="@+id/btn_mine_become_master"
                 android:clickable="true"
                 android:layout_width="match_parent"

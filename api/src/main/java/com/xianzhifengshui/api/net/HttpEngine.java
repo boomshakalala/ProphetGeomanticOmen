@@ -26,7 +26,7 @@ import cz.msebera.android.httpclient.Header;
  */
 public class HttpEngine {
     private final String TAG = "HttpEngine";
-    public final String HOST = "http://www.xianzhifengshui/api/";      //服务器主地址
+    public final String HOST = "http://123.56.162.170:8081/prophet/api";      //服务器主地址
     private static final int JSON_SYNTAX_ERROR = -1;
     private static final String JSON_SYNTAX_INFO = "返回数据格式错误";
     private static AsyncHttpClient client;

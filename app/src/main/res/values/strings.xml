@@ -58,5 +58,6 @@
     <string name="text_email">邮箱</string>
     <string name="text_submit_feed">提交反馈</string>
     <string name="text_tip_feed">请输入您的意见和建议，我们将为您提供更好的服务</string>
+    <string name="text_recharge">充值</string>
 
 </resources>

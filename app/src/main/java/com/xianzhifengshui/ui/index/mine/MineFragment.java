@@ -36,6 +36,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
     public static final int OPT_BECOME_MASTER = 4;//跳转到成为大师页
     public static final int OPT_EDIT_USER_INFO = 5;//跳转到修改个人信息页
     public static final int OPT_SETTING = 6;//跳转到设置页
+    public static final int OPT_RECHARGE = 7;//跳转到充值页
     /*======= 控件声明区 =======*/
     private RelativeLayout loginBtn;
     private RelativeLayout myMastBtn;
@@ -44,6 +45,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
     private RelativeLayout becomeMasterBtn;
     private RelativeLayout helpBtn;
     private RelativeLayout settingBtn;
+    private RelativeLayout rechargeBtn;
     private CircleImageView avatarIv;
     private TextView nickNameTv;
     private TextView userNameTv;
@@ -67,6 +69,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
         avatarIv = (CircleImageView) rootView.findViewById(R.id.image_mine_avatar);
         userNameTv = (TextView) rootView.findViewById(R.id.text_mine_user_name);
         nickNameTv = (TextView) rootView.findViewById(R.id.text_mine_nick_name);
+        rechargeBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_recharge);
         loginBtn.setOnClickListener(this);
         myMastBtn.setOnClickListener(this);
         myLectureBtn.setOnClickListener(this);
@@ -74,6 +77,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
         becomeMasterBtn.setOnClickListener(this);
         helpBtn.setOnClickListener(this);
         settingBtn.setOnClickListener(this);
+        rechargeBtn.setOnClickListener(this);
         presenter.checkIsLoginUpdateUI(sp);
     }
 
@@ -123,6 +127,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
                 case R.id.btn_mine_setting:
                     //跳转到设置页面
                     opt = OPT_SETTING;
+                    break;
+                case R.id.btn_mine_recharge:
+                    //TODO: 跳转到充值页面
+                    opt = OPT_RECHARGE;
                     break;
                 default:
                     opt = 0;
@@ -177,6 +185,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
                 break;
             case OPT_SETTING:
                 SettingActivity.launcher(activity);
+                break;
+            case OPT_RECHARGE:
+                log("跳转到充值页面");
                 break;
             default:
                 break;
