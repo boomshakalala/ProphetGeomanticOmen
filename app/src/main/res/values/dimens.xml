@@ -11,6 +11,7 @@
     <dimen name="text_size_large">28px</dimen>
     <dimen name="text_size_larger">36px</dimen>
     <dimen name="text_size_largest">38px</dimen>
+    <dimen name="text_size_super">48px</dimen>
     <dimen name="spline_height_normal">1px</dimen>
 
     <dimen name="indicator_right_padding">10dp</dimen>

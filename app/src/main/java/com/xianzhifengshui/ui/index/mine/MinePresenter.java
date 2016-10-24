@@ -19,7 +19,7 @@ public class MinePresenter extends BasePresenter implements MineContract.Present
     @Override
     public void checkIsLogin(SPUtils sp,boolean needUpdateUI,boolean needJump,int opt) {
         boolean isLogin = sp.getBoolean("isLogin");
-        if (isLogin){
+        if (!isLogin){
             if (needUpdateUI)
                 view.showLoginInfo();
             if (needJump){

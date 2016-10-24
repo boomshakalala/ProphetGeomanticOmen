@@ -59,5 +59,23 @@
     <string name="text_submit_feed">提交反馈</string>
     <string name="text_tip_feed">请输入您的意见和建议，我们将为您提供更好的服务</string>
     <string name="text_recharge">充值</string>
+    <string name="text_my_account">我的账户</string>
+    <string name="text_my_coupon">我的优惠券</string>
+    <string name="text_invite_friends_to_have_gifts">邀请好友有礼</string>
+    <string name="text_account_balance">账户余额</string>
+    <string name="text_withdrawal">提现</string>
+    <string name="text_my_bill">我的账单</string>
+    <string name="text_my_bank_card">我的银行卡</string>
+    <string name="text_recharge_amount">充值金额</string>
+    <string name="text_arrival_amount">到账金额</string>
+    <string name="text_pay_method">支付方式</string>
+    <string name="text_alipay">支付宝</string>
+    <string name="text_wechatpay">微信支付</string>
+    <string name="text_unionpay">银联支付</string>
+    <string name="text_pay">付款</string>
+    <string name="text_recharge_dicount_tip_1">即日起至2017.01.01，先知客户端用户充值即享</string>
+    <string name="text_recharge_discount_tip_2">充100送50</string>
+    <string name="text_recharge_discount_tip_3">特大优惠！</string>
+    <string name="title_activity_my_coupon">MyCouponActivity</string>
 
 </resources>

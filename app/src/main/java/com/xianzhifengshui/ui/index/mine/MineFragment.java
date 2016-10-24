@@ -14,6 +14,9 @@ import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.ui.HelpAndFeedActivity;
 import com.xianzhifengshui.ui.edituserinfo.EditUserInfoActivity;
 import com.xianzhifengshui.ui.login.LoginActivity;
+import com.xianzhifengshui.ui.myaccount.MyAccountActivity;
+import com.xianzhifengshui.ui.myaccount.MyAccountContract;
+import com.xianzhifengshui.ui.mycoupon.MyCouponActivity;
 import com.xianzhifengshui.ui.mylecture.MyLectureActivity;
 import com.xianzhifengshui.ui.mymaster.MyMasterActivity;
 import com.xianzhifengshui.ui.setting.SettingActivity;
@@ -36,7 +39,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
     public static final int OPT_BECOME_MASTER = 4;//跳转到成为大师页
     public static final int OPT_EDIT_USER_INFO = 5;//跳转到修改个人信息页
     public static final int OPT_SETTING = 6;//跳转到设置页
-    public static final int OPT_RECHARGE = 7;//跳转到充值页
+    public static final int OPT_MY_ACCOUNT = 7;//跳转到我的账户页
+    public static final int OPT_MY_COUPON = 8;//跳转到我的优惠券页
     /*======= 控件声明区 =======*/
     private RelativeLayout loginBtn;
     private RelativeLayout myMastBtn;
@@ -45,9 +49,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
     private RelativeLayout becomeMasterBtn;
     private RelativeLayout helpBtn;
     private RelativeLayout settingBtn;
-    private RelativeLayout rechargeBtn;
+    private RelativeLayout myAccountBtn;
+    private RelativeLayout myCouponBtn;
     private CircleImageView avatarIv;
-    private TextView nickNameTv;
     private TextView userNameTv;
     /*=========================*/
 
@@ -68,8 +72,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
         settingBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_setting);
         avatarIv = (CircleImageView) rootView.findViewById(R.id.image_mine_avatar);
         userNameTv = (TextView) rootView.findViewById(R.id.text_mine_user_name);
-        nickNameTv = (TextView) rootView.findViewById(R.id.text_mine_nick_name);
-        rechargeBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_recharge);
+        myAccountBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_my_account);
+        myCouponBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_my_coupon);
         loginBtn.setOnClickListener(this);
         myMastBtn.setOnClickListener(this);
         myLectureBtn.setOnClickListener(this);
@@ -77,7 +81,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
         becomeMasterBtn.setOnClickListener(this);
         helpBtn.setOnClickListener(this);
         settingBtn.setOnClickListener(this);
-        rechargeBtn.setOnClickListener(this);
+        myAccountBtn.setOnClickListener(this);
+        myCouponBtn.setOnClickListener(this);
         presenter.checkIsLoginUpdateUI(sp);
     }
 
@@ -128,9 +133,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
                     //跳转到设置页面
                     opt = OPT_SETTING;
                     break;
-                case R.id.btn_mine_recharge:
-                    //TODO: 跳转到充值页面
-                    opt = OPT_RECHARGE;
+                case R.id.btn_mine_my_account:
+                    //跳转到我的账户页面
+                    opt = OPT_MY_ACCOUNT;
+                    break;
+                case R.id.btn_mine_my_coupon:
+                    //跳转到我的优惠券页面
+                    opt = OPT_MY_COUPON;
                     break;
                 default:
                     opt = 0;
@@ -140,10 +149,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void initToolbar() {
         super.initToolbar();
         toolbar.setTitle(R.string.text_me);
+        toolbar.setTitleTextColor(getContext().getResources().getColor(R.color.white));
+        toolbar.setBackgroundColor(getContext().getResources().getColor(R.color.orange));
+
     }
 
     @Override
@@ -153,14 +166,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
 
     @Override
     public void showLoginInfo() {
-        nickNameTv.setText("小米粒");
         userNameTv.setText("18631565231");
         avatarIv.setImageResource(R.drawable.pic);
     }
 
     @Override
     public void showDefaultInfo() {
-        nickNameTv.setText("点击登录");
         userNameTv.setText("登录后更精彩哦~");
         avatarIv.setImageResource(R.drawable.avatar_not_login_icon);
     }
@@ -186,8 +197,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
             case OPT_SETTING:
                 SettingActivity.launcher(activity);
                 break;
-            case OPT_RECHARGE:
-                log("跳转到充值页面");
+            case OPT_MY_ACCOUNT:
+                MyAccountActivity.launcher(activity);
+                break;
+            case OPT_MY_COUPON:
+                MyCouponActivity.launcher(activity);
                 break;
             default:
                 break;

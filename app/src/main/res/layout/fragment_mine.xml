@@ -1,18 +1,17 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_gray"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.xianzhifengshui.ui.index.home.HomeFragment">
     <include
-        android:id="@+id/layout_title"
         layout="@layout/layout_base_toolbar"/>
-    <com.xianzhifengshui.widget.auto.AutoScrollView
-        android:layout_below="@id/layout_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+    <!--<com.xianzhifengshui.widget.auto.AutoScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!-->-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,9 +20,8 @@
                 android:id="@+id/btn_mine_login"
                 android:clickable="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14px"
-                android:background="@drawable/selector_commen_btn"
+                android:layout_height="330px"
+                android:background="@color/orange"
                 android:paddingTop="20px"
                 android:paddingBottom="20px"
                 android:paddingLeft="40px"
@@ -33,40 +31,20 @@
                     android:layout_width="160px"
                     android:layout_height="160px"
                     app:layout_auto_baseheight="width"
+                    android:layout_centerHorizontal="true"
                     android:src="@drawable/avatar_not_login_icon"
                     />
-                <ImageView
-                    android:layout_width="23px"
-                    android:layout_height="39px"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/arrow_right_icon"/>
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/text_mine_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="56px"
-                    android:layout_toRightOf="@id/image_mine_avatar">
-                    <TextView
-                        android:id="@+id/text_mine_nick_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_large"
-                        android:text="点击登陆"
-                        />
-                    <TextView
-                        android:id="@+id/text_mine_user_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/text_gray"
-                        android:textSize="@dimen/text_size_small"
-                        android:layout_marginTop="18px"
-                        android:layout_below="@id/text_mine_nick_name"
-                        android:text="登陆更精彩哦~"
-                        />
-
-                </RelativeLayout>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_small"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="30px"
+                    android:text="登陆更精彩哦~"
+                    />
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/btn_mine_my_master"
@@ -95,7 +73,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/selector_commen_btn"
+                android:background="@color/white"
                 android:paddingRight="40px"
                 android:paddingLeft="40px">
                 <View
@@ -163,7 +141,7 @@
 
             </RelativeLayout>
             <RelativeLayout
-                android:id="@+id/btn_mine_recharge"
+                android:id="@+id/btn_mine_my_account"
                 android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="88px"
@@ -178,13 +156,58 @@
                     android:textColor="@color/black"
                     android:layout_centerVertical="true"
                     android:textSize="@dimen/text_size_normal"
-                    android:text="@string/text_recharge"/>
+                    android:text="@string/text_my_account"/>
                 <ImageView
                     android:layout_width="16px"
                     android:layout_height="30px"
                     android:src="@drawable/arrow_right_icon"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_commen_btn"
+                android:paddingRight="40px"
+                android:paddingLeft="40px">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spline_height_normal"
+                    android:background="@color/spline_color"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/btn_mine_my_coupon"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="88px"
+                android:background="@drawable/selector_commen_btn"
+                android:paddingLeft="40px"
+                android:paddingRight="40px"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/text_size_normal"
+                    android:text="@string/text_my_coupon"/>
+                <ImageView
+                    android:id="@+id/image_mine_arrow"
+                    android:layout_width="16px"
+                    android:layout_height="30px"
+                    android:src="@drawable/arrow_right_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/text_size_smallest"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/image_mine_arrow"
+                    android:layout_marginRight="35px"
+                    android:text="@string/text_invite_friends_to_have_gifts"/>
 
             </RelativeLayout>
             <RelativeLayout
@@ -272,8 +295,8 @@
             </RelativeLayout>
         </LinearLayout>
 
-    </com.xianzhifengshui.widget.auto.AutoScrollView>
+    <!--</com.xianzhifengshui.widget.auto.AutoScrollView>-->
 
 
 
-</RelativeLayout>
+</LinearLayout>

@@ -52,4 +52,5 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
         this.data.addAll(data);
         notifyDataSetChanged();
     }
+
 }

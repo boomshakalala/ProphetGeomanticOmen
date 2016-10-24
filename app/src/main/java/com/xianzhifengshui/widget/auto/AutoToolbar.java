@@ -159,4 +159,10 @@ public class AutoToolbar extends Toolbar {
     public void setTitle(int resId) {
         setTitle(getContext().getString(resId));
     }
+
+    @Override
+    public void setTitleTextColor(int color) {
+        TextView titleView = (TextView) findViewById(R.id.title);
+        titleView.setTextColor(color);
+    }
 }
