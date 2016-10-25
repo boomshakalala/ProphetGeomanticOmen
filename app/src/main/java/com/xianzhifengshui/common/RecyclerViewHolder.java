@@ -35,6 +35,10 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder{
         return new RecyclerViewHolder(context,itemView,parent);
     }
 
+    public static RecyclerViewHolder get(ViewGroup parent,View itemView){
+        return new RecyclerViewHolder(parent.getContext(),itemView,parent);
+    }
+
     public <T extends View> T getView(int viewId){
         View view = views.get(viewId);
         if (view == null) {

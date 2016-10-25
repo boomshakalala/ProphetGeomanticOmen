@@ -1,6 +1,7 @@
 package com.xianzhifengshui.common;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import java.util.List;
@@ -10,24 +11,58 @@ import java.util.List;
  * 日期: 2016/10/11.
  * 描述: 支持多种ItemViewType的Adapter
  */
-public abstract class MultiItemCommonAdapter<T> extends CommonRecyclerAdapter<T> {
+public abstract class MultiItemCommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
+    protected Context context;
+    protected List<T> data;
 
-    protected MultiItemTypeSupport<T> multiItemTypeSupport;
+    protected ItemViewDelegateManager<T> itemViewDelegateManager;
 
-    public MultiItemCommonAdapter(Context context, List<T> data, MultiItemTypeSupport<T> multiItemTypeSupport) {
-        super(context, -1, data);
-        this.multiItemTypeSupport = multiItemTypeSupport;
+    public MultiItemCommonAdapter(Context context, List<T> data, ItemViewDelegateManager<T> itemViewDelegateManager) {
+        this.context = context;
+        this.data = data;
+        this.itemViewDelegateManager = itemViewDelegateManager;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return multiItemTypeSupport.getItemViewType(position, data.get(position));
+        if (!useItemViewDelegateManager()) return super.getItemViewType(position);
+        return itemViewDelegateManager.getItemViewType(data.get(position),position);
     }
 
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        int layoutId = multiItemTypeSupport.getLayoutId(viewType);
-        return RecyclerViewHolder.get(context, parent, layoutId);
+        ItemViewDelegate<T> itemViewDelegate = itemViewDelegateManager.getItemViewDelegate(viewType);
+        int layoutId = itemViewDelegate.getItemLayoutId();
+        RecyclerViewHolder holder = RecyclerViewHolder.get(context,parent,layoutId);
+        return holder;
     }
 
+    public void convert(RecyclerViewHolder holder,T t){
+        itemViewDelegateManager.convert(holder,t,holder.getAdapterPosition());
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+        convert(holder, data.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        int itemCount = data.size();
+        return itemCount;
+    }
+
+    public MultiItemCommonAdapter<T> addItemViewDelegate(ItemViewDelegate<T> itemViewDelegate) {
+        itemViewDelegateManager.addDelegate(itemViewDelegate);
+        return this;
+    }
+
+    public MultiItemCommonAdapter<T> addItemViewDelegate(int viewType,ItemViewDelegate<T> itemViewDelegate) {
+        itemViewDelegateManager.addDelegate(viewType,itemViewDelegate);
+        return this;
+    }
+
+    protected boolean useItemViewDelegateManager(){
+        return itemViewDelegateManager.getItemViewDelegateCount() > 0;
+    }
 }
