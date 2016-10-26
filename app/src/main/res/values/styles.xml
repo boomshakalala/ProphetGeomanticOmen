@@ -40,12 +40,12 @@
     </style>
     
     <style name="LargerTabLayoutTextStyle" parent="TextAppearance.AppCompat.Button">
-        <item name="android:textSize">@dimen/text_size_larger</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">?android:textColorSecondary</item>
         <item name="textAllCaps">true</item>
     </style>
     <style name="LargeTabLayoutTextStyle" parent="TextAppearance.AppCompat.Button">
-        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">?android:textColorSecondary</item>
         <item name="textAllCaps">true</item>
     </style>

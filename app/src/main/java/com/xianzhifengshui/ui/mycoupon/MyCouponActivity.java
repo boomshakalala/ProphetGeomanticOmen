@@ -82,10 +82,10 @@ public class MyCouponActivity extends BaseActivity implements MyCouponContract.V
     @Override
     protected void initData() {
         data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
                 data.add("");
         }
-        innerAdapter = new MyCouponListAdapter(this,R.layout.item_master_list,data);
+        innerAdapter = new MyCouponListAdapter(this,R.layout.item_coupon_list,data);
 
 
     }
@@ -102,7 +102,7 @@ public class MyCouponActivity extends BaseActivity implements MyCouponContract.V
 
     @Override
     public void setPresenter(MyCouponContract.Presenter presenter) {
-
+        this.presenter = presenter;
     }
 
     @Override

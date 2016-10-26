@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="168px"
+    android:layout_height="match_parent"
     android:gravity="center"
     android:background="@color/background_gray"
     >
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
     <TextView
         android:id="@+id/btn_my_coupon_gift"
         android:layout_width="wrap_content"
@@ -14,7 +18,13 @@
         android:textSize="@dimen/text_size_larger"
         android:text="@string/text_coupon_info"
         android:drawablePadding="15dp"
+        android:paddingBottom="50px"
+        android:paddingTop="50px"
         android:gravity="center"
         android:drawableLeft="@drawable/my_coupon_gift_icon"/>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
 
 </LinearLayout>

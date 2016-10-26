@@ -27,7 +27,7 @@ public class ViewHolder
         this.position = position;
         this.views = new SparseArray<>();
         convertView = LayoutInflater.from(context).inflate(layoutId, parent, false);
-        AutoUtils.auto(convertView);
+        AutoUtils.autoSize(convertView);
         convertView.setTag(this);
     }
 

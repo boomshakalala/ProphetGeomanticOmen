@@ -78,5 +78,7 @@
     <string name="text_recharge_discount_tip_3">特大优惠！</string>
     <string name="title_activity_my_coupon">MyCouponActivity</string>
     <string name="text_coupon_info">点击邀请好友赢大礼！</string>
+    <string name="text_search_for_master_and_topic">搜索大师、话题</string>
+    <string name="text_message">消息</string>
 
 </resources>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="165px"
+    android:layout_marginLeft="40px"
+    android:layout_marginRight="40px"
+    android:layout_marginBottom="14px"
+    >
+    <View
+        android:layout_width="10px"
+        android:layout_height="match_parent"
+        android:background="@drawable/bitmap_coupon_list_lace_left"/>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
+        <TextView
+            android:id="@+id/text_coupon_list_amount"
+            android:layout_width="176px"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/text_size_super"
+            android:gravity="center"
+            android:textColor="@color/orange"
+            android:text="150"/>
+        <View
+            android:id="@+id/view_spline"
+            android:layout_width="@dimen/spline_height_normal"
+            android:layout_height="100px"
+            android:background="@color/spline_color"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/text_coupon_list_amount"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_smaller"
+            android:layout_toRightOf="@id/view_spline"
+            android:layout_marginLeft="25px"
+            android:layout_alignTop="@id/view_spline"
+            android:singleLine="true"
+            android:text="● 有效期2016.10.09-2016.12.31"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_smaller"
+            android:layout_toRightOf="@id/view_spline"
+            android:layout_marginLeft="25px"
+            android:layout_centerVertical="true"
+            android:singleLine="true"
+            android:text="● 仅限先知客户使用"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_smaller"
+            android:layout_toRightOf="@id/view_spline"
+            android:layout_marginLeft="25px"
+            android:layout_alignBottom="@id/view_spline"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:text="● 可用于购买大师服务，参加讲座和吉祥商城开光商品"
+            />
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="10px"
+        android:layout_height="match_parent"
+        android:background="@drawable/bitmap_coupon_list_lace_right"/>
+
+</LinearLayout>

@@ -1,16 +1,23 @@
 package com.xianzhifengshui.widget.auto;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xianzhifengshui.R;
+import com.xianzhifengshui.utils.SizeUtils;
 import com.zhy.autolayout.AutoLayoutInfo;
 import com.zhy.autolayout.utils.AutoLayoutHelper;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -164,5 +171,121 @@ public class AutoToolbar extends Toolbar {
     public void setTitleTextColor(int color) {
         TextView titleView = (TextView) findViewById(R.id.title);
         titleView.setTextColor(color);
+    }
+
+    @Override
+    public void setNavigationIcon(int resId) {
+        ImageView leftBtn = (ImageView) findViewById(R.id.imgBtn_left);
+        if (leftBtn.getVisibility() == GONE){
+            leftBtn.setVisibility(VISIBLE);
+        }
+        leftBtn.setImageResource(resId);
+    }
+
+    @Override
+    public void setNavigationOnClickListener(OnClickListener listener) {
+        ImageView leftBtn = (ImageView) findViewById(R.id.imgBtn_left);
+        leftBtn.setOnClickListener(listener);
+    }
+
+    public void setRightBtnText(String text){
+        TextView rightBtn = (TextView) findViewById(R.id.btn_right);
+        if (rightBtn.getVisibility() == GONE){
+            rightBtn.setVisibility(VISIBLE);
+        }
+        rightBtn.setText(text);
+    }
+
+    public void setRightBtnText(int resId){
+        String text = getContext().getString(resId);
+        setRightBtnText(text);
+    }
+
+    public void setRightBtnImage(int resId){
+        ImageView rightBtn = (ImageView) findViewById(R.id.imgBtn_right);
+        if (rightBtn.getVisibility() == GONE){
+            rightBtn.setVisibility(VISIBLE);
+        }
+        rightBtn.setImageResource(resId);
+    }
+
+
+    public void setRightBtnDrawableLeft(int resId){
+        TextView rightBtn = (TextView) findViewById(R.id.btn_right);
+        Drawable drawable = getContext().getResources().getDrawable(resId);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        rightBtn.setCompoundDrawables(drawable, null, null, null);
+    }
+
+    public void setRightBtnDrawableRight(int resId){
+        TextView rightBtn = (TextView) findViewById(R.id.btn_right);
+        Drawable drawable = getContext().getResources().getDrawable(resId);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        rightBtn.setCompoundDrawables(null, null, drawable, null);
+
+    }
+
+    public void setOnRightBtnClickListener(View.OnClickListener onClickListener){
+        TextView rightBtn = (TextView) findViewById(R.id.btn_right);
+        ImageView rightImgBtn = (ImageView) findViewById(R.id.imgBtn_right);
+        if (rightBtn.getVisibility() == VISIBLE)
+            rightBtn.setOnClickListener(onClickListener);
+        if (rightImgBtn.getVisibility() == VISIBLE)
+            rightImgBtn.setOnClickListener(onClickListener);
+    }
+
+    public void setOnRightBtnDrawablePadding(int drawablePadding){
+        TextView rightBtn = (TextView) findViewById(R.id.btn_right);
+        rightBtn.setCompoundDrawablePadding(SizeUtils.dp2px(getContext(), drawablePadding));
+    }
+
+    public void setLeftBtnText(String text){
+        TextView leftBtn = (TextView) findViewById(R.id.btn_left);
+        if (leftBtn.getVisibility() == GONE){
+            leftBtn.setVisibility(VISIBLE);
+        }
+        leftBtn.setText(text);
+    }
+
+    public void setLeftBtnText(int resId){
+        String text = getContext().getString(resId);
+        setLeftBtnText(text);
+    }
+
+    public void setLeftBtnDrawableLeft(int resId){
+        TextView leftBtn = (TextView) findViewById(R.id.btn_left);
+        Drawable drawable = getContext().getResources().getDrawable(resId);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        leftBtn.setCompoundDrawables(drawable, null, null, null);
+    }
+
+    public void setLeftBtnDrawableRight(int resId){
+        TextView leftBtn = (TextView) findViewById(R.id.btn_left);
+        Drawable drawable = getContext().getResources().getDrawable(resId);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        leftBtn.setCompoundDrawables(null,null,drawable,null);
+    }
+
+    public void setOnLeftBtnClickListener(View.OnClickListener onClickListener){
+        TextView leftBtn = (TextView) findViewById(R.id.btn_left);
+        leftBtn.setOnClickListener(onClickListener);
+    }
+
+    public void setOnLeftBtnDrawablePadding(int drawablePadding){
+        TextView leftBtn = (TextView) findViewById(R.id.btn_left);
+        leftBtn.setCompoundDrawablePadding(SizeUtils.dp2px(getContext(), drawablePadding));
+    }
+
+    public void showSearchView(boolean searchable){
+        EditText searchView = (EditText) findViewById(R.id.searchView);
+        if (searchView.getVisibility() == GONE){
+            searchView.setVisibility(VISIBLE);
+        }
+        searchView.setFocusable(searchable);
+    }
+
+    public void setOnSearchViewClickListener(View.OnClickListener onClickListener){
+        EditText searchView = (EditText) findViewById(R.id.searchView);
+        searchView.setOnClickListener(onClickListener);
     }
 }

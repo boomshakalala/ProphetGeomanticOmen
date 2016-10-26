@@ -5,7 +5,9 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.utils.ConstUtils;
@@ -33,7 +35,6 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
     private NomalProgressDialog progressDialog;
 
     protected Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

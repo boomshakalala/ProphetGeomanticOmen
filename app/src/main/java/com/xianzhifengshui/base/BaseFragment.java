@@ -11,6 +11,7 @@ import android.widget.TableRow;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.utils.SPUtils;
+import com.xianzhifengshui.widget.auto.AutoToolbar;
 
 
 /**
@@ -25,7 +26,7 @@ public abstract class BaseFragment extends Fragment {
     protected boolean needToolBar = true;
 
     protected View rootView;
-    protected Toolbar toolbar;
+    protected AutoToolbar toolbar;
     protected boolean isActive;
 
     @Override
@@ -64,8 +65,8 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         isActive = true;
     }
 
@@ -89,7 +90,7 @@ public abstract class BaseFragment extends Fragment {
      * 初始化Toolbar
      */
     protected void initToolbar() {
-        toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        toolbar = (AutoToolbar) rootView.findViewById(R.id.toolbar);
     }
 
     /**

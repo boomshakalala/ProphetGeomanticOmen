@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.xianzhifengshui.utils.RecyclerViewUtils;
+import com.zhy.autolayout.utils.AutoUtils;
 
 /**
  * 作者: chengx
@@ -116,10 +117,12 @@ public class HeaderAndFooterCommonAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     public void addHeaderView(View view){
+        AutoUtils.auto(view);
         headerViews.put(headerViews.size()+ITEM_TYPE_HEADER,view);
     }
 
     public void addFooterView(View view){
+        AutoUtils.auto(view);
         footerViews.put(footerViews.size()+ITEM_TYPE_FOOTER,view);
     }
 
