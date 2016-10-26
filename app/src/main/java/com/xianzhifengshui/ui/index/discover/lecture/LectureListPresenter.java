@@ -30,7 +30,7 @@ public class LectureListPresenter extends BasePresenter implements LectureListCo
     @Override
     public void refreshData() {
         final List<String> data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             data.add("");
         }
         if (view.isActive())
@@ -48,7 +48,7 @@ public class LectureListPresenter extends BasePresenter implements LectureListCo
     @Override
     public void loadMore() {
         final List<String> data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             data.add("");
         }
         new Handler().postDelayed(new Runnable() {

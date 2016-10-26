@@ -49,7 +49,7 @@ public class MyLectureListFragment extends BaseFragment implements MyLectureList
     protected void initData() {
         this.presenter = new MyLectureListPresenter(this);
         data = new ArrayList<>();
-        adapter = new LectureListAdapter(getContext(),R.layout.item_lecture_list,data);
+        adapter = new LectureListAdapter(getContext(),R.layout.item_home_banner,data);
         type = getArguments().getInt("type",TYPE_WANTED);
         log(TAG,type);
     }

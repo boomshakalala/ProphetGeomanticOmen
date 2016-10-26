@@ -48,7 +48,7 @@ public class LectureListFragment extends BaseFragment implements LectureListCont
     protected void initData() {
         this.presenter = new LectureListPresenter(this);
         data = new ArrayList<>();
-        adapter = new LectureListAdapter(getContext(),R.layout.item_lecture_list,data);
+        adapter = new LectureListAdapter(getContext(),R.layout.item_home_banner,data);
     }
 
     @Override

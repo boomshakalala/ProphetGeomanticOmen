@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xianzhifengshui.utils.XImageLoader;
+import com.bumptech.glide.Glide;
 import com.zhy.autolayout.utils.AutoUtils;
 
 /**
@@ -22,10 +22,12 @@ public class ViewHolder
     private final SparseArray<View> views;
     private int position;
     private View convertView;
+    private Context context;
 
     private ViewHolder(Context context, ViewGroup parent, int layoutId, int position) {
         this.position = position;
         this.views = new SparseArray<>();
+        this.context = context;
         convertView = LayoutInflater.from(context).inflate(layoutId, parent, false);
         AutoUtils.autoSize(convertView);
         convertView.setTag(this);
@@ -118,7 +120,7 @@ public class ViewHolder
      */
     public ViewHolder setImageByUrl(int viewId, String url) {
         ImageView view = getView(viewId);
-        XImageLoader.getInstance().display(view,url);
+        Glide.with(context).load(url).into(view);
         return this;
     }
 

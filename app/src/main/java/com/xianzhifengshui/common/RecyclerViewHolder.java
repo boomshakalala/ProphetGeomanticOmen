@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xianzhifengshui.utils.XImageLoader;
+import com.bumptech.glide.Glide;
 import com.zhy.autolayout.utils.AutoUtils;
 
 /**
@@ -82,7 +82,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder{
      */
     public RecyclerViewHolder setImageUrl(int viewId,String imageUrl){
         ImageView imageView = getView(viewId);
-        XImageLoader.getInstance().display(imageView, imageUrl);
+        Glide.with(context).load(imageUrl).into(imageView);
         return this;
     }
 

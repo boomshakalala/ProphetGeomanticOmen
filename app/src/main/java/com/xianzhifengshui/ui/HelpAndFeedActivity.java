@@ -78,7 +78,7 @@ public class HelpAndFeedActivity extends BaseActivity implements View.OnClickLis
 
                 break;
             case R.id.btn_help_and_feed_feed:
-                //TODO:跳转到用户反馈页
+                //跳转到用户反馈页
                 FeedActivity.launcher(this);
                 break;
             default:
