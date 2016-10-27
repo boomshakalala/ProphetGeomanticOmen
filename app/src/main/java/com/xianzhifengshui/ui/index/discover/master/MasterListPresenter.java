@@ -2,7 +2,12 @@ package com.xianzhifengshui.ui.index.discover.master;
 
 import android.os.Handler;
 
+import com.xianzhifengshui.api.BaseListModel;
+import com.xianzhifengshui.api.model.Master;
+import com.xianzhifengshui.api.net.ActionCallbackListener;
+import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BasePresenter;
+import com.xianzhifengshui.utils.ConstUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +20,7 @@ import java.util.List;
 public class MasterListPresenter extends BasePresenter implements MasterListContract.Presenter{
 
     private MasterListContract.View view;
+    private int currentPage = 1;
 
     public MasterListPresenter(MasterListContract.View view) {
         this.view = view;
@@ -22,40 +28,56 @@ public class MasterListPresenter extends BasePresenter implements MasterListCont
     }
 
     private void requestData() {
+        view.showWaiting();
+        api.masterList(currentPage, AppConfig.PAGE_SIZE, new ActionCallbackListener<BaseListModel<ArrayList<Master>>>() {
+            @Override
+            public void onProgress(long bytesWritten, long totalSize) {
 
+            }
+
+            @Override
+            public void onSuccess(BaseListModel<ArrayList<Master>> data) {
+                view.closeWait();
+                if (data.getPageNum()==currentPage){
+                    //关闭记载更多
+                }
+                ArrayList<Master> dataList = data.getList();
+                if (dataList != null && dataList.size()>0) {
+                    if (currentPage == 1){
+                        view.refreshData(dataList);
+                    }else {
+                        view.loadMore(dataList);
+                    }
+                }else {
+                    if (currentPage == 1){
+                        view.showEmpty();
+                    }else {
+                        view.showTip("没有更多了");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int errorEvent, String message) {
+                view.closeWait();
+                if (currentPage == 1){
+                    view.showFailure();
+                }
+                view.showTip(message);
+            }
+        });
     }
 
 
     @Override
     public void refreshData() {
-        final List<String> data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            data.add("");
-        }
-        if (view.isActive())
-        view.showWaiting();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                view.refreshData(data);
-                view.closeWait();
-            }
-        },3000);
-
+        currentPage = 0;
+        requestData();
     }
 
     @Override
     public void loadMore() {
-        final List<String> data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            data.add("");
-        }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                view.loadMore(data);
-                view.closeWait();
-            }
-        },3000);
+        currentPage ++;
+        requestData();
     }
 }

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.MasterListAdapter;
+import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
@@ -38,8 +39,8 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
 
     private MasterListAdapter adapter;
     private MasterListContract.Presenter presenter;
-    private List<String> data;
-    private int currentPage = 0;
+    private List<Master> data;
+
     @Override
     protected void initViews() {
         pullToRefreshRecyclerView = (PullToRefreshRecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -138,15 +139,14 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
         allBtn.setClickable(true);
     }
 
-
     @Override
-    public void refreshData(List<String> data) {
+    public void refreshData(ArrayList<Master> data) {
         adapter.setData(data);
         recyclerView.smoothScrollToPosition(0);
     }
 
     @Override
-    public void loadMore(List<String> data) {
+    public void loadMore(ArrayList<Master> data) {
         adapter.loadMore(data);
     }
 

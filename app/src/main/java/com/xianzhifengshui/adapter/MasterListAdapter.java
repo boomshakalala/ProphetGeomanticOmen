@@ -3,6 +3,7 @@ package com.xianzhifengshui.adapter;
 import android.content.Context;
 
 import com.xianzhifengshui.R;
+import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.User;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
 import com.xianzhifengshui.common.RecyclerViewHolder;
@@ -17,18 +18,16 @@ import java.util.List;
  * 日期: 2016/10/11.
  * 描述: 大师列表适配器
  */
-public class MasterListAdapter extends CommonRecyclerAdapter<String> {
-    public MasterListAdapter(Context context, int layoutId, List<String> data) {
+public class MasterListAdapter extends CommonRecyclerAdapter<Master> {
+    public MasterListAdapter(Context context, int layoutId, List<Master> data) {
         super(context, layoutId, data);
     }
 
     @Override
-    public void convert(RecyclerViewHolder holder, String s) {
-        TagLayout tagLayout = holder.getView(R.id.layout_master_list_tag);
-        List<String> tags = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            tags.add("家居风水");
-        }
-        tagLayout.setAdapter(new TagAdapter(context,tags,R.layout.layout_master_list_tag));
+    public void convert(RecyclerViewHolder holder, Master m) {
+        holder.setText(R.id.text_master_list_title,m.getNickname());
+        holder.setText(R.id.text_master_list_desc,m.getSummary());
+        holder.setImageUrl(R.id.image_master_list_icon,m.getIcon());
+
     }
 }

@@ -3,6 +3,7 @@ package com.xianzhifengshui.api;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xianzhifengshui.api.des.DESUtils;
+import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.User;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
 import com.xianzhifengshui.api.net.HttpEngine;
@@ -52,11 +53,11 @@ public class ApiImpl implements Api {
     }
 
     @Override
-    public void masterList(int pageNum, int pageSize, ActionCallbackListener<BaseListModel<ArrayList<User>>> callback) {
+    public void masterList(int pageNum, int pageSize, ActionCallbackListener<BaseListModel<ArrayList<Master>>> callback) {
         paramsMap.clear();
         paramsMap.put("pageNum", String.valueOf(pageNum));
         paramsMap.put("pageSize",String.valueOf(pageSize));
-        Type type = new TypeToken<BaseListModel<ArrayList<User>>>(){}.getType();
+        Type type = new TypeToken<BaseListModel<ArrayList<Master>>>(){}.getType();
         HttpEngine.getInstance().get(MASTER_LIST,map2Ciphertext(paramsMap),type,callback);
 
     }

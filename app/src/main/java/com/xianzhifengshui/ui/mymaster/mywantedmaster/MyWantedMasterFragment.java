@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.MasterListAdapter;
+import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
@@ -26,7 +27,7 @@ public class MyWantedMasterFragment extends BaseFragment implements MyWantedMast
 
     private MasterListAdapter adapter;
     private MyWantedMasterContract.Present present;
-    private List<String> data;
+    private ArrayList<Master> data;
     private int currentPage = 0;
 
     @Override
@@ -85,12 +86,12 @@ public class MyWantedMasterFragment extends BaseFragment implements MyWantedMast
 
     @Override
     public void refreshData(List<String> data) {
-        adapter.setData(data);
+//        adapter.setData(data);
     }
 
     @Override
     public void loadMore(List<String> data) {
-        adapter.loadMore(data);
+//        adapter.loadMore(data);
     }
 
     @Override

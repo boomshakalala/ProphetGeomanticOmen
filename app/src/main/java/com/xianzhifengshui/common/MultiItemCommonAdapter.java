@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import com.xianzhifengshui.utils.KLog;
+
 import java.util.List;
 
 /**
@@ -17,10 +19,10 @@ public abstract class MultiItemCommonAdapter<T> extends RecyclerView.Adapter<Rec
 
     protected ItemViewDelegateManager<T> itemViewDelegateManager;
 
-    public MultiItemCommonAdapter(Context context, List<T> data, ItemViewDelegateManager<T> itemViewDelegateManager) {
+    public MultiItemCommonAdapter(Context context, List<T> data) {
         this.context = context;
         this.data = data;
-        this.itemViewDelegateManager = itemViewDelegateManager;
+        this.itemViewDelegateManager = new ItemViewDelegateManager<>();
     }
 
     @Override
@@ -34,11 +36,12 @@ public abstract class MultiItemCommonAdapter<T> extends RecyclerView.Adapter<Rec
         ItemViewDelegate<T> itemViewDelegate = itemViewDelegateManager.getItemViewDelegate(viewType);
         int layoutId = itemViewDelegate.getItemLayoutId();
         RecyclerViewHolder holder = RecyclerViewHolder.get(context,parent,layoutId);
+        KLog.d(getClass().getSimpleName(),"retun holder");
         return holder;
     }
 
     public void convert(RecyclerViewHolder holder,T t){
-        itemViewDelegateManager.convert(holder,t,holder.getAdapterPosition());
+        itemViewDelegateManager.convert(holder, t, holder.getAdapterPosition());
     }
 
     @Override
@@ -60,6 +63,10 @@ public abstract class MultiItemCommonAdapter<T> extends RecyclerView.Adapter<Rec
     public MultiItemCommonAdapter<T> addItemViewDelegate(int viewType,ItemViewDelegate<T> itemViewDelegate) {
         itemViewDelegateManager.addDelegate(viewType,itemViewDelegate);
         return this;
+    }
+
+    public ItemViewDelegate<T> getItemViewDelegate(int viewType){
+        return itemViewDelegateManager.getItemViewDelegate(viewType);
     }
 
     protected boolean useItemViewDelegateManager(){

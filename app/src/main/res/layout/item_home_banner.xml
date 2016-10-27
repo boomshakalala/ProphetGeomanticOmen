@@ -15,17 +15,21 @@
     <TextView
         android:id="@+id/text_home_banner_title"
         android:layout_marginLeft="40px"
+        android:layout_marginTop="14px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_size_small"
+        android:textSize="@dimen/text_size_large"
+        android:text="标题"
         />
     <TextView
         android:id="@+id/text_home_banner_desc"
         android:layout_marginLeft="40px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_smaller"
+        android:textSize="@dimen/text_size_small"
+        android:layout_marginTop="20px"
+        android:text="描述描述描述描述描述描述描述描述描述"
         android:textColor="@color/text_gray"/>
 
 

@@ -1,5 +1,6 @@
 package com.xianzhifengshui.api;
 
+import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.User;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
 
@@ -28,6 +29,6 @@ public interface Api {
      * @param pageSize 每页最多显示多少条
      * @param callback 回调
      */
-    void masterList(int pageNum,int pageSize,ActionCallbackListener<BaseListModel<ArrayList<User>>> callback);
+    void masterList(int pageNum,int pageSize,ActionCallbackListener<BaseListModel<ArrayList<Master>>> callback);
 
 }

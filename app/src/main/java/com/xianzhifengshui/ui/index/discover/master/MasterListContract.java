@@ -1,8 +1,10 @@
 package com.xianzhifengshui.ui.index.discover.master;
 
+import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.base.IPresenter;
 import com.xianzhifengshui.base.IView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,8 +14,8 @@ import java.util.List;
  */
 public interface MasterListContract {
      interface View extends IView<Presenter>{
-        void refreshData(List<String> data);
-        void loadMore(List<String> data);
+        void refreshData(ArrayList<Master> data);
+        void loadMore(ArrayList<Master> data);
         void showEmpty();
         void showFailure();
     }
