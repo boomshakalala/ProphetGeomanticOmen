@@ -1,5 +1,6 @@
 package com.xianzhifengshui.api.net;
 
+import android.text.method.KeyListener;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -12,6 +13,7 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import com.xianzhifengshui.api.ApiResponse;
 import com.xianzhifengshui.api.des.DESUtils;
 import com.xianzhifengshui.api.des.Md5Utils;
+import com.xianzhifengshui.api.utils.JsonFormatTool;
 
 
 import java.lang.reflect.Type;
@@ -52,7 +54,9 @@ public class HttpEngine {
 
     public  <T>  void  get(String method, String ciphertext, final Type typeOfClass ,final ActionCallbackListener<T> callback){
         String url = HOST + method;
+        Log.d(TAG, "get url = "+url);
         String sign = Md5Utils.md5s(DESUtils.decrypt(ciphertext));
+        Log.d(TAG, "get sign = "+sign);
         RequestParams params = new RequestParams();
         params.put("json", ciphertext);
         params.put("sign",sign);
@@ -74,6 +78,7 @@ public class HttpEngine {
             @Override
             public void onSuccess(int i, Header[] headers, String ciphertext) {
                 String json = DESUtils.decrypt(ciphertext);
+                Log.d(TAG, "onSuccess json = "+ JsonFormatTool.formatJson(json));
                 ApiResponse<T> response = json2Obj(json, typeOfClass);
                 if (response.isSuccess()){
                     callback.onSuccess(response.getData());

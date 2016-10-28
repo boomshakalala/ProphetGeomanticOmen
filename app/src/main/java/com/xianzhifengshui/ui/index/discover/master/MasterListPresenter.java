@@ -8,6 +8,7 @@ import com.xianzhifengshui.api.net.ActionCallbackListener;
 import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BasePresenter;
 import com.xianzhifengshui.utils.ConstUtils;
+import com.xianzhifengshui.utils.KLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class MasterListPresenter extends BasePresenter implements MasterListCont
         api.masterList(currentPage, AppConfig.PAGE_SIZE, new ActionCallbackListener<BaseListModel<ArrayList<Master>>>() {
             @Override
             public void onProgress(long bytesWritten, long totalSize) {
-
+                KLog.d(getClass().getSimpleName(),"bytesWritten="+bytesWritten+"totalSize="+totalSize);
             }
 
             @Override
@@ -63,6 +64,7 @@ public class MasterListPresenter extends BasePresenter implements MasterListCont
                 if (currentPage == 1){
                     view.showFailure();
                 }
+                KLog.d(getClass().getSimpleName(),message);
                 view.showTip(message);
             }
         });
@@ -71,7 +73,7 @@ public class MasterListPresenter extends BasePresenter implements MasterListCont
 
     @Override
     public void refreshData() {
-        currentPage = 0;
+        currentPage = 1;
         requestData();
     }
 

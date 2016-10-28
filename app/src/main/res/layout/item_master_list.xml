@@ -25,6 +25,45 @@
         android:layout_marginLeft="33px"
         android:text="张三丰"
         />
+
+    <TextView
+        android:id="@+id/text_master_list_point_of_praise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/orange"
+        android:layout_alignBaseline="@id/text_master_list_title"
+        android:layout_alignParentRight="true"
+        android:drawableLeft="@drawable/master_list_praise_icon"
+        android:gravity="bottom"
+        android:drawablePadding="3dp"
+        android:text="99"/>
+    <TextView
+        android:id="@+id/text_master_list_single_volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/text_gray"
+        android:layout_alignBaseline="@id/text_master_list_title"
+        android:layout_toLeftOf="@id/text_master_list_point_of_praise"
+        android:layout_marginRight="36px"
+        android:drawableLeft="@drawable/master_list_single_volume_icon"
+        android:gravity="bottom"
+        android:drawablePadding="3dp"
+        android:text="33单"/>
+    <TextView
+        android:id="@+id/text_master_list_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_smallest"
+        android:textColor="@color/yellow"
+        android:layout_alignBaseline="@id/text_master_list_title"
+        android:layout_toLeftOf="@id/text_master_list_single_volume"
+        android:layout_marginRight="36px"
+        android:drawableLeft="@drawable/master_list_lavel_icon"
+        android:gravity="bottom"
+        android:drawablePadding="3dp"
+        android:text="v1"/>
     <com.xianzhifengshui.widget.tag.TagLayout
         android:id="@+id/layout_master_list_tag"
         android:orientation="horizontal"

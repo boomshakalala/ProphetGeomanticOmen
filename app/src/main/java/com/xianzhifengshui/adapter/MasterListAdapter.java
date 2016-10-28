@@ -27,7 +27,9 @@ public class MasterListAdapter extends CommonRecyclerAdapter<Master> {
     public void convert(RecyclerViewHolder holder, Master m) {
         holder.setText(R.id.text_master_list_title,m.getNickname());
         holder.setText(R.id.text_master_list_desc,m.getSummary());
-        holder.setImageUrl(R.id.image_master_list_icon,m.getIcon());
-
+        holder.setImageUrl(R.id.image_master_list_icon, m.getIcon());
+        holder.setText(R.id.text_master_list_point_of_praise, String.valueOf(m.getPointOfPraise()));
+        holder.setText(R.id.text_master_list_single_volume,String.valueOf(m.getSingleVolume()));
+        holder.setText(R.id.text_master_list_level,"v"+m.getLevel());
     }
 }

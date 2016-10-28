@@ -1,5 +1,7 @@
 package com.xianzhifengshui.api;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xianzhifengshui.api.des.DESUtils;
@@ -7,6 +9,7 @@ import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.User;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
 import com.xianzhifengshui.api.net.HttpEngine;
+import com.xianzhifengshui.api.utils.JsonFormatTool;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -35,11 +38,12 @@ public class ApiImpl implements Api {
         Gson gson = new Gson();
         LinkedHashMap<String,String> resultMap = new LinkedHashMap();
         //城市代码:北京（110000）;上海（200000）；其他待定
-        resultMap.put("cityCode","110000");
+        resultMap.put("cityCode", "110000");
         //设备类型:安卓传android；苹果传ios；pc端传pc，微信端传weixin，M站传mobile
         resultMap.put("deviceType", "android");
         resultMap.putAll(map);
         String json = gson.toJson(resultMap);
+        Log.d(TAG, "map2Ciphertext json = "+ JsonFormatTool.formatJson(json));
         return DESUtils.encrypt(json);
 
     }

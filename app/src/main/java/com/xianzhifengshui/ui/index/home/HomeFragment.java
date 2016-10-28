@@ -1,5 +1,6 @@
 package com.xianzhifengshui.ui.index.home;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.view.menu.MenuBuilder;
@@ -23,12 +24,14 @@ import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.NaviMenu;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.common.ItemViewDelegateManager;
+import com.xianzhifengshui.ui.search.SearchActivity;
 import com.xianzhifengshui.utils.DeviceUtils;
 import com.xianzhifengshui.utils.SizeUtils;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 /**
@@ -57,6 +60,16 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Pull
             @Override
             public void onClick(View v) {
                 log("跳转到消息页面");
+            }
+        });
+        toolbar.setOnSearchViewClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    SearchActivity.launcher(activity,v);
+                }else {
+                    SearchActivity.launcher(getContext());
+                }
             }
         });
     }

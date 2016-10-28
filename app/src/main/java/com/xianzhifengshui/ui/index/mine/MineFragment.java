@@ -20,6 +20,7 @@ import com.xianzhifengshui.ui.mycoupon.MyCouponActivity;
 import com.xianzhifengshui.ui.mylecture.MyLectureActivity;
 import com.xianzhifengshui.ui.mymaster.MyMasterActivity;
 import com.xianzhifengshui.ui.setting.SettingActivity;
+import com.xianzhifengshui.utils.KLog;
 import com.xianzhifengshui.widget.CircleImageView;
 
 import java.util.IllegalFormatCodePointException;
@@ -227,7 +228,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == AppConfig.RESULT_LOGIN){
-            presenter.checkIsLogin(sp,true,true,requestCode);
+            KLog.d(TAG,requestCode);
+            presenter.checkIsLoginJump(sp, requestCode);
         }
     }
 }

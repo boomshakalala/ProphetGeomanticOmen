@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -34,7 +34,12 @@
                 android:textSize="@dimen/text_size_smaller"
                 android:textColor="@color/black"
                 android:hint="@string/text_search_for_master_and_topic"
-                android:layout_gravity="center"/>
+                android:transitionName="searchView"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
+                android:inputMethod="search"
+                tools:ignore="Deprecated,UnusedAttribute" />
         </FrameLayout>
         <TextView
             android:id="@+id/btn_left"

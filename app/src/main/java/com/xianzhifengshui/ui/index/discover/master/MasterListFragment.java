@@ -157,7 +157,7 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
 
     @Override
     public void showFailure() {
-
+        showTip("出错了哦");
     }
 
     @Override

@@ -34,7 +34,7 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
     private boolean needToolbar = true;
     private NomalProgressDialog progressDialog;
 
-    protected Toolbar toolbar;
+    protected AutoToolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +60,7 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
     protected abstract void initData();
 
     protected void initToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (AutoToolbar) findViewById(R.id.toolbar);
     }
 
     private void init() {
