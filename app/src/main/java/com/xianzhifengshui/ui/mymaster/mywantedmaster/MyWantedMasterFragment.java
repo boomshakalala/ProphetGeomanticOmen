@@ -85,12 +85,12 @@ public class MyWantedMasterFragment extends BaseFragment implements MyWantedMast
     }
 
     @Override
-    public void refreshData(List<String> data) {
+    public void refreshData(List<Master> data) {
 //        adapter.setData(data);
     }
 
     @Override
-    public void loadMore(List<String> data) {
+    public void loadMore(List<Master> data) {
 //        adapter.loadMore(data);
     }
 

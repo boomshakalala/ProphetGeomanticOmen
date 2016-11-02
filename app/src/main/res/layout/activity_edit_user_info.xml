@@ -280,7 +280,7 @@
             android:layout_marginLeft="40px"
             android:layout_marginRight="40px"
             android:layout_marginTop="90px"
-            android:background="@drawable/selector_orange_btn"
+            android:background="@drawable/selector_corner_orange_btn"
             android:textSize="@dimen/text_size_large"
             android:textColor="@color/white"
             android:text="@string/text_save"/>

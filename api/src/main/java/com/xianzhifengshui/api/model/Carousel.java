@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 作者: chengx
  * 日期: 2016/10/27.
- * 描述:
+ * 描述: banner模型
  */
 public class Carousel implements Serializable{
 

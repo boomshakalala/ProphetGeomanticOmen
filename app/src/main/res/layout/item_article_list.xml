@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingTop="24px"
+    android:paddingBottom="14px"
+    android:paddingLeft="40px"
+    android:paddingRight="40px">
+    <TextView
+        android:id="@+id/text_article_list_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/black"
+        android:text="床头摆放哪些物品可以让你财运亨通"
+        />
+    <TextView
+        android:id="@+id/text_article_list_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_smallest"
+        android:textColor="@color/text_gray"
+        android:layout_marginTop="15px"
+        android:text="根据风水理论，将地理因素、公司战略布局和业务范围有机结合，选择出适合公司发展的办公地址，为您的事业发展打开通路."
+        />
+
+</LinearLayout>

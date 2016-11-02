@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.xianzhifengshui.R;
+import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BaseActivity;
 import com.xianzhifengshui.ui.register.RegisterActivity;
 
@@ -99,6 +100,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,Vi
     @Override
     public void showLoginSuccess(String message) {
         showToast(message);
+        setResult(AppConfig.RESULT_LOGIN);
         finish();
     }
 

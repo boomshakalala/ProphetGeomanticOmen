@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 作者: chengx
  * 日期: 2016/10/27.
- * 描述:
+ * 描述: 城市列表模型
  */
 public class City implements Serializable {
     private static final long serialVersionUID = -3307216570609055698L;

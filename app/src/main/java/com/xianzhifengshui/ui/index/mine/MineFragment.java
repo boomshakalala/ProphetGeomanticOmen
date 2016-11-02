@@ -196,7 +196,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
                 EditUserInfoActivity.launcher(activity);
                 break;
             case OPT_SETTING:
-                SettingActivity.launcher(activity);
+                SettingActivity.launcher(activity,opt);
                 break;
             case OPT_MY_ACCOUNT:
                 MyAccountActivity.launcher(activity);
@@ -227,9 +227,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        log("requestCode="+requestCode+"resultCode="+resultCode);
         if (resultCode == AppConfig.RESULT_LOGIN){
-            KLog.d(TAG,requestCode);
+            log(requestCode);
             presenter.checkIsLoginJump(sp, requestCode);
+        }
+        if (resultCode == AppConfig.RESULT_LOGOUT){
+            log(resultCode);
+            presenter.checkIsLoginUpdateUI(sp);
         }
     }
 }

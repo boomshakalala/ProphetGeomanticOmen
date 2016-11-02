@@ -1,0 +1,46 @@
+package com.xianzhifengshui.ui.masterdetail;
+
+import com.xianzhifengshui.api.model.MasterDetailModel;
+import com.xianzhifengshui.api.net.ActionCallbackListener;
+import com.xianzhifengshui.base.BasePresenter;
+
+/**
+ * 作者: chengx
+ * 日期: 2016/11/1.
+ * 描述: 大师详情页面控制器
+ */
+public class MasterDetailPresenter extends BasePresenter implements MasterDetailContract.Presenter{
+
+    private MasterDetailContract.View view;
+
+    public MasterDetailPresenter(MasterDetailContract.View view) {
+        this.view = view;
+        this.view.setPresenter(this);
+    }
+
+    @Override
+    public void requestData() {
+        view.showWaiting();
+        api.masterDetail("9e41413d569b4f8f89ce70f572842917", "9e41413d569b4f8f89ce70f572842917", new ActionCallbackListener<MasterDetailModel>() {
+            @Override
+            public void onProgress(long bytesWritten, long totalSize) {
+
+            }
+
+            @Override
+            public void onSuccess(MasterDetailModel data) {
+                view.showInfo(data);
+                view.showService(data.getServiceType());
+                view.showAboutMaster(data.getDesc());
+                view.showEvaluate(data.getEvaluate());
+                view.closeWait();
+            }
+
+            @Override
+            public void onFailure(int errorEvent, String message) {
+                view.showTip(message);
+                view.closeWait();
+            }
+        });
+    }
+}

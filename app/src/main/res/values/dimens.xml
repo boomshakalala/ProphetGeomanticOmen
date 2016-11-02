@@ -4,6 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="hint_text_size">24px</dimen>
     <dimen name="btn_text_size">28px</dimen>
+    <dimen name="text_size_super_small">18px</dimen>
     <dimen name="text_size_smallest">20px</dimen>
     <dimen name="text_size_smaller">22px</dimen>
     <dimen name="text_size_small">24px</dimen>

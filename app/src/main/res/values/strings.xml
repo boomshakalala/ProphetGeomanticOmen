@@ -81,5 +81,29 @@
     <string name="text_search_for_master_and_topic">搜索大师、话题</string>
     <string name="text_message">消息</string>
     <string name="text_change_a_lot">换一批</string>
+    <string name="text_hot_search">热门搜索</string>
+    <string name="text_prophet_active">先知活动</string>
+    <string name="text_service_notification">服务通知</string>
+    <string name="text_system_message">系统消息</string>
+    <string name="text_collect_master">收藏大师</string>
+    <string name="text_master_detail">大师详情</string>
+    <string name="text_single">单</string>
+
+    <array name="tag_search">
+        <item>商务风水</item>
+        <item>家居风水</item>
+        <item>流年运势</item>
+        <item>手相面相</item>
+        <item>婚恋情感</item>
+        <item>良辰吉时</item>
+        <item>周公解梦</item>
+        <item>阴宅风水</item>
+    </array>
+    <array name="tab_master_detail">
+        <item>服务项目</item>
+        <item>关于大师</item>
+        <item>客户评价</item>
+        <item>大师文章</item>
+    </array>
 
 </resources>

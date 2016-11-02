@@ -2,13 +2,145 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_gray">
     <include
         layout="@layout/layout_base_toolbar"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="154px">
-
+        android:layout_height="154px"
+        android:paddingLeft="45px"
+        android:paddingRight="45px"
+        android:paddingTop="20px"
+        android:paddingBottom="20px"
+        android:background="@color/white">
+        <ImageView
+            android:id="@+id/image_message_active"
+            android:layout_width="70px"
+            android:layout_height="70px"
+            android:scaleType="fitXY"
+            android:src="@drawable/message_active_icon"/>
+        <TextView
+            android:id="@+id/text_message_active_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/image_message_active"
+            android:layout_marginLeft="18px"
+            android:text="@string/text_prophet_active"/>
+        <TextView
+            android:id="@+id/text_message_active_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/text_gray"
+            android:layout_alignParentRight="true"
+            android:layout_alignBaseline="@id/text_message_active_title"
+            android:text="今天 21:17"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/text_gray"
+            android:layout_below="@id/text_message_active_title"
+            android:layout_marginTop="20px"
+            android:layout_alignLeft="@id/text_message_active_title"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="尊敬的用户:即日起至11月11日，凡购买任意一款产品的都有礼品赠送"/>
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="154px"
+        android:paddingLeft="45px"
+        android:paddingRight="45px"
+        android:paddingTop="20px"
+        android:paddingBottom="20px"
+        android:background="@color/white">
+        <ImageView
+            android:id="@+id/image_message_service"
+            android:layout_width="70px"
+            android:layout_height="70px"
+            android:scaleType="fitXY"
+            android:src="@drawable/message_server_icon"/>
+        <TextView
+            android:id="@+id/text_message_service_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/image_message_service"
+            android:layout_marginLeft="18px"
+            android:text="@string/text_service_notification"/>
+        <TextView
+            android:id="@+id/text_message_service_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/text_gray"
+            android:layout_alignParentRight="true"
+            android:layout_alignBaseline="@id/text_message_service_title"
+            android:text="今天 21:17"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/text_gray"
+            android:layout_below="@id/text_message_service_title"
+            android:layout_marginTop="20px"
+            android:layout_alignLeft="@id/text_message_service_title"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="尊敬的用户:即日起至11月11日，凡购买任意一款产品的都有礼品赠送"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="154px"
+        android:paddingLeft="45px"
+        android:paddingRight="45px"
+        android:paddingTop="20px"
+        android:paddingBottom="20px"
+        android:background="@color/white">
+        <ImageView
+            android:id="@+id/image_message_system"
+            android:layout_width="70px"
+            android:layout_height="70px"
+            android:scaleType="fitXY"
+            android:src="@drawable/message_system_icon"/>
+        <TextView
+            android:id="@+id/text_message_system_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/image_message_system"
+            android:layout_marginLeft="18px"
+            android:text="@string/text_system_message"/>
+        <TextView
+            android:id="@+id/text_message_system_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/text_gray"
+            android:layout_alignParentRight="true"
+            android:layout_alignBaseline="@id/text_message_system_title"
+            android:text="今天 21:17"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/text_gray"
+            android:layout_below="@id/text_message_system_title"
+            android:layout_marginTop="20px"
+            android:layout_alignLeft="@id/text_message_system_title"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="尊敬的用户:即日起至11月11日，凡购买任意一款产品的都有礼品赠送"/>
+    </RelativeLayout>
+
+
 
 </LinearLayout>

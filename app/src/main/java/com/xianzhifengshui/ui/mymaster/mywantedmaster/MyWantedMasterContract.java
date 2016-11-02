@@ -1,5 +1,6 @@
 package com.xianzhifengshui.ui.mymaster.mywantedmaster;
 
+import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.base.IPresenter;
 import com.xianzhifengshui.base.IView;
 
@@ -13,8 +14,8 @@ import java.util.List;
 public interface MyWantedMasterContract {
 
     interface View extends IView<Present>{
-        void refreshData(List<String> data);
-        void loadMore(List<String> data);
+        void refreshData(List<Master> data);
+        void loadMore(List<Master> data);
         void showEmpty();
         void showFailure();
     }

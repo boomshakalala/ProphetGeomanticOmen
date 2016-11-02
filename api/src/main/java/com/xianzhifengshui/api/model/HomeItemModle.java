@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 作者: chengx
  * 日期: 2016/10/27.
- * 描述:
+ * 描述: 主页模型
  */
 public class HomeItemModle implements Serializable {
     private static final long serialVersionUID = -292618941496512047L;

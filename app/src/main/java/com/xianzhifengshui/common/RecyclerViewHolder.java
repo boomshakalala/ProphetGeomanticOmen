@@ -48,6 +48,10 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder{
         return (T)view;
     }
 
+    public View getConvertView() {
+        return convertView;
+    }
+
     /*======= ViewHolder辅助方法 =======*/
 
     /**

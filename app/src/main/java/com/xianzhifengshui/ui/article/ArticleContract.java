@@ -1,0 +1,26 @@
+package com.xianzhifengshui.ui.article;
+
+import com.xianzhifengshui.api.model.Article;
+import com.xianzhifengshui.base.IPresenter;
+import com.xianzhifengshui.base.IView;
+
+import java.util.ArrayList;
+
+/**
+ * 作者: chengx
+ * 日期: 2016/11/2.
+ * 描述: 服务项目页mvp接口
+ */
+public class ArticleContract {
+    interface View extends IView<Presenter>{
+        void refreshData(ArrayList<Article> data);
+        void loadMore(ArrayList<Article> data);
+        void showEmpty();
+        void showFailure();
+    }
+
+    interface Presenter extends IPresenter{
+        void refreshData();
+        void loadMore();
+    }
+}

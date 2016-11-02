@@ -31,7 +31,7 @@ public class TagConfig {
         try {
             lineSpacing = typedArray.getDimensionPixelSize(R.styleable.TagLayout_lineSpacing,DEFAULT_LINE_SPACING);
             tagSpacing = typedArray.getDimensionPixelSize(R.styleable.TagLayout_tagSpacing,DEFAULT_TAG_SPACING);
-            columnSize = typedArray.getDimensionPixelSize(R.styleable.TagLayout_columnSize,DEFAULT_COLUMN_SIZE);
+            columnSize = typedArray.getInteger(R.styleable.TagLayout_columnSize,DEFAULT_COLUMN_SIZE);
         }finally {
             typedArray.recycle();
         }

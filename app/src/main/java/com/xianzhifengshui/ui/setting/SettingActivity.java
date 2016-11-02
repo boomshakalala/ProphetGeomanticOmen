@@ -1,5 +1,6 @@
 package com.xianzhifengshui.ui.setting;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.xianzhifengshui.R;
+import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BaseActivity;
 import com.xianzhifengshui.ui.modifypassword.ModifyPasswordActivity;
 
@@ -26,10 +28,10 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
     private SettingContract.Presenter presenter;
 
 
-    public static void launcher(Context context){
+    public static void launcher(Activity context,int opt){
         Intent intent = new Intent();
         intent.setClass(context,SettingActivity.class);
-        context.startActivity(intent);
+        context.startActivityForResult(intent,opt);
     }
 
     @Override
@@ -90,6 +92,8 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
         switch (v.getId()){
             case R.id.btn_setting_logout:
                 //TODO:退出登录
+                sp.clear();
+                setResult(AppConfig.RESULT_LOGOUT);
                 break;
             case R.id.btn_setting_modify_password:
                 //修改密码

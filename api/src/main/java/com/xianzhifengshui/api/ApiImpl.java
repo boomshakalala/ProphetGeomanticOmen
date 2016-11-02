@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xianzhifengshui.api.des.DESUtils;
 import com.xianzhifengshui.api.model.Master;
+import com.xianzhifengshui.api.model.MasterDetailModel;
 import com.xianzhifengshui.api.model.User;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
 import com.xianzhifengshui.api.net.HttpEngine;
@@ -64,6 +65,15 @@ public class ApiImpl implements Api {
         Type type = new TypeToken<BaseListModel<ArrayList<Master>>>(){}.getType();
         HttpEngine.getInstance().get(MASTER_LIST,map2Ciphertext(paramsMap),type,callback);
 
+    }
+
+    @Override
+    public void masterDetail(String masterCode, String userCode, ActionCallbackListener<MasterDetailModel> callback) {
+        paramsMap.clear();
+        paramsMap.put("masterCode", masterCode);
+        paramsMap.put("userCode", userCode);
+        Type type = MasterDetailModel.class;
+        HttpEngine.getInstance().get(MASTER_DETAIL,map2Ciphertext(paramsMap),type,callback);
     }
 
 

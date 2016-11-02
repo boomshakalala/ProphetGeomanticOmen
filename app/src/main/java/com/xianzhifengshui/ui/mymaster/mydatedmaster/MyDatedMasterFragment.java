@@ -2,11 +2,14 @@ package com.xianzhifengshui.ui.mymaster.mydatedmaster;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.MasterListAdapter;
 import com.xianzhifengshui.adapter.MyDatedMasterListAdapter;
 import com.xianzhifengshui.base.BaseFragment;
+import com.xianzhifengshui.common.CommonRecyclerAdapter;
+import com.xianzhifengshui.ui.masterdetail.MasterDetailActivity;
 import com.xianzhifengshui.ui.mymaster.mywantedmaster.MyWantedMasterContract;
 import com.xianzhifengshui.ui.mymaster.mywantedmaster.MyWantedMasterPresent;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
@@ -20,7 +23,7 @@ import java.util.List;
  * 日期: 2016/10/17.
  * 描述: 我想约的大师列表
  */
-public class MyDatedMasterFragment extends BaseFragment implements MyDatedMasterContract.View,PullToRefreshBase.OnRefreshListener2<RecyclerView> {
+public class MyDatedMasterFragment extends BaseFragment implements MyDatedMasterContract.View,PullToRefreshBase.OnRefreshListener2<RecyclerView>,CommonRecyclerAdapter.OnRecyclerViewItemClickListener {
 
     private PullToRefreshRecyclerView pullToRefreshRecyclerView;
     private RecyclerView recyclerView;
@@ -46,6 +49,7 @@ public class MyDatedMasterFragment extends BaseFragment implements MyDatedMaster
     protected void initData() {
         data = new ArrayList<>();
         adapter = new MyDatedMasterListAdapter(getContext(),data,R.layout.item_my_dated_master_list);
+        adapter.setOnItemClickListener(this);
         present = new MyDatedMasterPresent(this);
     }
 
@@ -118,5 +122,10 @@ public class MyDatedMasterFragment extends BaseFragment implements MyDatedMaster
         }else {
             super.closeWait();
         }
+    }
+
+    @Override
+    public void onItemClick(View view, Object data) {
+        MasterDetailActivity.launcher(getContext());
     }
 }

@@ -1,6 +1,8 @@
 package com.xianzhifengshui.utils;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <pre>
@@ -322,5 +324,13 @@ public class StringUtils {
             sb.append(py);
         }
         return sb.toString();
+    }
+
+    public static ArrayList<String> arry2List(String[] arry){
+        ArrayList<String> result = new ArrayList<>();
+        for (int i = 0; i < arry.length; i++) {
+            result.add(arry[i]);
+        }
+        return result;
     }
 }

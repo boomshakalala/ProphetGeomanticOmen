@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="40px"
+    android:paddingRight="40px"
+    android:paddingTop="8px"
+    android:paddingBottom="17px"
+    android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <com.xianzhifengshui.widget.CircleImageView
+            android:id="@+id/image_evaluate_avatar"
+            android:layout_width="70px"
+            android:layout_height="70px"
+            android:layout_marginTop="8px"
+            android:layout_centerVertical="true"
+            android:src="@drawable/pic"
+            />
+        <TextView
+            android:id="@+id/text_evaluate_list_nick_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small"
+            android:layout_toRightOf="@id/image_evaluate_avatar"
+            android:layout_marginLeft="18px"
+            android:text="小米粒"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/black"
+            android:text="2016-9-9"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_size_smallest"
+        android:layout_marginTop="7px"
+        android:text="根据风水理论，将地理因素、公司战略布局和业务范围有机结合，选择出适合公司发展的办公地址，为您的事业发展打开通路."/>
+
+
+</LinearLayout>

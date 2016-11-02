@@ -5,10 +5,24 @@ import java.io.Serializable;
 /**
  * 作者: chengx
  * 日期: 2016/10/27.
- * 描述:
+ * 描述: 大师列表模型
  */
 public class Master implements Serializable{
     private static final long serialVersionUID = 4616237234657569947L;
+
+    private String desc; //大师详细介绍
+
+    private int appoint; //预约数
+
+    private String pic; //大师图片
+
+    private String type; //服务类型
+
+    private int collecteStatus; //收藏状态
+
+    private String title; //大师标语
+
+    private String address; //大师地址
 
     private String summary; //大师简介
 
@@ -98,5 +112,61 @@ public class Master implements Serializable{
 
     public void setMasterCode(String masterCode) {
         this.masterCode = masterCode;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public int getAppoint() {
+        return appoint;
+    }
+
+    public void setAppoint(int appoint) {
+        this.appoint = appoint;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getCollecteStatus() {
+        return collecteStatus;
+    }
+
+    public void setCollecteStatus(int collecteStatus) {
+        this.collecteStatus = collecteStatus;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

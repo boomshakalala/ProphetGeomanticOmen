@@ -128,6 +128,8 @@ public class AutoToolbar extends Toolbar {
         return new LayoutParams(this.getContext(), attrs);
     }
 
+
+
     public static class LayoutParams extends Toolbar.LayoutParams implements AutoLayoutHelper.AutoLayoutParams {
         private AutoLayoutInfo mDimenLayoutInfo;
 
@@ -263,7 +265,7 @@ public class AutoToolbar extends Toolbar {
         TextView leftBtn = (TextView) findViewById(R.id.btn_left);
         Drawable drawable = getContext().getResources().getDrawable(resId);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-        leftBtn.setCompoundDrawables(null,null,drawable,null);
+        leftBtn.setCompoundDrawables(null, null, drawable, null);
     }
 
     public void setOnLeftBtnClickListener(View.OnClickListener onClickListener){
@@ -287,5 +289,20 @@ public class AutoToolbar extends Toolbar {
     public void setOnSearchViewClickListener(View.OnClickListener onClickListener){
         EditText searchView = (EditText) findViewById(R.id.searchView);
         searchView.setOnClickListener(onClickListener);
+    }
+
+    public String getSearchText(){
+        EditText searchView = (EditText) findViewById(R.id.searchView);
+        return searchView.getText().toString().trim();
+    }
+
+    public void setOnEditorActionListener(EditText.OnEditorActionListener onEditorActionListener){
+        EditText searchView = (EditText) findViewById(R.id.searchView);
+        searchView.setOnEditorActionListener(onEditorActionListener);
+    }
+
+    public void setKeyword(String keyword) {
+        EditText searchView = (EditText) findViewById(R.id.searchView);
+        searchView.setText(keyword);
     }
 }

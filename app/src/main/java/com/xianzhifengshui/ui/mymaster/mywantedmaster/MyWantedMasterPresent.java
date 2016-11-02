@@ -2,6 +2,7 @@ package com.xianzhifengshui.ui.mymaster.mywantedmaster;
 
 import android.os.Handler;
 
+import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.base.BasePresenter;
 
@@ -23,9 +24,9 @@ public class MyWantedMasterPresent extends BasePresenter implements MyWantedMast
 
     @Override
     public void refreshData() {
-        final List<String> data = new ArrayList<>();
+        final List<Master> data = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            data.add("");
+            data.add(new Master());
         }
         if (view.isActive())
             view.showWaiting();
@@ -40,9 +41,9 @@ public class MyWantedMasterPresent extends BasePresenter implements MyWantedMast
 
     @Override
     public void loadMore() {
-        final List<String> data = new ArrayList<>();
+        final List<Master> data = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            data.add("");
+            data.add(new Master());
         }
         if (view.isActive())
             view.showWaiting();

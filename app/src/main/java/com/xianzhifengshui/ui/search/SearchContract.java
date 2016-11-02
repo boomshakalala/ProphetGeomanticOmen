@@ -1,7 +1,10 @@
 package com.xianzhifengshui.ui.search;
 
+import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.base.IPresenter;
 import com.xianzhifengshui.base.IView;
+
+import java.util.ArrayList;
 
 /**
  * 作者: chengx
@@ -12,12 +15,14 @@ public interface SearchContract {
     interface View extends IView<Presenter>{
         void showEmpty();
         void showFailure();
-        void loadData();
-        void loadMore();
+        void loadData(ArrayList<Master> dataList);
+        void loadMore(ArrayList<Master> dataList);
+        void showInit();
+        void setKeyword(String keyword);
     }
 
     interface Presenter extends IPresenter{
-        void loadData();
+        void loadData(String keyword);
 
         void loadMore();
     }

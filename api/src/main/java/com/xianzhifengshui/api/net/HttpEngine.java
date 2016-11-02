@@ -27,7 +27,7 @@ import cz.msebera.android.httpclient.Header;
  * 描述: 引擎处理类
  */
 public class HttpEngine {
-    private final String TAG = "HttpEngine";
+    private final String TAG = getClass().getSimpleName();
     public final String HOST = "http://123.56.162.170:8082/api/";      //服务器主地址
     private static final int JSON_SYNTAX_ERROR = -1;
     private static final String JSON_SYNTAX_INFO = "返回数据格式错误";
@@ -57,6 +57,7 @@ public class HttpEngine {
         Log.d(TAG, "get url = "+url);
         String sign = Md5Utils.md5s(DESUtils.decrypt(ciphertext));
         Log.d(TAG, "get sign = "+sign);
+        Log.d(TAG, "get json = "+ciphertext);
         RequestParams params = new RequestParams();
         params.put("json", ciphertext);
         params.put("sign",sign);
@@ -85,6 +86,7 @@ public class HttpEngine {
                 }else if (response.getStatus().equals("success")){
                     callback.onFailure(response.getStatusCode(),response.getMessage());
                 }else {
+                    callback.onFailure(response.getStatusCode(),response.getMessage());
                     Log.e(TAG, "network error:"+response.getMessage());
                 }
             }
@@ -101,6 +103,9 @@ public class HttpEngine {
         }
         if (jsonObject.has("status")){
             response.setStatus(jsonObject.get("status").getAsString());
+        }
+        if (jsonObject.has("message")){
+            response.setMessage(jsonObject.get("message").getAsString());
         }
         if (jsonObject.has("data")){
             String jsonDataStr = jsonObject.get("data").toString();

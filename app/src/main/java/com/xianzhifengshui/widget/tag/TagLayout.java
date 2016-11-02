@@ -5,6 +5,7 @@ import android.database.DataSetObserver;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 
 import com.zhy.autolayout.utils.AutoLayoutHelper;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -19,7 +20,7 @@ public class TagLayout extends ViewGroup{
     private final AutoLayoutHelper helper = new AutoLayoutHelper(this);
     private int lineSpacing;
     private int tagSpacing;
-    private TagAdapter tagAdapter;
+    private BaseAdapter tagAdapter;
 
     private TagItemClickListener listener;
     private DataChangeObserver observer;
@@ -131,7 +132,7 @@ public class TagLayout extends ViewGroup{
         return new LayoutParams(this.getContext(), attrs);
     }
 
-    public void setAdapter(TagAdapter adapter){
+    public void setAdapter(BaseAdapter adapter){
         if (tagAdapter == null) {
             this.tagAdapter = adapter;
             if (observer == null) {
