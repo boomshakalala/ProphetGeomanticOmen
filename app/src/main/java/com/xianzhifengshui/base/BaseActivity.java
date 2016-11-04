@@ -38,7 +38,8 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getContentLayoutId());
+        if (getContentLayoutId() != -1)
+            setContentView(getContentLayoutId());
         init();
         initData();
         initViews();

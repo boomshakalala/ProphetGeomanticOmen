@@ -180,4 +180,19 @@ public class MasterDetailActivity extends BaseActivity implements MasterDetailCo
         evaluateFragment.refreshData(evaluates);
     }
 
+    @Override
+    public void closeMoreService() {
+
+    }
+
+    @Override
+    public void closeMoreEvaluate() {
+        evaluateFragment.closeLoadMore();
+    }
+
+    @Override
+    public void closeMoreArticle() {
+
+    }
+
 }

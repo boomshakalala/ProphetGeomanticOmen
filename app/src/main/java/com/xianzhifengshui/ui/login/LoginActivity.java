@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BaseActivity;
+import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.ui.register.RegisterActivity;
 
 /**
@@ -39,6 +41,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,Vi
     @Override
     protected void initData() {
         presenter = new LoginPresenter(this);
+        log(getCallingActivity());
     }
 
     @Override
@@ -55,8 +58,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,Vi
         registerBtn.setOnClickListener(this);
     }
 
-    public static void launcher(Activity context,int requestCode){
-        Intent intent = new Intent(context,LoginActivity.class);
+    public static void launcher(BaseFragment context,int requestCode){
+        Intent intent = new Intent(context.getContext(),LoginActivity.class);
+        Log.d("LoginActivity", "launcher ");
         context.startActivityForResult(intent,requestCode);
     }
 

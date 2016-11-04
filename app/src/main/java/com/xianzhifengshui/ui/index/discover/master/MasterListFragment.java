@@ -10,6 +10,8 @@ import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.MasterListAdapter;
 import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.base.BaseFragment;
+import com.xianzhifengshui.common.CommonRecyclerAdapter;
+import com.xianzhifengshui.ui.masterdetail.MasterDetailActivity;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
 
@@ -23,7 +25,7 @@ import java.util.List;
  * 日期: 2016/10/10.
  * 描述: 大师列表页
  */
-public class MasterListFragment extends BaseFragment implements MasterListContract.View,PullToRefreshBase.OnRefreshListener2<RecyclerView>, View.OnClickListener {
+public class MasterListFragment extends BaseFragment implements MasterListContract.View,PullToRefreshBase.OnRefreshListener2<RecyclerView>, View.OnClickListener, CommonRecyclerAdapter.OnRecyclerViewItemClickListener<Master> {
 
     private final int INDEX_HOT = 0;
     private final int INDEX_LOCAL = 1;
@@ -64,6 +66,7 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
         this.presenter = new MasterListPresenter(this);
         data = new ArrayList<>();
         adapter = new MasterListAdapter(getContext(),R.layout.item_master_list,data);
+        adapter.setOnItemClickListener(this);
     }
 
     @Override
@@ -190,5 +193,11 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
     @Override
     public void showTip(String text) {
         showToast(text);
+    }
+
+
+    @Override
+    public void onItemClick(View view, Master data) {
+        MasterDetailActivity.launcher(getContext());
     }
 }

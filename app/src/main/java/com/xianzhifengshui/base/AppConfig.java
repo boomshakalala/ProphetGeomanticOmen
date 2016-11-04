@@ -1,5 +1,7 @@
 package com.xianzhifengshui.base;
 
+import com.xianzhifengshui.utils.PhoneUtils;
+
 /**
  * 作者: chengx
  * 日期: 2016/9/28.
@@ -14,4 +16,10 @@ public class AppConfig {
 
     public static int RESULT_LOGIN = 1;
     public static int RESULT_LOGOUT = -1;
+
+    public static String WX_APP_ID = "";
+
+    public static String WB_APP_ID = "";
+
+    public static String QQ_APP_ID = "";
 }

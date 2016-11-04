@@ -162,12 +162,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
 
     @Override
     public void toLoginActivity(int opt) {
-        LoginActivity.launcher(activity,opt);
+        LoginActivity.launcher(this,opt);
     }
 
     @Override
     public void showLoginInfo() {
-        userNameTv.setText("18631565231");
+        userNameTv.setText("OnTheWay");
         avatarIv.setImageResource(R.drawable.pic);
     }
 
@@ -196,7 +196,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
                 EditUserInfoActivity.launcher(activity);
                 break;
             case OPT_SETTING:
-                SettingActivity.launcher(activity,opt);
+                SettingActivity.launcher(this,opt);
                 break;
             case OPT_MY_ACCOUNT:
                 MyAccountActivity.launcher(activity);
@@ -224,17 +224,18 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
         showToast(text);
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         log("requestCode="+requestCode+"resultCode="+resultCode);
         if (resultCode == AppConfig.RESULT_LOGIN){
             log(requestCode);
-            presenter.checkIsLoginJump(sp, requestCode);
+            presenter.checkIsLogin(sp, true, true, requestCode);
         }
         if (resultCode == AppConfig.RESULT_LOGOUT){
             log(resultCode);
             presenter.checkIsLoginUpdateUI(sp);
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

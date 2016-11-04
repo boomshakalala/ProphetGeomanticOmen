@@ -44,7 +44,7 @@ public class BarView extends ImageView {
     }
 
     private void init(){
-        this.setImageResource(R.mipmap.progress_bar);
+        this.setImageResource(R.drawable.progress_bar);
         this.updateViewRunnable = new Runnable() {
             @Override
             public void run() {

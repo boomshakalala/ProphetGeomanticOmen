@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BaseActivity;
+import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.ui.modifypassword.ModifyPasswordActivity;
 
 /**
@@ -28,9 +29,9 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
     private SettingContract.Presenter presenter;
 
 
-    public static void launcher(Activity context,int opt){
+    public static void launcher(BaseFragment context,int opt){
         Intent intent = new Intent();
-        intent.setClass(context,SettingActivity.class);
+        intent.setClass(context.getContext(),SettingActivity.class);
         context.startActivityForResult(intent,opt);
     }
 
@@ -91,9 +92,10 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_setting_logout:
-                //TODO:退出登录
+                //退出登录
                 sp.clear();
                 setResult(AppConfig.RESULT_LOGOUT);
+                finish();
                 break;
             case R.id.btn_setting_modify_password:
                 //修改密码

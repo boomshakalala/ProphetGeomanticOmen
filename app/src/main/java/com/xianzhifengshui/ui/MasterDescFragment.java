@@ -23,7 +23,6 @@ public class MasterDescFragment extends BaseFragment {
     @Override
     protected void initViews() {
         descTv = (TextView) rootView.findViewById(R.id.text_master_desc);
-        descTv.setText(Html.fromHtml("张三丰，文始派传人，武当派祖师，著有《玄机直讲》、《玄要篇》等。对商务风水和良辰吉日有独到的见解。<br/>张先师曾先后主持过多项大型商务风水项目，获得业界一致好评，在风水行业有着举足轻重的地位。"));
     }
 
     @Override

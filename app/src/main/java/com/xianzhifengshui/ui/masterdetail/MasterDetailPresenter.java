@@ -2,6 +2,7 @@ package com.xianzhifengshui.ui.masterdetail;
 
 import com.xianzhifengshui.api.model.MasterDetailModel;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
+import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BasePresenter;
 
 /**
@@ -21,7 +22,7 @@ public class MasterDetailPresenter extends BasePresenter implements MasterDetail
     @Override
     public void requestData() {
         view.showWaiting();
-        api.masterDetail("9e41413d569b4f8f89ce70f572842917", "9e41413d569b4f8f89ce70f572842917", new ActionCallbackListener<MasterDetailModel>() {
+        api.masterDetail("bd35193472fa43d6b6aa7cdcf96d4c33", "9e41413d569b4f8f89ce70f572842917", new ActionCallbackListener<MasterDetailModel>() {
             @Override
             public void onProgress(long bytesWritten, long totalSize) {
 
@@ -33,6 +34,9 @@ public class MasterDetailPresenter extends BasePresenter implements MasterDetail
                 view.showService(data.getServiceType());
                 view.showAboutMaster(data.getDesc());
                 view.showEvaluate(data.getEvaluate());
+                if (data.getEvaluate().size()< AppConfig.PAGE_SIZE){
+                    view.closeMoreEvaluate();
+                }
                 view.closeWait();
             }
 

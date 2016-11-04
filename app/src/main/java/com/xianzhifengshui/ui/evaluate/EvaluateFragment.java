@@ -41,7 +41,6 @@ public class EvaluateFragment extends BaseFragment implements EvaluateContract.V
         pullToRefreshRecyclerView.setOnRefreshListener(this);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         recyclerView.setAdapter(adapter);
-        presenter.refreshData();
     }
 
     @Override
@@ -69,6 +68,11 @@ public class EvaluateFragment extends BaseFragment implements EvaluateContract.V
     @Override
     public void loadMore(List<Evaluate> data) {
         adapter.loadMore(data);
+    }
+
+    @Override
+    public void closeLoadMore() {
+        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
     }
 
     @Override
@@ -104,5 +108,19 @@ public class EvaluateFragment extends BaseFragment implements EvaluateContract.V
     @Override
     public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
         presenter.loadMore();
+    }
+
+    @Override
+    public void showWaiting() {
+        if (!pullToRefreshRecyclerView.isRefreshing())
+            super.showWaiting();
+    }
+
+    @Override
+    public void closeWait() {
+        if (pullToRefreshRecyclerView.isRefreshing())
+            pullToRefreshRecyclerView.onRefreshComplete();
+        else
+            super.closeWait();
     }
 }

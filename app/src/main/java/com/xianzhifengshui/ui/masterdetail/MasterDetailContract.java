@@ -1,5 +1,7 @@
 package com.xianzhifengshui.ui.masterdetail;
 
+import android.view.ViewOutlineProvider;
+
 import com.xianzhifengshui.api.model.Evaluate;
 import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.ServiceType;
@@ -21,6 +23,9 @@ public class MasterDetailContract {
         void showAboutMaster(String desc);
         void showArticle();
         void showEvaluate(List<Evaluate> evaluates);
+        void closeMoreService();
+        void closeMoreEvaluate();
+        void closeMoreArticle();
     }
 
     interface Presenter extends IPresenter{

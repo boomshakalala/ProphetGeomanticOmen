@@ -6,14 +6,14 @@
     <color name="black">#000000</color>
     <color name="gray">#dcdcdc</color>
     <color name="orange">#eb6000</color>
-    <color name="orange_dark">#d02900</color>
+    <color name="orange_dark">#e84019</color>
     <color name="white_dark">#faf9f9</color>
     <color name="text_gray">#9f9fa0</color>
     <color name="text_red">#e60012</color>
     <color name="spline_color">#c9c9ca</color>
     <color name="background_gray">#f1eeed</color>
     <color name="yellow">#f5d337</color>
-    <color name="half_transparent">#55ffffff</color>
+    <color name="half_transparent">#55000000</color>
 
 
 </resources>

@@ -17,6 +17,7 @@ public class EvaluateContract {
     interface View extends IView<Presenter>{
         void refreshData(List<Evaluate> data);
         void loadMore(List<Evaluate> data);
+        void closeLoadMore();
         void showEmpty();
         void showFailure();
     }

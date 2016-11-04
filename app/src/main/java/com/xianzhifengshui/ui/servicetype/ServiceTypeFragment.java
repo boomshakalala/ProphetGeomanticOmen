@@ -39,7 +39,6 @@ public class ServiceTypeFragment extends BaseFragment implements ServiceTypeCont
         pullToRefreshRecyclerView.setOnRefreshListener(this);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         recyclerView.setAdapter(adapter);
-        presenter.refreshData();
     }
 
     @Override

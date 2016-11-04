@@ -2,14 +2,17 @@ package com.xianzhifengshui.ui.index.discover.lecture;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.LectureListAdapter;
 import com.xianzhifengshui.adapter.MasterListAdapter;
 import com.xianzhifengshui.base.BaseFragment;
+import com.xianzhifengshui.common.CommonRecyclerAdapter;
 import com.xianzhifengshui.ui.index.discover.master.MasterListContract;
 import com.xianzhifengshui.ui.index.discover.master.MasterListPresenter;
+import com.xianzhifengshui.ui.lecturedetail.LectureDetailActivity;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
 
@@ -21,7 +24,7 @@ import java.util.List;
  * 日期: 2016/10/10.
  * 描述: 讲座列表页
  */
-public class LectureListFragment extends BaseFragment implements LectureListContract.View,PullToRefreshBase.OnRefreshListener2<RecyclerView>{
+public class LectureListFragment extends BaseFragment implements LectureListContract.View,PullToRefreshBase.OnRefreshListener2<RecyclerView>,CommonRecyclerAdapter.OnRecyclerViewItemClickListener<String>{
 
     /*======= 控件声明区 =======*/
     private PullToRefreshRecyclerView pullToRefreshRecyclerView;
@@ -49,6 +52,7 @@ public class LectureListFragment extends BaseFragment implements LectureListCont
         this.presenter = new LectureListPresenter(this);
         data = new ArrayList<>();
         adapter = new LectureListAdapter(getContext(),R.layout.item_lecture_list,data);
+        adapter.setOnItemClickListener(this);
     }
 
     @Override
@@ -118,5 +122,12 @@ public class LectureListFragment extends BaseFragment implements LectureListCont
             pullToRefreshRecyclerView.onRefreshComplete();
         }else
             super.closeWait();
+    }
+
+
+
+    @Override
+    public void onItemClick(View view, String data) {
+        LectureDetailActivity.launcher(getContext());
     }
 }

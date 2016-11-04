@@ -88,6 +88,10 @@
     <string name="text_collect_master">收藏大师</string>
     <string name="text_master_detail">大师详情</string>
     <string name="text_single">单</string>
+    <string name="text_collect_lecture">收藏讲座</string>
+    <string name="text_lecture_detail">讲座详情</string>
+    <string name="text_pay_success">支付成功</string>
+    <string name="text_pay_failure">支付失败</string>
 
     <array name="tag_search">
         <item>商务风水</item>

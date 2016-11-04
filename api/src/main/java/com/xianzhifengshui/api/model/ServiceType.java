@@ -18,7 +18,7 @@ public class ServiceType implements Serializable {
 
     private double marking; //评分
 
-    private int type; //服务类型
+    private String type; //服务类型
 
     public void setSummary(String summary){
         this.summary = summary;
@@ -44,10 +44,10 @@ public class ServiceType implements Serializable {
     public double getMarking(){
         return this.marking;
     }
-    public void setType(int type){
+    public void setType(String type){
         this.type = type;
     }
-    public int getType(){
+    public String getType(){
         return this.type;
     }
 }

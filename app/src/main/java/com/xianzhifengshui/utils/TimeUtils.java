@@ -179,12 +179,12 @@ public class TimeUtils {
      * EEEE 'DATE('yyyy-MM-dd')' 'TIME('HH:mm:ss')' zzzz    星期五 DATE(2016-08-12) TIME(15:44:40) 中国标准时间
      * </pre>
      */
-    public static final SimpleDateFormat DEFAULT_SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    public static final SimpleDateFormat DEFAULT_SDF = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
 
     /**
      * 将时间戳转为时间字符串
-     * <p>格式为yyyy-MM-dd HH:mm:ss</p>
+     * <p>格式为yyyy-MM-dd</p>
      *
      * @param milliseconds 毫秒时间戳
      * @return 时间字符串
