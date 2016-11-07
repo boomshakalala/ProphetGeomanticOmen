@@ -96,7 +96,8 @@
                     android:text="88人约过"
                     android:drawableLeft="@drawable/master_detail_single_valume_icon"
                     android:drawablePadding="10dp"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

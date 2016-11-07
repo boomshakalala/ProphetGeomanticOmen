@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
     private boolean couldDoubleBackExit;
     private boolean pressedOnce;
     private boolean needToolbar = true;
+    private boolean needFullScreen = false;
     private NomalProgressDialog progressDialog;
 
     protected AutoToolbar toolbar;
@@ -43,10 +45,10 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
         init();
         initData();
         initViews();
-
-        if (needToolbar){
+        if (needToolbar)
             initToolbar();
-        }
+        if (needFullScreen)
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
     }
 
@@ -106,6 +108,14 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
                 }
             }, ConstUtils.SEC*2);
         }
+    }
+
+    /**
+     * 设置是否全屏显示
+     * @param needFullScreen true 全屏显示
+     */
+    public void setNeedFullScreen(boolean needFullScreen) {
+        this.needFullScreen = needFullScreen;
     }
 
     /**

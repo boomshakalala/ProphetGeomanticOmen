@@ -1,7 +1,8 @@
-package com.xianzhifengshui.ui.index.discover.topic;
+package com.xianzhifengshui.ui.topic;
 
 import android.os.Handler;
 
+import com.xianzhifengshui.api.model.Topic;
 import com.xianzhifengshui.base.BasePresenter;
 
 import java.util.ArrayList;
@@ -9,10 +10,10 @@ import java.util.List;
 
 /**
  * 作者: chengx
- * 日期: 2016/10/12.
- * 描述: 讲座列表页控制器
+ * 日期: 2016/11/7.
+ * 描述:
  */
-public class TopicListPresenter extends BasePresenter implements TopicListContract.Presenter{
+public class TopicListPresenter extends BasePresenter implements TopicListContract.Presenter {
 
     private TopicListContract.View view;
 
@@ -21,19 +22,14 @@ public class TopicListPresenter extends BasePresenter implements TopicListContra
         view.setPresenter(this);
     }
 
-    private void requestData() {
-
-    }
-
-
     @Override
     public void refreshData() {
-        final List<String> data = new ArrayList<>();
+        final List<Topic> data = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
-            data.add("");
+            data.add(new Topic());
         }
         if (view.isActive())
-        view.showWaiting();
+            view.showWaiting();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -41,15 +37,16 @@ public class TopicListPresenter extends BasePresenter implements TopicListContra
                 view.closeWait();
             }
         },3000);
-
     }
 
     @Override
     public void loadMore() {
-        final List<String> data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            data.add("");
+        final List<Topic> data = new ArrayList<>();
+        for (int i = 0; i < 7; i++) {
+            data.add(new Topic());
         }
+        if (view.isActive())
+            view.showWaiting();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

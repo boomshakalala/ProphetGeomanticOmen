@@ -73,6 +73,12 @@
         <activity
             android:name=".ui.lecturedetail.LectureDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+        android:name=".ui.topic.TopicListActivity"
+        android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ImageBrowserActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

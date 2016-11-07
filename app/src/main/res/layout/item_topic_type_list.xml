@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="40px"
+    android:paddingRight="40px"
+    android:paddingTop="16px"
+    android:paddingBottom="16px"
+    android:background="@drawable/selector_recycler_item_bg">
+    <com.xianzhifengshui.widget.CircleImageView
+        android:id="@+id/image_topic_type_list_icon"
+        app:layout_auto_baseheight="width"
+        android:layout_width="98px"
+        android:layout_height="98px"
+        android:layout_centerVertical="true"
+        android:src="@drawable/pic"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/image_topic_type_list_icon"
+        android:layout_marginLeft="16px"
+        >
+        <TextView
+            android:id="@+id/text_topic_type_list_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_large"
+            android:textColor="@color/black"
+            android:text="事业•运势"/>
+        <TextView
+            android:id="@+id/text_topic_type_list_browsing_times"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:textColor="@color/text_gray"
+            android:layout_below="@id/text_topic_type_list_title"
+            android:textSize="@dimen/text_size_smaller"
+            android:text="5468k次浏览"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="54px"
+            android:layout_toRightOf="@id/text_topic_type_list_browsing_times">
+            <ImageView
+                android:id="@+id/image_topic_type_list_attention"
+                android:layout_width="30px"
+                android:layout_height="30px"
+                android:layout_marginTop="5px"
+                android:layout_centerHorizontal="true"
+                app:layout_auto_baseheight="width"
+                android:src="@drawable/lecture_list_collect_icon"
+                />
+            <TextView
+                android:id="@+id/text_topic_type_list_attention_times"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_topic_type_list_attention"
+                android:textSize="@dimen/text_size_smaller"
+                android:layout_marginTop="20px"
+                android:textColor="@color/text_gray"
+                android:text="5468k人关注"
+                />
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

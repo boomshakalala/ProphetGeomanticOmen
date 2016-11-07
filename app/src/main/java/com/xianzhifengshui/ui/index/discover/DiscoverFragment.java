@@ -1,19 +1,14 @@
 package com.xianzhifengshui.ui.index.discover;
 
 
-import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.TabPagerAdapter;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.ui.index.discover.lecture.LectureListFragment;
 import com.xianzhifengshui.ui.index.discover.master.MasterListFragment;
-import com.xianzhifengshui.ui.index.discover.topic.TopicListFragment;
+import com.xianzhifengshui.ui.index.discover.topictype.TopicTypeListFragment;
 import com.xianzhifengshui.widget.auto.AutoTabLayout;
 
 import java.util.ArrayList;
@@ -49,10 +44,10 @@ public class DiscoverFragment extends BaseFragment {
         fragments = new ArrayList<>();
         MasterListFragment masterListFragment = new MasterListFragment();
         LectureListFragment lectureListFragment = new LectureListFragment();
-        TopicListFragment topicListFragment = new TopicListFragment();
+        TopicTypeListFragment topicTypeListFragment = new TopicTypeListFragment();
         fragments.add(masterListFragment);
         fragments.add(lectureListFragment);
-        fragments.add(topicListFragment);
+        fragments.add(topicTypeListFragment);
         titles = new String[]{"大师","讲座","话题"};
         pagerAdapter = new TabPagerAdapter(getFragmentManager(),titles,fragments);
     }

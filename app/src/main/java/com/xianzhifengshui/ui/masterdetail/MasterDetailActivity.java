@@ -152,7 +152,7 @@ public class MasterDetailActivity extends BaseActivity implements MasterDetailCo
         pointOfPraiseTv.setText(master.getPointOfPraise()+"");
         singleVolumeTv.setText(master.getSingleVolume()+getString(R.string.text_single));
         collectionTv.setText(master.getCollection()+"");
-        Glide.with(this).load(master.getPic()).asBitmap().into(new SimpleTarget<Bitmap>() {
+        Glide.with(this).load("http://f.hiphotos.baidu.com/image/pic/item/203fb80e7bec54e753da379aba389b504fc26a7b.jpg").asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                 headLayout.setBackgroundDrawable(ImageUtils.bitmap2Drawable(getResources(), resource));
