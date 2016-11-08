@@ -14,10 +14,12 @@ import java.util.List;
  */
 public interface MasterListContract {
      interface View extends IView<Presenter>{
-        void refreshData(ArrayList<Master> data);
-        void loadMore(ArrayList<Master> data);
-        void showEmpty();
-        void showFailure();
+         void refreshData(ArrayList<Master> data);
+         void loadMore(ArrayList<Master> data);
+         void showEmpty();
+         void showFailure();
+         void closeLoadMore();
+
     }
 
     interface Presenter extends IPresenter{

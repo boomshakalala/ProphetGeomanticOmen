@@ -27,12 +27,8 @@ public class ServiceTypePresenter extends BasePresenter implements ServiceTypeCo
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                ArrayList<ServiceType> list = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    list.add(new ServiceType());
-                }
-                view.refreshData(list);
                 view.closeWait();
+                view.showEmpty();
             }
         },1500);
     }
@@ -43,11 +39,6 @@ public class ServiceTypePresenter extends BasePresenter implements ServiceTypeCo
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                ArrayList<ServiceType> list = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    list.add(new ServiceType());
-                }
-                view.loadMore(list);
                 view.closeWait();
             }
         },1500);

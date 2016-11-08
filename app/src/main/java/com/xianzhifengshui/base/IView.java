@@ -34,4 +34,5 @@ public interface IView<T> {
      * @param text 提示信息内容
      */
     void showTip(String text);
+
 }

@@ -11,6 +11,7 @@ import android.widget.TableRow;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.utils.SPUtils;
+import com.xianzhifengshui.widget.EmptyLayout;
 import com.xianzhifengshui.widget.auto.AutoToolbar;
 
 
@@ -27,6 +28,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected View rootView;
     protected AutoToolbar toolbar;
+    protected EmptyLayout emptyLayout;
     protected boolean isActive;
 
     @Override
@@ -58,10 +60,12 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view,Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        emptyLayout = (EmptyLayout) rootView.findViewById(R.id.emptyLayout);
         initViews();
         if (needToolBar){
             initToolbar();
         }
+
     }
 
     @Override
@@ -111,6 +115,10 @@ public abstract class BaseFragment extends Fragment {
 
     public void showWaiting(){
         activity.showWaiting();
+    }
+
+    public boolean isProgressDialogShowing(){
+        return activity.isProgressDialogShowing();
     }
 
     public void closeWait(){

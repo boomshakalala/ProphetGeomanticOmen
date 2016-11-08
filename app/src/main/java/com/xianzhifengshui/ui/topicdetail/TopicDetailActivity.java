@@ -1,6 +1,13 @@
 package com.xianzhifengshui.ui.topicdetail;
 
+import android.support.v7.widget.RecyclerView;
+
+import com.xianzhifengshui.R;
+import com.xianzhifengshui.api.model.Topic;
 import com.xianzhifengshui.base.BaseActivity;
+import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
+
+import java.util.List;
 
 /**
  * 作者: chengx
@@ -8,6 +15,18 @@ import com.xianzhifengshui.base.BaseActivity;
  * 描述: 话题详情页
  */
 public class TopicDetailActivity extends BaseActivity implements TopicDetailContract.View{
+
+
+    /*======= 控件声明区 =======*/
+    private PullToRefreshRecyclerView pullToRefreshRecyclerView;
+    private RecyclerView recyclerView;
+    /*=========================*/
+
+    @Override
+    protected void initToolbar() {
+        super.initToolbar();
+    }
+
     @Override
     protected void initViews() {
 
@@ -20,12 +39,12 @@ public class TopicDetailActivity extends BaseActivity implements TopicDetailCont
 
     @Override
     protected int getContentLayoutId() {
-        return 0;
+        return R.layout.activity_topic_detail;
     }
 
     @Override
     protected boolean isNeedToolbar() {
-        return false;
+        return true;
     }
 
     @Override
@@ -35,11 +54,31 @@ public class TopicDetailActivity extends BaseActivity implements TopicDetailCont
 
     @Override
     public boolean isActive() {
-        return false;
+        return isActive;
     }
 
     @Override
     public void showTip(String text) {
+        showToast(text);
+    }
+
+    @Override
+    public void refreshData(List<Object> data) {
+
+    }
+
+    @Override
+    public void loadMore(List<Object> data) {
+
+    }
+
+    @Override
+    public void showEmpty() {
+
+    }
+
+    @Override
+    public void showFailure() {
 
     }
 }

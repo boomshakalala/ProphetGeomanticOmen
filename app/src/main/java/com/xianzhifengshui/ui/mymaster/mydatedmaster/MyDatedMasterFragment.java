@@ -11,7 +11,6 @@ import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
 import com.xianzhifengshui.ui.masterdetail.MasterDetailActivity;
 import com.xianzhifengshui.ui.mymaster.mywantedmaster.MyWantedMasterContract;
-import com.xianzhifengshui.ui.mymaster.mywantedmaster.MyWantedMasterPresent;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
 
@@ -29,7 +28,7 @@ public class MyDatedMasterFragment extends BaseFragment implements MyDatedMaster
     private RecyclerView recyclerView;
 
     private MyDatedMasterListAdapter adapter;
-    MyDatedMasterContract.Present present;
+    private MyDatedMasterContract.Presenter presenter;
     private List<String> data;
     private int currentPage = 0;
 
@@ -42,7 +41,13 @@ public class MyDatedMasterFragment extends BaseFragment implements MyDatedMaster
         pullToRefreshRecyclerView.setOnRefreshListener(this);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         recyclerView.setAdapter(adapter);
-        present.refreshData();
+        emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.refreshData();
+            }
+        });
+        presenter.refreshData();
     }
 
     @Override
@@ -50,7 +55,7 @@ public class MyDatedMasterFragment extends BaseFragment implements MyDatedMaster
         data = new ArrayList<>();
         adapter = new MyDatedMasterListAdapter(getContext(),data,R.layout.item_my_dated_master_list);
         adapter.setOnItemClickListener(this);
-        present = new MyDatedMasterPresent(this);
+        presenter = new MyDatedMasterPresenter(this);
     }
 
     @Override
@@ -64,8 +69,8 @@ public class MyDatedMasterFragment extends BaseFragment implements MyDatedMaster
     }
 
     @Override
-    public void setPresenter(MyDatedMasterContract.Present presenter) {
-
+    public void setPresenter(MyDatedMasterContract.Presenter presenterer) {
+        this.presenter = presenterer;
     }
 
     @Override
@@ -90,37 +95,42 @@ public class MyDatedMasterFragment extends BaseFragment implements MyDatedMaster
 
     @Override
     public void showEmpty() {
-
+        emptyLayout.showEmpty();
     }
 
     @Override
     public void showFailure() {
-
+        emptyLayout.setShowErrorButton(true);
     }
 
     @Override
     public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
-        present.refreshData();
+        presenter.refreshData();
     }
 
     @Override
     public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
-        present.loadMore();
+        presenter.loadMore();
     }
 
     @Override
     public void showWaiting() {
-        if (!pullToRefreshRecyclerView.isRefreshing()){
+        if (pullToRefreshRecyclerView.isRefreshing())
+            return;
+        if (data.size() == 0){
+            emptyLayout.showLoading();
+        }else
             super.showWaiting();
-        }
     }
 
     @Override
     public void closeWait() {
         if (pullToRefreshRecyclerView.isRefreshing()){
             pullToRefreshRecyclerView.onRefreshComplete();
-        }else {
+        }else if (isProgressDialogShowing()){
             super.closeWait();
+        }else {
+            emptyLayout.hide();
         }
     }
 

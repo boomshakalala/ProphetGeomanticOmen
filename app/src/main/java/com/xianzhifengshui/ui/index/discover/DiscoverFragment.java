@@ -34,7 +34,7 @@ public class DiscoverFragment extends BaseFragment {
     protected void initViews() {
         tabLayout = (AutoTabLayout) rootView.findViewById(R.id.tab_discover);
         viewPager = (ViewPager) rootView.findViewById(R.id.pager_discover);
-//        viewPager.setOffscreenPageLimit(3);
+        viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }

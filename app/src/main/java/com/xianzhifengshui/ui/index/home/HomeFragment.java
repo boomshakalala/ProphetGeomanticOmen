@@ -47,6 +47,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Pull
     /*=========================*/
     private List<Object> data;
     private HomeAdapter adapter;
+    private HomeContract.Presenter presenter;
 
     @Override
     protected void initToolbar() {
@@ -85,44 +86,54 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Pull
             @Override
             public int getSpanSize(int position) {
                 int viewType = adapter.getItemViewType(position);
-               return adapter.getItemViewDelegate(viewType) instanceof HomeMenuItemDelegate ?  1 :  4;
+                return adapter.getItemViewDelegate(viewType) instanceof HomeMenuItemDelegate ? 1 : 4;
             }
         });
         recyclerView.setLayoutManager(layoutManager);
         pullToRefreshRecyclerView.setOnRefreshListener(this);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         recyclerView.setAdapter(adapter);
+        emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.refreshData();
+            }
+        });
+        presenter.refreshData();
     }
 
     @Override
     protected void initData() {
-        ArrayList<Carousel> carousels = new ArrayList<>();
-        String[] imgUrls = {"http://img3.fengniao.com/forum/attachpics/913/114/36502745.jpg",
-                "http://imageprocess.yitos.net/images/public/20160910/99381473502384338.jpg",
-                "http://imageprocess.yitos.net/images/public/20160910/77991473496077677.jpg",
-                "http://imageprocess.yitos.net/images/public/20160906/1291473163104906.jpg"};
-        for (int i = 0; i < 4; i++) {
-            Carousel carousel = new Carousel();
-            carousel.setPicUrl(imgUrls[i]);
-            carousels.add(carousel);
-        }
+        presenter = new HomePresenter(this);
         data = new ArrayList<>();
-        data.add(carousels);
-        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
-        for (int i = 0; i < 8; i++) {
-            data.add(new NaviMenu());
-        }
-        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
-        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_LABEL,"推荐大师",true));
-        for (int i = 0; i < 4; i++) {
-            data.add(new Master());
-        }
-        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
-        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_LABEL,"精品讲座",false));
-        for (int i = 0; i < 4; i++) {
-            data.add(new Lecture());
-        }
         adapter = new HomeAdapter(getContext(),data);
+//        ArrayList<Carousel> carousels = new ArrayList<>();
+//        String[] imgUrls = {"http://img3.fengniao.com/forum/attachpics/913/114/36502745.jpg",
+//                "http://imageprocess.yitos.net/images/public/20160910/99381473502384338.jpg",
+//                "http://imageprocess.yitos.net/images/public/20160910/77991473496077677.jpg",
+//                "http://imageprocess.yitos.net/images/public/20160906/1291473163104906.jpg"};
+//        for (int i = 0; i < 4; i++) {
+//            Carousel carousel = new Carousel();
+//            carousel.setPicUrl(imgUrls[i]);
+//            carousels.add(carousel);
+//        }
+//        data = new ArrayList<>();
+//        data.add(carousels);
+//        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
+//        for (int i = 0; i < 8; i++) {
+//            data.add(new NaviMenu());
+//        }
+//        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
+//        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_LABEL,"推荐大师",true));
+//        for (int i = 0; i < 4; i++) {
+//            data.add(new Master());
+//        }
+//        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
+//        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_LABEL,"精品讲座",false));
+//        for (int i = 0; i < 4; i++) {
+//            data.add(new Lecture());
+//        }
+
     }
 
     @Override
@@ -137,7 +148,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Pull
 
     @Override
     public void setPresenter(HomeContract.Presenter presenter) {
-
+        this.presenter = presenter;
     }
 
     @Override
@@ -152,11 +163,56 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Pull
 
     @Override
     public void onPullDownToRefresh(PullToRefreshBase refreshView) {
-
+        presenter.refreshData();
     }
 
     @Override
     public void onPullUpToRefresh(PullToRefreshBase refreshView) {
+        presenter.loadMore();
+    }
 
+    @Override
+    public void refreshData(List<Object> data) {
+        adapter.setData(data);
+    }
+
+    @Override
+    public void loadMore(List<Object> data) {
+        adapter.loadMore(data);
+    }
+
+    @Override
+    public void showEmpty() {
+        emptyLayout.showEmpty();
+    }
+
+    @Override
+    public void showFailure() {
+        emptyLayout.setShowErrorButton(true);
+    }
+
+    @Override
+    public void closeLoadMore() {
+        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+    }
+
+    @Override
+    public void showWaiting() {
+        if (pullToRefreshRecyclerView.isRefreshing())
+            return;
+        else if (data.size()==0){
+            emptyLayout.showLoading();
+        }else
+            super.showWaiting();
+    }
+
+    @Override
+    public void closeWait() {
+        if (pullToRefreshRecyclerView.isRefreshing())
+            pullToRefreshRecyclerView.onRefreshComplete();
+        else if (isProgressDialogShowing())
+            super.closeWait();
+        else
+            emptyLayout.hide();
     }
 }

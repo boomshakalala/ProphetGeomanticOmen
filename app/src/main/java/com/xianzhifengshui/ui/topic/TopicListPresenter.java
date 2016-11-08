@@ -4,6 +4,7 @@ import android.os.Handler;
 
 import com.xianzhifengshui.api.model.Topic;
 import com.xianzhifengshui.base.BasePresenter;
+import com.xianzhifengshui.ui.index.home.HomeContract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,33 +25,22 @@ public class TopicListPresenter extends BasePresenter implements TopicListContra
 
     @Override
     public void refreshData() {
-        final List<Topic> data = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            data.add(new Topic());
-        }
-        if (view.isActive())
             view.showWaiting();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                view.refreshData(data);
                 view.closeWait();
+                view.showEmpty();
             }
         },3000);
     }
 
     @Override
     public void loadMore() {
-        final List<Topic> data = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            data.add(new Topic());
-        }
-        if (view.isActive())
-            view.showWaiting();
+        view.showWaiting();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                view.loadMore(data);
                 view.closeWait();
             }
         },3000);

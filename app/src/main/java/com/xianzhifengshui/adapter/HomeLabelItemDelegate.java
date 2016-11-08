@@ -11,10 +11,10 @@ import com.xianzhifengshui.common.RecyclerViewHolder;
  * 日期: 2016/10/27.
  * 描述:
  */
-public class LabelItemDelegate implements ItemViewDelegate<Object> {
+public class HomeLabelItemDelegate implements ItemViewDelegate<Object> {
     @Override
     public int getItemLayoutId() {
-        return R.layout.item_label;
+        return R.layout.item_home_label;
     }
 
     @Override
@@ -25,6 +25,6 @@ public class LabelItemDelegate implements ItemViewDelegate<Object> {
     @Override
     public void convert(RecyclerViewHolder holder, Object o, int position) {
         holder.setVisibility(R.id.btn_change,((ViewSupportModel)o).isHasBtn()? View.VISIBLE: View.GONE);
-        holder.setText(R.id.text_label,((ViewSupportModel)o).getLabel());
+        holder.setText(R.id.text_home_label,((ViewSupportModel)o).getLabel());
     }
 }

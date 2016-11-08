@@ -44,6 +44,12 @@ public class LectureListFragment extends BaseFragment implements LectureListCont
         pullToRefreshRecyclerView.setOnRefreshListener(this);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         recyclerView.setAdapter(adapter);
+        emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.refreshData();
+            }
+        });
         presenter.refreshData();
     }
 
@@ -77,12 +83,12 @@ public class LectureListFragment extends BaseFragment implements LectureListCont
 
     @Override
     public void showEmpty() {
-
+        emptyLayout.showEmpty();
     }
 
     @Override
     public void showFailure() {
-
+        emptyLayout.setShowErrorButton(true);
     }
 
     @Override
@@ -112,16 +118,22 @@ public class LectureListFragment extends BaseFragment implements LectureListCont
 
     @Override
     public void showWaiting() {
-        if (!pullToRefreshRecyclerView.isRefreshing())
+        if (pullToRefreshRecyclerView.isRefreshing())
+            return;
+        else if (data.size()==0){
+            emptyLayout.showLoading();
+        }else
             super.showWaiting();
     }
 
     @Override
     public void closeWait() {
-        if (pullToRefreshRecyclerView.isRefreshing()){
+        if (pullToRefreshRecyclerView.isRefreshing())
             pullToRefreshRecyclerView.onRefreshComplete();
-        }else
+        else if (isProgressDialogShowing())
             super.closeWait();
+        else
+            emptyLayout.hide();
     }
 
 

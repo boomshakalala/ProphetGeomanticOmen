@@ -12,14 +12,14 @@ import java.util.List;
  */
 interface MyDatedMasterContract {
 
-    interface View extends IView<Present>{
+    interface View extends IView<Presenter>{
         void refreshData(List<String> data);
         void loadMore(List<String> data);
         void showEmpty();
         void showFailure();
     }
 
-    interface Present extends IPresenter{
+    interface Presenter extends IPresenter{
         void refreshData();
         void loadMore();
     }

@@ -42,6 +42,7 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
     private MasterListAdapter adapter;
     private MasterListContract.Presenter presenter;
     private List<Master> data;
+    private int currentIndex = INDEX_HOT;
 
     @Override
     protected void initViews() {
@@ -58,7 +59,13 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
         allBtn.setOnClickListener(this);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         recyclerView.setAdapter(adapter);
-        setSelected(INDEX_HOT);
+        emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setSelected(currentIndex);
+            }
+        });
+        setSelected(currentIndex);
     }
 
     @Override
@@ -94,14 +101,17 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
         switch (v.getId()){
             case R.id.btn_master_list_hot:
                 //切换到热门
+                currentIndex = INDEX_HOT;
                 setSelected(INDEX_HOT);
                 break;
             case R.id.btn_master_list_local:
                 //切换到本地
+                currentIndex = INDEX_LOCAL;
                 setSelected(INDEX_LOCAL);
                 break;
             case R.id.btn_master_list_all:
                 //切换到全部
+                currentIndex = INDEX_ALL;
                 setSelected(INDEX_ALL);
                 break;
             default:
@@ -145,7 +155,6 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
     @Override
     public void refreshData(ArrayList<Master> data) {
         adapter.setData(data);
-        recyclerView.smoothScrollToPosition(0);
     }
 
     @Override
@@ -155,28 +164,37 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
 
     @Override
     public void showEmpty() {
-
+        emptyLayout.showEmpty();
     }
 
     @Override
     public void showFailure() {
-        showTip("出错了哦");
+        emptyLayout.setShowErrorButton(true);
+    }
+
+    @Override
+    public void closeLoadMore() {
+        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
     }
 
     @Override
     public void showWaiting() {
-        if (!pullToRefreshRecyclerView.isRefreshing()){
+        if (pullToRefreshRecyclerView.isRefreshing())
+            return;
+        else if (data.size()==0){
+            emptyLayout.showLoading();
+        }else
             super.showWaiting();
-        }
     }
 
     @Override
     public void closeWait() {
-        if (pullToRefreshRecyclerView.isRefreshing()){
+        if (pullToRefreshRecyclerView.isRefreshing())
             pullToRefreshRecyclerView.onRefreshComplete();
-        }else {
+        else if (isProgressDialogShowing())
             super.closeWait();
-        }
+        else
+            emptyLayout.hide();
 
     }
 

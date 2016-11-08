@@ -27,12 +27,8 @@ public class EvaluatePresenter extends BasePresenter implements EvaluateContract
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                ArrayList<Evaluate> list = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    list.add(new Evaluate());
-                }
-                view.refreshData(list);
                 view.closeWait();
+                view.showEmpty();
             }
         },1500);
     }
@@ -43,11 +39,6 @@ public class EvaluatePresenter extends BasePresenter implements EvaluateContract
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                ArrayList<Evaluate> list = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    list.add(new Evaluate());
-                }
-                view.loadMore(list);
                 view.closeWait();
             }
         },1500);

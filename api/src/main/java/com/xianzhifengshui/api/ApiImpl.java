@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xianzhifengshui.api.des.DESUtils;
+import com.xianzhifengshui.api.model.HomeItemModle;
 import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.MasterDetailModel;
 import com.xianzhifengshui.api.model.User;
@@ -74,6 +75,13 @@ public class ApiImpl implements Api {
         paramsMap.put("userCode", userCode);
         Type type = MasterDetailModel.class;
         HttpEngine.getInstance().get(MASTER_DETAIL,map2Ciphertext(paramsMap),type,callback);
+    }
+
+    @Override
+    public void indexGetDataList(ActionCallbackListener<HomeItemModle> callback) {
+        paramsMap.clear();
+        Type type = HomeItemModle.class;
+        HttpEngine.getInstance().get(INDEX_GET_DATA_LIST,map2Ciphertext(paramsMap),type,callback);
     }
 
 

@@ -19,6 +19,7 @@ public interface SearchContract {
         void loadMore(ArrayList<Master> dataList);
         void showInit();
         void setKeyword(String keyword);
+        void closeLoadMore();
     }
 
     interface Presenter extends IPresenter{

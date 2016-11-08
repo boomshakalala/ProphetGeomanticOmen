@@ -13,14 +13,15 @@ import java.util.List;
  */
 public interface MyWantedMasterContract {
 
-    interface View extends IView<Present>{
+    interface View extends IView<Presenter>{
         void refreshData(List<Master> data);
         void loadMore(List<Master> data);
         void showEmpty();
         void showFailure();
+        void closeLoadMore();
     }
 
-    interface Present extends IPresenter{
+    interface Presenter extends IPresenter{
         void refreshData();
         void loadMore();
     }

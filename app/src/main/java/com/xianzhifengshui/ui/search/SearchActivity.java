@@ -103,6 +103,12 @@ public class SearchActivity extends BaseActivity implements SearchContract.View,
         tagLayout.setLayoutManager(gridLayoutManager);
         tagLayout.setAdapter(tagAdapter);
         recyclerView.setAdapter(adapter);
+        emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.loadData(null);
+            }
+        });
         showInit();
     }
 
@@ -129,12 +135,16 @@ public class SearchActivity extends BaseActivity implements SearchContract.View,
 
     @Override
     public void showEmpty() {
-
+        contentLayout.setVisibility(View.VISIBLE);
+        initLayout.setVisibility(View.GONE);
+        emptyLayout.showEmpty();
     }
 
     @Override
     public void showFailure() {
-
+        contentLayout.setVisibility(View.VISIBLE);
+        initLayout.setVisibility(View.GONE);
+        emptyLayout.setShowErrorButton(true);
     }
 
     @Override
@@ -158,6 +168,11 @@ public class SearchActivity extends BaseActivity implements SearchContract.View,
     @Override
     public void setKeyword(String keyword) {
         toolbar.setKeyword(keyword);
+    }
+
+    @Override
+    public void closeLoadMore() {
+        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
     }
 
     @Override
@@ -198,17 +213,22 @@ public class SearchActivity extends BaseActivity implements SearchContract.View,
 
     @Override
     public void showWaiting() {
-        if (!pullToRefreshRecyclerView.isRefreshing()){
+        if (pullToRefreshRecyclerView.isRefreshing())
+            return;
+        if (data.size() == 0){
+            emptyLayout.showLoading();
+        }else
             super.showWaiting();
-        }
     }
 
     @Override
     public void closeWait() {
         if (pullToRefreshRecyclerView.isRefreshing()){
             pullToRefreshRecyclerView.onRefreshComplete();
-        }else {
+        }else if (isProgressDialogShowing()){
             super.closeWait();
+        }else {
+            emptyLayout.hide();
         }
     }
 }

@@ -28,16 +28,12 @@ public class MyLectureListPresenter extends BasePresenter implements MyLectureLi
 
     @Override
     public void refreshData(int type) {
-        final List<String> data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            data.add("");
-        }
         view.showWaiting();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                view.refreshData(data);
                 view.closeWait();
+                view.showEmpty();
             }
         },3000);
 
@@ -45,14 +41,9 @@ public class MyLectureListPresenter extends BasePresenter implements MyLectureLi
 
     @Override
     public void loadMore() {
-        final List<String> data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            data.add("");
-        }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                view.loadMore(data);
                 view.closeWait();
             }
         },3000);

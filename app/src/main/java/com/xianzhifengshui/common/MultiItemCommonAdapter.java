@@ -72,4 +72,15 @@ public abstract class MultiItemCommonAdapter<T> extends RecyclerView.Adapter<Rec
     protected boolean useItemViewDelegateManager(){
         return itemViewDelegateManager.getItemViewDelegateCount() > 0;
     }
+
+    public void setData(List<T> data){
+        this.data.clear();
+        this.data.addAll(data);
+        notifyDataSetChanged();
+    }
+
+    public void loadMore(List<T> data){
+        this.data.addAll(data);
+        notifyDataSetChanged();
+    }
 }

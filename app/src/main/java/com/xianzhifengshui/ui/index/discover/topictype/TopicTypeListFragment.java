@@ -39,6 +39,12 @@ public class TopicTypeListFragment extends BaseFragment implements TopicTypeList
         pullToRefreshRecyclerView.setOnRefreshListener(this);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.DISABLED);
         recyclerView.setAdapter(adapter);
+        emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.refreshData();
+            }
+        });
         presenter.refreshData();
     }
 
@@ -72,12 +78,17 @@ public class TopicTypeListFragment extends BaseFragment implements TopicTypeList
 
     @Override
     public void showEmpty() {
-
+        emptyLayout.showEmpty();
     }
 
     @Override
     public void showFailure() {
+        emptyLayout.setShowErrorButton(true);
+    }
 
+    @Override
+    public void closeLoadMore() {
+        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
     }
 
     @Override
@@ -108,16 +119,22 @@ public class TopicTypeListFragment extends BaseFragment implements TopicTypeList
 
     @Override
     public void showWaiting() {
-        if (!pullToRefreshRecyclerView.isRefreshing())
+        if (pullToRefreshRecyclerView.isRefreshing())
+            return;
+        else if (data.size()==0){
+            emptyLayout.showLoading();
+        }else
             super.showWaiting();
     }
 
     @Override
     public void closeWait() {
-        if (pullToRefreshRecyclerView.isRefreshing()){
+        if (pullToRefreshRecyclerView.isRefreshing())
             pullToRefreshRecyclerView.onRefreshComplete();
-        }else
+        else if (isProgressDialogShowing())
             super.closeWait();
+        else
+            emptyLayout.hide();
     }
 
     @Override

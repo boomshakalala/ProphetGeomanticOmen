@@ -28,17 +28,12 @@ public class TopicTypeListPresenter extends BasePresenter implements TopicTypeLi
 
     @Override
     public void refreshData() {
-        final List<String> data = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            data.add("");
-        }
-        if (view.isActive())
         view.showWaiting();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                view.refreshData(data);
                 view.closeWait();
+                view.showEmpty();
             }
         },3000);
 
@@ -46,14 +41,9 @@ public class TopicTypeListPresenter extends BasePresenter implements TopicTypeLi
 
     @Override
     public void loadMore() {
-        final List<String> data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            data.add("");
-        }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                view.loadMore(data);
                 view.closeWait();
             }
         },3000);

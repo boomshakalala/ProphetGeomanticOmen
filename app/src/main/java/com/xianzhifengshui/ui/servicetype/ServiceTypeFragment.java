@@ -2,6 +2,7 @@ package com.xianzhifengshui.ui.servicetype;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.ServiceTypeListAdapter;
@@ -39,6 +40,12 @@ public class ServiceTypeFragment extends BaseFragment implements ServiceTypeCont
         pullToRefreshRecyclerView.setOnRefreshListener(this);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         recyclerView.setAdapter(adapter);
+        emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.refreshData();
+            }
+        });
     }
 
     @Override
@@ -61,6 +68,7 @@ public class ServiceTypeFragment extends BaseFragment implements ServiceTypeCont
     @Override
     public void refreshData(List<ServiceType> data) {
         adapter.setData(data);
+        emptyLayout.hide();
     }
 
     @Override
@@ -70,12 +78,12 @@ public class ServiceTypeFragment extends BaseFragment implements ServiceTypeCont
 
     @Override
     public void showEmpty() {
-
+        emptyLayout.showEmpty();
     }
 
     @Override
     public void showFailure() {
-
+        emptyLayout.setShowErrorButton(true);
     }
 
     @Override
@@ -101,5 +109,25 @@ public class ServiceTypeFragment extends BaseFragment implements ServiceTypeCont
     @Override
     public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
         presenter.loadMore();
+    }
+
+    @Override
+    public void showWaiting() {
+        if (pullToRefreshRecyclerView.isRefreshing())
+            return;
+        else if (data.size()==0){
+            emptyLayout.showLoading();
+        }else
+            super.showWaiting();
+    }
+
+    @Override
+    public void closeWait() {
+        if (pullToRefreshRecyclerView.isRefreshing())
+            pullToRefreshRecyclerView.onRefreshComplete();
+        else if (isProgressDialogShowing())
+            super.closeWait();
+        else
+            emptyLayout.hide();
     }
 }

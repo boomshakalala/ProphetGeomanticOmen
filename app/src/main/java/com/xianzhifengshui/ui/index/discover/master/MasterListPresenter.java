@@ -41,6 +41,7 @@ public class MasterListPresenter extends BasePresenter implements MasterListCont
                 view.closeWait();
                 if (data.getPageNum()==currentPage){
                     //关闭记载更多
+                    view.closeLoadMore();
                 }
                 ArrayList<Master> dataList = data.getList();
                 if (dataList != null && dataList.size()>0) {

@@ -32,7 +32,10 @@ public class SearchPresenter extends BasePresenter implements SearchContract.Pre
 
     @Override
     public void loadData(String keyword) {
-        this.keyword = keyword;
+        if (keyword != null) {
+            this.keyword = keyword;
+        }
+
         view.setKeyword(keyword);
         view.showWaiting();
         new Handler().postDelayed(new Runnable() {

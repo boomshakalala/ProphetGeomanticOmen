@@ -15,6 +15,7 @@ import com.xianzhifengshui.utils.ConstUtils;
 import com.xianzhifengshui.utils.KLog;
 import com.xianzhifengshui.utils.SPUtils;
 import com.xianzhifengshui.utils.ToastUtils;
+import com.xianzhifengshui.widget.EmptyLayout;
 import com.xianzhifengshui.widget.auto.AutoToolbar;
 import com.xianzhifengshui.widget.dialog.NomalProgressDialog;
 import com.zhy.autolayout.AutoLayoutActivity;
@@ -37,11 +38,13 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
     private NomalProgressDialog progressDialog;
 
     protected AutoToolbar toolbar;
+    protected EmptyLayout emptyLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getContentLayoutId() != -1)
             setContentView(getContentLayoutId());
+        emptyLayout = (EmptyLayout) findViewById(R.id.emptyLayout);
         init();
         initData();
         initViews();
@@ -169,6 +172,10 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
+    }
+
+    public boolean isProgressDialogShowing(){
+        return progressDialog != null && progressDialog.isShowing();
     }
 
 

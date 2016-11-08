@@ -2,11 +2,13 @@ package com.xianzhifengshui.ui.article;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.ArticleListAdapter;
 import com.xianzhifengshui.api.model.Article;
 import com.xianzhifengshui.base.BaseFragment;
+import com.xianzhifengshui.widget.EmptyLayout;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
 
@@ -38,7 +40,12 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.Vie
         pullToRefreshRecyclerView.setOnRefreshListener(this);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         recyclerView.setAdapter(adapter);
-        presenter.refreshData();
+        emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.refreshData();
+            }
+        });
     }
 
     @Override
@@ -61,6 +68,7 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.Vie
     @Override
     public void refreshData(ArrayList<Article> data) {
         adapter.setData(data);
+        emptyLayout.hide();
     }
 
     @Override
@@ -70,12 +78,12 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.Vie
 
     @Override
     public void showEmpty() {
-
+        emptyLayout.showEmpty();
     }
 
     @Override
     public void showFailure() {
-
+        emptyLayout.showError();
     }
 
     @Override
@@ -101,5 +109,25 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.Vie
     @Override
     public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
         presenter.loadMore();
+    }
+
+    @Override
+    public void showWaiting() {
+        if (pullToRefreshRecyclerView.isRefreshing())
+            return;
+        else if (data.size()==0){
+            emptyLayout.showLoading();
+        }else
+            super.showWaiting();
+    }
+
+    @Override
+    public void closeWait() {
+        if (pullToRefreshRecyclerView.isRefreshing())
+            pullToRefreshRecyclerView.onRefreshComplete();
+        else if (isProgressDialogShowing())
+            super.closeWait();
+        else
+            emptyLayout.hide();
     }
 }

@@ -63,6 +63,12 @@ public class TopicListActivity extends BaseActivity implements TopicListContract
         pullToRefreshRecyclerView.setOnRefreshListener(this);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         recyclerView.setAdapter(adapter);
+        emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.refreshData();
+            }
+        });
         presenter.refreshData();
     }
 
@@ -87,6 +93,7 @@ public class TopicListActivity extends BaseActivity implements TopicListContract
     @Override
     public void refreshData(List<Topic> data) {
         adapter.setData(data);
+        emptyLayout.hide();
     }
 
     @Override
@@ -96,12 +103,17 @@ public class TopicListActivity extends BaseActivity implements TopicListContract
 
     @Override
     public void showEmpty() {
-
+        emptyLayout.showEmpty();
     }
 
     @Override
     public void showFailure() {
+        emptyLayout.setShowErrorButton(true);
+    }
 
+    @Override
+    public void closeLoadMore() {
+        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
     }
 
     @Override
@@ -131,7 +143,11 @@ public class TopicListActivity extends BaseActivity implements TopicListContract
 
     @Override
     public void showWaiting() {
-        if (!pullToRefreshRecyclerView.isRefreshing())
+        if (pullToRefreshRecyclerView.isRefreshing())
+            return;
+        else if (data.size()==0){
+            emptyLayout.showLoading();
+        }else
             super.showWaiting();
     }
 
@@ -139,7 +155,9 @@ public class TopicListActivity extends BaseActivity implements TopicListContract
     public void closeWait() {
         if (pullToRefreshRecyclerView.isRefreshing())
             pullToRefreshRecyclerView.onRefreshComplete();
-        else
+        else if (isProgressDialogShowing())
             super.closeWait();
+        else
+            emptyLayout.hide();
     }
 }

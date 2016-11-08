@@ -17,6 +17,7 @@ public interface TopicListContract {
         void loadMore(List<Topic> data);
         void showEmpty();
         void showFailure();
+        void closeLoadMore();
     }
 
     interface Presenter extends IPresenter{

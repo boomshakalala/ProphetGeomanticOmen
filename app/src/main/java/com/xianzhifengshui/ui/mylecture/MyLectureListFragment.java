@@ -2,6 +2,8 @@ package com.xianzhifengshui.ui.mylecture;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TableRow;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.LectureListAdapter;
@@ -43,6 +45,12 @@ public class MyLectureListFragment extends BaseFragment implements MyLectureList
         pullToRefreshRecyclerView.setOnRefreshListener(this);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         recyclerView.setAdapter(adapter);
+        emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.refreshData(type);
+            }
+        });
         presenter.refreshData(type);
     }
     @Override
@@ -76,12 +84,17 @@ public class MyLectureListFragment extends BaseFragment implements MyLectureList
 
     @Override
     public void showEmpty() {
-
+        emptyLayout.showEmpty();
     }
 
     @Override
     public void showFailure() {
+        emptyLayout.setShowErrorButton(true);
+    }
 
+    @Override
+    public void closeLoadMore() {
+        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
     }
 
     @Override
@@ -111,7 +124,11 @@ public class MyLectureListFragment extends BaseFragment implements MyLectureList
 
     @Override
     public void showWaiting() {
-        if (!pullToRefreshRecyclerView.isRefreshing())
+        if (pullToRefreshRecyclerView.isRefreshing())
+            return;
+        if (data.size() == 0){
+            emptyLayout.showLoading();
+        }else
             super.showWaiting();
     }
 
@@ -119,7 +136,10 @@ public class MyLectureListFragment extends BaseFragment implements MyLectureList
     public void closeWait() {
         if (pullToRefreshRecyclerView.isRefreshing()){
             pullToRefreshRecyclerView.onRefreshComplete();
-        }else
+        }else if (isProgressDialogShowing()){
             super.closeWait();
+        }else {
+            emptyLayout.hide();
+        }
     }
 }

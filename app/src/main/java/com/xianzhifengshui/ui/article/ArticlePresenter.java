@@ -27,12 +27,8 @@ public class ArticlePresenter extends BasePresenter implements ArticleContract.P
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                ArrayList<Article> list = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    list.add(new Article());
-                }
-                view.refreshData(list);
                 view.closeWait();
+                view.showEmpty();
             }
         },1500);
     }
@@ -41,14 +37,9 @@ public class ArticlePresenter extends BasePresenter implements ArticleContract.P
     public void loadMore() {
         view.showWaiting();
         new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ArrayList<Article> list = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    list.add(new Article());
-                }
-                view.loadMore(list);
-                view.closeWait();
+                    @Override
+                    public void run() {
+                        view.closeWait();
             }
         },1500);
     }

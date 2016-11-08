@@ -54,6 +54,9 @@ public class NomalProgressDialog {
         dialog.dismiss();
     }
 
+    public boolean isShowing(){
+        return dialog.isShowing();
+    }
 
     public static class Builder{
         private final String DEFAULT_LABEL = "请稍后...";
@@ -124,6 +127,8 @@ public class NomalProgressDialog {
         public NomalProgressDialog build(){
             return new NomalProgressDialog(this);
         }
+
+
 
 
     }
