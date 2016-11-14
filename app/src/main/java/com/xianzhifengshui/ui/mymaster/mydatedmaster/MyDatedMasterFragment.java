@@ -104,6 +104,11 @@ public class MyDatedMasterFragment extends BaseFragment implements MyDatedMaster
     }
 
     @Override
+    public void closeLoadMore() {
+        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+    }
+
+    @Override
     public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
         presenter.refreshData();
     }

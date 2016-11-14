@@ -100,6 +100,7 @@
     <string name="empty_button">重试</string>
     <string name="loading_button">取消</string>
     <string name="error_button">重试</string>
+    <string name="text_topic_detail">话题详情</string>
 
     <array name="tag_search">
         <item>商务风水</item>
@@ -116,6 +117,11 @@
         <item>关于大师</item>
         <item>客户评价</item>
         <item>大师文章</item>
+    </array>
+    <array name="tab_my_topic">
+        <item>我发起的话题</item>
+        <item>我参与的话题</item>
+        <item>我关注的话题</item>
     </array>
 
 </resources>

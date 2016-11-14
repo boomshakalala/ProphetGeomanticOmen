@@ -78,6 +78,10 @@ public class HttpEngine {
 
             @Override
             public void onSuccess(int i, Header[] headers, String ciphertext) {
+                Log.d(TAG, "onSuccess cipherText="+ciphertext);
+//                e9d44ce4d8e50e178e044d7c80ad365b881a200429ff395e06a26b3f44b87ef99dc0d0b4ee5527f8a813de04c362fd9e6b5e3cabdaac161e
+//                e9d44ce4d8e50e178e044d7c80ad365b881a200429ff395e06a26b3f44b87ef99dc0d0b4ee5527f8a813de04c362fd9e6b5e3cabdaac161e
+
                 String json = DESUtils.decrypt(ciphertext);
                 Log.d(TAG, "onSuccess json = "+ JsonFormatTool.formatJson(json));
                 ApiResponse<T> response = json2Obj(json, typeOfClass);
@@ -105,9 +109,10 @@ public class HttpEngine {
             response.setStatus(jsonObject.get("status").getAsString());
         }
         if (jsonObject.has("message")){
-            response.setMessage(jsonObject.get("message").getAsString());
+            String message = jsonObject.get("message").getAsString();
+            response.setMessage(message.isEmpty()?"未知错误":message);
         }
-        if (jsonObject.has("data")){
+        if (jsonObject.has("data")&&!(typeOfT==Void.class)){
             String jsonDataStr = jsonObject.get("data").toString();
             T data = gson.fromJson(jsonDataStr,typeOfT);
             JsonObject jsonData = parser.parse(jsonDataStr).getAsJsonObject();

@@ -2,6 +2,7 @@ package com.xianzhifengshui.ui.index.discover.topictype;
 
 import android.os.Handler;
 
+import com.xianzhifengshui.api.model.Topic;
 import com.xianzhifengshui.base.BasePresenter;
 
 import java.util.ArrayList;
@@ -32,8 +33,12 @@ public class TopicTypeListPresenter extends BasePresenter implements TopicTypeLi
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                List<Topic> topics = new ArrayList<>();
+                for (int i = 0; i < 10; i++) {
+                    topics.add(new Topic());
+                }
                 view.closeWait();
-                view.showEmpty();
+                view.refreshData(topics);
             }
         },3000);
 

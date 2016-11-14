@@ -6,6 +6,7 @@ import com.xianzhifengshui.api.model.User;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
 import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BasePresenter;
+import com.xianzhifengshui.utils.KLog;
 import com.xianzhifengshui.utils.SPUtils;
 import com.xianzhifengshui.utils.StringUtils;
 
@@ -63,5 +64,8 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
     public void saveLoginInfo(User user) {
         SPUtils sp = new SPUtils((Context)view, AppConfig.SP_NAME);
         sp.putBoolean("isLogin",true);
+        sp.putObject("user", user);
+        KLog.d(sp.getObject("user",null));
+
     }
 }

@@ -66,13 +66,13 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.Vie
     }
 
     @Override
-    public void refreshData(ArrayList<Article> data) {
+    public void refreshData(List<Article> data) {
         adapter.setData(data);
         emptyLayout.hide();
     }
 
     @Override
-    public void loadMore(ArrayList<Article> data) {
+    public void loadMore(List<Article> data) {
         adapter.loadMore(data);
     }
 

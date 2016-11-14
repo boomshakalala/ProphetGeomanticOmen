@@ -1,5 +1,7 @@
 package com.xianzhifengshui.adapter;
 
+import com.xianzhifengshui.R;
+import com.xianzhifengshui.api.model.Topic;
 import com.xianzhifengshui.common.ItemViewDelegate;
 import com.xianzhifengshui.common.RecyclerViewHolder;
 
@@ -11,12 +13,12 @@ import com.xianzhifengshui.common.RecyclerViewHolder;
 public class TopicDetailItemDelegate implements ItemViewDelegate<Object> {
     @Override
     public int getItemLayoutId() {
-        return 0;
+        return R.layout.item_topic_detail_content;
     }
 
     @Override
     public boolean isForViewType(Object o, int position) {
-        return false;
+        return o instanceof Topic;
     }
 
     @Override

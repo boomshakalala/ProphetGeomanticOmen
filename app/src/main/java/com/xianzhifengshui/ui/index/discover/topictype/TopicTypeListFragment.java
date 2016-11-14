@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.TopicTypeListAdapter;
+import com.xianzhifengshui.api.model.Topic;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
 import com.xianzhifengshui.ui.topic.TopicListActivity;
@@ -28,7 +29,7 @@ public class TopicTypeListFragment extends BaseFragment implements TopicTypeList
 
     private TopicTypeListAdapter adapter;
     private TopicTypeListContract.Presenter presenter;
-    private List<String> data;
+    private List<Topic> data;
     private int currentPage = 0;
     @Override
     protected void initViews() {
@@ -67,12 +68,13 @@ public class TopicTypeListFragment extends BaseFragment implements TopicTypeList
     }
 
     @Override
-    public void refreshData(List<String> data) {
+    public void refreshData(List<Topic> data) {
         adapter.setData(data);
+        emptyLayout.hide();
     }
 
     @Override
-    public void loadMore(List<String> data) {
+    public void loadMore(List<Topic> data) {
         adapter.loadMore(data);
     }
 

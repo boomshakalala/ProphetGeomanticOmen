@@ -29,8 +29,13 @@ public class TopicListPresenter extends BasePresenter implements TopicListContra
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                List<Topic> topics = new ArrayList<>();
+                for (int i = 0; i < 10; i++) {
+                    Topic topic = new Topic();
+                    topics.add(topic);
+                }
                 view.closeWait();
-                view.showEmpty();
+                view.refreshData(topics);
             }
         },3000);
     }

@@ -7,6 +7,8 @@ import android.widget.TableRow;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.LectureListAdapter;
+import com.xianzhifengshui.api.model.Lecture;
+import com.xianzhifengshui.api.model.Topic;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.utils.KLog;
 import com.xianzhifengshui.utils.ThreadPoolUtils;
@@ -33,7 +35,7 @@ public class MyLectureListFragment extends BaseFragment implements MyLectureList
 
     private LectureListAdapter adapter;
     private MyLectureListContract.Presenter presenter;
-    private List<String> data;
+    private List<Lecture> data;
     private int currentPage = 0;
     private int type;
     @Override
@@ -72,13 +74,15 @@ public class MyLectureListFragment extends BaseFragment implements MyLectureList
         return false;
     }
 
+
     @Override
-    public void refreshData(List<String> data) {
+    public void refreshData(List<Lecture> data) {
         adapter.setData(data);
+        emptyLayout.hide();
     }
 
     @Override
-    public void loadMore(List<String> data) {
+    public void loadMore(List<Lecture> data) {
         adapter.loadMore(data);
     }
 

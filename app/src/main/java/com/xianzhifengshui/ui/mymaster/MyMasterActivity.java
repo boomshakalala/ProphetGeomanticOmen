@@ -2,6 +2,7 @@ package com.xianzhifengshui.ui.mymaster;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -21,7 +22,7 @@ import java.util.List;
  * 日期: 2016/10/17.
  * 描述: 我的大师页面
  */
-public class MyMasterActivity extends BaseActivity{
+public class MyMasterActivity extends BaseActivity implements TabLayout.OnTabSelectedListener {
     /*======= 控件声明区 =======*/
     AutoTabLayout tabLayout;
     ViewPager viewPager;
@@ -43,6 +44,8 @@ public class MyMasterActivity extends BaseActivity{
         viewPager = (ViewPager) findViewById(R.id.pager_my_master);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout.setOnTabSelectedListener(this);
     }
 
     @Override
@@ -77,5 +80,20 @@ public class MyMasterActivity extends BaseActivity{
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
     }
 }

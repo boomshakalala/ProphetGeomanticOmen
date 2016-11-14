@@ -2,6 +2,7 @@ package com.xianzhifengshui.ui.mylecture;
 
 import android.os.Handler;
 
+import com.xianzhifengshui.api.model.Lecture;
 import com.xianzhifengshui.base.BasePresenter;
 
 import java.util.ArrayList;
@@ -32,8 +33,12 @@ public class MyLectureListPresenter extends BasePresenter implements MyLectureLi
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                List<Lecture> lectures = new ArrayList<>();
+                for (int i = 0; i < 10; i++) {
+                    lectures.add(new Lecture());
+                }
                 view.closeWait();
-                view.showEmpty();
+                view.refreshData(lectures);
             }
         },3000);
 

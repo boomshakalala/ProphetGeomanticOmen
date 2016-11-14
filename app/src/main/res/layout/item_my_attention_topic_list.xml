@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="40px"
+    android:paddingRight="40px">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/text_gray"
+        android:layout_marginTop="30px"
+        android:text="易银堂 发表了新话题"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16px"
+        android:paddingTop="20px"
+        android:paddingBottom="20px"
+        android:paddingLeft="10px"
+        android:paddingRight="10px"
+        android:background="#eeefef">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_large"
+            android:text="求大神指点房子好不好，不好怎么办"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/text_size_normal"
+            android:text="求大神指点房子好不好，不好怎么办求大神指点房子好不好，不好怎么办求大神指点房子好不好，不好怎么办求大神指点房子好不好，不好怎么办求大神指点房子好不好，不好怎么办求大神指点房子好不好，不好怎么办"
+            />
+    </LinearLayout>
+</LinearLayout>

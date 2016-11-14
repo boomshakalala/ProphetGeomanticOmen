@@ -30,6 +30,7 @@ import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
 import com.xianzhifengshui.widget.tag.TagLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -116,7 +117,7 @@ public class SearchActivity extends BaseActivity implements SearchContract.View,
     @Override
     protected void initData() {
         presenter = new SearchPresenter(this);
-        tags = StringUtils.arry2List(getResources().getStringArray(R.array.tag_search));
+        tags = Arrays.asList(getResources().getStringArray(R.array.tag_search));
         tagAdapter = new TagAdapter(this,R.layout.item_search_tag,tags);
         tagAdapter.setOnItemClickListener(this);
         data = new ArrayList<>();

@@ -2,7 +2,12 @@ package com.xianzhifengshui.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Map;
 
 /**
@@ -186,6 +191,27 @@ public class SPUtils {
     }
 
     /**
+     * SP中写入序列化对象
+     * @param key 键
+     * @param value 值
+     * @param <T> 对象类型
+     */
+    public <T> void putObject(String key,T value){
+        putString(key, serialize(value));
+    }
+
+    /**
+     *
+     * @param key 键
+     * @param defaultValue 默认值
+     * @param <T> 对象类型
+     * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
+     */
+    public <T> T getObject(String key,T defaultValue) {
+        return deSerialization(getString(key));
+    }
+
+    /**
      * SP中获取所有键值对
      *
      * @return Map对象
@@ -218,5 +244,58 @@ public class SPUtils {
      */
     public void clear() {
         editor.clear().apply();
+    }
+
+    /**
+     * 序列化对象
+     * @param value 对象值
+     * @param <T> 对象类型
+     * @return 序列化字符串
+     */
+    private <T> String serialize(T value) {
+        try {
+            long startTime = System.currentTimeMillis();
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                    byteArrayOutputStream);
+            objectOutputStream.writeObject(value);
+            String serStr = byteArrayOutputStream.toString("ISO-8859-1");
+            serStr = java.net.URLEncoder.encode(serStr, "UTF-8");
+            objectOutputStream.close();
+            byteArrayOutputStream.close();
+            Log.d("serial", "serialize str =" + serStr);
+            long endTime = System.currentTimeMillis();
+            Log.d("serial", "序列化耗时为:" + (endTime - startTime));
+            return serStr;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 反序列化对象
+     * @param string 序列化字符串
+     * @param <T> 对象类型
+     * @return 序列化对象
+     */
+    private <T> T deSerialization(String string) {
+        long startTime = System.currentTimeMillis();
+        try {
+            String redStr = java.net.URLDecoder.decode(string, "UTF-8");
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+                    redStr.getBytes("ISO-8859-1"));
+            ObjectInputStream objectInputStream = new ObjectInputStream(
+                    byteArrayInputStream);
+            T t = (T) objectInputStream.readObject();
+            objectInputStream.close();
+            byteArrayInputStream.close();
+            return t;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        long endTime = System.currentTimeMillis();
+        Log.d("serial", "反序列化耗时为:" + (endTime - startTime));
+        return null;
     }
 }

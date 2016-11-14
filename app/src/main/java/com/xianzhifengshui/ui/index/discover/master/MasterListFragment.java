@@ -170,6 +170,7 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
     @Override
     public void showFailure() {
         emptyLayout.setShowErrorButton(true);
+        emptyLayout.showError();
     }
 
     @Override

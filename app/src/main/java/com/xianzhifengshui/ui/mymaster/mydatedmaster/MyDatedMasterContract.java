@@ -17,6 +17,7 @@ interface MyDatedMasterContract {
         void loadMore(List<String> data);
         void showEmpty();
         void showFailure();
+        void closeLoadMore();
     }
 
     interface Presenter extends IPresenter{

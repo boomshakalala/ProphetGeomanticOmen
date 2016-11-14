@@ -19,6 +19,7 @@ import com.xianzhifengshui.ui.myaccount.MyAccountContract;
 import com.xianzhifengshui.ui.mycoupon.MyCouponActivity;
 import com.xianzhifengshui.ui.mylecture.MyLectureActivity;
 import com.xianzhifengshui.ui.mymaster.MyMasterActivity;
+import com.xianzhifengshui.ui.mytopic.MyTopicActivity;
 import com.xianzhifengshui.ui.setting.SettingActivity;
 import com.xianzhifengshui.utils.KLog;
 import com.xianzhifengshui.widget.CircleImageView;
@@ -187,7 +188,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
                 MyLectureActivity.launcher(activity);
                 break;
             case OPT_MY_TOPIC:
-                log("跳转到我的话题页面");
+                MyTopicActivity.launcher(activity);
                 break;
             case OPT_BECOME_MASTER:
                 log("跳转到成为大师页面");

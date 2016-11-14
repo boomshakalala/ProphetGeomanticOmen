@@ -7,6 +7,7 @@ import com.xianzhifengshui.base.BasePresenter;
 import com.xianzhifengshui.ui.article.ArticleContract;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者: chengx
@@ -28,7 +29,12 @@ public class ArticlePresenter extends BasePresenter implements ArticleContract.P
             @Override
             public void run() {
                 view.closeWait();
-                view.showEmpty();
+                List<Article> articles = new ArrayList<>();
+                for (int i = 0; i < 10; i++) {
+                    Article article = new Article();
+                    articles.add(article);
+                }
+                view.refreshData(articles);
             }
         },1500);
     }

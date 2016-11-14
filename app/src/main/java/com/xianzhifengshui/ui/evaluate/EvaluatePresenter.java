@@ -2,11 +2,13 @@ package com.xianzhifengshui.ui.evaluate;
 
 import android.os.Handler;
 
+import com.xianzhifengshui.R;
 import com.xianzhifengshui.api.model.Evaluate;
 import com.xianzhifengshui.base.BasePresenter;
 import com.xianzhifengshui.ui.evaluate.EvaluateContract;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者: chengx
@@ -27,8 +29,18 @@ public class EvaluatePresenter extends BasePresenter implements EvaluateContract
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                List<Evaluate> evaluates = new ArrayList<>();
+                for (int i = 0; i < 10; i++) {
+                    Evaluate evaluate = new Evaluate();
+                    evaluate.setContent("你瞅啥 瞅你咋的");
+                    evaluate.setDate("2016-11-14");
+                    evaluate.setIcon("http://g.hiphotos.baidu.com/image/pic/item/9e3df8dcd100baa1cb7acbdb4210b912c8fc2e7f.jpg");
+                    evaluate.setNickname("OnTheWay");
+                    evaluate.setTitle("瞅你咋的");
+                    evaluates.add(evaluate);
+                }
                 view.closeWait();
-                view.showEmpty();
+                view.refreshData(evaluates);
             }
         },1500);
     }

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.LectureListAdapter;
 import com.xianzhifengshui.adapter.MasterListAdapter;
+import com.xianzhifengshui.api.model.Lecture;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
 import com.xianzhifengshui.ui.index.discover.master.MasterListContract;
@@ -24,7 +25,7 @@ import java.util.List;
  * 日期: 2016/10/10.
  * 描述: 讲座列表页
  */
-public class LectureListFragment extends BaseFragment implements LectureListContract.View,PullToRefreshBase.OnRefreshListener2<RecyclerView>,CommonRecyclerAdapter.OnRecyclerViewItemClickListener<String>{
+public class LectureListFragment extends BaseFragment implements LectureListContract.View,PullToRefreshBase.OnRefreshListener2<RecyclerView>,CommonRecyclerAdapter.OnRecyclerViewItemClickListener<Lecture>{
 
     /*======= 控件声明区 =======*/
     private PullToRefreshRecyclerView pullToRefreshRecyclerView;
@@ -33,7 +34,7 @@ public class LectureListFragment extends BaseFragment implements LectureListCont
 
     private LectureListAdapter adapter;
     private LectureListContract.Presenter presenter;
-    private List<String> data;
+    private List<Lecture> data;
     private int currentPage = 0;
     @Override
     protected void initViews() {
@@ -71,13 +72,15 @@ public class LectureListFragment extends BaseFragment implements LectureListCont
         return false;
     }
 
+
     @Override
-    public void refreshData(List<String> data) {
+    public void refreshData(List<Lecture> data) {
         adapter.setData(data);
+        emptyLayout.hide();
     }
 
     @Override
-    public void loadMore(List<String> data) {
+    public void loadMore(List<Lecture> data) {
         adapter.loadMore(data);
     }
 
@@ -139,7 +142,7 @@ public class LectureListFragment extends BaseFragment implements LectureListCont
 
 
     @Override
-    public void onItemClick(View view, String data) {
+    public void onItemClick(View view, Lecture data) {
         LectureDetailActivity.launcher(getContext());
     }
 }

@@ -1,5 +1,6 @@
 package com.xianzhifengshui.ui.index.discover.lecture;
 
+import com.xianzhifengshui.api.model.Lecture;
 import com.xianzhifengshui.base.IPresenter;
 import com.xianzhifengshui.base.IView;
 
@@ -12,8 +13,8 @@ import java.util.List;
  */
 public interface LectureListContract {
      interface View extends IView<Presenter>{
-        void refreshData(List<String> data);
-        void loadMore(List<String> data);
+        void refreshData(List<Lecture> data);
+        void loadMore(List<Lecture> data);
         void showEmpty();
         void showFailure();
     }

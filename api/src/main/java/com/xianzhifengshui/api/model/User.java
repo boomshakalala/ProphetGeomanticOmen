@@ -10,40 +10,100 @@ import java.io.Serializable;
 public class User implements Serializable{
     private static final long serialVersionUID = 9043766419151746508L;
 
-    private int id; //用户id（无实际含义）
-    private String username; //登录成功的用户名
-    private String bizCode; //用户编号（唯一性）
+    private int id;
 
-    public int getId() {
-        return id;
-    }
+    private long createTime; //注册时间
 
-    public void setId(int id) {
+    private String username; //用户名
+
+    private int isDel; //是否被删除
+
+    private String mobilePhone; //手机号
+
+    private String bizCode;
+
+    private String creater;
+
+    private String lastUpdater;
+
+    private int isLock;
+
+    private long lastModifyTime;
+
+    public void setId(int id){
         this.id = id;
     }
-
-    public String getUsername() {
-        return username;
+    public int getId(){
+        return this.id;
     }
-
-    public void setUsername(String username) {
+    public void setCreateTime(int createTime){
+        this.createTime = createTime;
+    }
+    public long getCreateTime(){
+        return this.createTime;
+    }
+    public void setUsername(String username){
         this.username = username;
     }
-
-    public String getBizCode() {
-        return bizCode;
+    public String getUsername(){
+        return this.username;
     }
-
-    public void setBizCode(String bizCode) {
+    public void setIsDel(int isDel){
+        this.isDel = isDel;
+    }
+    public int getIsDel(){
+        return this.isDel;
+    }
+    public void setMobilePhone(String mobilePhone){
+        this.mobilePhone = mobilePhone;
+    }
+    public String getMobilePhone(){
+        return this.mobilePhone;
+    }
+    public void setBizCode(String bizCode){
         this.bizCode = bizCode;
+    }
+    public String getBizCode(){
+        return this.bizCode;
+    }
+    public void setCreater(String creater){
+        this.creater = creater;
+    }
+    public String getCreater(){
+        return this.creater;
+    }
+    public void setLastUpdater(String lastUpdater){
+        this.lastUpdater = lastUpdater;
+    }
+    public String getLastUpdater(){
+        return this.lastUpdater;
+    }
+    public void setIsLock(int isLock){
+        this.isLock = isLock;
+    }
+    public int getIsLock(){
+        return this.isLock;
+    }
+    public void setLastModifyTime(int lastModifyTime){
+        this.lastModifyTime = lastModifyTime;
+    }
+    public long getLastModifyTime(){
+        return this.lastModifyTime;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", createTime=" + createTime +
                 ", username='" + username + '\'' +
+                ", isDel=" + isDel +
+                ", mobilePhone='" + mobilePhone + '\'' +
                 ", bizCode='" + bizCode + '\'' +
+                ", creater='" + creater + '\'' +
+                ", lastUpdater='" + lastUpdater + '\'' +
+                ", isLock=" + isLock +
+                ", lastModifyTime=" + lastModifyTime +
                 '}';
     }
 }

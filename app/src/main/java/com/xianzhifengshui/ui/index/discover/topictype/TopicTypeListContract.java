@@ -1,5 +1,6 @@
 package com.xianzhifengshui.ui.index.discover.topictype;
 
+import com.xianzhifengshui.api.model.Topic;
 import com.xianzhifengshui.base.IPresenter;
 import com.xianzhifengshui.base.IView;
 
@@ -12,8 +13,8 @@ import java.util.List;
  */
 public interface TopicTypeListContract {
      interface View extends IView<Presenter>{
-         void refreshData(List<String> data);
-         void loadMore(List<String> data);
+         void refreshData(List<Topic> data);
+         void loadMore(List<Topic> data);
          void showEmpty();
          void showFailure();
          void closeLoadMore();

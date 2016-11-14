@@ -5,6 +5,7 @@ import com.xianzhifengshui.base.IPresenter;
 import com.xianzhifengshui.base.IView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者: chengx
@@ -13,8 +14,8 @@ import java.util.ArrayList;
  */
 public class ArticleContract {
     interface View extends IView<Presenter>{
-        void refreshData(ArrayList<Article> data);
-        void loadMore(ArrayList<Article> data);
+        void refreshData(List<Article> data);
+        void loadMore(List<Article> data);
         void showEmpty();
         void showFailure();
     }

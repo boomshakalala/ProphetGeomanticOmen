@@ -2,6 +2,7 @@ package com.xianzhifengshui.ui.index.discover.lecture;
 
 import android.os.Handler;
 
+import com.xianzhifengshui.api.model.Lecture;
 import com.xianzhifengshui.base.BasePresenter;
 import com.xianzhifengshui.ui.index.discover.master.MasterListContract;
 
@@ -33,8 +34,14 @@ public class LectureListPresenter extends BasePresenter implements LectureListCo
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                requestData();
+                List<Lecture> lectures = new ArrayList<>();
+                for (int i = 0; i < 10; i++) {
+                    Lecture lecture = new Lecture();
+                    lectures.add(lecture);
+                }
                 view.closeWait();
-                view.showEmpty();
+                view.refreshData(lectures);
             }
         },3000);
 
