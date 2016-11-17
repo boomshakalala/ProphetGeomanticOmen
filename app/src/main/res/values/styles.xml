@@ -5,8 +5,6 @@
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/white</item>
         <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Borderless</item>
-        <item name="android:windowEnterTransition">@transition/explode</item>
-        <item name="android:windowExitTransition">@transition/explode</item>
     </style>
 
 
@@ -20,7 +18,16 @@
         <item name="android:windowAnimationStyle">@style/normalDialogAnim</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
-
+    <style name="NormalSelectDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/bottomDialogAnim</item>
+    </style>
     <style name="NormalProgressDialogStyle">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFrame">@null</item>
@@ -35,6 +42,11 @@
     <style name="normalDialogAnim" parent="android:Animation">
         <item name="@android:windowEnterAnimation">@anim/normal_dialog_enter</item>
         <item name="@android:windowExitAnimation">@anim/normal_dialog_exit</item>
+    </style>
+
+    <style name="bottomDialogAnim" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/bottom_dialog_enter</item>
+        <item name="@android:windowExitAnimation">@anim/bottom_dialog_exit</item>
     </style>
     
     <style name="normalTabLayoutStyle" parent="Base.Widget.Design.TabLayout">

@@ -91,6 +91,18 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder{
     }
 
     /**
+     * ImageView 加载网络图片
+     * @param viewId ImageView id
+     * @param imageUrl 图片地址
+     * @return this
+     */
+    public RecyclerViewHolder setImageUrlCenterCroup(int viewId,String imageUrl){
+        ImageView imageView = getView(viewId);
+        Glide.with(context).load(imageUrl).centerCrop().into(imageView);
+        return this;
+    }
+
+    /**
      * 添加点击事件监听
      * @param viewId View id
      * @param listener onClickListener

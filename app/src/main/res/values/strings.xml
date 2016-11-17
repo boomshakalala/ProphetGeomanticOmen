@@ -101,6 +101,13 @@
     <string name="loading_button">取消</string>
     <string name="error_button">重试</string>
     <string name="text_topic_detail">话题详情</string>
+    <string name="text_topic_type">话题类别</string>
+    <string name="text_topic_title">话题标题</string>
+    <string name="text_please_input_topic_title">请在此输入话题标题</string>
+    <string name="text_topic_content">话题内容</string>
+    <string name="text_add_pic">添加图片</string>
+    <string name="text_initiate_topic">发表话题</string>
+    <string name="text_post">发帖</string>
 
     <array name="tag_search">
         <item>商务风水</item>
@@ -111,6 +118,20 @@
         <item>良辰吉时</item>
         <item>周公解梦</item>
         <item>阴宅风水</item>
+    </array>
+    <array name="tag_initiate_topic">
+        <item>事业•运势</item>
+        <item>良辰•吉时</item>
+        <item>选址•乔迁</item>
+        <item>起名•测字</item>
+        <item>家居•装修</item>
+        <item>手相•面相</item>
+        <item>学业•考试</item>
+        <item>婚恋•情感</item>
+    </array>
+    <array name="select_initiate_topic">
+        <item>拍照</item>
+        <item>选择图片</item>
     </array>
     <array name="tab_master_detail">
         <item>服务项目</item>

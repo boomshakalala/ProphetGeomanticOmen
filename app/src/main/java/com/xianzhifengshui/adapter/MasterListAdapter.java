@@ -7,7 +7,6 @@ import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.User;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
 import com.xianzhifengshui.common.RecyclerViewHolder;
-import com.xianzhifengshui.widget.tag.TagLayout;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,9 +6,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android" >
     <TextView
         android:id="@+id/text_tag"
-        android:textColor="@color/text_gray"
+        android:textColor="@drawable/selector_tab_text_color"
         android:textSize="@dimen/text_size_normal"
-        android:background="@drawable/shape_gray_gray_strok_corner4"
+        android:background="@drawable/selector_tag"
         android:paddingLeft="30px"
         android:paddingRight="30px"
         android:paddingBottom="10px"

@@ -8,4 +8,9 @@ import com.xianzhifengshui.base.BasePresenter;
  * 描述:
  */
 public class InitiateTopicPresenter extends BasePresenter implements InitiateTopicContract.Presenter {
+    private InitiateTopicContract.View view;
+
+    public InitiateTopicPresenter(InitiateTopicContract.View view) {
+        this.view = view;
+    }
 }

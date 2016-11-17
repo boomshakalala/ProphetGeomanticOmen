@@ -10,6 +10,7 @@ import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.TopicListAdapter;
 import com.xianzhifengshui.api.model.Topic;
 import com.xianzhifengshui.base.BaseActivity;
+import com.xianzhifengshui.ui.initiatetopic.InitiateTopicActivity;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
 
@@ -52,6 +53,15 @@ public class TopicListActivity extends BaseActivity implements TopicListContract
             }
         });
         toolbar.setTitle(titleText);
+        toolbar.setRightBtnText(R.string.text_post);
+        toolbar.setRightBtnDrawableLeft(R.drawable.initiate_topic_post);
+        toolbar.setOnRightBtnDrawablePadding(3);
+        toolbar.setOnRightBtnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InitiateTopicActivity.launcher(TopicListActivity.this);
+            }
+        });
     }
 
     @Override
