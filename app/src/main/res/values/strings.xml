@@ -108,6 +108,8 @@
     <string name="text_add_pic">添加图片</string>
     <string name="text_initiate_topic">发表话题</string>
     <string name="text_post">发帖</string>
+    <string name="text_image">图片</string>
+    <string name="text_confrim">确定</string>
 
     <array name="tag_search">
         <item>商务风水</item>

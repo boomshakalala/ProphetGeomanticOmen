@@ -27,8 +27,18 @@ public class ApiImpl implements Api {
     private final String TAG = getClass().getSimpleName();
     public final int PARAM_NULL = -2;
     private LinkedHashMap<String,Object> paramsMap;
+    private static ApiImpl instance;
 
-    public ApiImpl(){
+    public static ApiImpl getInstance(){
+        if (instance != null) {
+            return instance;
+        }else {
+            instance = new ApiImpl();
+            return instance;
+        }
+    }
+
+    private ApiImpl(){
         paramsMap = new LinkedHashMap<>();
     }
 

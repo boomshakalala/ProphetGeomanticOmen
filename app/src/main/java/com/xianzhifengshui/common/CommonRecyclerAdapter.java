@@ -15,6 +15,7 @@ import java.util.List;
  */
 public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
 
+    public final String TAG = getClass().getSimpleName();
     protected Context context;
     protected int layoutId;
     protected List<T> data;

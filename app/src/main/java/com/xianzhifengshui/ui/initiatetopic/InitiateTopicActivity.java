@@ -15,6 +15,9 @@ import com.xianzhifengshui.adapter.TagAdapter;
 import com.xianzhifengshui.adapter.TagListAdapter;
 import com.xianzhifengshui.base.BaseActivity;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
+import com.xianzhifengshui.ui.photopicker.PhotoPickerActivity;
+import com.xianzhifengshui.widget.GridSpaceItemDecoration;
+import com.xianzhifengshui.widget.dialog.DialogOnItemClickListener;
 import com.xianzhifengshui.widget.dialog.NormalSelectDialog;
 import com.xianzhifengshui.widget.tag.TagLayout;
 
@@ -27,7 +30,7 @@ import java.util.List;
  * 日期: 2016/11/14.
  * 描述:
  */
-public class InitiateTopicActivity extends BaseActivity implements InitiateTopicContract.View, CommonRecyclerAdapter.OnRecyclerViewItemClickListener<String> {
+public class InitiateTopicActivity extends BaseActivity implements InitiateTopicContract.View, CommonRecyclerAdapter.OnRecyclerViewItemClickListener<String>,DialogOnItemClickListener {
 
 
 
@@ -44,6 +47,7 @@ public class InitiateTopicActivity extends BaseActivity implements InitiateTopic
     private TagListAdapter tagAdapter;
     private AddImageAdapter addImageAdapter;
     private List<String> result;
+    private int selectedCount;
 
 
     public static void launcher(Context context){
@@ -75,8 +79,10 @@ public class InitiateTopicActivity extends BaseActivity implements InitiateTopic
         initiateBtn = (TextView) findViewById(R.id.btn_initiate_topic);
         typeLayout.setAdapter(tagAdapter);
         recyclerView.setAdapter(addImageAdapter);
-        selectDialog = new NormalSelectDialog.Builder(this).build();
+        recyclerView.addItemDecoration(new GridSpaceItemDecoration(5));
+        selectDialog = new NormalSelectDialog.Builder(this).setOnItemClickListener(this).build();
         selectDialog.setDataList(Arrays.asList(getResources().getStringArray(R.array.select_initiate_topic)));
+
     }
 
     @Override
@@ -121,5 +127,44 @@ public class InitiateTopicActivity extends BaseActivity implements InitiateTopic
             selectDialog.show();
         }
 
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        switch (position){
+            case 0:
+                break;
+            case 1:
+                PhotoPickerActivity.launcher(this,0,selectedCount);
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        selectedCount = 0;
+        List<String> selectedImages = new ArrayList<>();
+        for (String s :result) {
+            if (!s.equals("add")){
+                selectedImages.add(s);
+                selectedCount++;
+            }
+        }
+        List<String> result = null;
+        try {
+            result = data.getStringArrayListExtra("result");
+        }catch (Exception e){
+            result = null;
+        }
+        if (result != null) {
+            result.addAll(0, selectedImages);
+            log("selectedCount===========>"+selectedCount);
+            if (selectedCount<9)
+                result.add("add");
+            this.result = result;
+            log("resultSize======>"+this.result.size());
+            addImageAdapter.setData(result);
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.xianzhifengshui.base;
 import com.xianzhifengshui.api.Api;
 import com.xianzhifengshui.api.ApiImpl;
 import com.xianzhifengshui.utils.SPUtils;
+import com.xianzhifengshui.utils.ThreadPoolUtils;
 
 /**
  * 作者: chengx
@@ -11,8 +12,10 @@ import com.xianzhifengshui.utils.SPUtils;
  */
 public class BasePresenter {
     protected Api api;
+    protected ThreadPoolUtils threadPool;
 
     public BasePresenter() {
-        this.api = new ApiImpl();
+        this.api = ApiImpl.getInstance();
+        this.threadPool = ThreadPoolUtils.getInstance(ThreadPoolUtils.Type.FixedThread,5);
     }
 }

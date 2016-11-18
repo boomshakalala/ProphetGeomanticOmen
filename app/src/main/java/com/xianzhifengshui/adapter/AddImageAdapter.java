@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide;
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
 import com.xianzhifengshui.common.RecyclerViewHolder;
+import com.xianzhifengshui.utils.KLog;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class AddImageAdapter extends CommonRecyclerAdapter<String> {
 
     @Override
     public void convert(RecyclerViewHolder holder, String s) {
+        KLog.d(TAG,s);
         if (s.equals("add")){
             holder.setImageResource(R.id.btn_initiate_topic_add,R.drawable.initiate_topic_add_image);
             holder.setVisibility(R.id.btn_initiate_topic_delete, View.GONE);

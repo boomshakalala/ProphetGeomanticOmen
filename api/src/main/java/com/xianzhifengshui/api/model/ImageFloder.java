@@ -1,6 +1,7 @@
 package com.xianzhifengshui.api.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 作者: chengx
@@ -14,6 +15,19 @@ public class ImageFloder implements Serializable {
     private String firstImagePath; //第一张图片的路径
     private String dirName; //文件夹名称
     private int imageCount; //图片数量
+    private List<String> imags;//文件夹里的图片地址
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public List<String> getImags() {
+        return imags;
+    }
+
+    public void setImags(List<String> imags) {
+        this.imags = imags;
+    }
 
     public String getDir() {
         return dir;

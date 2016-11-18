@@ -1,5 +1,7 @@
 package com.xianzhifengshui.utils;
 
+import com.xianzhifengshui.api.net.ActionCallbackListener;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -30,6 +32,17 @@ public class ThreadPoolUtils {
 
     private ExecutorService exec;
     private ScheduledExecutorService scheduleExec;
+
+    private static ThreadPoolUtils instance;
+
+    public static ThreadPoolUtils getInstance(Type type, int corePoolSize){
+        if (instance != null) {
+            return instance;
+        }else {
+            instance = new ThreadPoolUtils(type,corePoolSize);
+            return instance;
+        }
+    }
 
     /**
      * ThreadPoolUtils构造函数
@@ -171,6 +184,10 @@ public class ThreadPoolUtils {
      */
     public Future<?> submit(Runnable task) {
         return exec.submit(task);
+    }
+
+    public <T> void submit(Runnable task,ActionCallbackListener<T> callback){
+
     }
 
     /**

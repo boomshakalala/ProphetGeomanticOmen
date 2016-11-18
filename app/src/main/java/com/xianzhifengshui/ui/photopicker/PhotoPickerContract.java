@@ -14,13 +14,12 @@ import java.util.List;
  */
 public interface PhotoPickerContract {
     interface View extends IView<Presenter>{
-        void loadImage(List<String> imgs);
+        void loadImage(ImageFloder floder);
         void loadDir(List<ImageFloder> dirs);
     }
 
     interface  Presenter extends IPresenter{
-        void loadImage();
-        void loadDir();
+
     }
 
 }
