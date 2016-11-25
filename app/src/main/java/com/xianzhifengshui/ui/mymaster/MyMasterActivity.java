@@ -2,9 +2,16 @@ package com.xianzhifengshui.ui.mymaster;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.ListPopupWindow;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.TabPagerAdapter;
@@ -13,8 +20,10 @@ import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.ui.mymaster.mydatedmaster.MyDatedMasterFragment;
 import com.xianzhifengshui.ui.mymaster.mywantedmaster.MyWantedMasterFragment;
 import com.xianzhifengshui.widget.auto.AutoTabLayout;
+import com.xianzhifengshui.widget.popup.ListSelectDropDownPopupWindow;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,10 +31,14 @@ import java.util.List;
  * 日期: 2016/10/17.
  * 描述: 我的大师页面
  */
-public class MyMasterActivity extends BaseActivity implements TabLayout.OnTabSelectedListener {
+public class MyMasterActivity extends BaseActivity implements TabLayout.OnTabSelectedListener, View.OnClickListener, PopupWindow.OnDismissListener, ListSelectDropDownPopupWindow.OnItemSelectedListener {
     /*======= 控件声明区 =======*/
     AutoTabLayout tabLayout;
     ViewPager viewPager;
+    View customTabView;
+    ImageView customTabIv;
+    TextView customTabTv;
+    ListSelectDropDownPopupWindow popupWindow;
     /*=========================*/
     List<BaseFragment> fragments;
     String[] titles;
@@ -42,10 +55,29 @@ public class MyMasterActivity extends BaseActivity implements TabLayout.OnTabSel
     protected void initViews() {
         tabLayout = (AutoTabLayout) findViewById(R.id.tab_my_master);
         viewPager = (ViewPager) findViewById(R.id.pager_my_master);
+        customTabView = View.inflate(this,R.layout.widget_custom_tab,null);
+        customTabIv = (ImageView)customTabView.findViewById(R.id.image_custom_tab_arrow);
+        customTabTv = (TextView) customTabView.findViewById(R.id.text_custom_tab);
+        customTabTv.setText("我约过的大师");
+        customTabView.setSelected(true);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-
+        tabLayout.getTabAt(0).setCustomView(customTabView);
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            if (tab != null) {
+                if (tab.getCustomView() != null) {
+                    View tabView = (View) tab.getCustomView().getParent();
+                    tabView.setTag(i);
+                    tabView.setOnClickListener(this);
+                }
+            }
+        }
         tabLayout.setOnTabSelectedListener(this);
+        popupWindow = new ListSelectDropDownPopupWindow(this);
+        popupWindow.setOnDismissListener(this);
+        popupWindow.setOnItemSelectedListener(this);
+        popupWindow.loadItems(Arrays.asList(getResources().getStringArray(R.array.item_my_master)));
     }
 
     @Override
@@ -95,5 +127,39 @@ public class MyMasterActivity extends BaseActivity implements TabLayout.OnTabSel
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        int pos = (int) v.getTag();
+        TabLayout.Tab tab = tabLayout.getTabAt(pos);
+        if (tab != null) {
+            tab.select();
+        }
+        if (pos == 0){
+            if (popupWindow != null) {
+                popupWindow.showAsDropDown(v);
+            }
+        }
+
+    }
+
+    @Override
+    public void onDismiss() {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = 1.0f;
+        getWindow().setAttributes(lp);
+    }
+
+    @Override
+    public void onSelected(int position) {
+        switch (position){
+            case 0:
+                break;
+            case 1:
+                break;
+            default:
+                break;
+        }
     }
 }

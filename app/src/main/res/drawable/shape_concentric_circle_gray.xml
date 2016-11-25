@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/shape_circle_gray_radius10" android:width="10dp" android:height="10dp"
+        android:gravity="center"/>
+    <item android:drawable="@drawable/shape_circle_gray_radius5" android:width="5dp" android:height="5dp"
+        android:gravity="center"/>
+</layer-list>

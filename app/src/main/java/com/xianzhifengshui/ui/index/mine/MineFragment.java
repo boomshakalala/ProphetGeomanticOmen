@@ -12,6 +12,7 @@ import com.xianzhifengshui.R;
 import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.ui.HelpAndFeedActivity;
+import com.xianzhifengshui.ui.becomemaster.BecomeMasterActivity;
 import com.xianzhifengshui.ui.edituserinfo.EditUserInfoActivity;
 import com.xianzhifengshui.ui.login.LoginActivity;
 import com.xianzhifengshui.ui.myaccount.MyAccountActivity;
@@ -191,7 +192,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
                 MyTopicActivity.launcher(activity);
                 break;
             case OPT_BECOME_MASTER:
-                log("跳转到成为大师页面");
+                BecomeMasterActivity.launcher(activity);
                 break;
             case OPT_EDIT_USER_INFO:
                 EditUserInfoActivity.launcher(activity);

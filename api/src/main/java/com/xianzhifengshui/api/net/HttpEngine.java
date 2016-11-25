@@ -28,7 +28,7 @@ import cz.msebera.android.httpclient.Header;
  */
 public class HttpEngine {
     private final String TAG = getClass().getSimpleName();
-    public final String HOST = "http://123.56.162.170:8082/api/";      //服务器主地址
+    public final String HOST = "http://api.xianzhifengshui.com/";      //服务器主地址
     private static final int JSON_SYNTAX_ERROR = -1;
     private static final String JSON_SYNTAX_INFO = "返回数据格式错误";
     private static AsyncHttpClient client;
@@ -79,12 +79,8 @@ public class HttpEngine {
             @Override
             public void onSuccess(int i, Header[] headers, String ciphertext) {
                 Log.d(TAG, "onSuccess cipherText="+ciphertext);
-//                e9d44ce4d8e50e178e044d7c80ad365b881a200429ff395e06a26b3f44b87ef99dc0d0b4ee5527f8a813de04c362fd9e6b5e3cabdaac161e
-//                e9d44ce4d8e50e178e044d7c80ad365b881a200429ff395e06a26b3f44b87ef99dc0d0b4ee5527f8a813de04c362fd9e6b5e3cabdaac161e
-
-                String json = DESUtils.decrypt(ciphertext);
-                Log.d(TAG, "onSuccess json = "+ JsonFormatTool.formatJson(json));
-                ApiResponse<T> response = json2Obj(json, typeOfClass);
+                Log.d(TAG, "onSuccess json = "+ JsonFormatTool.formatJson(ciphertext));
+                ApiResponse<T> response = json2Obj(ciphertext, typeOfClass);
                 if (response.isSuccess()){
                     callback.onSuccess(response.getData());
                 }else if (response.getStatus().equals("success")){

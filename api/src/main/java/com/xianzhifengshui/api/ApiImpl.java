@@ -57,7 +57,7 @@ public class ApiImpl implements Api {
         resultMap.putAll(map);
         String json = gson.toJson(resultMap);
         Log.d(TAG, "map2Ciphertext json = "+ JsonFormatTool.formatJson(json));
-        return DESUtils.encrypt(json);
+        return json;
 
     }
 

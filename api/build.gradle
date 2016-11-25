@@ -24,4 +24,5 @@ dependencies {
     compile 'cz.msebera.android:httpclient:4.3.6'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile files('libs/android-async-http-1.4.9 .jar')
+    compile files('libs/jmessage-android-1.4.2.jar')
 }

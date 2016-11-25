@@ -110,6 +110,25 @@
     <string name="text_post">发帖</string>
     <string name="text_image">图片</string>
     <string name="text_confrim">确定</string>
+    <string name="text_cancel">取消</string>
+    <string name="text_private_message">私信</string>
+    <string name="text_update">修改</string>
+    <string name="symbol_required">*</string>
+    <string name="text_please_input_your_name">请输入姓名</string>
+    <string name="text_please_input_your_email">请输入邮箱</string>
+    <string name="text_permanent_city">常驻城市</string>
+    <string name="text_please_input_your_permanent_city">如：北京、上海</string>
+    <string name="text_post_office">任职机构</string>
+    <string name="text_please_input_your_post_office">如：中国风水研究院、自由职业者</string>
+    <string name="text_job_title">职位头衔</string>
+    <string name="text_please_input_your_job_title">如：商务科长</string>
+    <string name="text_bill">账单</string>
+    <string name="text_amount_of_bill">账单金额</string>
+    <string name="text_type">类  型</string>
+    <string name="text_time">时  间</string>
+    <string name="text_transaction_id">交易单号</string>
+    <string name="text_pay_type">支付方式</string>
+    <string name="text_bill_detail">账单详情</string>
 
     <array name="tag_search">
         <item>商务风水</item>
@@ -120,6 +139,10 @@
         <item>良辰吉时</item>
         <item>周公解梦</item>
         <item>阴宅风水</item>
+    </array>
+    <array name="item_my_master">
+        <item>进行中</item>
+        <item>已约见</item>
     </array>
     <array name="tag_initiate_topic">
         <item>事业•运势</item>

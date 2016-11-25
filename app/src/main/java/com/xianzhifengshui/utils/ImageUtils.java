@@ -1167,7 +1167,7 @@ public class ImageUtils {
      * @return {@code true}: 成功<br>{@code false}: 失败
      */
     public static boolean save(Bitmap src, String filePath, CompressFormat format) {
-        return save(src, FileUtils.getFileByPath(filePath), format, false);
+        return save(src, FileUtils.getFileByPath(filePath), format, true);
     }
 
     /**
@@ -1179,7 +1179,7 @@ public class ImageUtils {
      * @return {@code true}: 成功<br>{@code false}: 失败
      */
     public static boolean save(Bitmap src, File file, CompressFormat format) {
-        return save(src, file, format, false);
+        return save(src, file, format, true);
     }
 
     /**

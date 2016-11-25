@@ -505,7 +505,6 @@ public class EmptyLayout extends AutoLinearLayout {
 
     private void getChildViews(){
         int childCount = getChildCount();
-        KLog.d("EmptyLayout", "ChildCount:" + childCount);
         View view;
         for (int i=0;i<childCount;i++){
             view = getChildAt(i);

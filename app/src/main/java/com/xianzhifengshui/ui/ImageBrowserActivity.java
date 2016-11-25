@@ -33,6 +33,9 @@ public class ImageBrowserActivity extends BaseActivity {
         intent.putExtra("position", position);
         context.startActivity(intent);
     }
+    public static void launcher(Context context,ArrayList<String> imageUrls){
+       launcher(context,imageUrls,0);
+    }
 
     @Override
     protected void initViews() {

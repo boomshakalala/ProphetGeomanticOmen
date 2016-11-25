@@ -18,6 +18,7 @@ import com.xianzhifengshui.utils.ToastUtils;
 import com.xianzhifengshui.widget.EmptyLayout;
 import com.xianzhifengshui.widget.auto.AutoToolbar;
 import com.xianzhifengshui.widget.dialog.NomalProgressDialog;
+import com.xianzhifengshui.widget.dialog.NormalAlertDialog;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 
@@ -36,6 +37,7 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
     private boolean needToolbar = true;
     private boolean needFullScreen = false;
     private NomalProgressDialog progressDialog;
+    private NormalAlertDialog dialog;
 
     protected AutoToolbar toolbar;
     protected EmptyLayout emptyLayout;
@@ -177,6 +179,8 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
     public boolean isProgressDialogShowing(){
         return progressDialog != null && progressDialog.isShowing();
     }
+
+
 
 
 }

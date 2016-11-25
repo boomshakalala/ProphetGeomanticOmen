@@ -5,12 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.xianzhifengshui.R;
-import com.xianzhifengshui.adapter.MasterListAdapter;
 import com.xianzhifengshui.adapter.MyDatedMasterListAdapter;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
 import com.xianzhifengshui.ui.masterdetail.MasterDetailActivity;
-import com.xianzhifengshui.ui.mymaster.mywantedmaster.MyWantedMasterContract;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
 
@@ -53,7 +51,7 @@ public class MyDatedMasterFragment extends BaseFragment implements MyDatedMaster
     @Override
     protected void initData() {
         data = new ArrayList<>();
-        adapter = new MyDatedMasterListAdapter(getContext(),data,R.layout.item_my_dated_master_list);
+        adapter = new MyDatedMasterListAdapter(getContext(),data,R.layout.item_my_booking_master_list);
         adapter.setOnItemClickListener(this);
         presenter = new MyDatedMasterPresenter(this);
     }

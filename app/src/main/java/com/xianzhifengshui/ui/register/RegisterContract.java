@@ -10,10 +10,7 @@ import com.xianzhifengshui.base.IView;
  */
 public interface RegisterContract {
     interface View extends IView<Presenter> {
-        void showRegisterSuccess(String message);
-        void showRegisterFalure(String message);
-        void showGetVerifySuccess(String message);
-        void showGetVerifyFailure(String message);
+
     }
     interface  Presenter extends IPresenter {
         /**

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.base.BaseActivity;
 
-public class RegisterActivity extends BaseActivity implements View.OnClickListener {
+public class RegisterActivity extends BaseActivity implements View.OnClickListener,RegisterContract.View {
 
     /*======= 控件声明区 =======*/
     private ImageView backBtn;
@@ -26,6 +26,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private Button registerBtn;
     private TextView verifyCodeBtn;
     /*========================*/
+    private RegisterContract.Presenter presenter;
 
     public static void luncher(Context context){
         Intent intent = new Intent();
@@ -49,7 +50,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initData() {
-
+        presenter = new RegisterPresenter(this);
     }
 
     @Override
@@ -80,5 +81,20 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             default:
                 break;
         }
+    }
+
+    @Override
+    public void setPresenter(RegisterContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public boolean isActive() {
+        return isActive;
+    }
+
+    @Override
+    public void showTip(String text) {
+        showToast(text);
     }
 }

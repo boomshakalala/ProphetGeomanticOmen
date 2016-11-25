@@ -1,6 +1,7 @@
 package com.xianzhifengshui.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 
@@ -19,12 +20,23 @@ import java.util.List;
  */
 public class AddImageAdapter extends CommonRecyclerAdapter<String> {
 
+
+    private OnDeleteListener onDeleteListener;
+
     public AddImageAdapter(Context context, int layoutId, List<String> data) {
         super(context, layoutId, data);
     }
 
+    public interface OnDeleteListener{
+        void onDelete(RecyclerView.ViewHolder holder, String s);
+    }
+
+    public void setOnDeleteListener(OnDeleteListener onDeleteListener) {
+        this.onDeleteListener = onDeleteListener;
+    }
+
     @Override
-    public void convert(RecyclerViewHolder holder, String s) {
+    public void convert(final RecyclerViewHolder holder, final String s) {
         KLog.d(TAG,s);
         if (s.equals("add")){
             holder.setImageResource(R.id.btn_initiate_topic_add,R.drawable.initiate_topic_add_image);
@@ -33,5 +45,15 @@ public class AddImageAdapter extends CommonRecyclerAdapter<String> {
             holder.setImageUrlCenterCroup(R.id.btn_initiate_topic_add,s);
             holder.setVisibility(R.id.btn_initiate_topic_delete,View.VISIBLE);
         }
+        holder.setOnclickListener(R.id.btn_initiate_topic_delete, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onDeleteListener != null) {
+                    onDeleteListener.onDelete(holder,s);
+                }
+            }
+        });
     }
+
+
 }

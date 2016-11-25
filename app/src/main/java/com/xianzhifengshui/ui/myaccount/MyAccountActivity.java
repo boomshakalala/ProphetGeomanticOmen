@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.base.BaseActivity;
+import com.xianzhifengshui.ui.mybill.MyBillActivity;
 import com.xianzhifengshui.ui.recharge.RechargeActivity;
 import com.xianzhifengshui.ui.recharge.RechargeContract;
 
@@ -109,6 +110,7 @@ public class MyAccountActivity extends BaseActivity implements MyAccountContract
                 break;
             case R.id.btn_my_account_bill:
                 //TODO:跳转到我的账单页面
+                MyBillActivity.launcher(this);
                 break;
             case R.id.btn_my_account_bank_card:
                 //TODO:跳转到我的银行卡页面

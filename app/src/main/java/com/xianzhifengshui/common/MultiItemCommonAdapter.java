@@ -2,9 +2,11 @@ package com.xianzhifengshui.common;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.xianzhifengshui.utils.KLog;
+import com.xianzhifengshui.widget.MultiImageView;
 
 import java.util.List;
 
@@ -19,10 +21,20 @@ public abstract class MultiItemCommonAdapter<T> extends RecyclerView.Adapter<Rec
 
     protected ItemViewDelegateManager<T> itemViewDelegateManager;
 
+    private OnItemClickListener onItemClickListener;
+
     public MultiItemCommonAdapter(Context context, List<T> data) {
         this.context = context;
         this.data = data;
         this.itemViewDelegateManager = new ItemViewDelegateManager<>();
+    }
+
+    public interface OnItemClickListener<T>{
+        void onItemClick(View view , T data);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
@@ -40,7 +52,15 @@ public abstract class MultiItemCommonAdapter<T> extends RecyclerView.Adapter<Rec
         return holder;
     }
 
-    public void convert(RecyclerViewHolder holder,T t){
+    public void convert(RecyclerViewHolder holder,final T t){
+        holder.getConvertView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener!=null){
+                    onItemClickListener.onItemClick(v,t);
+                }
+            }
+        });
         itemViewDelegateManager.convert(holder, t, holder.getAdapterPosition());
     }
 
@@ -61,7 +81,7 @@ public abstract class MultiItemCommonAdapter<T> extends RecyclerView.Adapter<Rec
     }
 
     public MultiItemCommonAdapter<T> addItemViewDelegate(int viewType,ItemViewDelegate<T> itemViewDelegate) {
-        itemViewDelegateManager.addDelegate(viewType,itemViewDelegate);
+        itemViewDelegateManager.addDelegate(viewType, itemViewDelegate);
         return this;
     }
 

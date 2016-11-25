@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="40px"
     android:paddingRight="40px"
     android:paddingTop="20px"
     android:paddingBottom="20px"
-    android:background="@drawable/selector_recycler_item_bg">
+    android:background="@drawable/selector_recycler_item_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
-        android:id="@+id/image_my_dated_master_list_icon"
+        android:id="@+id/image_my_booking_master_list_icon"
         app:layout_auto_baseheight="width"
         android:layout_width="188px"
         android:layout_height="188px"
@@ -17,52 +17,41 @@
         android:src="@drawable/pic"
         android:layout_centerVertical="true"/>
     <TextView
-        android:id="@+id/text_my_dated_master_list_title"
+        android:id="@+id/text_my_booking_master_list_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_small"
-        android:layout_toRightOf="@id/image_my_dated_master_list_icon"
+        android:layout_toRightOf="@id/image_my_booking_master_list_icon"
         android:layout_marginTop="25px"
         android:layout_marginLeft="33px"
         android:text="张三丰"
         />
     <TextView
-        android:id="@+id/text_my_dated_master_list_status"
+        android:id="@+id/text_my_booking_master_list_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_smaller"
-        android:textColor="@color/text_gray"
-        android:layout_alignBaseline="@id/text_my_dated_master_list_title"
-        android:layout_alignParentRight="true"
-        android:drawablePadding="10px"
-        android:gravity="center"
-        android:drawableLeft="@drawable/my_dated_master_list_status_icon"
-        android:text="进行中"/>
-    <TextView
-        android:id="@+id/text_my_dated_master_list_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_below="@id/text_my_booking_master_list_title"
+        android:layout_alignLeft="@id/text_my_booking_master_list_title"
         android:singleLine="true"
         android:ellipsize="end"
+        android:maxEms="15"
         android:textColor="@color/text_gray"
         android:textSize="@dimen/text_size_smallest"
-        android:layout_below="@id/text_my_dated_master_list_title"
-        android:layout_alignLeft="@id/text_my_dated_master_list_title"
         android:layout_marginTop="35px"
         android:text="服务项目:商务风水——办公大楼选址"/>
     <TextView
-        android:id="@+id/text_my_dated_master_list_price"
+        android:id="@+id/text_my_booking_master_list_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:ellipsize="end"
         android:textColor="@color/orange"
         android:textSize="@dimen/text_size_smallest"
-        android:layout_below="@id/text_my_dated_master_list_desc"
-        android:layout_alignLeft="@id/text_my_dated_master_list_desc"
+        android:layout_below="@id/text_my_booking_master_list_desc"
+        android:layout_alignLeft="@id/text_my_booking_master_list_desc"
         android:layout_marginTop="35px"
-        android:text="88"/>
+        android:text="￥88"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,10 +59,29 @@
         android:ellipsize="end"
         android:textColor="@color/orange"
         android:textSize="@dimen/text_size_small"
-        android:layout_toRightOf="@id/text_my_dated_master_list_price"
-        android:layout_alignBaseline="@id/text_my_dated_master_list_price"
         android:layout_marginLeft="20px"
         android:layout_marginTop="35px"
+        android:layout_toRightOf="@id/text_my_booking_master_list_price"
+        android:layout_alignBaseline="@id/text_my_booking_master_list_price"
         android:text="@string/text_zhibi"/>
- </RelativeLayout>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/orange"
+        android:text="去评价大师"
+        android:layout_alignBaseline="@id/text_my_booking_master_list_price"
+        android:layout_alignParentRight="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_smallest"
+        android:textColor="@color/yellow"
+        android:drawableLeft="@drawable/master_list_lavel_icon"
+        android:drawablePadding="3dp"
+        android:text="v1"
+        android:gravity="bottom"
+        android:layout_marginLeft="35px"
+        android:layout_alignBaseline="@id/text_my_booking_master_list_title"
+        android:layout_toRightOf="@+id/text_my_booking_master_list_title"/>
+</RelativeLayout>

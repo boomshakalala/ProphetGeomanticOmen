@@ -48,6 +48,11 @@
         <item name="@android:windowEnterAnimation">@anim/bottom_dialog_enter</item>
         <item name="@android:windowExitAnimation">@anim/bottom_dialog_exit</item>
     </style>
+
+    <style name="topDialogAnim" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/top_dialog_enter</item>
+        <item name="@android:windowExitAnimation">@anim/top_dialog_exit</item>
+    </style>
     
     <style name="normalTabLayoutStyle" parent="Base.Widget.Design.TabLayout">
         <item name="tabTextAppearance">@style/LargerTabLayoutTextStyle</item>

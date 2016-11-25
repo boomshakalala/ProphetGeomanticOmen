@@ -3,14 +3,18 @@ package com.xianzhifengshui.widget.auto;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xianzhifengshui.R;
+import com.xianzhifengshui.utils.SizeUtils;
 import com.zhy.autolayout.utils.AutoUtils;
 import com.zhy.autolayout.utils.DimenUtils;
 
@@ -20,25 +24,21 @@ import com.zhy.autolayout.utils.DimenUtils;
  * 日期: 2015/12/28.
  * 描述: 支持auto的Toolbar
  */
-public class AutoTabLayout extends TabLayout
-{
+public class AutoTabLayout extends TabLayout {
     private static final int NO_VALID = -1;
     private int mTextSize;
     private boolean mTextSizeBaseWidth = false;
 
-    public AutoTabLayout(Context context)
-    {
+    public AutoTabLayout(Context context) {
         this(context, null);
     }
 
-    public AutoTabLayout(Context context, AttributeSet attrs)
-    {
+    public AutoTabLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
     @SuppressLint("PrivateResource")
-    public AutoTabLayout(Context context, AttributeSet attrs, int defStyleAttr)
-    {
+    public AutoTabLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         initTextSizeBaseWidth(context, attrs);
@@ -52,63 +52,50 @@ public class AutoTabLayout extends TabLayout
         a.recycle();
     }
 
-    private void initTextSizeBaseWidth(Context context, AttributeSet attrs)
-    {
+    private void initTextSizeBaseWidth(Context context, AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AutoTabLayout);
         mTextSizeBaseWidth = a.getBoolean(R.styleable.AutoTabLayout_auto_textSize_base_width, false);
         a.recycle();
     }
 
     @SuppressLint("PrivateResource")
-    private int loadTextSizeFromTextAppearance(int textAppearanceResId)
-    {
+    private int loadTextSizeFromTextAppearance(int textAppearanceResId) {
         TypedArray a = getContext().obtainStyledAttributes(textAppearanceResId,
                 R.styleable.TextAppearance);
 
-        try
-        {
+        try {
             if (!DimenUtils.isPxVal(a.peekValue(R.styleable.TextAppearance_android_textSize)))
                 return NO_VALID;
             return a.getDimensionPixelSize(R.styleable.TextAppearance_android_textSize, NO_VALID);
-        } finally
-        {
+        } finally {
             a.recycle();
         }
     }
 
     @Override
-    public void addTab(@NonNull Tab tab, int position, boolean setSelected)
-    {
+    public void addTab(@NonNull Tab tab, int position, boolean setSelected) {
         super.addTab(tab, position, setSelected);
         setUpTabTextSize(tab);
     }
 
     @Override
-    public void addTab(@NonNull Tab tab, boolean setSelected)
-    {
+    public void addTab(@NonNull Tab tab, boolean setSelected) {
         super.addTab(tab, setSelected);
         setUpTabTextSize(tab);
     }
 
-    private void setUpTabTextSize(Tab tab)
-    {
+
+    private void setUpTabTextSize(Tab tab) {
         if (mTextSize == NO_VALID || tab.getCustomView() != null) return;
 
         ViewGroup tabGroup = (ViewGroup) getChildAt(0);
         ViewGroup tabContainer = (ViewGroup) tabGroup.getChildAt(tab.getPosition());
         TextView textView = (TextView) tabContainer.getChildAt(1);
 
-//
-//        if (AutoUtils.autoed(textView))
-//        {
-//            return;
-//        }
         int autoTextSize = 0 ;
-        if (mTextSizeBaseWidth)
-        {
+        if (mTextSizeBaseWidth) {
             autoTextSize = AutoUtils.getPercentWidthSize(mTextSize);
-        } else
-        {
+        } else {
             autoTextSize = AutoUtils.getPercentHeightSize(mTextSize);
         }
 
@@ -116,5 +103,19 @@ public class AutoTabLayout extends TabLayout
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, autoTextSize);
     }
 
+    public void setDrawableRight(int position,int resId,int drawablePadding){
+        ViewGroup tabGroup = (ViewGroup) getChildAt(0);
+        ViewGroup tabContainer = (ViewGroup) tabGroup.getChildAt(getTabAt(position).getPosition());
+        TextView textView = (TextView) tabContainer.getChildAt(1);
+        Drawable drawable = getContext().getResources().getDrawable(resId);
+        textView.setCompoundDrawables(null,null,drawable,null);
+        textView.setCompoundDrawablePadding(SizeUtils.dp2px(getContext(), drawablePadding));
+        tabContainer.invalidate();
+    }
 
+    public TextView getTextView(int position){
+        ViewGroup tabGroup = (ViewGroup) getChildAt(0);
+        ViewGroup tabContainer = (ViewGroup) tabGroup.getChildAt(getTabAt(position).getPosition());
+        return (TextView) tabContainer.getChildAt(1);
+    }
 }

@@ -82,9 +82,6 @@ public class MyCouponActivity extends BaseActivity implements MyCouponContract.V
     @Override
     protected void initData() {
         data = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-                data.add("");
-        }
         innerAdapter = new MyCouponListAdapter(this,R.layout.item_coupon_list,data);
 
 
