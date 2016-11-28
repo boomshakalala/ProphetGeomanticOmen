@@ -21,6 +21,10 @@ import com.xianzhifengshui.widget.dialog.NomalProgressDialog;
 import com.xianzhifengshui.widget.dialog.NormalAlertDialog;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import javax.xml.transform.sax.TemplatesHandler;
+
+import cn.jpush.android.api.JPushInterface;
+
 
 /**
  * 作者: chengx
@@ -93,6 +97,18 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
     protected void onStop() {
         super.onStop();
         isActive = false;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
     }
 
     @Override

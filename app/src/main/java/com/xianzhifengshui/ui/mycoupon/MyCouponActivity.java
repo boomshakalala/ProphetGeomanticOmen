@@ -70,7 +70,6 @@ public class MyCouponActivity extends BaseActivity implements MyCouponContract.V
         pullToRefreshRecyclerView.setScrollingWhileRefreshingEnabled(true);
         recyclerView = pullToRefreshRecyclerView.getRefreshableView();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new HeaderAndFooterCommonAdapter(innerAdapter);
         View headerView = LayoutInflater.from(this).inflate(R.layout.layout_my_coupon_header, null);
         TextView giftBtn = (TextView) headerView.findViewById(R.id.btn_my_coupon_gift);
         giftBtn.setOnClickListener(this);
@@ -83,6 +82,7 @@ public class MyCouponActivity extends BaseActivity implements MyCouponContract.V
     protected void initData() {
         data = new ArrayList<>();
         innerAdapter = new MyCouponListAdapter(this,R.layout.item_coupon_list,data);
+        adapter = new HeaderAndFooterCommonAdapter(innerAdapter);
 
 
     }

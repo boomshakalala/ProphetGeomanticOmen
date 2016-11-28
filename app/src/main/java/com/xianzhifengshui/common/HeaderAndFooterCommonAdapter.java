@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.xianzhifengshui.utils.KLog;
 import com.xianzhifengshui.utils.RecyclerViewUtils;
 import com.zhy.autolayout.utils.AutoUtils;
 
@@ -44,7 +45,7 @@ public class HeaderAndFooterCommonAdapter<T> extends RecyclerView.Adapter<Recycl
         if (isHeaderViewPos(position)){
             return headerViews.keyAt(position);
         }else if (isFooterViewPos(position)){
-            return footerViews.keyAt(position);
+            return footerViews.keyAt(position-getHeadersCount()-getRealItemCount());
         }else {
             return innerAdapter.getItemViewType(position - getHeadersCount());
         }
@@ -65,6 +66,9 @@ public class HeaderAndFooterCommonAdapter<T> extends RecyclerView.Adapter<Recycl
 
     @Override
     public int getItemCount() {
+        KLog.d(getClass().getSimpleName(),"headerCount="+getHeadersCount());
+        KLog.d(getClass().getSimpleName(),"footerCount="+getFootersCount());
+        KLog.d(getClass().getSimpleName(),"adapterCount="+getRealItemCount());
         return getHeadersCount()+getFootersCount()+getRealItemCount();
     }
 
@@ -105,6 +109,7 @@ public class HeaderAndFooterCommonAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     private boolean isFooterViewPos(int position) {
+        KLog.d(getClass().getSimpleName(),"position="+position);
         return position >= getHeadersCount() + getRealItemCount();
     }
 
@@ -113,7 +118,7 @@ public class HeaderAndFooterCommonAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     public int getFootersCount() {
-        return headerViews.size();
+        return footerViews.size();
     }
 
     public void addHeaderView(View view){

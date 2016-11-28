@@ -54,6 +54,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/btn_message_center_service"
         android:layout_width="match_parent"
         android:layout_height="154px"
         android:paddingLeft="45px"
@@ -98,6 +99,7 @@
             android:text="尊敬的用户:即日起至11月11日，凡购买任意一款产品的都有礼品赠送"/>
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/btn_message_center_system"
         android:layout_width="match_parent"
         android:layout_height="154px"
         android:paddingLeft="45px"

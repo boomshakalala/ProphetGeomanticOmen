@@ -24,6 +24,8 @@ import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.NaviMenu;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.common.ItemViewDelegateManager;
+import com.xianzhifengshui.ui.messagecenter.MessageCenterActivity;
+import com.xianzhifengshui.ui.messagecenter.MessageCenterContract;
 import com.xianzhifengshui.ui.search.SearchActivity;
 import com.xianzhifengshui.utils.DeviceUtils;
 import com.xianzhifengshui.utils.SizeUtils;
@@ -60,7 +62,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Pull
         toolbar.setOnRightBtnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                log("跳转到消息页面");
+                MessageCenterActivity.launcher(getContext());
             }
         });
         toolbar.setOnSearchViewClickListener(new View.OnClickListener() {
@@ -107,8 +109,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Pull
         presenter = new HomePresenter(this);
         data = new ArrayList<>();
         adapter = new HomeAdapter(getContext(),data);
-
-
     }
 
     @Override

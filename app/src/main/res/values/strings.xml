@@ -129,6 +129,24 @@
     <string name="text_transaction_id">交易单号</string>
     <string name="text_pay_type">支付方式</string>
     <string name="text_bill_detail">账单详情</string>
+    <string name="text_message_center">消息中心</string>
+    <string name="text_add_bank_card">添加银行卡</string>
+    <string name="text_bank_card_id">卡号</string>
+    <string name="text_please_input_your_bank_card_id">请输入您的银行卡卡号</string>
+    <string name="text_bank_card_type">卡类型</string>
+    <string name="text_choose_bank_card_type">选择银行卡类型</string>
+    <string name="text_bank_card_owner">持卡人</string>
+    <string name="text_please_input_bank_card_owner">请输入持卡人姓名</string>
+    <string name="text_id_card">身份证号码</string>
+    <string name="text_please_input_your_id_card">请输入持卡人身份证号码</string>
+    <string name="text_reserve_phone_number">银行预留手机号</string>
+    <string name="text_please_input_your_reserve_phone_number">请输入预留手机号</string>
+    <string name="text_and_agree">并同意</string>
+    <string name="text_user_agreement">用户协议</string>
+    <string name="text_method_of_withdraw_crash">体现方式</string>
+    <string name="text_amount_of_money">金额(元)</string>
+    <string name="text_max_withdraw_crash">最多可提现金额88.8</string>
+    <string name="text_account_of_alipay">支付宝账户</string>
 
     <array name="tag_search">
         <item>商务风水</item>

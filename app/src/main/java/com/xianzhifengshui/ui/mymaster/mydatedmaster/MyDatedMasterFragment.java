@@ -51,7 +51,7 @@ public class MyDatedMasterFragment extends BaseFragment implements MyDatedMaster
     @Override
     protected void initData() {
         data = new ArrayList<>();
-        adapter = new MyDatedMasterListAdapter(getContext(),data,R.layout.item_my_booking_master_list);
+        adapter = new MyDatedMasterListAdapter(getContext(),data,R.layout.item_my_dated_master_list);
         adapter.setOnItemClickListener(this);
         presenter = new MyDatedMasterPresenter(this);
     }
