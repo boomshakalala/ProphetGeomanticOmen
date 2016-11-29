@@ -10,6 +10,9 @@ import com.xianzhifengshui.utils.KLog;
 import com.xianzhifengshui.utils.SPUtils;
 import com.xianzhifengshui.utils.StringUtils;
 
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.api.BasicCallback;
+
 /**
  * 作者: chengx
  * 日期: 2016/10/9.
@@ -25,7 +28,7 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
     }
 
     @Override
-    public void login(String userName, String password) {
+    public void login(final String userName, final String password) {
         if (StringUtils.isEmpty(userName)){
             view.showTip("请输入用户名");
             return;
@@ -45,6 +48,7 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
 
             @Override
             public void onSuccess(User data) {
+                loginChatService(userName, password);
                 saveLoginInfo(data);
                 view.closeWait();
                 view.showLoginSuccess("登录成功");
@@ -56,6 +60,18 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
 
                 view.closeWait();
                 view.showLoginFalure(message);
+            }
+        });
+    }
+
+    private void loginChatService(String userName, String password) {
+        JMessageClient.login(userName, password, new BasicCallback() {
+            @Override
+            public void gotResult(int code, String info) {
+                KLog.d(TAG,"resultCode="+code+"responseInfo="+info);
+                if (code != 0){
+                    view.showTip("登录聊天服务器失败！");
+                }
             }
         });
     }

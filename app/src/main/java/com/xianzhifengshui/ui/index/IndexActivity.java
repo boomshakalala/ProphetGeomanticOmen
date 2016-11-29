@@ -11,10 +11,14 @@ import android.widget.TextView;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.base.BaseActivity;
+import com.xianzhifengshui.ui.chat.ChatActivity;
 import com.xianzhifengshui.ui.index.discover.DiscoverFragment;
 import com.xianzhifengshui.ui.index.home.HomeFragment;
 import com.xianzhifengshui.ui.index.mine.MineFragment;
 import com.xianzhifengshui.ui.index.shop.ShopFragment;
+
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.event.NotificationClickEvent;
 
 /**
  * 作者: chengx
@@ -167,4 +171,5 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener 
         }
 
     }
+
 }

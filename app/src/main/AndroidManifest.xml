@@ -120,6 +120,18 @@
         <!-- Required SDK核心功能-->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
 
+        <receiver
+            android:name="cn.jpush.im.android.helpers.IMReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.im.android.action.IM_RESPONSE" />
+                <action android:name="cn.jpush.im.android.action.NOTIFICATION_CLICK_PROXY" />
+                <category android:name="com.xianzhifengshui" />
+            </intent-filter>
+        </receiver>
+
+
         <!-- User defined. 用户自定义的广播接收器-->
         <receiver
             android:name="com.xianzhifengshui.push.JPushReceiver"
@@ -236,6 +248,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.withdrawcrash.WithdrawCrashActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.chat.ChatActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.chat.NotificationClickEvent"
             android:screenOrientation="portrait" />
     </application>
 

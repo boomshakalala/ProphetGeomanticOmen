@@ -11,6 +11,7 @@ import com.xianzhifengshui.utils.ThreadPoolUtils;
  * 描述: Presenter基类
  */
 public class BasePresenter {
+    protected final String TAG = getClass().getSimpleName();
     protected Api api;
     protected ThreadPoolUtils threadPool;
 

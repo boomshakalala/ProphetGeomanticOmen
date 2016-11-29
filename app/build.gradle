@@ -37,5 +37,5 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.5.2'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
     compile files('libs/libammsdk.jar')
-    compile files('libs/jpush-android-2.2.0.jar')
+    compile files('libs/jmessage-android-1.4.2.jar')
 }
