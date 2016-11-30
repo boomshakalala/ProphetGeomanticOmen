@@ -1,12 +1,20 @@
 package com.xianzhifengshui.ui.chat;
 
+import android.content.Context;
+import android.media.AudioRecord;
+import android.media.MediaRecorder;
 import android.provider.CalendarContract;
 
+import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BasePresenter;
+import com.xianzhifengshui.utils.FileUtils;
 import com.xianzhifengshui.utils.KLog;
+import com.xianzhifengshui.widget.RecordVoiceButton;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import cn.jpush.im.android.api.JMessageClient;
@@ -22,10 +30,13 @@ import cn.jpush.im.api.BasicCallback;
  * 日期: 2016/11/29.
  * 描述:
  */
-public class ChatPresenter extends BasePresenter implements ChatContract.Presenter{
+public class ChatPresenter extends BasePresenter implements ChatContract.Presenter,RecordVoiceButton.OnRecordListener{
 
-    ChatContract.View view;
-    String userName;
+    private ChatContract.View view;
+    private String userName;
+    private File recordAudioFile;
+    private MediaRecorder recorder;
+    private long startTime;
 
     public ChatPresenter(ChatContract.View view) {
         this.view = view;
@@ -84,8 +95,7 @@ public class ChatPresenter extends BasePresenter implements ChatContract.Present
         JMessageClient.sendMessage(msg);
     }
 
-    @Override
-    public void sendVoiceMessage(String userName, String voicePath, int duration) {
+    private void sendVoiceMessage(String userName, String voicePath, int duration) {
         try {
             Message msg = JMessageClient.createSingleVoiceMessage(userName,new File(voicePath),duration);
             msg.setOnSendCompleteCallback(new BasicCallback() {
@@ -103,5 +113,60 @@ public class ChatPresenter extends BasePresenter implements ChatContract.Present
     public void onEventMainThread(MessageEvent event){
         Message msg = event.getMessage();
         view.loadMessage(msg);
+    }
+
+    @Override
+    public void onRecordStart() {
+        try {
+            recordAudioFile = new File(AppConfig.APP_VOICE_PATH+System.currentTimeMillis()+".amr");
+            recorder = new MediaRecorder();
+            recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+            recorder.setOutputFile(recordAudioFile.getAbsolutePath());
+            recordAudioFile.createNewFile();
+            recorder.prepare();
+            startTime = System.currentTimeMillis();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRecordComplete() {
+
+    }
+
+    @Override
+    public void onRecordCancel() {
+
+    }
+
+    class getAudioLevelRunnable implements Runnable{
+
+        private volatile boolean running = true;
+
+        public void exit(){
+            running = false;
+        }
+
+        @Override
+        public void run() {
+            while (running){
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (recorder == null && !running) {
+                    break;
+                }
+                int x = recorder.getMaxAmplitude();
+                if (x!=0){
+
+                }
+            }
+
+        }
     }
 }

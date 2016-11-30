@@ -3,6 +3,7 @@ package com.xianzhifengshui.ui.chat;
 import android.content.Context;
 import android.content.Intent;
 
+import com.xianzhifengshui.R;
 import com.xianzhifengshui.base.BaseActivity;
 import com.xianzhifengshui.utils.KLog;
 
@@ -38,7 +39,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View{
 
     @Override
     protected int getContentLayoutId() {
-        return -1;
+        return R.layout.activity_chat;
     }
 
     @Override

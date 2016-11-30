@@ -23,7 +23,6 @@ public interface ChatContract {
         void destroy();
         void sendImageMessage(String userName,String imagePath);
         void sendTextMessage(String userName,String content);
-        void sendVoiceMessage(String userName,String voicePath,int duration);
     }
 
 }
