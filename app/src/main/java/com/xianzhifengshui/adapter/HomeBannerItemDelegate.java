@@ -56,7 +56,6 @@ public class HomeBannerItemDelegate implements ItemViewDelegate<Object>, XBanner
             e.printStackTrace();
             isForViewType = false;
         }
-        KLog.d(getClass().getSimpleName(),isForViewType);
         return isForViewType;
     }
 

@@ -26,6 +26,8 @@ public class AppConfig {
 
     public static String QQ_APP_ID = "";
 
+    public static String JPUSH_APPKEY="824e0cd5141e8db5b3ecacc1";
+
     public static String APP_PIC_PATH = SDCardUtils.getSDCardPath() + File.separator + "先知风水" + File.separator + "images" + File.separator;
 
     public static String APP_FILE_PATH = SDCardUtils.getSDCardPath() + File.separator + "先知风水" + File.separator + "files" + File.separator;

@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.Button;
 
+import com.xianzhifengshui.R;
 import com.xianzhifengshui.ui.becomemaster.InfomationFragment;
 import com.xianzhifengshui.utils.ConstUtils;
 import com.xianzhifengshui.utils.FileUtils;
@@ -62,13 +63,17 @@ public class RecordVoiceButton extends Button {
         this.onRecordListener = onRecordListener;
     }
 
+    public void updateVoiceLevel(int level){
+        dialog.updateVoiceLevel(level);
+    }
+
     @Override
     public boolean onTouchEvent(@NonNull MotionEvent event) {
 
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 this.setPressed(true);
-                setText("松开 结束");
+                setText(R.string.text_unpress_complete);
                 if (onRecordListener!=null){
                     onRecordListener.onRecordStart();
                 }
@@ -77,15 +82,15 @@ public class RecordVoiceButton extends Button {
                 if (SDCardUtils.isSDCardEnable()){
                     dialog.showRecordingDialog();
                 }else {
-                    ToastUtils.showToast(getContext(),"请插入SD卡");
-                    setText("按住 说话");
+                    ToastUtils.showToast(getContext(), getContext().getString(R.string.text_please_instal_sdcard));
+                    setText(R.string.text_press_and_say);
                     setPressed(false);
                     return false;
                 }
                 break;
             case MotionEvent.ACTION_UP:
                 this.setPressed(false);
-                setText("按住 说话");
+                setText(R.string.text_press_and_say);
                 touchUpY =  event.getY();
                 touchUpTime = System.currentTimeMillis();
                 if ((touchUpTime-touchDownTime)<ConstUtils.SEC){
@@ -116,17 +121,17 @@ public class RecordVoiceButton extends Button {
             case MotionEvent.ACTION_MOVE:
                 touchMoveY = event.getY();
                 if (Math.abs(touchDownY-touchMoveY)>300){
-                    setText("松开手指，取消发送");
+                    setText(R.string.text_unpress_to_cancel);
                     dialog.cancel();
                     dialog.setIsCanceling(true);
                 }else {
-                    setText("松开 结束");
+                    setText(R.string.text_unpress_complete);
                     dialog.setIsCanceling(false);
                     dialog.showRecordingDialog();
                 }
                 break;
             case MotionEvent.ACTION_CANCEL:
-                setText("按住 说话");
+                setText(R.string.text_unpress_complete);
                 //取消录制
                 if (onRecordListener != null) {
                     KLog.d(TAG,"取消录制");

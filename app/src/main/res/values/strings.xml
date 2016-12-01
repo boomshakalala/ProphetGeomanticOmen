@@ -147,6 +147,13 @@
     <string name="text_amount_of_money">金额(元)</string>
     <string name="text_max_withdraw_crash">最多可提现金额88.8</string>
     <string name="text_account_of_alipay">支付宝账户</string>
+    <string name="text_press_and_say">按住 说话</string>
+    <string name="text_unpress_complete">松开 结束</string>
+    <string name="text_please_instal_sdcard">请插入SD卡</string>
+    <string name="text_unpress_to_cancel">松开手指，取消发送</string>
+    <string name="text_picture">图片</string>
+    <string name="text_take_photo">拍照</string>
+    <string name="text_send">发送</string>
 
     <array name="tag_search">
         <item>商务风水</item>

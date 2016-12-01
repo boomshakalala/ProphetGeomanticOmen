@@ -13,9 +13,10 @@ import cn.jpush.im.android.api.model.Message;
  * 描述:
  */
 public interface ChatContract {
-    interface View extends IView{
+    interface View extends IView<Presenter>{
         void loadHistory(List<Message> data);
         void loadMessage(Message data);
+        void updateVoiceLevel(int level);
     }
 
     interface Presenter extends IPresenter{

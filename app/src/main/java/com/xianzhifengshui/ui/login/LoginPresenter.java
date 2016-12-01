@@ -48,7 +48,7 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
 
             @Override
             public void onSuccess(User data) {
-                loginChatService(userName, password);
+                loginChatService("553882594", "123456");
                 saveLoginInfo(data);
                 view.closeWait();
                 view.showLoginSuccess("登录成功");
