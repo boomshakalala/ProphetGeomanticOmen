@@ -1,6 +1,7 @@
 package com.xianzhifengshui.common;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -102,6 +103,13 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder{
         return this;
     }
 
+    public RecyclerViewHolder setImageUrlBtimap(int viewId,Bitmap bitmap){
+        ImageView imageView = getView(viewId);
+        Glide.with(context).load(bitmap).centerCrop().into(imageView);
+        return this;
+    }
+
+
     /**
      * 添加点击事件监听
      * @param viewId View id
@@ -120,5 +128,6 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder{
         return this;
     }
     /*=================================*/
+
 
 }

@@ -27,7 +27,7 @@ public class BaseApplication extends Application {
         KLog.init(AppConfig.isDebug);
         JPushInterface.setDebugMode(true); 	// 设置开启日志
         JMessageClient.init(this);// 初始化 JMessage
-        JMessageClient.setNotificationMode(JMessageClient.NOTI_MODE_NO_NOTIFICATION);
+        JMessageClient.setNotificationMode(JMessageClient.NOTI_MODE_DEFAULT);
         FileUtils.createOrExistsDir(AppConfig.APP_PIC_PATH);
         FileUtils.createOrExistsDir(AppConfig.APP_FILE_PATH);
         FileUtils.createOrExistsDir(AppConfig.APP_VOICE_PATH);

@@ -48,10 +48,9 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
 
             @Override
             public void onSuccess(User data) {
-                loginChatService("553882594", "123456");
+                loginChatService("admin", "123456");
                 saveLoginInfo(data);
-                view.closeWait();
-                view.showLoginSuccess("登录成功");
+
 
             }
 
@@ -71,7 +70,10 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
                 KLog.d(TAG,"resultCode="+code+"responseInfo="+info);
                 if (code != 0){
                     view.showTip("登录聊天服务器失败！");
+                }else {
+                    view.showLoginSuccess("登录成功");
                 }
+                view.closeWait();
             }
         });
     }

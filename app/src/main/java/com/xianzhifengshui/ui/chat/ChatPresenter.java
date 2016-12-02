@@ -28,6 +28,7 @@ import cn.jpush.im.android.api.content.VoiceContent;
 import cn.jpush.im.android.api.event.MessageEvent;
 import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.Message;
+import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.api.BasicCallback;
 
 /**
@@ -61,11 +62,12 @@ public class ChatPresenter extends BasePresenter implements ChatContract.Present
         JMessageClient.registerEventReceiver(this);
         JMessageClient.enterSingleConversation(userName);
         conversation = JMessageClient.getSingleConversation(userName);
-        if (conversation != null) {
-            List<Message> historyMsg = conversation.getAllMessage();
-            if (historyMsg != null && historyMsg.size()>0) {
-                view.loadHistory(historyMsg);
-            }
+        if (conversation == null){
+            conversation = Conversation.createSingleConversation(userName);
+        }
+        List<Message> historyMsg = conversation.getAllMessage();
+        if (historyMsg != null && historyMsg.size()>0) {
+            view.loadHistory(historyMsg);
         }
         uiHandler = new Handler(this);
 
@@ -95,11 +97,17 @@ public class ChatPresenter extends BasePresenter implements ChatContract.Present
 
     @Override
     public void sendTextMessage(String userName, String content) {
-        Message msg = JMessageClient.createSingleTextMessage(userName, content);
+        TextContent textContent = new TextContent(content);
+        if (conversation == null){
+            KLog.d(TAG,"conversation=null");
+            return;
+        }
+        Message msg = conversation.createSendMessage(textContent);
+        view.loadMessage(msg);
         msg.setOnSendCompleteCallback(new BasicCallback() {
             @Override
             public void gotResult(int i, String s) {
-                KLog.d(TAG, "响应吗：" + i + "反馈信息：" + s);
+                KLog.d(TAG,"statusCode="+i+"statusInfo="+s);
             }
         });
         JMessageClient.sendMessage(msg);
@@ -108,7 +116,7 @@ public class ChatPresenter extends BasePresenter implements ChatContract.Present
     private void sendVoiceMessage(int duration) {
         try {
             VoiceContent voiceContent = new VoiceContent(recordAudioFile,duration);
-            Message msg = JMessageClient.createSingleVoiceMessage(userName,recordAudioFile,duration);
+            Message msg = conversation.createSendMessage(voiceContent);
             msg.setOnSendCompleteCallback(new BasicCallback() {
                 @Override
                 public void gotResult(int i, String s) {
@@ -124,6 +132,8 @@ public class ChatPresenter extends BasePresenter implements ChatContract.Present
 
     public void onEventMainThread(MessageEvent event){
         Message msg = event.getMessage();
+        UserInfo targetInfo = (UserInfo) msg.getTargetInfo();
+        if (targetInfo.getUserName().equals(userName))
         view.loadMessage(msg);
     }
 
@@ -142,13 +152,15 @@ public class ChatPresenter extends BasePresenter implements ChatContract.Present
             recorder.start();
             levelRunnable = new AudioLevelRunnable();
             threadPool.execute(levelRunnable);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void stopRecording(){
-        levelRunnable.exit();
+        if (levelRunnable != null) {
+            levelRunnable.exit();
+        }
         try {
             recorder.stop();
         }catch (Exception e){

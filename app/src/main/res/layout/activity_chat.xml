@@ -77,10 +77,10 @@
                     android:layout_width="48px"
                     android:layout_height="48px"
                     app:layout_auto_baseheight="width"
-
                     android:src="@drawable/chat_more_icon"
                     />
                 <TextView
+                    android:id="@+id/jmui_send_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="48px"
                     android:gravity="center"

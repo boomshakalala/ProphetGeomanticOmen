@@ -3,6 +3,10 @@ package com.xianzhifengshui.ui.chat;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -11,8 +15,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
+import android.widget.TextView;
 
 import com.xianzhifengshui.R;
+import com.xianzhifengshui.adapter.ChatAdapter;
 import com.xianzhifengshui.base.BaseActivity;
 import com.xianzhifengshui.utils.KLog;
 import com.xianzhifengshui.utils.KeyboardUtils;
@@ -20,6 +26,7 @@ import com.xianzhifengshui.widget.RecordVoiceButton;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.transform.sax.TemplatesHandler;
@@ -31,7 +38,7 @@ import cn.jpush.im.android.api.model.Message;
  * 日期: 2016/11/29.
  * 描述:
  */
-public class ChatActivity extends BaseActivity implements ChatContract.View, View.OnClickListener, View.OnFocusChangeListener {
+public class ChatActivity extends BaseActivity implements ChatContract.View, View.OnClickListener, View.OnFocusChangeListener, TextWatcher {
 
 
     /*====== 控件声明区 =======*/
@@ -41,13 +48,17 @@ public class ChatActivity extends BaseActivity implements ChatContract.View, Vie
     private EditText chatEt;
     private TableLayout tableLayout;
     private PullToRefreshRecyclerView pullToRefreshRecyclerView;
+    private RecyclerView recyclerView;
     private ImageButton pickImageBtn;
     private ImageButton takePhotoBtn;
+    private TextView sendBtn;
     /*=======================*/
 
     private ChatContract.Presenter presenter;
     private boolean softInputShowing = false;
     private boolean isInputBykeyBoard = true;
+    private ChatAdapter adapter;
+    private List<Message> data;
 
 
     public static void launcher(Context context){
@@ -80,16 +91,24 @@ public class ChatActivity extends BaseActivity implements ChatContract.View, Vie
         pickImageBtn = (ImageButton) findViewById(R.id.jmui_pick_from_local_btn);
         takePhotoBtn = (ImageButton) findViewById(R.id.jmui_pick_from_camera_btn);
         pullToRefreshRecyclerView = (PullToRefreshRecyclerView) findViewById(R.id.recyclerView);
+        sendBtn = (TextView) findViewById(R.id.jmui_send_btn);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        recyclerView = pullToRefreshRecyclerView.getRefreshableView();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
         switchBtn.setOnClickListener(this);
         addFileBtn.setOnClickListener(this);
         chatEt.setOnFocusChangeListener(this);
+        chatEt.addTextChangedListener(this);
+        sendBtn.setOnClickListener(this);
+        presenter.init();
     }
 
     @Override
     protected void initData() {
+        data = new ArrayList<>();
+        adapter = new ChatAdapter(this,data);
         presenter = new ChatPresenter(this,"admin");
-        presenter.init();
     }
 
     @Override
@@ -104,12 +123,15 @@ public class ChatActivity extends BaseActivity implements ChatContract.View, Vie
 
     @Override
     public void loadHistory(List<Message> data) {
-        log(data);
+        adapter.setData(data);
+        recyclerView.smoothScrollToPosition(adapter.getItemCount()-1);
     }
 
     @Override
     public void loadMessage(Message data) {
         log(data);
+        adapter.addMsgToList(data);
+        recyclerView.smoothScrollToPosition(adapter.getItemCount()-1);
     }
 
     @Override
@@ -117,6 +139,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View, Vie
         log(level);
         rvBtn.updateVoiceLevel(level);
     }
+
 
     @Override
     public void setPresenter(ChatContract.Presenter presenter) {
@@ -171,6 +194,17 @@ public class ChatActivity extends BaseActivity implements ChatContract.View, Vie
         setMoreMenuHeight();
     }
 
+    private void showSendBtn(){
+        if (isInputBykeyBoard){
+            addFileBtn.setVisibility(View.GONE);
+            sendBtn.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void hideSendBtn(){
+        sendBtn.setVisibility(View.GONE);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -212,6 +246,11 @@ public class ChatActivity extends BaseActivity implements ChatContract.View, Vie
                     }
                 }
                 break;
+            case R.id.jmui_send_btn:
+                String content = chatEt.getText().toString();
+                presenter.sendTextMessage("admin",content);
+                chatEt.setText("");
+                break;
         }
     }
 
@@ -220,5 +259,24 @@ public class ChatActivity extends BaseActivity implements ChatContract.View, Vie
         if (hasFocus){
             dismissMoreMenu();
         }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (s.length()>0){
+            showSendBtn();
+        }else {
+            hideSendBtn();
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 }
