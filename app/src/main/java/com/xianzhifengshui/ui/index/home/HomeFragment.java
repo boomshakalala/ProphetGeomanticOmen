@@ -191,4 +191,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Pull
         else
             emptyLayout.hide();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((HomePresenter)presenter).checkLogin(sp);
+    }
 }

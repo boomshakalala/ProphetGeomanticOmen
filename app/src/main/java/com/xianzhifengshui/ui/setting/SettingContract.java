@@ -2,6 +2,7 @@ package com.xianzhifengshui.ui.setting;
 
 import com.xianzhifengshui.base.IPresenter;
 import com.xianzhifengshui.base.IView;
+import com.xianzhifengshui.utils.SPUtils;
 
 /**
  * 作者: chengx
@@ -10,10 +11,10 @@ import com.xianzhifengshui.base.IView;
  */
 public interface SettingContract {
     interface View extends IView<Presenter>{
-
+        void logoutSuccess();
     }
 
     interface Presenter extends IPresenter{
-
+        void logout(SPUtils sp);
     }
 }

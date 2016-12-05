@@ -7,11 +7,19 @@ import com.xianzhifengshui.api.model.Carousel;
 import com.xianzhifengshui.api.model.Lecture;
 import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.NaviMenu;
+import com.xianzhifengshui.api.model.User;
+import com.xianzhifengshui.base.BaseActivity;
+import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.base.BasePresenter;
+import com.xianzhifengshui.utils.SPUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.UserInfo;
+import cn.jpush.im.api.BasicCallback;
 
 /**
  * 作者: chengx
@@ -25,6 +33,33 @@ public class HomePresenter extends BasePresenter implements HomeContract.Present
     public HomePresenter(HomeContract.View view) {
         this.view = view;
         view.setPresenter(this);
+    }
+
+    public void checkLogin(final SPUtils sp){
+        if (sp.getBoolean("isLogin")){
+            UserInfo userInfo = JMessageClient.getMyInfo();
+            if (userInfo == null){
+                User user = sp.getObject("user", null);
+                if (user != null) {
+                    JMessageClient.login(user.getUsername(), user.getPassword(), new BasicCallback() {
+                        @Override
+                        public void gotResult(int i, String s) {
+                            if (i == 0){
+                                return;
+                            }else {
+                                sp.clear();
+                            }
+                        }
+                    });
+                }
+
+            }else {
+                return;
+            }
+        }else {
+            return;
+        }
+
     }
 
     @Override

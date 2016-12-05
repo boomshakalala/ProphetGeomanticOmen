@@ -1,5 +1,7 @@
 package com.xianzhifengshui.base;
 
+import android.app.Application;
+
 import com.xianzhifengshui.api.Api;
 import com.xianzhifengshui.api.ApiImpl;
 import com.xianzhifengshui.utils.SPUtils;

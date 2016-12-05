@@ -2,6 +2,7 @@ package com.xianzhifengshui.ui.register;
 
 import com.xianzhifengshui.api.net.ActionCallbackListener;
 import com.xianzhifengshui.base.BasePresenter;
+import com.xianzhifengshui.common.PagerAdapter;
 
 /**
  * 作者: chengx
@@ -39,6 +40,23 @@ public class RegisterPresenter extends BasePresenter implements RegisterContract
 
     @Override
     public void getVerifyCode(String phoneNum) {
+        api.userSendSms(phoneNum, "1", new ActionCallbackListener<Void>() {
+            @Override
+            public void onProgress(long bytesWritten, long totalSize) {
 
+            }
+
+            @Override
+            public void onSuccess(Void data) {
+                view.closeWait();
+                view.showTip("获取验证码成功");
+            }
+
+            @Override
+            public void onFailure(int errorEvent, String message) {
+                view.closeWait();
+                view.showTip(message);
+            }
+        });
     }
 }

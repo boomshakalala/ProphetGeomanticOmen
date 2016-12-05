@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -76,7 +77,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.btn_register_get_verify_code:
                 //TODO:获取验证码
-
+                String phoneNum = phoneNumEt.getText().toString().trim();
+                if (phoneNum!=null&&!TextUtils.isEmpty(phoneNum)){
+                    presenter.getVerifyCode(phoneNum);
+                }else {
+                    showTip("请输入手机号");
+                }
                 break;
             default:
                 break;

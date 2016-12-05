@@ -23,7 +23,7 @@ import com.xianzhifengshui.widget.auto.AutoToolbar;
 public abstract class BaseFragment extends Fragment {
     protected String TAG;
     protected BaseActivity activity;
-    protected SPUtils sp;
+    public SPUtils sp;
     protected boolean needToolBar = true;
 
     protected View rootView;

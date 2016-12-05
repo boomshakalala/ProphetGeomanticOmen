@@ -47,7 +47,8 @@ public class ChatTextReceiveItemDelegate implements ItemViewDelegate<Message>, V
                 @Override
                 public void gotResult(int status, String info, Bitmap bitmap) {
                     if (status == 0)
-                        holder.setImageUrlBtimap(R.id.jmui_msg_avatar,bitmap);
+                        if (bitmap != null)
+                            holder.setImageUrlBtimap(R.id.jmui_msg_avatar,bitmap);
                     else
                         holder.setImageResource(R.id.jmui_msg_avatar,R.drawable.pic1);
                 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.xianzhifengshui.api.model.User;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
 import com.xianzhifengshui.base.AppConfig;
+import com.xianzhifengshui.base.BaseActivity;
 import com.xianzhifengshui.base.BasePresenter;
 import com.xianzhifengshui.utils.KLog;
 import com.xianzhifengshui.utils.SPUtils;
@@ -49,14 +50,12 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
             @Override
             public void onSuccess(User data) {
                 loginChatService("admin", "123456");
+                data.setPassword(password);
                 saveLoginInfo(data);
-
-
             }
 
             @Override
             public void onFailure(int errorEvent, String message) {
-
                 view.closeWait();
                 view.showLoginFalure(message);
             }
@@ -70,6 +69,7 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
                 KLog.d(TAG,"resultCode="+code+"responseInfo="+info);
                 if (code != 0){
                     view.showTip("登录聊天服务器失败！");
+                    ((BaseActivity)view).sp.clear();
                 }else {
                     view.showLoginSuccess("登录成功");
                 }

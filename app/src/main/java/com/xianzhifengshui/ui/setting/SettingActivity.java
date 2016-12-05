@@ -47,7 +47,7 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
 
     @Override
     protected void initData() {
-
+        presenter = new SettingPresenter(this);
     }
 
     @Override
@@ -93,9 +93,7 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
         switch (v.getId()){
             case R.id.btn_setting_logout:
                 //退出登录
-                sp.clear();
-                setResult(AppConfig.RESULT_LOGOUT);
-                finish();
+                presenter.logout(sp);
                 break;
             case R.id.btn_setting_modify_password:
                 //修改密码
@@ -107,5 +105,11 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
             default:
                 break;
         }
+    }
+
+    @Override
+    public void logoutSuccess() {
+        setResult(AppConfig.RESULT_LOGOUT);
+        finish();
     }
 }
