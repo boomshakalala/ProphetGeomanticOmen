@@ -2,6 +2,7 @@ package com.xianzhifengshui.wxapi;
 
 import android.content.Context;
 
+import com.tencent.mm.sdk.modelmsg.SendAuth;
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
@@ -42,7 +43,13 @@ public class WXAPI {
         //TODO:微信分享
     }
 
-    public static void login(){
+    public static void login(Context context){
+        IWXAPI api = WXAPIFactory.createWXAPI(context,AppConfig.WX_APP_ID);
+        api.registerApp(AppConfig.WX_APP_ID);
+        SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+        req.state = "wechat_sdk_demo_test";
+        api.sendReq(req);
 
     }
 

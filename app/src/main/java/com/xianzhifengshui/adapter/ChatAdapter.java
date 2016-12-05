@@ -18,6 +18,8 @@ public class ChatAdapter extends MultiItemCommonAdapter<Message> {
         super(context, data);
         addItemViewDelegate(new ChatTextSendItemDelegate());
         addItemViewDelegate(new ChatTextReceiveItemDelegate());
+        addItemViewDelegate(new ChatVoiceReceiveItemDelegate());
+        addItemViewDelegate(new ChatVoiceSendItemDelegate());
     }
 
 

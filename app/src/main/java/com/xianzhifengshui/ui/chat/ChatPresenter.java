@@ -36,7 +36,7 @@ import cn.jpush.im.api.BasicCallback;
  * 日期: 2016/11/29.
  * 描述:
  */
-public class ChatPresenter extends BasePresenter implements ChatContract.Presenter,RecordVoiceButton.OnRecordListener,Handler.Callback{
+class ChatPresenter extends BasePresenter implements ChatContract.Presenter,RecordVoiceButton.OnRecordListener,Handler.Callback{
 
     private ChatContract.View view;
     private String userName;
@@ -47,12 +47,12 @@ public class ChatPresenter extends BasePresenter implements ChatContract.Present
     private AudioLevelRunnable levelRunnable;
     private Conversation conversation;
 
-    public ChatPresenter(ChatContract.View view) {
+    ChatPresenter(ChatContract.View view) {
         this.view = view;
         view.setPresenter(this);
     }
 
-    public ChatPresenter(ChatContract.View view,String userName) {
+    ChatPresenter(ChatContract.View view, String userName) {
         this(view);
         this.userName = userName;
     }
@@ -124,6 +124,7 @@ public class ChatPresenter extends BasePresenter implements ChatContract.Present
                 }
             });
             JMessageClient.sendMessage(msg);
+            view.loadMessage(msg);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -137,6 +138,7 @@ public class ChatPresenter extends BasePresenter implements ChatContract.Present
         view.loadMessage(msg);
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public void onRecordStart() {
         try {
@@ -195,6 +197,7 @@ public class ChatPresenter extends BasePresenter implements ChatContract.Present
                         duration = 60;
                     }
                     sendVoiceMessage(duration);
+                    mp.release();
                 }
             }
         }
@@ -215,11 +218,11 @@ public class ChatPresenter extends BasePresenter implements ChatContract.Present
         return false;
     }
 
-    class AudioLevelRunnable implements Runnable{
+    private class AudioLevelRunnable implements Runnable{
 
         private volatile boolean running = true;
 
-        public void exit(){
+        void exit(){
             running = false;
         }
 
