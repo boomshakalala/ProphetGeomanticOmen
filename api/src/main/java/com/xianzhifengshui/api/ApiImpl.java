@@ -5,11 +5,13 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.loopj.android.http.RequestParams;
 import com.xianzhifengshui.api.des.DESUtils;
 import com.xianzhifengshui.api.model.HomeItemModle;
 import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.MasterDetailModel;
 import com.xianzhifengshui.api.model.User;
+import com.xianzhifengshui.api.model.WXApiResponse;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
 import com.xianzhifengshui.api.net.HttpEngine;
 import com.xianzhifengshui.api.utils.JsonFormatTool;
@@ -59,6 +61,24 @@ public class ApiImpl implements Api {
         Log.d(TAG, "map2Ciphertext json = "+ JsonFormatTool.formatJson(json));
         return json;
 
+    }
+
+    @Override
+    public void getAccessToken(String appId, String secret, String code,ActionCallbackListener<WXApiResponse> callback) {
+        RequestParams params = new RequestParams();
+        params.put("appid",appId);
+        params.put("secret",secret);
+        params.put("code",code);
+        params.put("grant_type","authorization_code");
+        HttpEngine.getInstance().get(WX_ACCESS_TOKEN,params,callback);
+    }
+
+    @Override
+    public void getUserInfo(String accessToken, String openId,ActionCallbackListener<WXApiResponse> callback) {
+        RequestParams params = new RequestParams();
+        params.put("access_token",accessToken);
+        params.put("openid",openId);
+        HttpEngine.getInstance().get(WX_USER_INFO,params,callback);
     }
 
     @Override

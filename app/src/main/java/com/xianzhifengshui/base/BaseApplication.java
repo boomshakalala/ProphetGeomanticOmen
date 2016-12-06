@@ -1,6 +1,7 @@
 package com.xianzhifengshui.base;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.xianzhifengshui.ui.chat.ChatActivity;
 import com.xianzhifengshui.utils.FileUtils;
@@ -20,10 +21,13 @@ import cn.jpush.im.android.api.event.NotificationClickEvent;
  */
 public class BaseApplication extends Application {
 
+    private static BaseApplication instance;
+
     @Override
     public void onCreate() {
         super.onCreate();
         //日志开关
+        instance = this;
         KLog.init(AppConfig.isDebug);
         JPushInterface.setDebugMode(true); 	// 设置开启日志
         JMessageClient.init(this);// 初始化 JMessage
@@ -31,6 +35,10 @@ public class BaseApplication extends Application {
         FileUtils.createOrExistsDir(AppConfig.APP_PIC_PATH);
         FileUtils.createOrExistsDir(AppConfig.APP_FILE_PATH);
         FileUtils.createOrExistsDir(AppConfig.APP_VOICE_PATH);
+    }
+
+    public static Context getAppContext(){
+        return instance.getApplicationContext();
     }
 
 }

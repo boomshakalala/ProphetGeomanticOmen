@@ -20,11 +20,13 @@ public class AppConfig {
     public static int RESULT_LOGIN = 1;
     public static int RESULT_LOGOUT = -1;
 
-    public static String WX_APP_ID = "";
+    public static String WX_APP_ID = "wxe208d293e5353bf4";
 
     public static String WB_APP_ID = "";
 
     public static String QQ_APP_ID = "";
+
+    public static String WX_APP_SECRET = "6dd9fc61162f7ae9573f1b8aa412a340";
 
     public static String JPUSH_APPKEY="824e0cd5141e8db5b3ecacc1";
 

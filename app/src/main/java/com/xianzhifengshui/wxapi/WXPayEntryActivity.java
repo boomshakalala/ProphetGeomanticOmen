@@ -36,8 +36,8 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 
     @Override
     protected void initData() {
-        api = WXAPIFactory.createWXAPI(this, AppConfig.WX_APP_ID);
-        api.handleIntent(getIntent(), this);
+        api = WXAPIFactory.createWXAPI(this, AppConfig.WX_APP_ID,true);
+        api.handleIntent(this.getIntent(), this);
     }
 
     @Override

@@ -44,7 +44,7 @@ public class WXAPI {
     }
 
     public static void login(Context context){
-        IWXAPI api = WXAPIFactory.createWXAPI(context,AppConfig.WX_APP_ID);
+        IWXAPI api = WXAPIFactory.createWXAPI(context,AppConfig.WX_APP_ID,true);
         api.registerApp(AppConfig.WX_APP_ID);
         SendAuth.Req req = new SendAuth.Req();
         req.scope = "snsapi_userinfo";

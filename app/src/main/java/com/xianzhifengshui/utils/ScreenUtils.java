@@ -152,6 +152,11 @@ public class ScreenUtils {
         return ret;
     }
 
+    public static float getDensity(Context context){
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return displayMetrics.density;
+    }
+
     /**
      * 判断是否锁屏
      *

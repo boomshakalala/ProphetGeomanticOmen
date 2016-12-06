@@ -8,8 +8,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.xianzhifengshui.R;
+import com.xianzhifengshui.base.BaseApplication;
 import com.xianzhifengshui.common.ItemViewDelegate;
 import com.xianzhifengshui.common.RecyclerViewHolder;
+import com.xianzhifengshui.utils.ScreenUtils;
 import com.xianzhifengshui.utils.SizeUtils;
 import com.xianzhifengshui.widget.auto.AutoScrollView;
 
@@ -39,7 +41,8 @@ public class ChatVoiceSendItemDelegate implements ItemViewDelegate<Message> {
     public void convert(final RecyclerViewHolder holder, Message message, int position) {
         VoiceContent voiceContent = (VoiceContent) message.getContent();
         int length = voiceContent.getDuration();
-        int width = (int) (-0.04 * length * length + 4.526 * length + 75.214);
+        int width = ScreenUtils.getScreenWidth(BaseApplication.getAppContext())/ 120 * length
+                + SizeUtils.dp2px(BaseApplication.getAppContext(),60);
         ImageView imageView = holder.getView(R.id.jmui_msg_content);
         if (imageView != null) {
             ViewGroup.LayoutParams params = imageView.getLayoutParams();
@@ -62,6 +65,7 @@ public class ChatVoiceSendItemDelegate implements ItemViewDelegate<Message> {
         }else {
             holder.setImageResource(R.id.jmui_msg_avatar, R.drawable.pic1);
         }
+        holder.setText(R.id.jmui_msg_length,length+"s");
         switch (message.getStatus()){
             case send_success:
                 holder.setVisibility(R.id.jmui_sending_iv, View.GONE);

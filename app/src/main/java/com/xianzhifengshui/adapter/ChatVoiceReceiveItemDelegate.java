@@ -1,6 +1,7 @@
 package com.xianzhifengshui.adapter;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.AnimationDrawable;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +9,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.xianzhifengshui.R;
+import com.xianzhifengshui.base.BaseApplication;
 import com.xianzhifengshui.common.ItemViewDelegate;
 import com.xianzhifengshui.common.RecyclerViewHolder;
 import com.xianzhifengshui.utils.KLog;
+import com.xianzhifengshui.utils.ScreenUtils;
+import com.xianzhifengshui.utils.SizeUtils;
 
 import cn.jpush.im.android.api.callback.GetAvatarBitmapCallback;
 import cn.jpush.im.android.api.content.TextContent;
@@ -43,16 +47,31 @@ public class ChatVoiceReceiveItemDelegate implements ItemViewDelegate<Message>, 
     public void convert(final RecyclerViewHolder holder, Message message, int position) {
         VoiceContent voiceContent = (VoiceContent) message.getContent();
         int length = voiceContent.getDuration();
-        int width = (int) (-0.04 * length * length + 4.526 * length + 75.214);
-        ImageView imageView = holder.getView(R.id.jmui_msg_content);
+        KLog.d(TAG, "length=" + length);
+        final ImageView imageView = holder.getView(R.id.jmui_msg_content);
+        final AnimationDrawable animation = (AnimationDrawable) imageView.getDrawable();
+        animation.stop();
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animation.start();
+            }
+        });
         if (imageView != null) {
+            int width = ScreenUtils.getScreenWidth(BaseApplication.getAppContext())/ 120 * length
+                    + SizeUtils.dp2px(BaseApplication.getAppContext(),60);
+            KLog.d(TAG,"width="+width);
             ViewGroup.LayoutParams params = imageView.getLayoutParams();
             if (params != null) {
                 params.width = width;
+            }else {
+                KLog.d(TAG,"param = null");
             }
+        }else {
+            KLog.d(TAG,"imageView = null");
         }
 
-
+        holder.setText(R.id.jmui_msg_length,length+"s");
         UserInfo userInfo = message.getFromUser();
         if (userInfo != null && !TextUtils.isEmpty(userInfo.getAvatar())) {
             KLog.d(TAG,userInfo.getAvatar());
@@ -68,6 +87,7 @@ public class ChatVoiceReceiveItemDelegate implements ItemViewDelegate<Message>, 
         }else {
             holder.setImageResource(R.id.jmui_msg_avatar,R.drawable.pic1);
         }
+
     }
 
     @Override

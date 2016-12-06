@@ -128,4 +128,12 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,Vi
     public void showTip(String text) {
         showToast(text);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (presenter != null) {
+            presenter.unRegisterEvent();
+        }
+    }
 }

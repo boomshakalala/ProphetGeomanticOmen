@@ -4,6 +4,7 @@ import com.xianzhifengshui.api.model.HomeItemModle;
 import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.MasterDetailModel;
 import com.xianzhifengshui.api.model.User;
+import com.xianzhifengshui.api.model.WXApiResponse;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
 
 import java.util.ArrayList;
@@ -14,6 +15,11 @@ import java.util.ArrayList;
  * 描述: Api接口
  */
 public interface Api {
+    /*======= 微信接口 =======*/
+    String WX_ACCESS_TOKEN = "access_token";//通过code获取access_token
+    String WX_USER_INFO = "userinfo";//获取用户个人信息（UnionID机制）
+    /*=======================*/
+
     String USER_LOGIN = "user/login"; //用户登录接口
     String MASTER_LIST = "master/list"; //获取大师列表接口
     String MASTER_DETAIL = "master/detail"; //获取大师详情接口
@@ -26,6 +32,21 @@ public interface Api {
     String USER_RESET_PASSWORD = "user/resetPassword";// 找回（重置）密码接口
     String USER_UPDATE_PASSWORD = "user/updatePassword";// 修改密码接口
     String FEEDBACK_FEEDBACK = "feedback/feedback";// 用户反馈
+
+    /**
+     * 通过code获取access_token的接口。
+     * @param appId 应用唯一标识，在微信开放平台提交应用审核通过后获得
+     * @param secret 应用密钥AppSecret，在微信开放平台提交应用审核通过后获得
+     * @param code 填写第一步获取的code参数
+     */
+    void getAccessToken(String appId,String secret,String code,ActionCallbackListener<WXApiResponse> callback);
+
+    /**
+     * 此接口用于获取用户个人信息。
+     * @param accessToken 调用凭证
+     * @param openId 普通用户的标识，对当前开发者帐号唯一
+     */
+    void getUserInfo(String accessToken,String openId,ActionCallbackListener<WXApiResponse> callback);
 
 
     /**

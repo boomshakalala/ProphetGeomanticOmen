@@ -21,17 +21,27 @@
             android:src="@drawable/pic"
             />
         <ImageView
+            android:id="@+id/jmui_msg_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/jmui_voice_receive"
             android:maxWidth="450px"
             android:layout_marginLeft="6px"
+            android:scaleType="fitStart"
             android:paddingLeft="20px"
             android:paddingRight="30px"
             android:paddingTop="20px"
             android:paddingBottom="20px"
             android:background="@drawable/jmui_msg_receive_bg"/>
-
+        <TextView
+            android:id="@+id/jmui_msg_length"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_gray"
+            android:layout_marginLeft="10px"
+            android:textSize="@dimen/text_size_super_small"
+            android:layout_gravity="center_vertical"
+            android:text="15s"/>
 
     </LinearLayout>
 

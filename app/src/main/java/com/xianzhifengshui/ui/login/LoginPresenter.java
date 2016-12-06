@@ -2,17 +2,24 @@ package com.xianzhifengshui.ui.login;
 
 import android.content.Context;
 
+import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.tencent.mm.sdk.modelmsg.SendAuth;
 import com.xianzhifengshui.api.model.User;
+import com.xianzhifengshui.api.model.WXApiResponse;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
 import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BaseActivity;
 import com.xianzhifengshui.base.BasePresenter;
+import com.xianzhifengshui.ui.chat.ChatContract;
 import com.xianzhifengshui.utils.KLog;
 import com.xianzhifengshui.utils.SPUtils;
 import com.xianzhifengshui.utils.StringUtils;
+import com.xianzhifengshui.wxapi.WXAPI;
+
 
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.api.BasicCallback;
+import de.greenrobot.event.EventBus;
 
 /**
  * 作者: chengx
@@ -26,6 +33,7 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
         super();
         this.view = view;
         view.setPresenter(this);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -40,26 +48,27 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
         if (!view.isActive()){
             return;
         }
-        view.showWaiting();
-        api.userLogin(userName, password, new ActionCallbackListener<User>() {
-            @Override
-            public void onProgress(long bytesWritten, long totalSize) {
-
-            }
-
-            @Override
-            public void onSuccess(User data) {
-                loginChatService("admin", "123456");
-                data.setPassword(password);
-                saveLoginInfo(data);
-            }
-
-            @Override
-            public void onFailure(int errorEvent, String message) {
-                view.closeWait();
-                view.showLoginFalure(message);
-            }
-        });
+//        view.showWaiting();
+        WXAPI.login((Context)view);
+//        api.userLogin(userName, password, new ActionCallbackListener<User>() {
+//            @Override
+//            public void onProgress(long bytesWritten, long totalSize) {
+//
+//            }
+//
+//            @Override
+//            public void onSuccess(User data) {
+//                loginChatService("admin", "123456");
+//                data.setPassword(password);
+//                saveLoginInfo(data);
+//            }
+//
+//            @Override
+//            public void onFailure(int errorEvent, String message) {
+//                view.closeWait();
+//                view.showLoginFalure(message);
+//            }
+//        });
     }
 
     private void loginChatService(String userName, String password) {
@@ -83,7 +92,57 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
         SPUtils sp = new SPUtils((Context)view, AppConfig.SP_NAME);
         sp.putBoolean("isLogin",true);
         sp.putObject("user", user);
-        KLog.d(sp.getObject("user",null));
+        KLog.d(sp.getObject("user", null));
 
+    }
+
+    public void onEventMainThread(BaseResp resp){
+        view.showWaiting();
+        SendAuth.Resp authResp = (SendAuth.Resp)resp;
+        String code = authResp.code;
+        KLog.d(TAG,"code="+code);
+        api.getAccessToken(AppConfig.WX_APP_ID, AppConfig.WX_APP_SECRET, code, new ActionCallbackListener<WXApiResponse>() {
+            @Override
+            public void onProgress(long bytesWritten, long totalSize) {
+
+            }
+
+            @Override
+            public void onSuccess(WXApiResponse data) {
+                String openid = data.getOpenid();
+                String accessToken = data.getAccess_token();
+                api.getUserInfo(accessToken, openid, new ActionCallbackListener<WXApiResponse>() {
+                    @Override
+                    public void onProgress(long bytesWritten, long totalSize) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(WXApiResponse data) {
+                        KLog.d(TAG,data);
+                        view.closeWait();
+                    }
+
+                    @Override
+                    public void onFailure(int errorEvent, String message) {
+                        view.closeWait();
+                        view.showTip(message);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int errorEvent, String message) {
+                view.closeWait();
+                view.showTip(message);
+            }
+        });
+    }
+
+    @Override
+    public void unRegisterEvent(){
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
     }
 }

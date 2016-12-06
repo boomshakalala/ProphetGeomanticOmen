@@ -254,8 +254,13 @@
             android:name=".ui.chat.ChatActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.chat.NotificationClickEvent"
-            android:screenOrientation="portrait" />
+            android:name=".wxapi.WXEntryActivity"
+            android:launchMode="singleInstance"
+            android:exported="true"/>
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"/>
     </application>
 
 </manifest>

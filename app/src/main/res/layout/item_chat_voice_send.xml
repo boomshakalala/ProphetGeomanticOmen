@@ -35,6 +35,7 @@
             android:src="@drawable/jmui_sending_img"
             android:visibility="gone"/>
         <TextView
+            android:id="@+id/jmui_msg_length"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_gray"
@@ -48,6 +49,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/jmui_voice_send"
             android:maxWidth="450px"
+            android:scaleType="fitEnd"
             android:layout_marginRight="6px"
             android:paddingLeft="20px"
             android:paddingRight="30px"

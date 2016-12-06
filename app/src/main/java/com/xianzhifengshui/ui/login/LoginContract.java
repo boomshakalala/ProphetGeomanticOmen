@@ -22,5 +22,10 @@ public interface LoginContract {
          */
         void login(String userName,String password);
 
+        /**
+         * 注销EventBus
+         */
+        void unRegisterEvent();
+
     }
 }
