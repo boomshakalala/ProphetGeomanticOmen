@@ -73,11 +73,15 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.btn_register:
                 //TODO:注册
-
+                String phoneNum = phoneNumEt.getText().toString().trim();
+                String password = passwordEt.getText().toString().trim();
+                String nickName = nickNameEt.getText().toString().trim();
+                String verifyCode = verifyCodeEt.getText().toString().trim();
+                presenter.register(phoneNum,password,nickName,verifyCode);
                 break;
             case R.id.btn_register_get_verify_code:
                 //TODO:获取验证码
-                String phoneNum = phoneNumEt.getText().toString().trim();
+                phoneNum = phoneNumEt.getText().toString().trim();
                 if (phoneNum!=null&&!TextUtils.isEmpty(phoneNum)){
                     presenter.getVerifyCode(phoneNum);
                 }else {
@@ -102,5 +106,20 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void showTip(String text) {
         showToast(text);
+    }
+
+    @Override
+    public void setTimeCount(String timeCount) {
+        verifyCodeBtn.setText(timeCount);
+    }
+
+    @Override
+    public void setClickble(boolean clickble) {
+        verifyCodeBtn.setClickable(clickble);
+    }
+
+    @Override
+    public void setVerifyCode(String verifyCode) {
+        verifyCodeEt.setText(verifyCode);
     }
 }

@@ -34,6 +34,7 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
         this.view = view;
         view.setPresenter(this);
         EventBus.getDefault().register(this);
+
     }
 
     @Override
@@ -48,27 +49,26 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
         if (!view.isActive()){
             return;
         }
-//        view.showWaiting();
-        WXAPI.login((Context)view);
-//        api.userLogin(userName, password, new ActionCallbackListener<User>() {
-//            @Override
-//            public void onProgress(long bytesWritten, long totalSize) {
-//
-//            }
-//
-//            @Override
-//            public void onSuccess(User data) {
-//                loginChatService("admin", "123456");
-//                data.setPassword(password);
-//                saveLoginInfo(data);
-//            }
-//
-//            @Override
-//            public void onFailure(int errorEvent, String message) {
-//                view.closeWait();
-//                view.showLoginFalure(message);
-//            }
-//        });
+        view.showWaiting();
+        api.userLogin(userName, password, new ActionCallbackListener<User>() {
+            @Override
+            public void onProgress(long bytesWritten, long totalSize) {
+
+            }
+
+            @Override
+            public void onSuccess(User data) {
+                loginChatService("admin", "123456");
+                data.setPassword(password);
+                saveLoginInfo(data);
+            }
+
+            @Override
+            public void onFailure(int errorEvent, String message) {
+                view.closeWait();
+                view.showLoginFalure(message);
+            }
+        });
     }
 
     private void loginChatService(String userName, String password) {
@@ -101,7 +101,7 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
         SendAuth.Resp authResp = (SendAuth.Resp)resp;
         String code = authResp.code;
         KLog.d(TAG,"code="+code);
-        api.getAccessToken(AppConfig.WX_APP_ID, AppConfig.WX_APP_SECRET, code, new ActionCallbackListener<WXApiResponse>() {
+        api.wxGetAccessToken(AppConfig.WX_APP_ID, AppConfig.WX_APP_SECRET, code, new ActionCallbackListener<WXApiResponse>() {
             @Override
             public void onProgress(long bytesWritten, long totalSize) {
 
@@ -111,7 +111,7 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
             public void onSuccess(WXApiResponse data) {
                 String openid = data.getOpenid();
                 String accessToken = data.getAccess_token();
-                api.getUserInfo(accessToken, openid, new ActionCallbackListener<WXApiResponse>() {
+                api.wxGetUserInfo(accessToken, openid, new ActionCallbackListener<WXApiResponse>() {
                     @Override
                     public void onProgress(long bytesWritten, long totalSize) {
 
@@ -119,7 +119,7 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
 
                     @Override
                     public void onSuccess(WXApiResponse data) {
-                        KLog.d(TAG,data);
+                        KLog.d(TAG, data);
                         view.closeWait();
                     }
 

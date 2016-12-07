@@ -22,7 +22,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.google.code.gson:gson:2.7'
-    compile 'cz.msebera.android:httpclient:4.3.6'
     compile 'com.android.support:appcompat-v7:23.1.1'
-    compile files('libs/android-async-http-1.4.9 .jar')
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+
 }

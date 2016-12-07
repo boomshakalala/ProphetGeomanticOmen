@@ -95,6 +95,68 @@
         android:layout_marginLeft="20px"
         android:text="@string/text_register_at_once"
         />
+    <LinearLayout
+        android:id="@+id/layout_login_auth_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="140px"
+        android:layout_below="@id/btn_login_register">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_weight="1"
+            android:background="@color/text_gray"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/text_size_smaller"
+            android:layout_marginLeft="35px"
+            android:layout_marginRight="35px"
+            android:text="@string/text_auth_login"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_weight="1"
+            android:background="@color/text_gray"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="150px"
+        android:paddingRight="150px"
+        android:layout_below="@id/layout_login_auth_info"
+        android:layout_marginTop="70px">
+        <TextView
+            android:id="@+id/btn_login_wb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_smaller"
+            android:textColor="@color/text_gray"
+            android:text="@string/text_sina_weibo"
+            android:drawablePadding="30px"
+            android:drawableTop="@drawable/login_wb_icon"/>
+        <View
+            android:layout_width="1px"
+            android:layout_height="70px"
+            android:background="@color/text_gray"/>
+        <TextView
+            android:id="@+id/btn_login_wx"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_smaller"
+            android:textColor="@color/text_gray"
+            android:text="@string/text_wx"
+            android:drawablePadding="30px"
+            android:drawableTop="@drawable/login_wx_icon"/>
+    </LinearLayout>
 </RelativeLayout>
 
 

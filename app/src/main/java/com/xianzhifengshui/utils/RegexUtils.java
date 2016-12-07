@@ -134,6 +134,16 @@ public class RegexUtils {
     }
 
     /**
+     * 验证手机验证码
+     *
+     * @param string 待验证文本
+     * @return {@code true}: 匹配<br>{@code false}: 不匹配
+     */
+    public static boolean isVerifyCode(String string){
+        return isMatch(REGEX_VERIFY_CODE,string);
+    }
+
+    /**
      * string是否匹配regex
      *
      * @param regex  正则表达式字符串

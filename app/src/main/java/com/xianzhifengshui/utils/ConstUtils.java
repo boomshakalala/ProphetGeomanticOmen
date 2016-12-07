@@ -119,4 +119,9 @@ public class ConstUtils {
      * 正则：IP地址
      */
     public static final String REGEX_IP = "((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)";
+
+    /**
+     * 正则：手机验证码，取值6位数字
+     */
+    public static final String REGEX_VERIFY_CODE = "^\\d{6}$";
 }

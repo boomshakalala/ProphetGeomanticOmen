@@ -154,6 +154,9 @@
     <string name="text_picture">图片</string>
     <string name="text_take_photo">拍照</string>
     <string name="text_send">发送</string>
+    <string name="text_auth_login">第三方账号登录</string>
+    <string name="text_sina_weibo">新浪微博</string>
+    <string name="text_wx">微信</string>
 
     <array name="tag_search">
         <item>商务风水</item>

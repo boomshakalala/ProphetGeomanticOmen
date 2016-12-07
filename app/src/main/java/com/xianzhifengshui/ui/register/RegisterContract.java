@@ -10,7 +10,9 @@ import com.xianzhifengshui.base.IView;
  */
 public interface RegisterContract {
     interface View extends IView<Presenter> {
-
+        void setTimeCount(String timeCount);
+        void setClickble(boolean clickble);
+        void setVerifyCode(String verifyCode);
     }
     interface  Presenter extends IPresenter {
         /**

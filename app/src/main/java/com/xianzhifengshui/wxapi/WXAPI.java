@@ -50,7 +50,6 @@ public class WXAPI {
         req.scope = "snsapi_userinfo";
         req.state = "wechat_sdk_demo_test";
         api.sendReq(req);
-
     }
 
 }

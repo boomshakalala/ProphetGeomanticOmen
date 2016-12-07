@@ -145,4 +145,25 @@ public class WXApiResponse implements Serializable{
     public void setUnionid(String unionid) {
         this.unionid = unionid;
     }
+
+    @Override
+    public String toString() {
+        return "\nWXApiResponse{" +"\n"+
+                "access_token='" + access_token + "\'\n" +
+                ", expires_in='" + expires_in + "\'\n" +
+                ", refresh_token='" + refresh_token + "\'\n" +
+                ", openid='" + openid + "\'\n" +
+                ", scope='" + scope + "\'\n" +
+                ", errcode=" + errcode +
+                ", errmsg='" + errmsg + "\'\n" +
+                ", nickname='" + nickname + "\'\n" +
+                ", sex=" + sex +
+                ", province='" + province + "\'\n" +
+                ", city='" + city + "\'\n" +
+                ", country='" + country + "\'\n" +
+                ", headimgurl='" + headimgurl + "\'\n" +
+                ", privilege=" + privilege +
+                ", unionid='" + unionid + "\'\n" +
+                '}';
+    }
 }

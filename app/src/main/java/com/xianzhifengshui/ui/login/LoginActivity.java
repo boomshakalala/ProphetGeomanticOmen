@@ -20,6 +20,7 @@ import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BaseActivity;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.ui.register.RegisterActivity;
+import com.xianzhifengshui.wxapi.WXAPI;
 
 /**
  * 作者: chengx
@@ -35,6 +36,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,Vi
     private ImageButton backBtn;
     private TextView forgetPwdBtn;
     private TextView registerBtn;
+    private TextView wxLoginBtn;
+    private TextView wbLoginBtn;
     /*========================*/
     private LoginContract.Presenter presenter;
 
@@ -52,10 +55,14 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,Vi
         loginBtn = (Button) findViewById(R.id.btn_login);
         forgetPwdBtn = (TextView) findViewById(R.id.btn_login_forget_pwd);
         registerBtn = (TextView) findViewById(R.id.btn_login_register);
+        wxLoginBtn = (TextView) findViewById(R.id.btn_login_wx);
+        wbLoginBtn = (TextView) findViewById(R.id.btn_login_wb);
         backBtn.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
         forgetPwdBtn.setOnClickListener(this);
         registerBtn.setOnClickListener(this);
+        wxLoginBtn.setOnClickListener(this);
+        wbLoginBtn.setOnClickListener(this);
     }
 
     public static void launcher(BaseFragment context,int requestCode){
@@ -95,6 +102,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,Vi
             case R.id.btn_login_register:
                 //跳转到注册页面
                 RegisterActivity.luncher(this);
+                break;
+            case R.id.btn_login_wx:
+                //微信登录
+                WXAPI.login(this);
+                break;
+            case R.id.btn_login_wb:
+                //TODO:新浪微博登录
                 break;
             default:
                 break;

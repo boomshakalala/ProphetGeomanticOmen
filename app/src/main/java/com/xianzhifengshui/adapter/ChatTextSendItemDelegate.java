@@ -16,7 +16,6 @@ import cn.jpush.im.android.api.enums.ContentType;
 import cn.jpush.im.android.api.enums.MessageDirect;
 import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.android.api.model.UserInfo;
-import cz.msebera.android.httpclient.client.methods.HttpOptions;
 
 /**
  * 作者: chengx
