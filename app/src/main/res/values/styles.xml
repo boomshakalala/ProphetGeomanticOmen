@@ -65,6 +65,7 @@
     
     <style name="normalTabLayoutStyle" parent="Base.Widget.Design.TabLayout">
         <item name="tabTextAppearance">@style/LargerTabLayoutTextStyle</item>
+        <item name="android:maxHeight">32sp</item>
     </style>
     
     <style name="LargerTabLayoutTextStyle" parent="TextAppearance.AppCompat.Button">

@@ -157,6 +157,8 @@
     <string name="text_auth_login">第三方账号登录</string>
     <string name="text_sina_weibo">新浪微博</string>
     <string name="text_wx">微信</string>
+    <string name="text_choose_all">全选</string>
+    <string name="text_money_sum">合计：</string>
 
     <array name="tag_search">
         <item>商务风水</item>

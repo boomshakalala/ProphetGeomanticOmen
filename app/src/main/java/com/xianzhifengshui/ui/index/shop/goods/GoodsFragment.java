@@ -1,15 +1,13 @@
-package com.xianzhifengshui.ui.index.discover.topictype;
+package com.xianzhifengshui.ui.index.shop.goods;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.xianzhifengshui.R;
-import com.xianzhifengshui.adapter.TopicTypeListAdapter;
-import com.xianzhifengshui.api.model.Topic;
+import com.xianzhifengshui.adapter.GoodsListAdapter;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
-import com.xianzhifengshui.ui.topic.TopicListActivity;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
 
@@ -17,19 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 作者: chengx
- * 日期: 2016/10/10.
- * 描述: 讲座列表页
+ * 作者：chengx
+ * 日期：2016/12/12
+ * 描述：商品列表页
  */
-public class TopicTypeListFragment extends BaseFragment implements TopicTypeListContract.View,PullToRefreshBase.OnRefreshListener2<RecyclerView>,CommonRecyclerAdapter.OnRecyclerViewItemClickListener {
+
+public class GoodsFragment extends BaseFragment implements GoodsContract.View,PullToRefreshBase.OnRefreshListener2<RecyclerView>,CommonRecyclerAdapter.OnRecyclerViewItemClickListener {
     /*======= 控件声明区 =======*/
     private PullToRefreshRecyclerView pullToRefreshRecyclerView;
     private RecyclerView recyclerView;
     /*=========================*/
 
-    private TopicTypeListAdapter adapter;
-    private TopicTypeListContract.Presenter presenter;
-    private List<Topic> data;
+    private GoodsListAdapter adapter;
+    private GoodsContract.Presenter presenter;
+    private List<Object> data;
     @Override
     protected void initViews() {
         pullToRefreshRecyclerView = (PullToRefreshRecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -39,6 +38,7 @@ public class TopicTypeListFragment extends BaseFragment implements TopicTypeList
         pullToRefreshRecyclerView.setOnRefreshListener(this);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.DISABLED);
         recyclerView.setAdapter(adapter);
+        emptyLayout.setShowErrorButton(true);
         emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,15 +50,15 @@ public class TopicTypeListFragment extends BaseFragment implements TopicTypeList
 
     @Override
     protected void initData() {
-        this.presenter = new TopicTypeListPresenter(this);
+        this.presenter = new GoodsPresenter(this);
         data = new ArrayList<>();
-        adapter = new TopicTypeListAdapter(getContext(),R.layout.item_topic_type_list,data);
+        adapter = new GoodsListAdapter(getContext(),R.layout.item_topic_type_list,data);
         adapter.setOnItemClickListener(this);
     }
 
     @Override
     protected int getContentLayoutId() {
-        return R.layout.fragment_topic_type_list;
+        return R.layout.fragment_goods;
     }
 
     @Override
@@ -67,13 +67,28 @@ public class TopicTypeListFragment extends BaseFragment implements TopicTypeList
     }
 
     @Override
-    public void refreshData(List<Topic> data) {
+    public void setPresenter(GoodsContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public boolean isActive() {
+        return isActive;
+    }
+
+    @Override
+    public void showTip(String text) {
+        showToast(text);
+    }
+
+    @Override
+    public void refreshData(List<Object> data) {
         adapter.setData(data);
         emptyLayout.hide();
     }
 
     @Override
-    public void loadMore(List<Topic> data) {
+    public void loadMore(List<Object> data) {
         adapter.loadMore(data);
     }
 
@@ -84,28 +99,12 @@ public class TopicTypeListFragment extends BaseFragment implements TopicTypeList
 
     @Override
     public void showFailure() {
-        emptyLayout.setShowErrorButton(true);
+        emptyLayout.showError();
     }
 
     @Override
     public void closeLoadMore() {
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-    }
-
-    @Override
-    public void setPresenter(TopicTypeListContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-
-    @Override
-    public boolean isActive() {
-        return isActive;
-    }
-
-    @Override
-    public void showTip(String text) {
-        showToast(text);
     }
 
     @Override
@@ -138,8 +137,9 @@ public class TopicTypeListFragment extends BaseFragment implements TopicTypeList
             emptyLayout.hide();
     }
 
+
     @Override
     public void onItemClick(View view, Object data) {
-        TopicListActivity.launcher(getContext(),"事业•运势");
+
     }
 }

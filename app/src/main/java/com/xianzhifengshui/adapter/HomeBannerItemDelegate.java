@@ -5,22 +5,14 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.reflect.TypeToken;
 import com.stx.xhb.xbanner.XBanner;
-import com.stx.xhb.xbanner.transformers.Transformer;
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.api.model.Carousel;
-import com.xianzhifengshui.api.model.HomeItemModle;
 import com.xianzhifengshui.common.ItemViewDelegate;
 import com.xianzhifengshui.common.RecyclerViewHolder;
-import com.xianzhifengshui.utils.KLog;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
-import static com.stx.xhb.xbanner.transformers.Transformer.Alpha;
-import static com.stx.xhb.xbanner.transformers.Transformer.Cube;
 import static com.stx.xhb.xbanner.transformers.Transformer.Rotate;
 
 /**
@@ -42,13 +34,14 @@ public class HomeBannerItemDelegate implements ItemViewDelegate<Object>, XBanner
         return R.layout.item_home_banner;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean isForViewType(Object o, int position) {
         boolean isForViewType = false;
         try {
             ArrayList<Carousel> list = (ArrayList<Carousel>) o;
             if (list !=null && list.size()>0){
-                if (list.get(0) instanceof Carousel){
+                if (list.get(0) != null){
                     isForViewType = true;
                 }
             }
@@ -59,6 +52,7 @@ public class HomeBannerItemDelegate implements ItemViewDelegate<Object>, XBanner
         return isForViewType;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void convert(RecyclerViewHolder holder, Object o, int position) {
         data = (ArrayList<Carousel>) o;
@@ -71,8 +65,6 @@ public class HomeBannerItemDelegate implements ItemViewDelegate<Object>, XBanner
         banner.setData(imageUrls, null);
         banner.setPageTransformer(Rotate);
         banner.setmAdapter(this);
-
-
     }
 
 
