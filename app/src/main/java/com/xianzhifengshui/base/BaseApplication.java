@@ -3,6 +3,8 @@ package com.xianzhifengshui.base;
 import android.app.Application;
 import android.content.Context;
 
+import com.tencent.smtt.sdk.QbSdk;
+import com.tencent.smtt.sdk.TbsListener;
 import com.xianzhifengshui.ui.chat.ChatActivity;
 import com.xianzhifengshui.utils.FileUtils;
 import com.xianzhifengshui.utils.KLog;
@@ -35,6 +37,34 @@ public class BaseApplication extends Application {
         FileUtils.createOrExistsDir(AppConfig.APP_PIC_PATH);
         FileUtils.createOrExistsDir(AppConfig.APP_FILE_PATH);
         FileUtils.createOrExistsDir(AppConfig.APP_VOICE_PATH);
+        QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
+            @Override
+            public void onCoreInitFinished() {
+
+            }
+
+            @Override
+            public void onViewInitFinished(boolean b) {
+                KLog.d("app", " onViewInitFinished is " + b);
+            }
+        };
+        QbSdk.setTbsListener(new TbsListener() {
+            @Override
+            public void onDownloadFinish(int i) {
+                KLog.d("app","onDownloadFinish");
+            }
+
+            @Override
+            public void onInstallFinish(int i) {
+                KLog.d("app","onInstallFinish");
+            }
+
+            @Override
+            public void onDownloadProgress(int i) {
+                KLog.d("app","onDownloadProgress:"+i);
+            }
+        });
+        QbSdk.initX5Environment(getAppContext(),cb);
     }
 
     public static Context getAppContext(){

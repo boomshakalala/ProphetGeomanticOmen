@@ -5,6 +5,8 @@ import android.support.v4.view.ViewPager;
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.TabPagerAdapter;
 import com.xianzhifengshui.base.BaseFragment;
+import com.xianzhifengshui.ui.index.shop.goods.GoodsFragment;
+import com.xianzhifengshui.ui.index.shop.shoppingchart.ShoppingChartFragment;
 import com.xianzhifengshui.widget.auto.AutoTabLayout;
 
 import java.util.ArrayList;
@@ -26,9 +28,15 @@ public class ShopFragment extends BaseFragment {
     TabPagerAdapter pagerAdapter;
 
     @Override
+    protected void initToolbar() {
+        super.initToolbar();
+        toolbar.setTitle(R.string.text_shop);
+    }
+
+    @Override
     protected void initViews() {
-        tabLayout = (AutoTabLayout) rootView.findViewById(R.id.tab_discover);
-        viewPager = (ViewPager) rootView.findViewById(R.id.pager_discover);
+        tabLayout = (AutoTabLayout) rootView.findViewById(R.id.tab_shop);
+        viewPager = (ViewPager) rootView.findViewById(R.id.pager_shop);
         viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -37,13 +45,15 @@ public class ShopFragment extends BaseFragment {
     @Override
     protected void initData() {
         fragments = new ArrayList<>();
-        titles = new String[]{"大师","讲座","话题"};
+        titles = new String[]{"宝贝","购物车"};
+        fragments.add(new GoodsFragment());
+        fragments.add(new ShoppingChartFragment());
         pagerAdapter = new TabPagerAdapter(getFragmentManager(),titles,fragments);
     }
 
     @Override
     protected int getContentLayoutId() {
-        return R.layout.fragment_discover;
+        return R.layout.fragment_shop;
     }
 
     @Override

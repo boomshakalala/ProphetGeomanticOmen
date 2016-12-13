@@ -12,9 +12,11 @@ import android.view.View;
 public class GridSpaceItemDecoration extends RecyclerView.ItemDecoration {
 
     private int space;
+    private int count;
 
-    public GridSpaceItemDecoration(int space) {
+    public GridSpaceItemDecoration(int space,int count) {
         this.space = space;
+        this.count = count;
     }
 
     @Override
@@ -23,7 +25,7 @@ public class GridSpaceItemDecoration extends RecyclerView.ItemDecoration {
         outRect.left = space;
         outRect.bottom = space;
         //由于每行都只有3个，所以第一个都是3的倍数，把左边距设为0
-        if (parent.getChildLayoutPosition(view) %3==0) {
+        if (parent.getChildLayoutPosition(view) %count==0) {
             outRect.left = 0;
         }
     }

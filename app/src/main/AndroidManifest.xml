@@ -43,6 +43,9 @@
         <meta-data
             android:name="design_height"
             android:value="1334" />
+        <meta-data
+            android:name="QBSDKAppKey"
+            android:value="KA39GN0JefvC1rlB7tHg2JXI"/>
 
         <!-- Required. AppKey copied from Portal -->
         <meta-data android:name="JPUSH_APPKEY"

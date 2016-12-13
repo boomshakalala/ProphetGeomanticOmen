@@ -2,6 +2,7 @@ package com.xianzhifengshui.adapter;
 
 import android.content.Context;
 
+import com.xianzhifengshui.api.model.Goods;
 import com.xianzhifengshui.common.CommonAdapter;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
 import com.xianzhifengshui.common.RecyclerViewHolder;
@@ -14,14 +15,14 @@ import java.util.List;
  * 描述：
  */
 
-public class GoodsListAdapter extends CommonRecyclerAdapter<Object> {
+public class GoodsListAdapter extends CommonRecyclerAdapter<Goods> {
 
-    public GoodsListAdapter(Context context, int layoutId, List<Object> data) {
+    public GoodsListAdapter(Context context, int layoutId, List<Goods> data) {
         super(context, layoutId, data);
     }
 
     @Override
-    public void convert(RecyclerViewHolder holder, Object o) {
+    public void convert(RecyclerViewHolder holder, Goods goods) {
 
     }
 }

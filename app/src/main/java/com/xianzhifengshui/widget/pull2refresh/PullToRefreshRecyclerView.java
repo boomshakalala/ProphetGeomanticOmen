@@ -20,6 +20,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 import com.xianzhifengshui.R;
+import com.xianzhifengshui.widget.LinearSpaceItemDecoration;
 
 /**
  *

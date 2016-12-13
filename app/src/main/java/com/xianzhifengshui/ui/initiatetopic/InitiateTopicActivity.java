@@ -93,7 +93,7 @@ public class InitiateTopicActivity extends BaseActivity implements InitiateTopic
         initiateBtn = (TextView) findViewById(R.id.btn_initiate_topic);
         typeLayout.setAdapter(tagAdapter);
         recyclerView.setAdapter(addImageAdapter);
-        recyclerView.addItemDecoration(new GridSpaceItemDecoration(5));
+        recyclerView.addItemDecoration(new GridSpaceItemDecoration(5,4));
         selectDialog = new NormalSelectDialog.Builder(this).setOnItemClickListener(this).build();
         selectDialog.setDataList(Arrays.asList(getResources().getStringArray(R.array.select_initiate_topic)));
 

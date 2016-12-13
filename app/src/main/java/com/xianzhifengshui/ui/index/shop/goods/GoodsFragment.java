@@ -1,13 +1,17 @@
 package com.xianzhifengshui.ui.index.shop.goods;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.GoodsListAdapter;
+import com.xianzhifengshui.api.model.Goods;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
+import com.xianzhifengshui.utils.SizeUtils;
+import com.xianzhifengshui.widget.GridSpaceItemDecoration;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
 
@@ -28,13 +32,15 @@ public class GoodsFragment extends BaseFragment implements GoodsContract.View,Pu
 
     private GoodsListAdapter adapter;
     private GoodsContract.Presenter presenter;
-    private List<Object> data;
+    private List<Goods> data;
     @Override
     protected void initViews() {
         pullToRefreshRecyclerView = (PullToRefreshRecyclerView) rootView.findViewById(R.id.recyclerView);
         pullToRefreshRecyclerView.setScrollingWhileRefreshingEnabled(true);
         recyclerView = pullToRefreshRecyclerView.getRefreshableView();
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2);
+        recyclerView.addItemDecoration(new GridSpaceItemDecoration(SizeUtils.dp2px(getContext(),16),2));
+        recyclerView.setLayoutManager(layoutManager);
         pullToRefreshRecyclerView.setOnRefreshListener(this);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.DISABLED);
         recyclerView.setAdapter(adapter);
@@ -52,7 +58,7 @@ public class GoodsFragment extends BaseFragment implements GoodsContract.View,Pu
     protected void initData() {
         this.presenter = new GoodsPresenter(this);
         data = new ArrayList<>();
-        adapter = new GoodsListAdapter(getContext(),R.layout.item_topic_type_list,data);
+        adapter = new GoodsListAdapter(getContext(),R.layout.item_goods,data);
         adapter.setOnItemClickListener(this);
     }
 
@@ -82,13 +88,13 @@ public class GoodsFragment extends BaseFragment implements GoodsContract.View,Pu
     }
 
     @Override
-    public void refreshData(List<Object> data) {
+    public void refreshData(List<Goods> data) {
         adapter.setData(data);
         emptyLayout.hide();
     }
 
     @Override
-    public void loadMore(List<Object> data) {
+    public void loadMore(List<Goods> data) {
         adapter.loadMore(data);
     }
 

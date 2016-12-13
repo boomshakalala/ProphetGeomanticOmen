@@ -1,6 +1,10 @@
 package com.xianzhifengshui.ui.index.shop.goods;
 
+import com.xianzhifengshui.api.model.Goods;
 import com.xianzhifengshui.base.BasePresenter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者：chengx
@@ -18,7 +22,11 @@ public class GoodsPresenter extends BasePresenter implements GoodsContract.Prese
 
     @Override
     public void refreshData() {
-
+        List<Goods> data = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            data.add(new Goods());
+        }
+        view.refreshData(data);
     }
 
     @Override

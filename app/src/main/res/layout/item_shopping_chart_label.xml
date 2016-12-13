@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:paddingBottom="20px"
+    android:paddingTop="20px"
+    android:paddingLeft="50px"
+    android:paddingRight="40px">
+    <ImageButton
+        android:id="@+id/btn_shopping_chart_label_choose"
+        android:layout_width="37px"
+        android:layout_height="37px"
+        app:layout_auto_baseheight="width"
+        android:background="@color/white"
+        android:src="@drawable/selector_shopping_chart_choose_btn"/>
+    <TextView
+        android:id="@+id/text_shopping_chart_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="@color/black"
+        android:layout_marginLeft="28px"
+        android:text="聚缘阁"
+        />
+
+</LinearLayout>

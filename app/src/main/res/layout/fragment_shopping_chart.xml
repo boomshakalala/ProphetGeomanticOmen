@@ -17,7 +17,7 @@
             android:layout_width="50px"
             android:layout_height="50px"
             android:background="@color/white"
-            android:src="@drawable/shopping_chart_unchoose"
+            android:src="@drawable/selector_shopping_chart_choose_btn"
             android:layout_centerVertical="true"
             android:layout_marginLeft="40px"/>
         <TextView

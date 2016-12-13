@@ -79,7 +79,7 @@ public class PhotoPickerActivity extends BaseActivity implements PhotoPickerCont
         imageCountTv = (TextView) findViewById(R.id.text_photo_picker_image_count);
         chooseDirBtn = (RelativeLayout) findViewById(R.id.btn_photo_picker_choose_dir);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerView.addItemDecoration(new GridSpaceItemDecoration(1));
+        recyclerView.addItemDecoration(new GridSpaceItemDecoration(1,3));
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerView.setAdapter(adapter);
         popupWindow = new ListImageDirPopupWindow(this);
