@@ -24,7 +24,7 @@ import com.xianzhifengshui.utils.SizeUtils;
  * 日期: 2016/11/7.
  * 描述: ViewPager指示器
  */
-public class CircleIndicator extends LinearLayout {
+public class  CircleIndicator extends LinearLayout {
 
     private final static int DEFAULT_INDICATOR_WIDTH = 5;
     private ViewPager mViewpager;

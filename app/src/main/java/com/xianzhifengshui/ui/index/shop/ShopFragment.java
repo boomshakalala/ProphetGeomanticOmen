@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.TabPagerAdapter;
 import com.xianzhifengshui.base.BaseFragment;
+import com.xianzhifengshui.ui.index.shop.collection.CollectionFragment;
 import com.xianzhifengshui.ui.index.shop.goods.GoodsFragment;
 import com.xianzhifengshui.ui.index.shop.shoppingchart.ShoppingChartFragment;
 import com.xianzhifengshui.widget.auto.AutoTabLayout;
@@ -45,9 +46,10 @@ public class ShopFragment extends BaseFragment {
     @Override
     protected void initData() {
         fragments = new ArrayList<>();
-        titles = new String[]{"宝贝","购物车"};
+        titles = new String[]{"宝贝","购物车","收藏","订单"};
         fragments.add(new GoodsFragment());
         fragments.add(new ShoppingChartFragment());
+        fragments.add(new CollectionFragment());
         pagerAdapter = new TabPagerAdapter(getFragmentManager(),titles,fragments);
     }
 
