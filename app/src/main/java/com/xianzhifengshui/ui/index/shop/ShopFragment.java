@@ -7,6 +7,7 @@ import com.xianzhifengshui.adapter.TabPagerAdapter;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.ui.index.shop.collection.CollectionFragment;
 import com.xianzhifengshui.ui.index.shop.goods.GoodsFragment;
+import com.xianzhifengshui.ui.index.shop.order.OrderFragment;
 import com.xianzhifengshui.ui.index.shop.shoppingchart.ShoppingChartFragment;
 import com.xianzhifengshui.widget.auto.AutoTabLayout;
 
@@ -50,6 +51,7 @@ public class ShopFragment extends BaseFragment {
         fragments.add(new GoodsFragment());
         fragments.add(new ShoppingChartFragment());
         fragments.add(new CollectionFragment());
+        fragments.add(new OrderFragment());
         pagerAdapter = new TabPagerAdapter(getFragmentManager(),titles,fragments);
     }
 
