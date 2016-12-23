@@ -10,7 +10,9 @@ import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.TopicListAdapter;
 import com.xianzhifengshui.api.model.Topic;
 import com.xianzhifengshui.base.BaseActivity;
+import com.xianzhifengshui.common.CommonRecyclerAdapter;
 import com.xianzhifengshui.ui.initiatetopic.InitiateTopicActivity;
+import com.xianzhifengshui.ui.topicdetail.TopicDetailActivity;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshRecyclerView;
 
@@ -22,7 +24,7 @@ import java.util.List;
  * 日期: 2016/11/7.
  * 描述:
  */
-public class TopicListActivity extends BaseActivity implements TopicListContract.View,PullToRefreshBase.OnRefreshListener2<RecyclerView>{
+public class TopicListActivity extends BaseActivity implements TopicListContract.View,PullToRefreshBase.OnRefreshListener2<RecyclerView>,CommonRecyclerAdapter.OnRecyclerViewItemClickListener<Topic> {
 
     /*======= 控件声明区 =======*/
     private PullToRefreshRecyclerView pullToRefreshRecyclerView;
@@ -73,6 +75,7 @@ public class TopicListActivity extends BaseActivity implements TopicListContract
         pullToRefreshRecyclerView.setOnRefreshListener(this);
         pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(this);
         emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,5 +172,11 @@ public class TopicListActivity extends BaseActivity implements TopicListContract
             super.closeWait();
         else
             emptyLayout.hide();
+    }
+
+
+    @Override
+    public void onItemClick(View view, Topic data) {
+        TopicDetailActivity.launcher(this,data.getTopicCode());
     }
 }

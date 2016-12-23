@@ -28,19 +28,7 @@ public class TopicListAdapter extends CommonRecyclerAdapter<Topic> {
     @Override
     public void convert(RecyclerViewHolder holder, Topic topic) {
         MultiImageView imageView = holder.getView(R.id.image_topic_list_images);
-
-        final ArrayList<String> imgs = new ArrayList<>();
-        String[] imgUrls = {"http://pic7.nipic.com/20100609/5136651_124423001651_2.jpg",
-                "http://g.hiphotos.baidu.com/image/pic/item/9e3df8dcd100baa1cb7acbdb4210b912c8fc2e7f.jpg",
-                "http://f.hiphotos.baidu.com/image/pic/item/32fa828ba61ea8d360a750ea930a304e241f5852.jpg",
-                "http://i2.cqnews.net/car/attachement/jpg/site82/20120817/5404a6b61e3c1197fb211d.jpg",
-                "http://h.hiphotos.baidu.com/image/pic/item/dc54564e9258d1093cf78e5cd558ccbf6d814dc3.jpg",
-                "http://a.hiphotos.baidu.com/image/pic/item/279759ee3d6d55fb924d52c869224f4a21a4dd50.jpg",
-                "http://e.hiphotos.baidu.com/image/pic/item/738b4710b912c8fc7778d223f8039245d7882150.jpg",
-                "http://f.hiphotos.baidu.com/image/pic/item/203fb80e7bec54e753da379aba389b504fc26a7b.jpg",
-                "http://d.hiphotos.baidu.com/image/pic/item/562c11dfa9ec8a13f075f10cf303918fa1ecc0eb.jpg",};
-        int count = new Random().nextInt(10);
-        imgs.addAll(Arrays.asList(imgUrls).subList(0, count));
+        final ArrayList<String> imgs = (ArrayList<String>) topic.getPhoto();
         imageView.setOnItemClickListener(new MultiImageView.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -48,6 +36,11 @@ public class TopicListAdapter extends CommonRecyclerAdapter<Topic> {
             }
         });
         imageView.setList(imgs);
-
+        holder.setText(R.id.text_topic_list_title,topic.getTitle());
+        holder.setText(R.id.text_topic_list_content,topic.getContent());
+        holder.setText(R.id.text_topic_list_nick_name,topic.getNickname());
+        holder.setImageUrl(R.id.image_topic_list_avatar,topic.getIcon());
+        holder.setText(R.id.text_topic_list_point_of_Praise,topic.getPointOfPraise()+"");
+        holder.setText(R.id.text_topic_list_comment_count,topic.getComment()+"");
     }
 }

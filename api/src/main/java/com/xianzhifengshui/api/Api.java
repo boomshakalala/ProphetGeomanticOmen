@@ -1,8 +1,11 @@
 package com.xianzhifengshui.api;
 
 import com.xianzhifengshui.api.model.HomeItemModle;
+import com.xianzhifengshui.api.model.Lecture;
 import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.MasterDetailModel;
+import com.xianzhifengshui.api.model.Topic;
+import com.xianzhifengshui.api.model.TopicType;
 import com.xianzhifengshui.api.model.User;
 import com.xianzhifengshui.api.model.Verify;
 import com.xianzhifengshui.api.model.WXApiResponse;
@@ -33,6 +36,10 @@ public interface Api {
     String USER_RESET_PASSWORD = "user/resetPassword";// 找回（重置）密码接口
     String USER_UPDATE_PASSWORD = "user/updatePassword";// 修改密码接口
     String FEEDBACK_FEEDBACK = "feedback/feedback";// 用户反馈
+    String LECTURES_LIST = "lectures/list";//获取讲座列表接口
+    String LECTURES_DETAIL = "lectures/detail";//获取讲座详情接口
+    String TOPIC_LIST = "topic/list";//获取话题列表接口
+    String TOPIC_TYPE_LIST = "topic/typeList";// 获取话题类型列表接口
 
     /**
      * 通过code获取access_token的接口。（微信）
@@ -128,7 +135,7 @@ public interface Api {
      * @param password 新密码
      * @param callback 回调
      */
-    void userResetPassword(String mobilePhone,String password,ActionCallbackListener<Void> callback);
+    void userResetPassword(int mobilePhone,int password,ActionCallbackListener<Void> callback);
 
     /**
      * 调用本接口修改用户登录密码
@@ -146,4 +153,34 @@ public interface Api {
      * @param callback 回调
      */
     void feedBack(String uid,String content,ActionCallbackListener<Void> callback);
+
+    /**
+     * 调用本接口获取讲座列表数据
+     * @param pageNum 当前第几页
+     * @param pageSize 每页最多显示多少条
+     * @param callback 回调
+     */
+    void lecturesList(int pageNum, int pageSize, ActionCallbackListener<BaseListModel<ArrayList<Lecture>>> callback);
+
+    /**
+     * 调用本接口获取讲座详情
+     * @param lectureCode 讲座编号
+     * @param userCode 用户编号
+     * @param callback 回调
+     */
+    void lecturesDetail(String lectureCode,String userCode,ActionCallbackListener<Lecture> callback);
+
+    /**
+     * 调用本接口获取话题列表数据
+     * @param pageNum 当前第几页
+     * @param PageSize 每页最多显示多少条
+     * @param callback 回调
+     */
+    void topicList(int pageNum, int PageSize, ActionCallbackListener<BaseListModel<ArrayList<Topic>>> callback);
+
+    /**
+     * 调用本接口获取话题分类列表
+     * @param callback 回调
+     */
+    void topicTypeList(ActionCallbackListener<BaseListModel<ArrayList<TopicType>>> callback);
 }

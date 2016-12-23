@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
 import android.text.method.KeyListener;
-import android.util.Log;
+import com.xianzhifengshui.api.utils.KLog;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -31,8 +31,12 @@ import java.security.UnrecoverableKeyException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import de.greenrobot.event.EventBus;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -57,10 +61,9 @@ public class HttpEngine {
     private static final int WX_NETWORK_SUCCESS = 201;
     private static OkHttpClient client;
     public static HttpEngine instance;
-    private UIThreadHandler uiThreadHandler;
 
     private HttpEngine(){
-        uiThreadHandler = new UIThreadHandler();
+        EventBus.getDefault().register(this);
     }
 
     public static HttpEngine getInstance() {
@@ -79,15 +82,9 @@ public class HttpEngine {
 
 
     public  <T>  void  get(String method, String ciphertext, final Type typeOfClass ,final ActionCallbackListener<T> callback){
-        String sign = Md5Utils.md5s(DESUtils.decrypt(ciphertext));
-        String url = getUrl(HOST + method, ciphertext, sign);
-        Log.d(TAG, "get url = "+url);
-        Log.d(TAG, "get sign = "+sign);
-        Log.d(TAG, "get json = " + ciphertext);
-        if (uiThreadHandler!=null){
-            uiThreadHandler.setCallback(callback);
-            uiThreadHandler.setType(typeOfClass);
-        }
+//        String sign = Md5Utils.md5s(DESUtils.decrypt(ciphertext));
+        String url = getUrl(HOST + method, ciphertext, "");
+        KLog.d(TAG, "get url = "+url);
         Request request = new Request.Builder()
                 .url(url)
                 .header("User-Agent","android")
@@ -95,29 +92,28 @@ public class HttpEngine {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Message msg = new Message();
-                msg.what = NETWORK_FAILURE_ERROR;
-                msg.obj = NETWORK_FAILURE_INFO;
-                uiThreadHandler.sendMessage(msg);
+                com.xianzhifengshui.api.net.Response<T> resp = new com.xianzhifengshui.api.net.Response<>();
+                resp.code = NETWORK_FAILURE_ERROR;
+                resp.json = NETWORK_FAILURE_INFO;
+                resp.callback = callback;
+                EventBus.getDefault().post(resp);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Message msg = new Message();
-                msg.what = NETWORK_SUCCESS;
-                msg.obj = response.body().string();
-                uiThreadHandler.sendMessage(msg);
+                com.xianzhifengshui.api.net.Response<T> resp = new com.xianzhifengshui.api.net.Response<>();
+                resp.code = NETWORK_SUCCESS;
+                resp.json = response.body().string();
+                resp.callback = callback;
+                resp.typeOfClass = typeOfClass;
+                EventBus.getDefault().post(resp);
             }
         });
     }
 
     public void wxGet(String method,LinkedHashMap<String,String> params, final ActionCallbackListener<WXApiResponse> callback){
         String url = getUrl(WX_HOST + method, params);
-        Log.d(TAG, "get url = " + url);
-        if (uiThreadHandler!=null){
-            uiThreadHandler.setCallback(callback);
-            uiThreadHandler.setType(WXApiResponse.class);
-        }
+        KLog.d(TAG, "get url = " + url);
         Request request = new Request.Builder()
                 .url(url)
                 .header("User-Agent","android")
@@ -125,23 +121,26 @@ public class HttpEngine {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Message msg = new Message();
-                msg.what = NETWORK_FAILURE_ERROR;
-                msg.obj = NETWORK_FAILURE_INFO;
-                uiThreadHandler.sendMessage(msg);
+                com.xianzhifengshui.api.net.Response<WXApiResponse> resp = new com.xianzhifengshui.api.net.Response<>();
+                resp.code = NETWORK_FAILURE_ERROR;
+                resp.json = NETWORK_FAILURE_INFO;
+                resp.callback = callback;
+                EventBus.getDefault().post(resp);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Message msg = new Message();
-                msg.what = WX_NETWORK_SUCCESS;
-                msg.obj = response.body().string();
-                uiThreadHandler.sendMessage(msg);
+                com.xianzhifengshui.api.net.Response<WXApiResponse> resp = new com.xianzhifengshui.api.net.Response<>();
+                resp.code = NETWORK_SUCCESS;
+                resp.json = response.body().string();
+                resp.callback = callback;
+                EventBus.getDefault().post(resp);
             }
         });
     }
 
     private <T> ApiResponse<T> json2Obj(String json,Type typeOfT) throws JsonSyntaxException {
+        KLog.json(TAG, json);
         Gson gson = new Gson();
         ApiResponse<T> response = new ApiResponse<>();
         JsonParser parser = new JsonParser();
@@ -172,7 +171,8 @@ public class HttpEngine {
 
 
     private String getUrl(String url ,String json,String sign){
-        return url + "?json="+json+"&sign="+sign;
+//        return url + "?json="+json+"&sign="+sign;
+        return url + "?json="+json;
     }
 
     private String getUrl(String url,Map<String,String> params){
@@ -189,58 +189,45 @@ public class HttpEngine {
         return result.substring(0, result.lastIndexOf('&'));
     }
 
-    class UIThreadHandler extends Handler{
-        private ActionCallbackListener callback;
-        private Type type;
-
-        public void setType(Type type) {
-            this.type = type;
-        }
-
-        public <T> void setCallback(ActionCallbackListener<T> callback){
-            this.callback = callback;
-        }
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case NETWORK_FAILURE_ERROR:
-                    if (callback!=null){
-                        String info = (String) msg.obj;
-                        callback.onFailure(NETWORK_FAILURE_ERROR,info);
+    void onEventMainThread(com.xianzhifengshui.api.net.Response resp){
+        switch (resp.code){
+            case NETWORK_FAILURE_ERROR:
+                if (resp.callback!=null){
+                    String info = resp.json;
+                    resp.callback.onFailure(NETWORK_FAILURE_ERROR,info);
+                }
+                break;
+            case NETWORK_SUCCESS:
+                if (resp.callback!=null){
+                    String json = resp.json;
+                    KLog.json(TAG, json);
+                    ApiResponse response = json2Obj(json,resp.typeOfClass);
+                    if (response.isSuccess()){
+                        resp.callback.onSuccess(response.getData());
+                    }else if (response.getStatus().equals("success")){
+                        resp.callback.onFailure(response.getStatusCode(),response.getMessage());
+                    }else {
+                        resp.callback.onFailure(response.getStatusCode(),response.getMessage());
+                        KLog.e(TAG, "network error:"+response.getMessage());
                     }
-                    break;
-                case NETWORK_SUCCESS:
-                    if (callback!=null){
-                        String json = (String) msg.obj;
-                        Log.d(TAG, "handleMessage json="+json);
-                        ApiResponse response = json2Obj(json,type);
-                        if (response.isSuccess()){
-                            callback.onSuccess(response.getData());
-                        }else if (response.getStatus().equals("success")){
-                            callback.onFailure(response.getStatusCode(),response.getMessage());
-                        }else {
-                            callback.onFailure(response.getStatusCode(),response.getMessage());
-                            Log.e(TAG, "network error:"+response.getMessage());
-                        }
+                }
+                break;
+            case WX_NETWORK_SUCCESS:
+                if (resp.callback!=null){
+                    String json = resp.json;
+                    WXApiResponse response = json2Obj(json);
+                    if (response.getErrcode() == 0) {
+                        resp.callback.onSuccess(response);
+                    } else {
+                        KLog.d(TAG, "onSuccess errorCode=" + response.getErrcode());
+                        KLog.d(TAG, "onSuccess errorMsg=" + response.getErrmsg());
+                        resp.callback.onFailure(response.getErrcode(), response.getErrmsg());
                     }
-                    break;
-                case WX_NETWORK_SUCCESS:
-                    if (callback !=null){
-                        String json = (String) msg.obj;
-                        WXApiResponse response = json2Obj(json);
-                        if (response.getErrcode() == 0) {
-                            callback.onSuccess(response);
-                        } else {
-                            Log.d(TAG, "onSuccess errorCode=" + response.getErrcode());
-                            Log.d(TAG, "onSuccess errorMsg=" + response.getErrmsg());
-                            callback.onFailure(response.getErrcode(), response.getErrmsg());
-                        }
-                    }
-                    break;
-                default:
-                    super.handleMessage(msg);
-                    break;
-            }
+                }
+                break;
         }
     }
+
+
 
 }

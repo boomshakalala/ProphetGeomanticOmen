@@ -57,6 +57,7 @@
         android:layout_marginLeft="33px"
         android:text="中国道家协会主席"/>
     <TextView
+        android:id="@+id/text_lecture_list_remain_seats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"

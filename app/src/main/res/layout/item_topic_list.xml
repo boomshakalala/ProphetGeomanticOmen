@@ -82,6 +82,7 @@
                 android:background="@drawable/selector_commen_btn"
                 android:layout_weight="1">
                 <TextView
+                    android:id="@+id/text_topic_list_point_of_Praise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/orange"
@@ -99,6 +100,7 @@
                 android:background="@drawable/selector_commen_btn"
                 android:layout_weight="1">
                 <TextView
+                    android:id="@+id/text_topic_list_comment_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_gray"

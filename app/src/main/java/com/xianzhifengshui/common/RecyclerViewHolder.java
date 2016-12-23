@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.zhy.autolayout.utils.AutoUtils;
 
 /**
@@ -125,6 +126,12 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder{
     public RecyclerViewHolder setVisibility(int viewId,int visivility){
         View view = getView(viewId);
         view.setVisibility(visivility);
+        return this;
+    }
+
+    public RecyclerViewHolder setSelected(int viewId,boolean selected){
+        View view = getView(viewId);
+        view.setSelected(selected);
         return this;
     }
     /*=================================*/

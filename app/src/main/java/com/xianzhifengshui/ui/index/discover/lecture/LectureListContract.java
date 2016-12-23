@@ -13,10 +13,11 @@ import java.util.List;
  */
 public interface LectureListContract {
      interface View extends IView<Presenter>{
-        void refreshData(List<Lecture> data);
-        void loadMore(List<Lecture> data);
-        void showEmpty();
-        void showFailure();
+         void refreshData(List<Lecture> data);
+         void loadMore(List<Lecture> data);
+         void showEmpty();
+         void showFailure();
+         void closeLoadMore();
     }
 
     interface Presenter extends IPresenter{

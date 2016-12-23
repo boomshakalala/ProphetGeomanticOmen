@@ -194,8 +194,7 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
             pullToRefreshRecyclerView.onRefreshComplete();
         else if (isProgressDialogShowing())
             super.closeWait();
-        else
-            emptyLayout.hide();
+        emptyLayout.hide();
 
     }
 
@@ -214,9 +213,8 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
         showToast(text);
     }
 
-
     @Override
-    public void onItemClick(View view, Master data) {
+    public void  onItemClick(View view, Master data) {
         MasterDetailActivity.launcher(getContext());
     }
 }

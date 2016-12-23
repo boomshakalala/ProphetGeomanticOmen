@@ -7,6 +7,7 @@ import android.view.View;
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.TopicTypeListAdapter;
 import com.xianzhifengshui.api.model.Topic;
+import com.xianzhifengshui.api.model.TopicType;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
 import com.xianzhifengshui.ui.topic.TopicListActivity;
@@ -29,7 +30,7 @@ public class TopicTypeListFragment extends BaseFragment implements TopicTypeList
 
     private TopicTypeListAdapter adapter;
     private TopicTypeListContract.Presenter presenter;
-    private List<Topic> data;
+    private List<TopicType> data;
     @Override
     protected void initViews() {
         pullToRefreshRecyclerView = (PullToRefreshRecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -37,7 +38,7 @@ public class TopicTypeListFragment extends BaseFragment implements TopicTypeList
         recyclerView = pullToRefreshRecyclerView.getRefreshableView();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         pullToRefreshRecyclerView.setOnRefreshListener(this);
-        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.DISABLED);
+        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         recyclerView.setAdapter(adapter);
         emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
             @Override
@@ -67,13 +68,13 @@ public class TopicTypeListFragment extends BaseFragment implements TopicTypeList
     }
 
     @Override
-    public void refreshData(List<Topic> data) {
+    public void refreshData(List<TopicType> data) {
         adapter.setData(data);
         emptyLayout.hide();
     }
 
     @Override
-    public void loadMore(List<Topic> data) {
+    public void loadMore(List<TopicType> data) {
         adapter.loadMore(data);
     }
 

@@ -7,8 +7,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xianzhifengshui.api.des.DESUtils;
 import com.xianzhifengshui.api.model.HomeItemModle;
+import com.xianzhifengshui.api.model.Lecture;
 import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.MasterDetailModel;
+import com.xianzhifengshui.api.model.Topic;
+import com.xianzhifengshui.api.model.TopicType;
 import com.xianzhifengshui.api.model.User;
 import com.xianzhifengshui.api.model.Verify;
 import com.xianzhifengshui.api.model.WXApiResponse;
@@ -162,7 +165,7 @@ public class ApiImpl implements Api {
     }
 
     @Override
-    public void userResetPassword(String mobilePhone, String password, ActionCallbackListener<Void> callback) {
+    public void userResetPassword(int mobilePhone, int password, ActionCallbackListener<Void> callback) {
         paramsMap.clear();
         Type typeOfT = Void.class;
         paramsMap.put("mobilePhone",mobilePhone);
@@ -186,6 +189,40 @@ public class ApiImpl implements Api {
         Type tpyeOfT = Void.class;
         paramsMap.put("uid",uid);
         paramsMap.put("content",content);
+    }
+
+    @Override
+    public void lecturesList(int pageNum, int pageSize, ActionCallbackListener<BaseListModel<ArrayList<Lecture>>> callback) {
+        paramsMap.clear();
+        paramsMap.put("pageNum", pageNum);
+        paramsMap.put("pageSize",pageSize);
+        Type type = new TypeToken<BaseListModel<ArrayList<Lecture>>>(){}.getType();
+        HttpEngine.getInstance().get(LECTURES_LIST,map2Ciphertext(paramsMap),type,callback);
+    }
+
+    @Override
+    public void lecturesDetail(String lectureCode, String userCode, ActionCallbackListener<Lecture> callback) {
+        paramsMap.clear();
+        paramsMap.put("lecturesCode", lectureCode);
+        paramsMap.put("userCode", userCode);
+        Type type = Lecture.class;
+        HttpEngine.getInstance().get(LECTURES_DETAIL,map2Ciphertext(paramsMap),type,callback);
+    }
+
+    @Override
+    public void topicList(int pageNum, int pageSize, ActionCallbackListener<BaseListModel<ArrayList<Topic>>> callback) {
+        paramsMap.clear();
+        paramsMap.put("pageNum", pageNum);
+        paramsMap.put("pageSize",pageSize);
+        Type type = new TypeToken<BaseListModel<ArrayList<Topic>>>(){}.getType();
+        HttpEngine.getInstance().get(TOPIC_LIST,map2Ciphertext(paramsMap),type,callback);
+    }
+
+    @Override
+    public void topicTypeList(ActionCallbackListener<BaseListModel<ArrayList<TopicType>>> callback) {
+        paramsMap.clear();
+        Type type = new TypeToken<BaseListModel<ArrayList<TopicType>>>(){}.getType();
+        HttpEngine.getInstance().get(TOPIC_TYPE_LIST,map2Ciphertext(paramsMap),type,callback);
     }
 
 

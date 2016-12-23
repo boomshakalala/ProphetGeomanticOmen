@@ -95,6 +95,11 @@ public class LectureListFragment extends BaseFragment implements LectureListCont
     }
 
     @Override
+    public void closeLoadMore() {
+        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+    }
+
+    @Override
     public void setPresenter(LectureListContract.Presenter presenter) {
         this.presenter = presenter;
     }
@@ -143,6 +148,6 @@ public class LectureListFragment extends BaseFragment implements LectureListCont
 
     @Override
     public void onItemClick(View view, Lecture data) {
-        LectureDetailActivity.launcher(getContext());
+        LectureDetailActivity.launcher(getContext(),data.getLecturesCode());
     }
 }

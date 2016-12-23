@@ -1,5 +1,6 @@
 package com.xianzhifengshui.ui.lecturedetail;
 
+import com.xianzhifengshui.api.model.Lecture;
 import com.xianzhifengshui.base.IPresenter;
 import com.xianzhifengshui.base.IView;
 
@@ -9,11 +10,12 @@ import com.xianzhifengshui.base.IView;
  * 描述:
  */
 public interface LectureDetailContract {
-    interface View extends IView{
-
+    interface View extends IView<Presenter>{
+        void loadData(Lecture lecture);
+        void showFailure();
     }
 
     interface Presenter extends IPresenter{
-
+        void requestData(String lecturesCode,String userCode);
     }
 }

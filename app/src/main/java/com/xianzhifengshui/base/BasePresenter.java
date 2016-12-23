@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.xianzhifengshui.api.Api;
 import com.xianzhifengshui.api.ApiImpl;
+import com.xianzhifengshui.utils.KLog;
 import com.xianzhifengshui.utils.SPUtils;
 import com.xianzhifengshui.utils.ThreadPoolUtils;
 
@@ -20,5 +21,13 @@ public class BasePresenter {
     public BasePresenter() {
         this.api = ApiImpl.getInstance();
         this.threadPool = ThreadPoolUtils.getInstance(ThreadPoolUtils.Type.FixedThread,5);
+    }
+
+    /**
+     * 打印普通log日志
+     * @param objects 日志内容
+     */
+    public void log(Object... objects){
+        KLog.d(TAG, objects);
     }
 }

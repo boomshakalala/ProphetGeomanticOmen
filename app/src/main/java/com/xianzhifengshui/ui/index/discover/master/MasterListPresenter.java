@@ -38,7 +38,6 @@ public class MasterListPresenter extends BasePresenter implements MasterListCont
 
             @Override
             public void onSuccess(BaseListModel<ArrayList<Master>> data) {
-                view.closeWait();
                 if (data.getPageNum()==currentPage){
                     //关闭记载更多
                     view.closeLoadMore();
@@ -57,6 +56,7 @@ public class MasterListPresenter extends BasePresenter implements MasterListCont
                         view.showTip("没有更多了");
                     }
                 }
+                view.closeWait();
             }
 
             @Override

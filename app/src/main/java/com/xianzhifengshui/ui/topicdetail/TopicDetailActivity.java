@@ -32,9 +32,10 @@ public class TopicDetailActivity extends BaseActivity implements TopicDetailCont
     private TopicDetailContract.Presenter presenter;
     private List<Object> data;
 
-    public static void launcher(Context context){
+    public static void launcher(Context context,String topicCode){
         Intent intent = new Intent();
         intent.setClass(context,TopicDetailActivity.class);
+        intent.putExtra("topicCode",topicCode);
         context.startActivity(intent);
     }
 

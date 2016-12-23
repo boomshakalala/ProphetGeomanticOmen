@@ -143,12 +143,13 @@
                 android:minEms="6"
                 android:textSize="@dimen/text_size_smaller"
                 android:text="@string/text_gender"/>
-            <EditText
+            <TextView
+                android:id="@+id/btn_edit_user_info_gender"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
-                android:text="女"
+                android:text="保密"
                 android:inputType="text"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_smaller"
@@ -182,7 +183,8 @@
                 android:minEms="6"
                 android:textSize="@dimen/text_size_smaller"
                 android:text="@string/text_age"/>
-            <EditText
+            <TextView
+                android:id="@+id/btn_edit_user_info_age"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
@@ -222,7 +224,8 @@
                 android:minEms="6"
                 android:textSize="@dimen/text_size_smaller"
                 android:text="@string/text_address"/>
-            <EditText
+            <TextView
+                android:id="@+id/btn_edit_user_info_area"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"

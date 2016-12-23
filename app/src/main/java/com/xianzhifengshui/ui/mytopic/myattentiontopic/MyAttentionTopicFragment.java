@@ -124,6 +124,6 @@ public class MyAttentionTopicFragment extends BaseFragment implements MyAttentio
 
     @Override
     public void onItemClick(View view, Topic data) {
-        TopicDetailActivity.launcher(getContext());
+        TopicDetailActivity.launcher(getContext(),data.getTopicCode());
     }
 }

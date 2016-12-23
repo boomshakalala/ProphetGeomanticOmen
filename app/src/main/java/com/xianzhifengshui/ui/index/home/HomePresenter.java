@@ -4,10 +4,12 @@ import android.os.Handler;
 
 import com.xianzhifengshui.adapter.ViewSupportModel;
 import com.xianzhifengshui.api.model.Carousel;
+import com.xianzhifengshui.api.model.HomeItemModle;
 import com.xianzhifengshui.api.model.Lecture;
 import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.NaviMenu;
 import com.xianzhifengshui.api.model.User;
+import com.xianzhifengshui.api.net.ActionCallbackListener;
 import com.xianzhifengshui.base.BaseActivity;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.base.BasePresenter;
@@ -65,6 +67,22 @@ public class HomePresenter extends BasePresenter implements HomeContract.Present
     @Override
     public void refreshData() {
         view.showWaiting();
+//        api.indexGetDataList(new ActionCallbackListener<HomeItemModle>() {
+//            @Override
+//            public void onProgress(long bytesWritten, long totalSize) {
+//
+//            }
+//
+//            @Override
+//            public void onSuccess(HomeItemModle data) {
+//                log(data);
+//            }
+//
+//            @Override
+//            public void onFailure(int errorEvent, String message) {
+//
+//            }
+//        });
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

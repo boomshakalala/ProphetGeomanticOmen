@@ -199,5 +199,10 @@
         <item>我参与的话题</item>
         <item>我关注的话题</item>
     </array>
+    <array name="gender">
+        <item>保密</item>
+        <item>男</item>
+        <item>女</item>
+    </array>
 
 </resources>

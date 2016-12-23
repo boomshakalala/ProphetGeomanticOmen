@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xianzhifengshui.R;
+import com.xianzhifengshui.api.model.User;
 import com.xianzhifengshui.utils.ConstUtils;
 import com.xianzhifengshui.utils.KLog;
 import com.xianzhifengshui.utils.SPUtils;
@@ -196,6 +197,18 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
         return progressDialog != null && progressDialog.isShowing();
     }
 
+    public User getUserInfo(){
+        return sp.getObject("user",null);
+    }
+
+    public String getUserCode(){
+        User user = getUserInfo();
+        if (user!=null){
+            return user.getBizCode();
+        }else {
+            return "";
+        }
+    }
 
 
 

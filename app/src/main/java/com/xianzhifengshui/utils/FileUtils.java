@@ -1,5 +1,7 @@
 package com.xianzhifengshui.utils;
 
+import android.content.Context;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -1088,5 +1090,47 @@ public class FileUtils {
         int lastSep = filePath.lastIndexOf(File.separator);
         if (lastPoi == -1 || lastSep >= lastPoi) return "";
         return filePath.substring(lastPoi);
+    }
+
+    /**
+     * 复制raw文件到指定目录
+     *
+     * @param context 上下文
+     * @param file sd卡中的文件
+     * @param id raw中的文件id
+     * @throws IOException
+     */
+    public static void copyFileFromRaw(Context context, File file, int id)
+            throws IOException {
+        InputStream is = context.getResources().openRawResource(id);
+        FileOutputStream fos = new FileOutputStream(file);
+        byte[] buffer = new byte[1024];
+        int count;
+        while ((count = is.read(buffer)) > 0) {
+            fos.write(buffer, 0, count);
+        }
+        fos.close();
+        is.close();
+    }
+
+    /**
+     * 复制Assets文件到指定目录
+     *
+     * @param context 上下文
+     * @param file sd卡中的文件
+     * @param fileName assets中的文件名称
+     * @throws IOException
+     */
+    public static void copyFileFromAssets(Context context, File file, String fileName)
+            throws IOException {
+        InputStream is = context.getAssets().open(fileName);
+        FileOutputStream fos = new FileOutputStream(file);
+        byte[] buffer = new byte[1024];
+        int count;
+        while ((count = is.read(buffer)) > 0) {
+            fos.write(buffer, 0, count);
+        }
+        fos.close();
+        is.close();
     }
 }
