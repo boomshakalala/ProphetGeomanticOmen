@@ -6,10 +6,12 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xianzhifengshui.api.des.DESUtils;
+import com.xianzhifengshui.api.model.Article;
 import com.xianzhifengshui.api.model.HomeItemModle;
 import com.xianzhifengshui.api.model.Lecture;
 import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.MasterDetailModel;
+import com.xianzhifengshui.api.model.PayOrder;
 import com.xianzhifengshui.api.model.Topic;
 import com.xianzhifengshui.api.model.TopicType;
 import com.xianzhifengshui.api.model.User;
@@ -129,16 +131,6 @@ public class ApiImpl implements Api {
     }
 
     @Override
-    public void masterCollectionConfirm(String masterCode, String userCode, String type, ActionCallbackListener<Void> callback) {
-        paramsMap.clear();
-        Type typeOfT = Void.class;
-        paramsMap.put("masterCode",masterCode);
-        paramsMap.put("userCode",userCode);
-        paramsMap.put("type",type);
-        HttpEngine.getInstance().get(MASTER_COLLECTION_CONFIRM,map2Ciphertext(paramsMap),typeOfT,callback);
-    }
-
-    @Override
     public void masterEvaluateConfirm(String masterCode, String userCode, String content, ActionCallbackListener<Void> callback) {
         paramsMap.clear();
         Type typeOfT = Void.class;
@@ -223,6 +215,111 @@ public class ApiImpl implements Api {
         paramsMap.clear();
         Type type = new TypeToken<BaseListModel<ArrayList<TopicType>>>(){}.getType();
         HttpEngine.getInstance().get(TOPIC_TYPE_LIST,map2Ciphertext(paramsMap),type,callback);
+    }
+
+    @Override
+    public void userThirdLogin(String token, String phone, String tokenType, ActionCallbackListener<User> callback) {
+        paramsMap.clear();
+        paramsMap.put("token",token);
+        paramsMap.put("phone",phone);
+        paramsMap.put("tokenType",tokenType);
+        HttpEngine.getInstance().get(USER_THIRD_LOGIN,map2Ciphertext(paramsMap),User.class,callback);
+    }
+
+    @Override
+    public void masterPointOfPraise(String masterCode, String userCode,ActionCallbackListener<Void> callback) {
+        paramsMap.clear();
+        paramsMap.put("masterCode", masterCode);
+        paramsMap.put("userCode",userCode);
+        HttpEngine.getInstance().get(MASTER_POINT_OF_PRAISE,map2Ciphertext(paramsMap),Void.class,callback);
+    }
+
+    @Override
+    public void masterArticleList(String masterCode, int pageNum, int pageSize, ActionCallbackListener<BaseListModel<ArrayList<Article>>> callback) {
+        paramsMap.clear();
+        paramsMap.put("pageNum", pageNum);
+        paramsMap.put("pageSize",pageSize);
+        paramsMap.put("masterCode",masterCode);
+        Type type = new TypeToken<BaseListModel<ArrayList<Article>>>(){}.getType();
+        HttpEngine.getInstance().get(MASTER_ARTICLE_LIST,map2Ciphertext(paramsMap),type,callback);
+    }
+
+    @Override
+    public void masterArticleDetail(String articleCode, ActionCallbackListener<Article> callback) {
+        paramsMap.clear();
+        paramsMap.put("articleCode", articleCode);
+        HttpEngine.getInstance().get(MASTER_ARTICLE_DETAIL,map2Ciphertext(paramsMap),Article.class,callback);
+    }
+
+    @Override
+    public void masterCollectionConfirm(String masterCode, String userCode, int type, ActionCallbackListener<Void> callback) {
+        paramsMap.clear();
+        paramsMap.put("masterCode", masterCode);
+        paramsMap.put("userCode", userCode);
+        paramsMap.put("type", type);
+        HttpEngine.getInstance().get(MASTER_COLLECTION_CONFIRM,map2Ciphertext(paramsMap),Void.class,callback);
+    }
+
+    @Override
+    public void masterEvaluateConfirm(String masterCode, String userCode, String masterOrderCode, int serviceAttitude, int professionalLevel, String content, ActionCallbackListener<Void> callback) {
+        paramsMap.clear();
+        paramsMap.put("masterCode", masterCode);
+        paramsMap.put("userCode", userCode);
+        paramsMap.put("masterOrderCode", masterOrderCode);
+        paramsMap.put("serviceAttitude", serviceAttitude);
+        paramsMap.put("professionalLevel", professionalLevel);
+        paramsMap.put("content", content);
+        HttpEngine.getInstance().get(MASTER_EVALUATE_CONFIRM,map2Ciphertext(paramsMap),Void.class,callback);
+    }
+
+    @Override
+    public void lectureCollectionCollect(String userCode, String lectCode, String type, ActionCallbackListener<Void> callback) {
+        paramsMap.clear();
+        paramsMap.put("userCode", userCode);
+        paramsMap.put("lectCode", lectCode);
+        paramsMap.put("type", type);
+        HttpEngine.getInstance().get(LECTURE_COLLECTION_COLLECT,map2Ciphertext(paramsMap),Void.class,callback);
+    }
+
+    @Override
+    public void lectureCollectionList(String userCode, int pageNum, int pageSize, ActionCallbackListener<BaseListModel<ArrayList<Lecture>>> callback) {
+        paramsMap.clear();
+        paramsMap.put("userCode", userCode);
+        paramsMap.put("pageNum", pageNum);
+        paramsMap.put("pageSize", pageSize);
+        Type type = new TypeToken<BaseListModel<ArrayList<Lecture>>>(){}.getType();
+        HttpEngine.getInstance().get(LECTURE_COLLECTION_LIST,map2Ciphertext(paramsMap),type,callback);
+    }
+
+    @Override
+    public void lectureSignUpSign(String userCode, String lectCode, int type, ActionCallbackListener<Void> callback) {
+        paramsMap.clear();
+        paramsMap.put("userCode", userCode);
+        paramsMap.put("lectCode", lectCode);
+        paramsMap.put("type", type);
+        HttpEngine.getInstance().get(LECTURE_SIGN_UP_SIGN,map2Ciphertext(paramsMap),Void.class,callback);
+    }
+
+    @Override
+    public void lectureSignPuList(String userCode, int pageNum, int pageSize, ActionCallbackListener<BaseListModel<ArrayList<Lecture>>> callback) {
+        paramsMap.clear();
+        paramsMap.put("userCode", userCode);
+        paramsMap.put("pageNum", pageNum);
+        paramsMap.put("pageSize", pageSize);
+        Type type = new TypeToken<BaseListModel<ArrayList<Lecture>>>(){}.getType();
+        HttpEngine.getInstance().get(LECTURE_SIGN_PU_LIST,map2Ciphertext(paramsMap),type,callback);
+    }
+
+    @Override
+    public void lectureOrderPay(String userCode, String ip, int totalFee, String body, String lectCode, String payType, ActionCallbackListener<PayOrder> callback) {
+        paramsMap.clear();
+        paramsMap.put("userCode", userCode);
+        paramsMap.put("ip", ip);
+        paramsMap.put("totalFee", totalFee);
+        paramsMap.put("body", body);
+        paramsMap.put("lectCode", lectCode);
+        paramsMap.put("payType", payType);
+        HttpEngine.getInstance().get(LECTURE_ORDER_PAY,map2Ciphertext(paramsMap),PayOrder.class,callback);
     }
 
 

@@ -71,6 +71,18 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,Vi
         context.startActivityForResult(intent,requestCode);
     }
 
+    public static void launcher(BaseActivity context,int requestCode){
+        Intent intent = new Intent(context,LoginActivity.class);
+        Log.d("LoginActivity", "launcher ");
+        context.startActivityForResult(intent,requestCode);
+    }
+
+    public static void launcher(Context context){
+        Intent intent = new Intent(context,LoginActivity.class);
+        Log.d("LoginActivity", "launcher ");
+        context.startActivity(intent);
+    }
+
     @Override
     protected int getContentLayoutId() {
         return R.layout.activity_login;

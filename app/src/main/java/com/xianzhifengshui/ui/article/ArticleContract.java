@@ -18,10 +18,11 @@ public class ArticleContract {
         void loadMore(List<Article> data);
         void showEmpty();
         void showFailure();
+        void closeLoadMore();
     }
 
     interface Presenter extends IPresenter{
-        void refreshData();
-        void loadMore();
+        void refreshData(String masterCode);
+        void loadMore(String masterCode);
     }
 }

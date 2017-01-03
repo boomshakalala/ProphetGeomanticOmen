@@ -1,5 +1,7 @@
 package com.xianzhifengshui.ui.article;
 
+import android.annotation.SuppressLint;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -30,6 +32,8 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.Vie
     private ArticleListAdapter adapter;
     private ArticleContract.Presenter presenter;
     private List<Article> data;
+    private String masterCode;
+
 
     @Override
     protected void initViews() {
@@ -43,7 +47,7 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.Vie
         emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.refreshData();
+                presenter.refreshData(masterCode);
             }
         });
     }
@@ -53,6 +57,8 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.Vie
         this.presenter = new ArticlePresenter(this);
         data = new ArrayList<>();
         adapter = new ArticleListAdapter(getContext(),R.layout.item_article_list,data);
+//        masterCode = getArguments().getString("masterCode");
+        masterCode = "7b13a9abc5f942e7aa5294ffab96e604";
     }
 
     @Override
@@ -87,6 +93,11 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.Vie
     }
 
     @Override
+    public void closeLoadMore() {
+        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+    }
+
+    @Override
     public void setPresenter(ArticleContract.Presenter presenter) {
         this.presenter = presenter;
     }
@@ -103,12 +114,12 @@ public class ArticleFragment extends BaseFragment implements ArticleContract.Vie
 
     @Override
     public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
-        presenter.refreshData();
+        presenter.refreshData(masterCode);
     }
 
     @Override
     public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
-        presenter.loadMore();
+        presenter.loadMore(masterCode);
     }
 
     @Override

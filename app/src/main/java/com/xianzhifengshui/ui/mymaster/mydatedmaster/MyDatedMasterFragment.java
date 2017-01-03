@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.MyDatedMasterListAdapter;
+import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
 import com.xianzhifengshui.ui.masterdetail.MasterDetailActivity;
@@ -132,13 +133,13 @@ public class MyDatedMasterFragment extends BaseFragment implements MyDatedMaster
             pullToRefreshRecyclerView.onRefreshComplete();
         }else if (isProgressDialogShowing()){
             super.closeWait();
-        }else {
-            emptyLayout.hide();
         }
+        emptyLayout.hide();
     }
 
     @Override
     public void onItemClick(View view, Object data) {
-        MasterDetailActivity.launcher(getContext());
+        if (data instanceof Master)
+        MasterDetailActivity.launcher(getContext(),((Master)data).getMasterCode());
     }
 }

@@ -2,6 +2,7 @@ package com.xianzhifengshui.adapter;
 
 import android.content.Context;
 
+import com.xianzhifengshui.R;
 import com.xianzhifengshui.api.model.Article;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
 import com.xianzhifengshui.common.RecyclerViewHolder;
@@ -20,6 +21,7 @@ public class ArticleListAdapter extends CommonRecyclerAdapter<Article> {
 
     @Override
     public void convert(RecyclerViewHolder holder, Article m) {
-
+        holder.setText(R.id.text_article_list_title,m.getTitle());
+        holder.setText(R.id.text_article_list_desc,m.getSummary());
     }
 }

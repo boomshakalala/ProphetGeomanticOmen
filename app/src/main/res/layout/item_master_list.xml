@@ -31,10 +31,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_small"
-        android:textColor="@color/orange"
+        android:textColor="@drawable/selector_index_tab_text_color"
         android:layout_alignBaseline="@id/text_master_list_title"
         android:layout_alignParentRight="true"
-        android:drawableLeft="@drawable/master_list_praise_icon"
+        android:drawableLeft="@drawable/selector_master_praise"
         android:gravity="bottom"
         android:drawablePadding="3dp"
         android:text="99"/>

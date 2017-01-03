@@ -1,9 +1,13 @@
 package com.xianzhifengshui.api;
 
+import android.app.Notification;
+
+import com.xianzhifengshui.api.model.Article;
 import com.xianzhifengshui.api.model.HomeItemModle;
 import com.xianzhifengshui.api.model.Lecture;
 import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.MasterDetailModel;
+import com.xianzhifengshui.api.model.PayOrder;
 import com.xianzhifengshui.api.model.Topic;
 import com.xianzhifengshui.api.model.TopicType;
 import com.xianzhifengshui.api.model.User;
@@ -27,8 +31,8 @@ public interface Api {
     String USER_LOGIN = "user/login"; //用户登录接口
     String MASTER_LIST = "master/list"; //获取大师列表接口
     String MASTER_DETAIL = "master/detail"; //获取大师详情接口
-    String INDEX_GET_DATA_LIST = "index/getDataList";//获取首页数据（城市列表、轮播图列表、大师类型列表）
-    String INDEX_GET_CITY_LIST = "index/getCityList";//获取城市列表接口
+    String INDEX_GET_DATA_LIST = "getDataList";//获取首页数据（城市列表、轮播图列表、大师类型列表）
+    String INDEX_GET_CITY_LIST = "getCityList";//获取城市列表接口
     String USER_SAVE_USER_INFO = "user/saveUserInfo";//用户注册接口（保存用户信息）
     String MASTER_COLLECTION_CONFIRM = "master/collection/confirm";// 收藏（包括取消）大师接口
     String MASTER_EVALUATE_CONFIRM = "master/collection/confirm";// 评价大师接口
@@ -40,6 +44,17 @@ public interface Api {
     String LECTURES_DETAIL = "lectures/detail";//获取讲座详情接口
     String TOPIC_LIST = "topic/list";//获取话题列表接口
     String TOPIC_TYPE_LIST = "topic/typeList";// 获取话题类型列表接口
+    String USER_THIRD_LOGIN = "user/thirdLogin";// 微信、新浪三方登录
+    String MASTER_POINT_OF_PRAISE = "master/pointOfPraise";// 用户给大师点赞接口
+    String MASTER_ARTICLE_LIST = "master/article/list";// 获取大师下的文章列表接口
+    String MASTER_ARTICLE_DETAIL = "master/article/detail";// 获取大师下的文章详情接口
+    String LECTURE_COLLECTION_COLLECT = "lectures/collection/list";//收藏（取消）讲座
+    String LECTURE_COLLECTION_LIST = "lectures/collection/list";// 我的收藏讲座列表
+    String LECTURE_SIGN_UP_SIGN = "lectures/signUp/sign";// 报名（取消）讲座
+    String LECTURE_SIGN_PU_LIST = "lectures/signUp/list";// 我报名的讲座列表
+    String LECTURE_ORDER_PAY = "lecturs/order/pay";// 讲座支付
+    String TOPIC_DETAIL = "topic/detail";// 获取话题详情接口
+    String File_UPLOAD = "file/upload";// 文件上传
 
     /**
      * 通过code获取access_token的接口。（微信）
@@ -96,15 +111,6 @@ public interface Api {
      * @param callback 回调
      */
     void userSaveUserInfo(String mobilePhone,String password,String nickname,ActionCallbackListener<Void> callback);
-
-    /**
-     * 调用本接口收藏（或取消）大师
-     * @param masterCode 大师编号
-     * @param userCode 用户编号
-     * @param type 类型 1表示收藏；2表示取消收藏
-     * @param callback 回调
-     */
-    void masterCollectionConfirm(String masterCode,String userCode,String type,ActionCallbackListener<Void> callback);
 
     /**
      * 调用本接口保存用户评价大师信息
@@ -183,4 +189,106 @@ public interface Api {
      * @param callback 回调
      */
     void topicTypeList(ActionCallbackListener<BaseListModel<ArrayList<TopicType>>> callback);
+
+    /**
+     *
+     * @param token 三方登录token
+     * @param phone 手机号
+     * @param tokenType 三方登录类型
+     * @param callback 回调
+     */
+    void userThirdLogin(String token, String phone, String tokenType, ActionCallbackListener<User> callback);
+
+    /**
+     *  调用本接口给大师点赞
+     * @param masterCode 大师编号
+     * @param userCode 用户编号
+     * @param callback 回调
+     */
+    void masterPointOfPraise(String masterCode,String userCode,ActionCallbackListener<Void> callback);
+
+    /**
+     * 调用本接口获取大师下的文章列表数据
+     * @param masterCode 大师编号
+     * @param pageNum 当前第几页
+     * @param pageSize 每页最多显示多少条
+     * @param callback 回调
+     */
+    void masterArticleList(String masterCode,int pageNum,int pageSize,ActionCallbackListener<BaseListModel<ArrayList<Article>>> callback);
+
+    /**
+     * 调用本接口获取大师下的文章详情数据
+     * @param articleCode 文章编号
+     * @param callback 回到
+     */
+    void masterArticleDetail(String articleCode, ActionCallbackListener<Article> callback);
+
+    /**
+     * 调用本接口收藏（或取消）大师
+     * @param masterCode 大师编号
+     * @param userCode 用户编号
+     * @param type 类型 1表示收藏；其他值表示取消收藏（默认为1）
+     * @param callback 回调
+     */
+    void masterCollectionConfirm(String masterCode,String userCode,int type,ActionCallbackListener<Void> callback);
+
+    /**
+     * 调用本接口保存用户评价大师信息
+     * @param masterCode 大师编号
+     * @param userCode 用户编号
+     * @param masterOrderCode 大师订单编号
+     * @param serviceAttitude 服务态度
+     * @param professionalLevel 专业水平
+     * @param content 评价内容
+     * @param callback 回调
+     */
+    void masterEvaluateConfirm(String masterCode,String userCode,String masterOrderCode,int serviceAttitude,int professionalLevel,String content,ActionCallbackListener<Void> callback);
+
+    /**
+     * 调用本接口收藏讲座
+     * @param userCode 用户code
+     * @param lectCode 讲座code
+     * @param type 1：收藏讲座 0：取消收藏
+     * @param callback 回调
+     */
+    void lectureCollectionCollect(String userCode,String lectCode,String type,ActionCallbackListener<Void> callback);
+
+    /**
+     * 调用本接口获取我的收藏讲座列表
+     * @param userCode 用户编号
+     * @param pageNum 当前第几页
+     * @param pageSize 每页最多显示多少条
+     * @param callback 回调
+     */
+    void lectureCollectionList(String userCode,int pageNum,int pageSize,ActionCallbackListener<BaseListModel<ArrayList<Lecture>>> callback);
+
+    /**
+     *  调用本接口报名（取消）讲座
+     * @param userCode 用户code
+     * @param ectCode 讲座code
+     * @param type 类型 1：报名 0：取消报名
+     * @param callback 回调
+     */
+    void lectureSignUpSign(String userCode,String ectCode,int type,ActionCallbackListener<Void> callback);
+
+    /***
+     * 调用本接口获取我报名的讲座列表
+     * @param userCode 用户编号
+     * @param pageNum 当前第几页
+     * @param pageSize 每页最多显示多少条
+     * @param callback 回调
+     */
+    void lectureSignPuList(String userCode,int pageNum,int pageSize,ActionCallbackListener<BaseListModel<ArrayList<Lecture>>> callback);
+
+    /**
+     * 调用本接口支付讲座
+     * @param userCode 用户code
+     * @param ip 	用户IP
+     * @param totalFee 	订单费用（单位：分）
+     * @param body 	商品描述
+     * @param lectCode 讲座code
+     * @param payType 支付类型 微信:W ,支付宝:A
+     * @param callback 回调
+     */
+    void lectureOrderPay(String userCode, String ip, int totalFee, String body, String lectCode, String payType, ActionCallbackListener<PayOrder> callback);
 }

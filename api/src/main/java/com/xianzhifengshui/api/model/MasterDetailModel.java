@@ -11,15 +11,24 @@ public class MasterDetailModel extends Master {
 
     private static final long serialVersionUID = 8513107300364273847L;
 
-    private List<Evaluate> evaluate;
-    private List<ServiceType> serviceType ;
+    private List<Evaluate> evaluateList;
+    private List<ServiceType> serviceType;
+    private List<Article> articleList;
 
-    public List<Evaluate> getEvaluate() {
-        return evaluate;
+    public List<Evaluate> getEvaluateList() {
+        return evaluateList;
     }
 
-    public void setEvaluate(List<Evaluate> evaluate) {
-        this.evaluate = evaluate;
+    public void setEvaluateList(List<Evaluate> evaluateList) {
+        this.evaluateList = evaluateList;
+    }
+
+    public List<Article> getArticleList() {
+        return articleList;
+    }
+
+    public void setArticleList(List<Article> articleList) {
+        this.articleList = articleList;
     }
 
     public List<ServiceType> getServiceType() {

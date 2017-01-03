@@ -94,7 +94,8 @@ public class MyWantedMasterFragment extends BaseFragment implements MyWantedMast
 
     @Override
     public void refreshData(List<Master> data) {
-            adapter.setData(data);
+        adapter.setData(data);
+        emptyLayout.hide();
     }
 
     @Override

@@ -140,7 +140,6 @@ public class HttpEngine {
     }
 
     private <T> ApiResponse<T> json2Obj(String json,Type typeOfT) throws JsonSyntaxException {
-        KLog.json(TAG, json);
         Gson gson = new Gson();
         ApiResponse<T> response = new ApiResponse<>();
         JsonParser parser = new JsonParser();

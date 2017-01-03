@@ -1,5 +1,7 @@
 package com.xianzhifengshui.base;
 
+import android.content.Context;
+
 /**
  * 作者: chengx
  * 日期: 2016/9/29.
@@ -34,5 +36,7 @@ public interface IView<T> {
      * @param text 提示信息内容
      */
     void showTip(String text);
+
+    void toLoginActivity(Context context);
 
 }

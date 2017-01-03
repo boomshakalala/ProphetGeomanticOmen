@@ -20,6 +20,8 @@ public class AppConfig {
     public static int RESULT_LOGIN = 1;
     public static int RESULT_LOGOUT = -1;
 
+    public static String IS_LOGIN = "isLogin";
+
     public static String WX_APP_ID = "wxe208d293e5353bf4";
 
     public static String WB_APP_ID = "";

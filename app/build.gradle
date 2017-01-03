@@ -50,4 +50,5 @@ dependencies {
     compile files('libs/weiboSDKCore_3.1.4.jar')
     compile files('libs/ormlite-android-5.0.jar')
     compile files('libs/ormlite-core-5.0.jar')
+    compile files('libs/alipaySdk-20161222.jar')
 }

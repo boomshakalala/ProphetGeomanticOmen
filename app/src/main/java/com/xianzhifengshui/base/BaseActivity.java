@@ -1,5 +1,7 @@
 package com.xianzhifengshui.base;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.api.model.User;
+import com.xianzhifengshui.ui.login.LoginActivity;
 import com.xianzhifengshui.utils.ConstUtils;
 import com.xianzhifengshui.utils.KLog;
 import com.xianzhifengshui.utils.SPUtils;
@@ -208,6 +211,10 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
         }else {
             return "";
         }
+    }
+
+    public void toLoginActivity(Context context){
+        LoginActivity.launcher(context);
     }
 
 

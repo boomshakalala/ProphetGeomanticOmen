@@ -6,6 +6,7 @@ import com.xianzhifengshui.api.BaseListModel;
 import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
 import com.xianzhifengshui.base.AppConfig;
+import com.xianzhifengshui.base.BaseApplication;
 import com.xianzhifengshui.base.BasePresenter;
 import com.xianzhifengshui.utils.ConstUtils;
 import com.xianzhifengshui.utils.KLog;
@@ -83,4 +84,26 @@ public class MasterListPresenter extends BasePresenter implements MasterListCont
         currentPage ++;
         requestData();
     }
+
+    @Override
+    public void praise(String masterCode) {
+        String userCode = getUserCode();
+        api.masterPointOfPraise(masterCode, userCode, new ActionCallbackListener<Void>() {
+            @Override
+            public void onProgress(long bytesWritten, long totalSize) {
+
+            }
+
+            @Override
+            public void onSuccess(Void data) {
+
+            }
+
+            @Override
+            public void onFailure(int errorEvent, String message) {
+                view.showTip(message);
+            }
+        });
+    }
+
 }

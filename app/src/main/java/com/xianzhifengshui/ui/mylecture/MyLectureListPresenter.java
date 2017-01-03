@@ -2,8 +2,13 @@ package com.xianzhifengshui.ui.mylecture;
 
 import android.os.Handler;
 
+import com.xianzhifengshui.api.BaseListModel;
+import com.xianzhifengshui.api.model.Article;
 import com.xianzhifengshui.api.model.Lecture;
+import com.xianzhifengshui.api.net.ActionCallbackListener;
+import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BasePresenter;
+import com.xianzhifengshui.utils.KLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,40 +22,66 @@ public class MyLectureListPresenter extends BasePresenter implements MyLectureLi
 
     private MyLectureListContract.View view;
 
+    private int currentPage = 1;
+
     public MyLectureListPresenter(MyLectureListContract.View view) {
         this.view = view;
         view.setPresenter(this);
     }
 
     private void requestData() {
+        view.showWaiting();
+        api.lectureCollectionList("3232",currentPage, AppConfig.PAGE_SIZE, new ActionCallbackListener<BaseListModel<ArrayList<Lecture>>>() {
+            @Override
+            public void onProgress(long bytesWritten, long totalSize) {
+            }
 
+            @Override
+            public void onSuccess(BaseListModel<ArrayList<Lecture>> data) {
+                log(data);
+                view.closeWait();
+                if (data.getPageNum()==currentPage){
+                    //关闭记载更多
+                    view.closeLoadMore();
+                }
+                ArrayList<Lecture> dataList = data.getList();
+                if (dataList != null && dataList.size()>0) {
+                    if (currentPage == 1){
+                        view.refreshData(dataList);
+                    }else {
+                        view.loadMore(dataList);
+                    }
+                }else {
+                    if (currentPage == 1){
+                        view.showEmpty();
+                    }else {
+                        view.showTip("没有更多了");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int errorEvent, String message) {
+                view.closeWait();
+                if (currentPage == 1){
+                    view.showFailure();
+                }
+                KLog.d(getClass().getSimpleName(),message);
+                view.showTip(message);
+            }
+        });
     }
 
 
     @Override
     public void refreshData(int type) {
-        view.showWaiting();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                List<Lecture> lectures = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    lectures.add(new Lecture());
-                }
-                view.closeWait();
-                view.refreshData(lectures);
-            }
-        },3000);
-
+        currentPage = 1;
+        requestData();
     }
 
     @Override
     public void loadMore() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                view.closeWait();
-            }
-        },3000);
+        currentPage++;
+        requestData();
     }
 }

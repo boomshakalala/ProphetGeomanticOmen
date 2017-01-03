@@ -1,5 +1,6 @@
 package com.xianzhifengshui.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -131,5 +132,9 @@ public abstract class BaseFragment extends Fragment {
 
     protected void logJson(String json){
         activity.logJson(json);
+    }
+
+    public void toLoginActivity(Context context){
+        activity.toLoginActivity(context);
     }
 }

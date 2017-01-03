@@ -74,6 +74,7 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
         data = new ArrayList<>();
         adapter = new MasterListAdapter(getContext(),R.layout.item_master_list,data);
         adapter.setOnItemClickListener(this);
+        adapter.setOnClickListener(this);
     }
 
     @Override
@@ -113,6 +114,12 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
                 //切换到全部
                 currentIndex = INDEX_ALL;
                 setSelected(INDEX_ALL);
+                break;
+            case R.id.text_master_list_point_of_praise:
+                Master master = (Master) v.getTag(R.id.text_master_list_point_of_praise);
+                if (master != null) {
+                    presenter.praise(master.getMasterCode());
+                }
                 break;
             default:
                 break;
@@ -215,6 +222,6 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
 
     @Override
     public void  onItemClick(View view, Master data) {
-        MasterDetailActivity.launcher(getContext());
+        MasterDetailActivity.launcher(getContext(),data.getMasterCode());
     }
 }

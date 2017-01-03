@@ -10,6 +10,8 @@ import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.NaviMenu;
 import com.xianzhifengshui.api.model.User;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
+import com.xianzhifengshui.api.utils.KLog;
+import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BaseActivity;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.base.BasePresenter;
@@ -38,7 +40,7 @@ public class HomePresenter extends BasePresenter implements HomeContract.Present
     }
 
     public void checkLogin(final SPUtils sp){
-        if (sp.getBoolean("isLogin")){
+        if (sp.getBoolean(AppConfig.IS_LOGIN)){
             UserInfo userInfo = JMessageClient.getMyInfo();
             if (userInfo == null){
                 User user = sp.getObject("user", null);
@@ -67,56 +69,74 @@ public class HomePresenter extends BasePresenter implements HomeContract.Present
     @Override
     public void refreshData() {
         view.showWaiting();
-//        api.indexGetDataList(new ActionCallbackListener<HomeItemModle>() {
-//            @Override
-//            public void onProgress(long bytesWritten, long totalSize) {
-//
-//            }
-//
-//            @Override
-//            public void onSuccess(HomeItemModle data) {
-//                log(data);
-//            }
-//
-//            @Override
-//            public void onFailure(int errorEvent, String message) {
-//
-//            }
-//        });
-        new Handler().postDelayed(new Runnable() {
+        api.indexGetDataList(new ActionCallbackListener<HomeItemModle>() {
             @Override
-            public void run() {
-                List<Object> data = new ArrayList<>();
+            public void onProgress(long bytesWritten, long totalSize) {
+
+            }
+
+            @Override
+            public void onSuccess(HomeItemModle data) {
+                List<Object> dataList = new ArrayList<>();
+//                dataList.addAll(data.getCarouselList());
                 ArrayList<Carousel> carousels = new ArrayList<>();
                 String[] imgUrls = {"http://img3.fengniao.com/forum/attachpics/913/114/36502745.jpg",
                 "http://imageprocess.yitos.net/images/public/20160910/99381473502384338.jpg",
                 "http://imageprocess.yitos.net/images/public/20160910/77991473496077677.jpg",
                 "http://imageprocess.yitos.net/images/public/20160906/1291473163104906.jpg"};
-        for (int i = 0; i < 4; i++) {
-            Carousel carousel = new Carousel();
-            carousel.setPicUrl(imgUrls[i]);
-            carousels.add(carousel);
-        }
-        data = new ArrayList<>();
-        data.add(carousels);
-        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
-        for (int i = 0; i < 8; i++) {
-            data.add(new NaviMenu());
-        }
-        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
-        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_LABEL,"推荐大师",true));
-        for (int i = 0; i < 4; i++) {
-            data.add(new Master());
-        }
-        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
-        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_LABEL,"精品讲座",false));
-        for (int i = 0; i < 4; i++) {
-            data.add(new Lecture());
-        }
-                view.closeWait();
-                view.refreshData(data);
+                for (int i = 0; i < 4; i++) {
+                    Carousel carousel = new Carousel();
+                    carousel.setPicUrl(imgUrls[i]);
+                    carousels.add(carousel);
+                }
+                dataList.add(carousels);
+                dataList.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
+                dataList.addAll(data.getNaviMenuList());
+                dataList.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
+                log(dataList);
+
+                view.refreshData(dataList);
             }
-        },3000);
+
+            @Override
+            public void onFailure(int errorEvent, String message) {
+
+            }
+        });
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                List<Object> data ;
+//                ArrayList<Carousel> carousels = new ArrayList<>();
+//                String[] imgUrls = {"http://img3.fengniao.com/forum/attachpics/913/114/36502745.jpg",
+//                "http://imageprocess.yitos.net/images/public/20160910/99381473502384338.jpg",
+//                "http://imageprocess.yitos.net/images/public/20160910/77991473496077677.jpg",
+//                "http://imageprocess.yitos.net/images/public/20160906/1291473163104906.jpg"};
+//        for (int i = 0; i < 4; i++) {
+//            Carousel carousel = new Carousel();
+//            carousel.setPicUrl(imgUrls[i]);
+//            carousels.add(carousel);
+//        }
+//        data = new ArrayList<>();
+//        data.add(carousels);
+//        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
+//        for (int i = 0; i < 8; i++) {
+//            data.add(new NaviMenu());
+//        }
+//        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
+//        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_LABEL,"推荐大师",true));
+//        for (int i = 0; i < 4; i++) {
+//            data.add(new Master());
+//        }
+//        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
+//        data.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_LABEL,"精品讲座",false));
+//        for (int i = 0; i < 4; i++) {
+//            data.add(new Lecture());
+//        }
+//                view.closeWait();
+//                view.refreshData(data);
+//            }
+//        },3000);
     }
 
     @Override

@@ -11,7 +11,7 @@
         android:id="@+id/layout_master_detail_head"
         android:layout_width="match_parent"
         android:layout_height="330px"
-        android:background="@drawable/pic1">
+        android:background="@color/orange">
         <RelativeLayout
             android:layout_width="190px"
             android:layout_height="220px"
@@ -125,12 +125,12 @@
             android:layout_marginTop="1px"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            />
+            android:layout_weight="1" />
         <Button
             android:id="@+id/btn_master_detail_collect"
             android:layout_width="match_parent"
             android:layout_height="88px"
+            android:gravity="center"
             android:background="@drawable/selector_rect_orange_btn"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_larger"

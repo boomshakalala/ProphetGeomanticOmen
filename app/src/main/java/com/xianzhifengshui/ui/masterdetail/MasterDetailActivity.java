@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.TabPagerAdapter;
+import com.xianzhifengshui.api.model.Article;
 import com.xianzhifengshui.api.model.Evaluate;
 import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.model.ServiceType;
@@ -35,7 +38,7 @@ import java.util.List;
  * 日期: 2016/10/31.
  * 描述: 大师详情页面
  */
-public class MasterDetailActivity extends BaseActivity implements MasterDetailContract.View{
+public class MasterDetailActivity extends BaseActivity implements MasterDetailContract.View, View.OnClickListener {
     /*======= 控件声明区 =======*/
     private RelativeLayout headLayout;
     private TextView nameTv;
@@ -45,6 +48,7 @@ public class MasterDetailActivity extends BaseActivity implements MasterDetailCo
     private TextView pointOfPraiseTv;
     private TextView collectionTv;
     private TextView singleVolumeTv;
+    private Button collectBtn;
     private ViewPager viewPager;
     private AutoTabLayout tabLayout;
     /*=========================*/
@@ -56,10 +60,13 @@ public class MasterDetailActivity extends BaseActivity implements MasterDetailCo
     private MasterDescFragment masterDescFragment;
     private EvaluateFragment evaluateFragment;
     private ArticleFragment articleFragment;
+    private String masterCode;
+    private boolean isCollected = false;
 
 
-    public static void launcher(Context context){
+    public static void launcher(Context context,String masterCode){
         Intent intent = new Intent();
+        intent.putExtra("masterCode",masterCode);
         intent.setClass(context, MasterDetailActivity.class);
         context.startActivity(intent);
     }
@@ -94,6 +101,8 @@ public class MasterDetailActivity extends BaseActivity implements MasterDetailCo
         pointOfPraiseTv = (TextView) findViewById(R.id.text_master_detail_point_of_praise);
         collectionTv = (TextView) findViewById(R.id.text_master_detail_collection);
         singleVolumeTv = (TextView) findViewById(R.id.text_master_detail_single_volume);
+        collectBtn = (Button) findViewById(R.id.btn_master_detail_collect);
+        collectBtn.setOnClickListener(this);
         viewPager = (ViewPager) findViewById(R.id.pager_master_detail);
         viewPager.setOffscreenPageLimit(4);
         tabLayout = (AutoTabLayout) findViewById(R.id.tab_master_detail);
@@ -104,6 +113,7 @@ public class MasterDetailActivity extends BaseActivity implements MasterDetailCo
 
     @Override
     protected void initData() {
+        this.masterCode = getIntent().getStringExtra("masterCode");
         presenter = new MasterDetailPresenter(this);
         tabs = getResources().getStringArray(R.array.tab_master_detail);
         fragments = new ArrayList<>();
@@ -111,6 +121,9 @@ public class MasterDetailActivity extends BaseActivity implements MasterDetailCo
         masterDescFragment = new MasterDescFragment();
         evaluateFragment = new EvaluateFragment();
         articleFragment = new ArticleFragment();
+        Bundle arguments = new Bundle();
+        arguments.putString("masterCode",masterCode);
+        articleFragment.setArguments(arguments);
         fragments.add(serviceTypeFragment);
         fragments.add(masterDescFragment);
         fragments.add(evaluateFragment);
@@ -143,6 +156,8 @@ public class MasterDetailActivity extends BaseActivity implements MasterDetailCo
         showToast(text);
     }
 
+
+
     @Override
     public void showInfo(Master master) {
         nameTv.setText(master.getName());
@@ -152,7 +167,7 @@ public class MasterDetailActivity extends BaseActivity implements MasterDetailCo
         pointOfPraiseTv.setText(master.getPointOfPraise()+"");
         singleVolumeTv.setText(master.getSingleVolume()+getString(R.string.text_single));
         collectionTv.setText(master.getCollection()+"");
-        Glide.with(this).load("http://f.hiphotos.baidu.com/image/pic/item/203fb80e7bec54e753da379aba389b504fc26a7b.jpg").asBitmap().into(new SimpleTarget<Bitmap>() {
+        Glide.with(this).load(master.getIcon()).asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                 headLayout.setBackgroundDrawable(ImageUtils.bitmap2Drawable(getResources(), resource));
@@ -171,8 +186,8 @@ public class MasterDetailActivity extends BaseActivity implements MasterDetailCo
     }
 
     @Override
-    public void showArticle() {
-//        articleFragment.refreshData();
+    public void showArticle(List<Article> articles) {
+        articleFragment.refreshData(articles);
     }
 
     @Override
@@ -195,4 +210,27 @@ public class MasterDetailActivity extends BaseActivity implements MasterDetailCo
 
     }
 
+    @Override
+    public void showCollect() {
+        collectBtn.setText("取消收藏");
+        isCollected = true;
+    }
+
+    @Override
+    public void showUnCollect() {
+        collectBtn.setText("收藏大师");
+        isCollected = false;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_master_detail_collect:
+                if (isCollected)
+                    presenter.unCollectMaster(masterCode);
+                else
+                    presenter.collectMaster(masterCode);
+                break;
+        }
+    }
 }

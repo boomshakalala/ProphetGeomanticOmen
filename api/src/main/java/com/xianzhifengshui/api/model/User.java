@@ -10,6 +10,12 @@ import java.io.Serializable;
 public class User implements Serializable{
     private static final long serialVersionUID = 9043766419151746508L;
 
+    private String accessType;
+
+    private int type;
+
+    private String accessToken;
+
     private int id;
 
     private long createTime; //注册时间
@@ -31,6 +37,38 @@ public class User implements Serializable{
     private long lastModifyTime;
 
     private String password;
+
+    public String getAccessType() {
+        return accessType;
+    }
+
+    public void setAccessType(String accessType) {
+        this.accessType = accessType;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
+
+    public void setLastModifyTime(long lastModifyTime) {
+        this.lastModifyTime = lastModifyTime;
+    }
 
     public String getPassword() {
         return password;

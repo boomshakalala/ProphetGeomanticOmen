@@ -1,5 +1,6 @@
 package com.xianzhifengshui.ui.index.mine;
 
+import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BasePresenter;
 import com.xianzhifengshui.utils.SPUtils;
 
@@ -18,7 +19,7 @@ public class MinePresenter extends BasePresenter implements MineContract.Present
 
     @Override
     public void checkIsLogin(SPUtils sp,boolean needUpdateUI,boolean needJump,int opt) {
-        boolean isLogin = sp.getBoolean("isLogin");
+        boolean isLogin = sp.getBoolean(AppConfig.IS_LOGIN);
         if (isLogin){
             if (needUpdateUI)
                 view.showLoginInfo();
