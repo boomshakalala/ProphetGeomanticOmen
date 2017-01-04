@@ -3,6 +3,7 @@ package com.xianzhifengshui.ui.index.home;
 import android.os.Handler;
 
 import com.xianzhifengshui.adapter.ViewSupportModel;
+import com.xianzhifengshui.api.BaseListModel;
 import com.xianzhifengshui.api.model.Carousel;
 import com.xianzhifengshui.api.model.HomeItemModle;
 import com.xianzhifengshui.api.model.Lecture;
@@ -77,7 +78,7 @@ public class HomePresenter extends BasePresenter implements HomeContract.Present
 
             @Override
             public void onSuccess(HomeItemModle data) {
-                List<Object> dataList = new ArrayList<>();
+                final List<Object> dataList = new ArrayList<>();
 //                dataList.addAll(data.getCarouselList());
                 ArrayList<Carousel> carousels = new ArrayList<>();
                 String[] imgUrls = {"http://img3.fengniao.com/forum/attachpics/913/114/36502745.jpg",
@@ -93,8 +94,46 @@ public class HomePresenter extends BasePresenter implements HomeContract.Present
                 dataList.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
                 dataList.addAll(data.getNaviMenuList());
                 dataList.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
-                log(dataList);
+                api.masterList(1, AppConfig.PAGE_SIZE, new ActionCallbackListener<BaseListModel<ArrayList<Master>>>() {
+                    @Override
+                    public void onProgress(long bytesWritten, long totalSize) {
 
+                    }
+
+                    @Override
+                    public void onSuccess(BaseListModel<ArrayList<Master>> data) {
+                        dataList.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_LABEL,"推荐大师",true));
+                        dataList.addAll(data.getList());
+                        dataList.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
+                        api.lecturesList(1, AppConfig.PAGE_SIZE, new ActionCallbackListener<BaseListModel<ArrayList<Lecture>>>() {
+                            @Override
+                            public void onProgress(long bytesWritten, long totalSize) {
+
+                            }
+
+                            @Override
+                            public void onSuccess(BaseListModel<ArrayList<Lecture>> data) {
+                                dataList.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_LABEL,"推荐讲座",false));
+                                dataList.addAll(data.getList());
+                                dataList.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
+                                log(dataList);
+                                view.refreshData(dataList);
+                                view.closeWait();
+                            }
+
+                            @Override
+                            public void onFailure(int errorEvent, String message) {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(int errorEvent, String message) {
+
+                    }
+                });
+                log(dataList);
                 view.refreshData(dataList);
             }
 
@@ -147,5 +186,26 @@ public class HomePresenter extends BasePresenter implements HomeContract.Present
                 view.closeWait();
             }
         },3000);
+    }
+
+    @Override
+    public void praise(String masterCode) {
+        String userCode = getUserCode();
+        api.masterPointOfPraise(masterCode, userCode, new ActionCallbackListener<Void>() {
+            @Override
+            public void onProgress(long bytesWritten, long totalSize) {
+
+            }
+
+            @Override
+            public void onSuccess(Void data) {
+
+            }
+
+            @Override
+            public void onFailure(int errorEvent, String message) {
+                view.showTip(message);
+            }
+        });
     }
 }

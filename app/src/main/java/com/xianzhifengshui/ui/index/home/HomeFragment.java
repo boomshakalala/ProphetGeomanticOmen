@@ -42,7 +42,7 @@ import java.util.List;
  * 日期: 2016/10/10.
  * 描述: 首页
  */
-public class HomeFragment extends BaseFragment implements HomeContract.View,PullToRefreshBase.OnRefreshListener2{
+public class HomeFragment extends BaseFragment implements HomeContract.View,PullToRefreshBase.OnRefreshListener2, View.OnClickListener {
 
    /*======== 控件声明区 =======*/
     private PullToRefreshRecyclerView pullToRefreshRecyclerView;
@@ -110,6 +110,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Pull
         presenter = new HomePresenter(this);
         data = new ArrayList<>();
         adapter = new HomeAdapter(getContext(),data);
+        adapter.setOnClickListener(this);
+
     }
 
     @Override
@@ -196,5 +198,19 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Pull
     public void onResume() {
         super.onResume();
         ((HomePresenter)presenter).checkLogin(sp);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.text_master_list_point_of_praise:
+                Master master = (Master) view.getTag(R.id.text_master_list_point_of_praise);
+                if (master != null) {
+                    presenter.praise(master.getMasterCode());
+                }
+                break;
+            default:
+                break;
+        }
     }
 }

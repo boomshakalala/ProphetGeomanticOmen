@@ -25,6 +25,8 @@ public class HomeMenuItemDelegate implements ItemViewDelegate<Object> {
 
     @Override
     public void convert(RecyclerViewHolder holder, Object o, int position) {
-
+        NaviMenu naviMenu = (NaviMenu) o;
+        holder.setImageUrl(R.id.image_home_menu_item,naviMenu.getRemark());
+        holder.setText(R.id.text_home_menu_item,naviMenu.getValue());
     }
 }

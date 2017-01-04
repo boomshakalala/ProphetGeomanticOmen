@@ -23,5 +23,6 @@ public interface HomeContract {
     interface Presenter extends IPresenter{
         void refreshData();
         void loadMore();
+        void praise(String masterCode);
     }
 }
