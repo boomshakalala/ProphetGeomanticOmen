@@ -251,7 +251,7 @@ public interface Api {
      * @param type 1：收藏讲座 0：取消收藏
      * @param callback 回调
      */
-    void lectureCollectionCollect(String userCode,String lectCode,String type,ActionCallbackListener<Void> callback);
+    void lectureCollectionCollect(String userCode,String lectCode,int type,ActionCallbackListener<Void> callback);
 
     /**
      * 调用本接口获取我的收藏讲座列表

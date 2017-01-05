@@ -20,10 +20,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <RelativeLayout
-                    android:id="@+id/layout_master_detail_head"
+                    android:id="@+id/layout_lecture_detail_head"
                     android:layout_width="match_parent"
                     android:layout_height="330px"
-                    android:background="@drawable/pic1">
+                    android:background="@color/white">
                     <RelativeLayout
                         android:layout_width="190px"
                         android:layout_height="220px"
@@ -37,24 +37,24 @@
                         android:layout_marginRight="40px"
                         android:orientation="vertical">
                         <TextView
-                            android:id="@+id/text_master_detail_name"
+                            android:id="@+id/text_lecture_detail_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/text_size_larger"
                             android:textColor="@color/white"
-                            android:text="张三丰"
+                            android:text=""
                             android:layout_centerHorizontal="true"/>
                         <TextView
-                            android:id="@+id/text_master_detail_desc"
-                            android:layout_below="@id/text_master_detail_name"
+                            android:id="@+id/text_lecture_detail_master_title"
+                            android:layout_below="@id/text_lecture_detail_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
                             android:layout_marginTop="25px"
                             android:textSize="@dimen/text_size_smallest"
-                            android:text="武当派创始人、首任掌门人。"/>
+                            android:text=""/>
                         <TextView
-                            android:id="@+id/text_master_detail_location"
+                            android:id="@+id/text_lecture_detail_master_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/text_size_smallest"
@@ -62,7 +62,7 @@
                             android:textColor="@color/black"
                             android:gravity="center"
                             android:drawablePadding="5dp"
-                            android:text="北京 西直门"
+                            android:text=""
                             android:drawableLeft="@drawable/master_detail_location_icon"/>
                     </RelativeLayout>
 
@@ -81,7 +81,7 @@
                         android:textColor="@color/yellow"
                         android:layout_centerVertical="true"
                         android:textSize="@dimen/text_size_small"
-                        android:text="高级"/>
+                        android:text=""/>
                     <RatingBar
                         android:id="@+id/rating_lecture_detail"
                         android:layout_width="wrap_content"
@@ -93,22 +93,24 @@
                         android:layout_toRightOf="@id/text_lecture_detail_rating_info"
                         />
                     <TextView
+                        android:id="@+id/text_lecture_detail_single_volume"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/text_size_small"
                         android:textColor="@color/text_red"
                         android:gravity="center"
-                        android:text="88人约过"
+                        android:text=""
                         android:drawableLeft="@drawable/master_detail_single_valume_icon"
                         android:drawablePadding="10dp"
                         android:layout_centerInParent="true"
                         />
                     <TextView
+                        android:id="@+id/text_lecture_detail_collect"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/orange"
                         android:textSize="@dimen/text_size_small"
-                        android:text="99"
+                        android:text=""
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:gravity="center"
@@ -116,6 +118,7 @@
                         android:drawablePadding="6dp"/>
                 </RelativeLayout>
                 <TextView
+                    android:id="@+id/text_lecture_detail_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -125,7 +128,7 @@
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:textSize="@dimen/text_size_normal"
-                    android:text="聊聊买房那些事儿"/>
+                    android:text=""/>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -144,7 +147,7 @@
                         android:drawablePadding="8dp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentLeft="true"
-                        android:text="9-12 9:00"
+                        android:text=""
                         android:gravity="center"/>
                     <TextView
                         android:id="@+id/text_lecture_detail_duration"
@@ -155,7 +158,7 @@
                         android:drawableLeft="@drawable/lecture_detail_duration_icon"
                         android:drawablePadding="8dp"
                         android:layout_centerInParent="true"
-                        android:text="9小时"
+                        android:text=""
                         android:gravity="center"/>
 
                     <TextView
@@ -168,11 +171,12 @@
                         android:drawablePadding="8dp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
-                        android:text="人民大会堂福建厅"
+                        android:text=""
                         android:gravity="center"/>
 
                 </RelativeLayout>
                 <TextView
+                    android:id="@+id/text_lecture_detail_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -184,8 +188,9 @@
                     android:maxLines="7"
                     android:textColor="@color/text_gray"
                     android:textSize="@dimen/text_size_smaller"
-                    android:text="沪深两市双双跳空低开，券商，一带一路盘初即表现强势，拉升指数低开高走震荡上行，突破5、10日均线。题材上局部热点继续给力，股权变化，次新，高送，债转股等继续强劲，涨停潮也继续上演，中小创板相对活跃。午后券商、一带一路等蓝筹继续发酵，沪指成功刷新2638点反弹以来的新高3140.93点，但是新高后妖股纷纷跳水引发股指快速回落，周四收盘，上证指数报涨0.84%，成交量2658亿元，深成指数报涨0.48%，成交量3747亿元，创业板报涨0.32%，两市涨停57只，无跌停。/n沪深两市双双跳空低开，券商，一带一路盘初即表现强势，拉升指数低开高走震荡上行，突破5、10日均线。题材上局部热点继续给力，股权变化，次新，高送，债转股等继续强劲，涨停潮也继续上演，中小创板相对活跃。午后券商、一带一路等蓝筹继续发酵，沪指成功刷新2638点反弹以来的新高3140.93点，但是新高后妖股纷纷跳水引发股指快速回落，周四收盘，上证指数报涨0.84%，成交量2658亿元，深成指数报涨0.48%，成交量3747亿元，创业板报涨0.32%，两市涨停57只，无跌停。"/>
+                    android:text=""/>
                 <TextView
+                    android:id="@+id/btn_lecture_detail_show_all"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -193,7 +198,7 @@
                     android:gravity="center"
                     android:paddingTop="30px"
                     android:paddingBottom="30px"
-                    android:text="显示全部"/>
+                    android:text="@string/text_show_all"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -204,8 +209,9 @@
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:textSize="@dimen/text_size_normal"
-                    android:text="关于大师"/>
+                    android:text="@string/text_about_master"/>
                 <TextView
+                    android:id="@+id/text_lecture_detail_master_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -215,7 +221,7 @@
                     android:paddingBottom="47px"
                     android:textColor="@color/text_gray"
                     android:textSize="@dimen/text_size_smaller"
-                    android:text="沪深两市双双跳空低开，券商，一带一路盘初即表现强势，拉升指数低开高走震荡上行，突破5、10日均线。题材上局部热点继续给力，股权变化，次新，高送，债转股等继续强劲，涨停潮也继续上演，中小创板相对活跃。午后券商、一带一路等蓝筹继续发酵，沪指成功刷新2638点反弹以来的新高3140.93点，但是新高后妖股纷纷跳水引发股指快速回落，周四收盘，上证指数报涨0.84%，成交量2658亿元，深成指数报涨0.48%，成交量3747亿元，创业板报涨0.32%，两市涨停57只，无跌停。/n沪深两市双双跳空低开，券商，一带一路盘初即表现强势，拉升指数低开高走震荡上行，突破5、10日均线。题材上局部热点继续给力，股权变化，次新，高送，债转股等继续强劲，涨停潮也继续上演，中小创板相对活跃。午后券商、一带一路等蓝筹继续发酵，沪指成功刷新2638点反弹以来的新高3140.93点，但是新高后妖股纷纷跳水引发股指快速回落，周四收盘，上证指数报涨0.84%，成交量2658亿元，深成指数报涨0.48%，成交量3747亿元，创业板报涨0.32%，两市涨停57只，无跌停。"/>
+                    android:text=""/>
             </LinearLayout>
         </com.xianzhifengshui.widget.auto.AutoScrollView>
     </com.xianzhifengshui.widget.EmptyLayout>
@@ -225,6 +231,7 @@
         android:layout_height="92px"
         android:orientation="horizontal">
         <TextView
+            android:id="@+id/btn_lecture_detail_collect"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
@@ -234,13 +241,14 @@
             android:gravity="center"
             android:text="@string/text_collect_lecture"/>
         <TextView
+            android:id="@+id/btn_lecture_detail_sign_up"
             android:layout_width="237px"
             android:layout_height="match_parent"
             android:background="@color/orange_dark"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_larger"
             android:gravity="center"
-            android:text="报名"/>
+            android:text="@string/text_sign_up"/>
     </LinearLayout>
 
 </LinearLayout>

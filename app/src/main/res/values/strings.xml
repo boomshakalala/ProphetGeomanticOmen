@@ -159,6 +159,13 @@
     <string name="text_wx">微信</string>
     <string name="text_choose_all">全选</string>
     <string name="text_money_sum">合计：</string>
+    <string name="text_about_master">关于大师</string>
+    <string name="text_show_all">显示全部</string>
+    <string name="text_sign_up">报名</string>
+    <string name="text_order_detail">订单详情</string>
+    <string name="text_coupon">优惠券</string>
+    <string name="text_you_have_no_coupon">您当前没有可用优惠券，赶紧去领吧~</string>
+    <string name="text_to_pay">去支付</string>
 
     <array name="tag_search">
         <item>商务风水</item>

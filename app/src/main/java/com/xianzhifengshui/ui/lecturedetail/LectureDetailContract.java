@@ -13,9 +13,13 @@ public interface LectureDetailContract {
     interface View extends IView<Presenter>{
         void loadData(Lecture lecture);
         void showFailure();
+        void showCollect();
+        void showUnCollect();
     }
 
     interface Presenter extends IPresenter{
         void requestData(String lecturesCode,String userCode);
+        void collectMaster(String masterCode);
+        void unCollectMaster(String masterCode);
     }
 }

@@ -273,7 +273,7 @@ public class ApiImpl implements Api {
     }
 
     @Override
-    public void lectureCollectionCollect(String userCode, String lectCode, String type, ActionCallbackListener<Void> callback) {
+    public void lectureCollectionCollect(String userCode, String lectCode, int type, ActionCallbackListener<Void> callback) {
         paramsMap.clear();
         paramsMap.put("userCode", userCode);
         paramsMap.put("lectCode", lectCode);
