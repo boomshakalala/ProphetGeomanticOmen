@@ -3,6 +3,7 @@ package com.xianzhifengshui.utils;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * <pre>
@@ -326,11 +327,32 @@ public class StringUtils {
         return sb.toString();
     }
 
+    /**
+     * String数组转换为集合
+     * @param arry String数组
+     * @return String集合
+     */
     public static ArrayList<String> arry2List(String[] arry){
         ArrayList<String> result = new ArrayList<>();
         for (int i = 0; i < arry.length; i++) {
             result.add(arry[i]);
         }
         return result;
+    }
+
+    /**
+     * 生成任意长度的随机字符串
+     * @param length 字符串长度
+     * @return 随机字符串
+     */
+    public static String getRandomString(int length) {
+        String base = "abcdefghijklmnopqrstuvwxyz0123456789";
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(base.length());
+            sb.append(base.charAt(number));
+        }
+        return sb.toString();
     }
 }

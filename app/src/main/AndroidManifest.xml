@@ -27,8 +27,8 @@
     <uses-permission android:name="com.xianzhifengshui.permission.JPUSH_MESSAGE" />
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="23"
-        tools:ignore="GradleOverrides" />
+        android:targetSdkVersion="19"
+        />
     <!-- 极光推送权限完毕 -->
 
     <application
@@ -275,6 +275,10 @@
             android:exported="true"/>
         <activity
             android:name=".wxapi.WXPayEntryActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.pay.PayActivity"
             android:screenOrientation="portrait"
             android:exported="true"/>
     </application>

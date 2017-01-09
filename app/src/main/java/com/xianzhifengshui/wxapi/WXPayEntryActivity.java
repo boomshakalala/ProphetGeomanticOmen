@@ -71,6 +71,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
             }else {
                 showToast(getString(R.string.text_pay_failure));
             }
+            finish();
         }
     }
 }

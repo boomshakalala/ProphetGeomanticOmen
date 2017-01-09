@@ -123,6 +123,8 @@ public class HomePresenter extends BasePresenter implements HomeContract.Present
 
                             @Override
                             public void onFailure(int errorEvent, String message) {
+                                view.showTip(message);
+                                view.showFailure();
 
                             }
                         });
@@ -130,7 +132,8 @@ public class HomePresenter extends BasePresenter implements HomeContract.Present
 
                     @Override
                     public void onFailure(int errorEvent, String message) {
-
+                            view.showTip(message);
+                            view.showFailure();
                     }
                 });
                 log(dataList);
@@ -139,7 +142,8 @@ public class HomePresenter extends BasePresenter implements HomeContract.Present
 
             @Override
             public void onFailure(int errorEvent, String message) {
-
+                view.showTip(message);
+                view.showFailure();
             }
         });
 //        new Handler().postDelayed(new Runnable() {

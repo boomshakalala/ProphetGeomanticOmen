@@ -21,9 +21,11 @@ import com.xianzhifengshui.api.net.ActionCallbackListener;
 import com.xianzhifengshui.api.net.HttpEngine;
 import com.xianzhifengshui.api.utils.JsonFormatTool;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * 作者: 陈冠希
@@ -89,7 +91,7 @@ public class ApiImpl implements Api {
     @Override
     public void userLogin(String userName, String passWord,ActionCallbackListener<User> callback) {
         paramsMap.clear();
-        paramsMap.put("username", userName);
+        paramsMap.put("mobilePhone", userName);
         paramsMap.put("password",passWord);
         HttpEngine.getInstance().get(USER_LOGIN, map2Ciphertext(paramsMap) ,User.class,callback);
     }
@@ -313,13 +315,23 @@ public class ApiImpl implements Api {
     @Override
     public void lectureOrderPay(String userCode, String ip, int totalFee, String body, String lectCode, String payType, ActionCallbackListener<PayOrder> callback) {
         paramsMap.clear();
-        paramsMap.put("userCode", userCode);
+        paramsMap.put("usercode", "123");
         paramsMap.put("ip", ip);
         paramsMap.put("totalFee", totalFee);
         paramsMap.put("body", body);
         paramsMap.put("lectCode", lectCode);
         paramsMap.put("payType", payType);
-        HttpEngine.getInstance().get(LECTURE_ORDER_PAY,map2Ciphertext(paramsMap),PayOrder.class,callback);
+        HttpEngine.getInstance().post(LECTURE_ORDER_PAY,map2Ciphertext(paramsMap),PayOrder.class,callback);
+    }
+
+    @Override
+    public void fileUpload(File file) {
+        HttpEngine.getInstance().imageUpload(file);
+    }
+
+    @Override
+    public void fileUploadBatch(List<File> files) {
+        HttpEngine.getInstance().imageUploadBatch(files);
     }
 
 

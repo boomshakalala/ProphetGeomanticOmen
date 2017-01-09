@@ -44,7 +44,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     }
 
     protected void initData() {
-        api = WXAPIFactory.createWXAPI(this, AppConfig.WX_APP_ID,true);
+        api = WXAPIFactory.createWXAPI(this, AppConfig.WX_APP_ID);
         api.handleIntent(this.getIntent(), this);
         sp = new SPUtils(this,AppConfig.SP_NAME);
     }
@@ -67,6 +67,10 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onResp(BaseResp baseResp) {
+        KLog.e(TAG,baseResp.errCode);
+        KLog.e(TAG,baseResp.errStr);
+        KLog.e(TAG,baseResp.getType());
+        KLog.e(TAG,baseResp.transaction);
         if (baseResp.errCode == BaseResp.ErrCode.ERR_OK){
             if (baseResp instanceof SendAuth.Resp){
                 EventBus.getDefault().post(baseResp);
@@ -83,9 +87,4 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
         }
     }
 
-    private void getToken(String code) {
-        KLog.d(TAG,code);
-
-//        HttpEngine.getInstance()
-    }
 }

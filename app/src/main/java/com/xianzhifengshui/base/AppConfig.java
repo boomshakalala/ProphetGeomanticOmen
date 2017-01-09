@@ -24,6 +24,8 @@ public class AppConfig {
 
     public static String WX_APP_ID = "wxe208d293e5353bf4";
 
+    public static String WX_PARTNER_ID = "1397428402";
+
     public static String WB_APP_ID = "";
 
     public static String QQ_APP_ID = "";

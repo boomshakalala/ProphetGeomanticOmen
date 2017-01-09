@@ -16,6 +16,7 @@ import com.xianzhifengshui.R;
 import com.xianzhifengshui.api.model.Lecture;
 import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BaseActivity;
+import com.xianzhifengshui.ui.pay.PayActivity;
 import com.xianzhifengshui.utils.ImageUtils;
 import com.xianzhifengshui.widget.auto.AutoTabLayout;
 
@@ -87,6 +88,7 @@ public class LectureDetailActivity extends BaseActivity implements LectureDetail
         showAllBtn = (TextView) findViewById(R.id.btn_lecture_detail_show_all);
         colloctBtn = (TextView) findViewById(R.id.btn_lecture_detail_collect);
         signUpBtn = (TextView) findViewById(R.id.btn_lecture_detail_sign_up);
+        signUpBtn.setOnClickListener(this);
         levelRating = (RatingBar) findViewById(R.id.rating_lecture_detail);
         colloctBtn.setOnClickListener(this);
         emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
@@ -177,6 +179,9 @@ public class LectureDetailActivity extends BaseActivity implements LectureDetail
                     presenter.unCollectMaster(lectureCode);
                 else
                     presenter.collectMaster(lectureCode);
+                break;
+            case R.id.btn_lecture_detail_sign_up:
+                PayActivity.launcher(this);
                 break;
             default:
                 break;

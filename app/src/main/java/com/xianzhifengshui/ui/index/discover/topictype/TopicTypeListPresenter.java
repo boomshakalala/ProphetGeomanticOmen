@@ -51,6 +51,9 @@ public class TopicTypeListPresenter extends BasePresenter implements TopicTypeLi
             public void onFailure(int errorEvent, String message) {
                 view.closeWait();
                 view.showFailure();
+                List<TopicType> list = new ArrayList<>();
+                list.add(new TopicType());
+                view.refreshData(list);
                 KLog.d(getClass().getSimpleName(),message);
                 view.showTip(message);
             }

@@ -15,7 +15,9 @@ import com.xianzhifengshui.api.model.Verify;
 import com.xianzhifengshui.api.model.WXApiResponse;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者: 陈冠希
@@ -291,4 +293,16 @@ public interface Api {
      * @param callback 回调
      */
     void lectureOrderPay(String userCode, String ip, int totalFee, String body, String lectCode, String payType, ActionCallbackListener<PayOrder> callback);
+
+    /**
+     * 调用本接口提交文件
+     * @param file 	文件
+     */
+    void fileUpload(File file);
+
+    /**
+     * 调用本接口批量上传文件
+     * @param files 文件列表
+     */
+    void fileUploadBatch(List<File> files);
 }

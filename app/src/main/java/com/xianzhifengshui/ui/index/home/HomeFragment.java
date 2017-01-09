@@ -167,6 +167,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View,Pull
     @Override
     public void showFailure() {
         emptyLayout.setShowErrorButton(true);
+        emptyLayout.showError();
     }
 
     @Override

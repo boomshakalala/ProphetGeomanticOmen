@@ -183,6 +183,7 @@ public class InitiateTopicActivity extends BaseActivity implements InitiateTopic
                 this.result = result;
                 log("resultSize======>"+this.result.size());
                 addImageAdapter.setData(result);
+                presenter.uploadFiles(result);
             }
         }else if (requestCode == REQUEST_CAMERA){
             Bundle extras = data.getExtras();

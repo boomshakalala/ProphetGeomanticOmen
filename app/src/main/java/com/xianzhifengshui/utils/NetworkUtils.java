@@ -5,6 +5,14 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
+import android.util.Log;
+
+import com.xianzhifengshui.api.utils.*;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 
 /**
  * <pre>
@@ -239,5 +247,27 @@ public class NetworkUtils {
             default:
                 return "NETWORK_UNKNOWN";
         }
+    }
+
+    /**
+     * 获取本机IP地址
+     * @param context 上下文
+     * @return ip
+     */
+    public static String getIpAdress(Context context){
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress()) {
+                        return inetAddress.getAddress().toString();
+                    }
+                }
+            }
+        } catch (SocketException ex) {
+            KLog.e(ex.toString());
+        }
+        return null;
     }
 }
