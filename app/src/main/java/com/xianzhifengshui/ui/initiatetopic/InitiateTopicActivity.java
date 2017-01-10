@@ -17,9 +17,11 @@ import com.xianzhifengshui.adapter.AddImageAdapter;
 import com.xianzhifengshui.adapter.TagAdapter;
 import com.xianzhifengshui.adapter.TagListAdapter;
 import com.xianzhifengshui.api.model.ImageFloder;
+import com.xianzhifengshui.api.model.TopicType;
 import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BaseActivity;
 import com.xianzhifengshui.common.CommonRecyclerAdapter;
+import com.xianzhifengshui.ui.pay.PayContract;
 import com.xianzhifengshui.ui.photopicker.PhotoPickerActivity;
 import com.xianzhifengshui.utils.CameraUtils;
 import com.xianzhifengshui.utils.FileUtils;
@@ -42,7 +44,7 @@ import javax.xml.transform.sax.TemplatesHandler;
  * 日期: 2016/11/14.
  * 描述:
  */
-public class InitiateTopicActivity extends BaseActivity implements InitiateTopicContract.View, CommonRecyclerAdapter.OnRecyclerViewItemClickListener<String>,DialogOnItemClickListener, AddImageAdapter.OnDeleteListener {
+public class InitiateTopicActivity extends BaseActivity implements InitiateTopicContract.View, CommonRecyclerAdapter.OnRecyclerViewItemClickListener<String>,DialogOnItemClickListener, AddImageAdapter.OnDeleteListener, View.OnClickListener {
 
 
     private final int REQUEST_CAMERA = 0x00;
@@ -61,6 +63,9 @@ public class InitiateTopicActivity extends BaseActivity implements InitiateTopic
     private TagListAdapter tagAdapter;
     private AddImageAdapter addImageAdapter;
     private List<String> result;
+    private List<String> tagStr;
+    private List<TopicType> topicTypes;
+    private String typeCode;
     private int selectedCount;
 
 
@@ -85,24 +90,33 @@ public class InitiateTopicActivity extends BaseActivity implements InitiateTopic
 
     @Override
     protected void initViews() {
+        emptyLayout.setShowErrorButton(true);
+        emptyLayout.setErrorButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.getTopicTypes();
+            }
+        });
         typeLayout = (TagLayout) findViewById(R.id.layout_initiate_topic_tag);
         titleEt = (EditText) findViewById(R.id.edit_initiate_topic_title);
         contentEt = (EditText) findViewById(R.id.edit_initiate_topic_content);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView_initiate_topic_image);
         recyclerView.setLayoutManager(new GridLayoutManager(this,4));
         initiateBtn = (TextView) findViewById(R.id.btn_initiate_topic);
+        initiateBtn.setOnClickListener(this);
         typeLayout.setAdapter(tagAdapter);
         recyclerView.setAdapter(addImageAdapter);
         recyclerView.addItemDecoration(new GridSpaceItemDecoration(5,4));
         selectDialog = new NormalSelectDialog.Builder(this).setOnItemClickListener(this).build();
         selectDialog.setDataList(Arrays.asList(getResources().getStringArray(R.array.select_initiate_topic)));
-
+        presenter.getTopicTypes();
     }
 
     @Override
     protected void initData() {
         presenter = new InitiateTopicPresenter(this);
-        tagAdapter = new TagListAdapter(this, Arrays.asList(getResources().getStringArray(R.array.tag_initiate_topic)),R.layout.item_search_tag);
+        tagStr = new ArrayList<>();
+        tagAdapter = new TagListAdapter(this, tagStr,R.layout.item_search_tag);
         result = new ArrayList<>();
         result.add("add");
         addImageAdapter = new AddImageAdapter(this,R.layout.item_initiate_topic_image,result);
@@ -183,7 +197,6 @@ public class InitiateTopicActivity extends BaseActivity implements InitiateTopic
                 this.result = result;
                 log("resultSize======>"+this.result.size());
                 addImageAdapter.setData(result);
-                presenter.uploadFiles(result);
             }
         }else if (requestCode == REQUEST_CAMERA){
             Bundle extras = data.getExtras();
@@ -220,5 +233,55 @@ public class InitiateTopicActivity extends BaseActivity implements InitiateTopic
         if (selectedCount<9 && !newImages.contains("add"))
             newImages.add("add");
         addImageAdapter.setData(newImages);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_initiate_topic:
+                String title = titleEt.getText().toString().trim();
+                String content = contentEt.getText().toString().trim();
+                List<String> picList = result.contains("add")?result.subList(0,result.size()-1):result;
+                presenter.topicIssueConfirm(title,content,typeCode,picList);
+                break;
+        }
+    }
+
+    @Override
+    public void loadTopicTypes(List<TopicType> data) {
+        topicTypes.addAll(data);
+    }
+
+    @Override
+    public void loadTagStr(List<String> tagStr) {
+        this.tagStr.addAll(tagStr);
+        tagAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showError() {
+        emptyLayout.showError();
+    }
+
+    @Override
+    public void showEmpty() {
+        emptyLayout.showEmpty();
+    }
+
+    @Override
+    public void showWaiting() {
+       if (topicTypes == null || topicTypes.size()==0){
+           emptyLayout.showLoading();
+       }else {
+           super.showWaiting();
+       }
+    }
+
+    @Override
+    public void closeWait() {
+        if (isProgressDialogShowing())
+            super.closeWait();
+        else
+            emptyLayout.hide();
     }
 }

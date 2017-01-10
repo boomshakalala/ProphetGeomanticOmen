@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public interface SearchContract {
     interface View extends IView<Presenter>{
         void showEmpty();
-        void showFailure();
+        void showFailure(String message);
         void loadData(ArrayList<Master> dataList);
         void loadMore(ArrayList<Master> dataList);
         void showInit();

@@ -281,6 +281,10 @@
             android:name=".ui.pay.PayActivity"
             android:screenOrientation="portrait"
             android:exported="true"/>
+        <activity
+            android:name=".ui.resetpassword.ResetPasswordActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"/>
     </application>
 
 </manifest>

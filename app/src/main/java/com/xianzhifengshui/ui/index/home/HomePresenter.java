@@ -94,7 +94,7 @@ public class HomePresenter extends BasePresenter implements HomeContract.Present
                 dataList.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
                 dataList.addAll(data.getNaviMenuList());
                 dataList.add(new ViewSupportModel(ViewSupportModel.VIEW_TYPE_SPLIT_LINE,"",false));
-                api.masterList(1, AppConfig.PAGE_SIZE, new ActionCallbackListener<BaseListModel<ArrayList<Master>>>() {
+                api.masterList(1, AppConfig.PAGE_SIZE,1,"","",new ActionCallbackListener<BaseListModel<ArrayList<Master>>>() {
                     @Override
                     public void onProgress(long bytesWritten, long totalSize) {
 

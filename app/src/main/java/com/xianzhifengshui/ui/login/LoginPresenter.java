@@ -109,8 +109,8 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
 
             @Override
             public void onSuccess(WXApiResponse data) {
-                String openid = data.getOpenid();
-                String accessToken = data.getAccess_token();
+                final String openid = data.getOpenid();
+                final String accessToken = data.getAccess_token();
                 api.wxGetUserInfo(accessToken, openid, new ActionCallbackListener<WXApiResponse>() {
                     @Override
                     public void onProgress(long bytesWritten, long totalSize) {
@@ -119,8 +119,24 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
 
                     @Override
                     public void onSuccess(WXApiResponse data) {
-                        KLog.d(TAG, data);
-                        view.closeWait();
+                        data.setAccess_token(accessToken);
+                        data.setOpenid(openid);
+                        api.userThirdLogin(data.getAccess_token(), "", "W", new ActionCallbackListener<User>() {
+                            @Override
+                            public void onProgress(long bytesWritten, long totalSize) {
+
+                            }
+
+                            @Override
+                            public void onSuccess(User data) {
+                                log(data);
+                            }
+
+                            @Override
+                            public void onFailure(int errorEvent, String message) {
+                                view.closeWait();
+                            }
+                        });
                     }
 
                     @Override

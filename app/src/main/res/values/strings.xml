@@ -166,6 +166,8 @@
     <string name="text_coupon">优惠券</string>
     <string name="text_you_have_no_coupon">您当前没有可用优惠券，赶紧去领吧~</string>
     <string name="text_to_pay">去支付</string>
+    <string name="text_verify_code">验证码</string>
+    <string name="text_reset_password">重置密码</string>
 
     <array name="tag_search">
         <item>商务风水</item>

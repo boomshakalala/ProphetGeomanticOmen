@@ -31,7 +31,7 @@ public class MasterListPresenter extends BasePresenter implements MasterListCont
 
     private void requestData() {
         view.showWaiting();
-        api.masterList(currentPage, AppConfig.PAGE_SIZE, new ActionCallbackListener<BaseListModel<ArrayList<Master>>>() {
+        api.masterList(currentPage, AppConfig.PAGE_SIZE,1,"","", new ActionCallbackListener<BaseListModel<ArrayList<Master>>>() {
             @Override
             public void onProgress(long bytesWritten, long totalSize) {
                 KLog.d(getClass().getSimpleName(),"bytesWritten="+bytesWritten+"totalSize="+totalSize);

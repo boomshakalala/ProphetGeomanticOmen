@@ -1,14 +1,8 @@
 package com.xianzhifengshui.ui.login;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +14,7 @@ import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BaseActivity;
 import com.xianzhifengshui.base.BaseFragment;
 import com.xianzhifengshui.ui.register.RegisterActivity;
+import com.xianzhifengshui.ui.resetpassword.ResetPasswordActivity;
 import com.xianzhifengshui.wxapi.WXAPI;
 
 /**
@@ -108,8 +103,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,Vi
                 finish();
                 break;
             case R.id.btn_login_forget_pwd:
-                //TODO:跳转到忘记密码页面
-
+                //跳转到忘记密码页面
+                ResetPasswordActivity.launcher(this);
                 break;
             case R.id.btn_login_register:
                 //跳转到注册页面

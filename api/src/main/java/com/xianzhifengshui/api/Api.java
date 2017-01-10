@@ -57,6 +57,17 @@ public interface Api {
     String LECTURE_ORDER_PAY = "lecturs/order/pay";// 讲座支付
     String TOPIC_DETAIL = "topic/detail";// 获取话题详情接口
     String File_UPLOAD = "file/upload";// 文件上传
+    String TOPIC_ISSUE_CONFIRM = "topic/issue/confirm";//用户发布话题接口
+
+    /**
+     * 调用本接口用户可以发布话题。
+     * @param userCode 用户编号
+     * @param tile 话题标题
+     * @param content 话题内容
+     * @param typeCode 话题类型编号
+     * @param picList 话题相关图片url列表
+     */
+    void topicIssueConfirm(String userCode,String tile,String content,String typeCode,List<String> picList,ActionCallbackListener<Void> callback);
 
     /**
      * 通过code获取access_token的接口。（微信）
@@ -88,7 +99,7 @@ public interface Api {
      * @param pageSize 每页最多显示多少条
      * @param callback 回调
      */
-    void masterList(int pageNum,int pageSize,ActionCallbackListener<BaseListModel<ArrayList<Master>>> callback);
+    void masterList(int pageNum,int pageSize,int searchType,String userCode,String keyword,ActionCallbackListener<BaseListModel<ArrayList<Master>>> callback);
 
     /**
      * 调用本接口获取大师详情

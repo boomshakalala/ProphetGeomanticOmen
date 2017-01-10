@@ -92,9 +92,9 @@ public class SearchActivity extends BaseActivity implements SearchContract.View,
     @Override
     protected void initViews() {
         pullToRefreshRecyclerView = (PullToRefreshRecyclerView) findViewById(R.id.recyclerView);
+        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         recyclerView = pullToRefreshRecyclerView.getRefreshableView();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         pullToRefreshRecyclerView.setOnRefreshListener(this);
         pullToRefreshRecyclerView.setScrollingWhileRefreshingEnabled(true);
         tagLayout = (RecyclerView) findViewById(R.id.layout_search_tag);
@@ -110,7 +110,7 @@ public class SearchActivity extends BaseActivity implements SearchContract.View,
                 presenter.loadData(null);
             }
         });
-        showInit();
+       showInit();
     }
 
 
@@ -142,10 +142,11 @@ public class SearchActivity extends BaseActivity implements SearchContract.View,
     }
 
     @Override
-    public void showFailure() {
+    public void showFailure(String message) {
         contentLayout.setVisibility(View.VISIBLE);
         initLayout.setVisibility(View.GONE);
         emptyLayout.setShowErrorButton(true);
+        emptyLayout.showError();
     }
 
     @Override
@@ -173,7 +174,7 @@ public class SearchActivity extends BaseActivity implements SearchContract.View,
 
     @Override
     public void closeLoadMore() {
-        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        pullToRefreshRecyclerView.setMode(PullToRefreshBase.Mode.DISABLED);
     }
 
     @Override
@@ -216,7 +217,7 @@ public class SearchActivity extends BaseActivity implements SearchContract.View,
     public void showWaiting() {
         if (pullToRefreshRecyclerView.isRefreshing())
             return;
-        if (data.size() == 0){
+        else if (data.size()==0){
             emptyLayout.showLoading();
         }else
             super.showWaiting();
@@ -224,12 +225,11 @@ public class SearchActivity extends BaseActivity implements SearchContract.View,
 
     @Override
     public void closeWait() {
-        if (pullToRefreshRecyclerView.isRefreshing()){
+        if (pullToRefreshRecyclerView.isRefreshing())
             pullToRefreshRecyclerView.onRefreshComplete();
-        }else if (isProgressDialogShowing()){
+        else if (isProgressDialogShowing())
             super.closeWait();
-        }else {
+        else
             emptyLayout.hide();
-        }
     }
 }

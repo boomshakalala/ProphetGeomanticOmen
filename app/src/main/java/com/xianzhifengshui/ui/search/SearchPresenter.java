@@ -1,18 +1,14 @@
 package com.xianzhifengshui.ui.search;
 
-import android.os.Handler;
 
 import com.xianzhifengshui.api.BaseListModel;
 import com.xianzhifengshui.api.model.Master;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
+import com.xianzhifengshui.api.utils.KLog;
 import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BasePresenter;
-import com.xianzhifengshui.utils.StringUtils;
-
-import org.w3c.dom.ProcessingInstruction;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 作者: chengx
@@ -23,11 +19,50 @@ public class SearchPresenter extends BasePresenter implements SearchContract.Pre
 
     private SearchContract.View view;
     private String keyword;
-    private int currentPage;
+    private int currentPage = 1;
 
     public SearchPresenter(SearchContract.View view) {
         this.view = view;
         view.setPresenter(this);
+    }
+
+    private void requestData(){
+        view.closeWait();
+        api.masterList(currentPage, AppConfig.PAGE_SIZE, 1, "", keyword, new ActionCallbackListener<BaseListModel<ArrayList<Master>>>() {
+            @Override
+            public void onProgress(long bytesWritten, long totalSize) {
+
+            }
+
+            @Override
+            public void onSuccess(BaseListModel<ArrayList<Master>> data) {
+                if (data.getPageNum()==currentPage){
+                    //关闭记载更多
+                    view.closeLoadMore();
+                }
+                ArrayList<Master> dataList = data.getList();
+                if (dataList != null && dataList.size()>0) {
+                    if (currentPage == 1){
+                        view.loadData(dataList);
+                    }else {
+                        view.loadMore(dataList);
+                    }
+                }else {
+                    if (currentPage == 1){
+                        log("showEmpty");
+                        view.showEmpty();
+                    }else {
+                        log("closeloadmore");
+                        view.showTip("没有更多了");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int errorEvent, String message) {
+                view.showFailure(message);
+            }
+        });
     }
 
     @Override
@@ -35,34 +70,15 @@ public class SearchPresenter extends BasePresenter implements SearchContract.Pre
         if (keyword != null) {
             this.keyword = keyword;
         }
-
         view.setKeyword(keyword);
-        view.showWaiting();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ArrayList<Master> list = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    list.add(new Master());
-                }
-                view.loadData(list);
-                view.closeWait();
-            }
-        },1500);
+        currentPage = 1;
+        requestData();
+
     }
 
     @Override
     public void loadMore() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ArrayList<Master> list = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    list.add(new Master());
-                }
-                view.loadMore(list);
-                view.closeWait();
-            }
-        },1500);
+        currentPage++;
+        requestData();
     }
 }

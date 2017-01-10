@@ -1,9 +1,15 @@
 package com.xianzhifengshui.api.net;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.media.Image;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.text.method.KeyListener;
+
+import com.xianzhifengshui.api.model.Topic;
 import com.xianzhifengshui.api.utils.KLog;
 
 import com.google.gson.Gson;
@@ -16,6 +22,7 @@ import com.xianzhifengshui.api.des.Md5Utils;
 import com.xianzhifengshui.api.model.ImageFloder;
 import com.xianzhifengshui.api.model.WXApiResponse;
 import com.xianzhifengshui.api.utils.JsonFormatTool;
+import com.xianzhifengshui.api.utils.PicUtils;
 
 
 import org.apache.http.conn.ssl.SSLSocketFactory;
@@ -29,6 +36,7 @@ import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -154,35 +162,55 @@ public class HttpEngine {
     }
 
     public void imageUpload(File imageFile){
+        if (!imageFile.exists()){
+            return;
+        }
         String url = HOST + FILE_UPLOAD;
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        if (imageFile != null) {
-            builder.addFormDataPart("file", imageFile.getName(),RequestBody.create(MEDIA_TYPE_PNG,imageFile));
-        }
-        MultipartBody body = builder.build();
-        Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                KLog.e(TAG,e.getLocalizedMessage());
-            }
+        try {
+            final String tempPath = PicUtils.bitmapToPath(imageFile.getPath());
+            File tempFile = new File(tempPath);
+            builder.addFormDataPart("file", tempFile.getName(), RequestBody.create(MEDIA_TYPE_PNG, tempFile));
+            MultipartBody body = builder.build();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    KLog.e(TAG,e.getLocalizedMessage());
+                }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                KLog.json(TAG,response.body().string());
-            }
-        });
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    PicUtils.deleteImgTmp(tempPath);
+                    KLog.json(TAG,response.body().string());
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public void imageUploadBatch(List<File> imageFiles){
         String url = HOST + FILE_UPLOAD_BATCH;
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        final List<String> tempFilePaths = new ArrayList<>();
         for (File imageFile : imageFiles) {
             if (imageFile != null) {
-                builder.addFormDataPart("file", imageFile.getName(),RequestBody.create(MEDIA_TYPE_PNG,imageFile));
+                final String tempPath;
+                try {
+                    tempPath = PicUtils.bitmapToPath(imageFile.getPath());
+                    tempFilePaths.add(tempPath);
+                    File tempFile = new File(tempPath);
+                    builder.addFormDataPart("file", tempFile.getName(),RequestBody.create(MEDIA_TYPE_PNG,tempFile));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
         MultipartBody body = builder.build();
@@ -199,6 +227,7 @@ public class HttpEngine {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                PicUtils.deleteImgTmp(tempFilePaths);
                 KLog.json(TAG,response.body().string());
             }
         });
@@ -224,7 +253,7 @@ public class HttpEngine {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 com.xianzhifengshui.api.net.Response<WXApiResponse> resp = new com.xianzhifengshui.api.net.Response<>();
-                resp.code = NETWORK_SUCCESS;
+                resp.code = WX_NETWORK_SUCCESS;
                 resp.json = response.body().string();
                 resp.callback = callback;
                 EventBus.getDefault().post(resp);

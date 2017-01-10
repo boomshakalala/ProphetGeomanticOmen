@@ -1,11 +1,10 @@
 package com.xianzhifengshui.api;
 
-import android.app.SearchManager;
-import android.util.Log;
+
+import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.xianzhifengshui.api.des.DESUtils;
 import com.xianzhifengshui.api.model.Article;
 import com.xianzhifengshui.api.model.HomeItemModle;
 import com.xianzhifengshui.api.model.Lecture;
@@ -19,7 +18,7 @@ import com.xianzhifengshui.api.model.Verify;
 import com.xianzhifengshui.api.model.WXApiResponse;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
 import com.xianzhifengshui.api.net.HttpEngine;
-import com.xianzhifengshui.api.utils.JsonFormatTool;
+import com.xianzhifengshui.api.utils.KLog;
 
 import java.io.File;
 import java.lang.reflect.Type;
@@ -65,9 +64,20 @@ public class ApiImpl implements Api {
         resultMap.put("deviceType", "android");
         resultMap.putAll(map);
         String json = gson.toJson(resultMap);
-        Log.d(TAG, "map2Ciphertext json = "+ JsonFormatTool.formatJson(json));
+        KLog.json(TAG,json);
         return json;
 
+    }
+
+    @Override
+    public void topicIssueConfirm(String userCode, String tile, String content, String typeCode, List<String> picList, ActionCallbackListener<Void> callback) {
+        paramsMap.clear();
+        paramsMap.put("userCode", userCode);
+        paramsMap.put("tile",tile);
+        paramsMap.put("content",content);
+        paramsMap.put("typeCode",typeCode);
+        paramsMap.put("picList",picList);
+        HttpEngine.getInstance().post(TOPIC_ISSUE_CONFIRM, map2Ciphertext(paramsMap) ,Void.class,callback);
     }
 
     @Override
@@ -93,17 +103,19 @@ public class ApiImpl implements Api {
         paramsMap.clear();
         paramsMap.put("mobilePhone", userName);
         paramsMap.put("password",passWord);
-        HttpEngine.getInstance().get(USER_LOGIN, map2Ciphertext(paramsMap) ,User.class,callback);
+        HttpEngine.getInstance().post(USER_LOGIN, map2Ciphertext(paramsMap) ,User.class,callback);
     }
 
     @Override
-    public void masterList(int pageNum, int pageSize, ActionCallbackListener<BaseListModel<ArrayList<Master>>> callback) {
+    public void masterList(int pageNum, int pageSize, int searchType, String userCode, String keyword, ActionCallbackListener<BaseListModel<ArrayList<Master>>> callback) {
         paramsMap.clear();
         paramsMap.put("pageNum", pageNum);
         paramsMap.put("pageSize",pageSize);
+        paramsMap.put("searchType",searchType);
+        paramsMap.put("userCode",userCode);
+        paramsMap.put("keyword",keyword);
         Type type = new TypeToken<BaseListModel<ArrayList<Master>>>(){}.getType();
-        HttpEngine.getInstance().get(MASTER_LIST,map2Ciphertext(paramsMap),type,callback);
-
+        HttpEngine.getInstance().post(MASTER_LIST,map2Ciphertext(paramsMap),type,callback);
     }
 
     @Override
@@ -112,14 +124,14 @@ public class ApiImpl implements Api {
         paramsMap.put("masterCode", masterCode);
         paramsMap.put("userCode", userCode);
         Type type = MasterDetailModel.class;
-        HttpEngine.getInstance().get(MASTER_DETAIL,map2Ciphertext(paramsMap),type,callback);
+        HttpEngine.getInstance().post(MASTER_DETAIL,map2Ciphertext(paramsMap),type,callback);
     }
 
     @Override
     public void indexGetDataList(ActionCallbackListener<HomeItemModle> callback) {
         paramsMap.clear();
         Type type = HomeItemModle.class;
-        HttpEngine.getInstance().get(INDEX_GET_DATA_LIST,map2Ciphertext(paramsMap),type,callback);
+        HttpEngine.getInstance().post(INDEX_GET_DATA_LIST,map2Ciphertext(paramsMap),type,callback);
     }
 
     @Override
@@ -129,7 +141,7 @@ public class ApiImpl implements Api {
         paramsMap.put("mobilePhone",mobilePhone);
         paramsMap.put("password",password);
         paramsMap.put("nickname",nickname);
-        HttpEngine.getInstance().get(USER_SAVE_USER_INFO,map2Ciphertext(paramsMap),type,callback);
+        HttpEngine.getInstance().post(USER_SAVE_USER_INFO,map2Ciphertext(paramsMap),type,callback);
     }
 
     @Override
@@ -139,14 +151,14 @@ public class ApiImpl implements Api {
         paramsMap.put("masterCode",masterCode);
         paramsMap.put("userCode",userCode);
         paramsMap.put("content",content);
-        HttpEngine.getInstance().get(MASTER_COLLECTION_CONFIRM,map2Ciphertext(paramsMap),typeOfT,callback);
+        HttpEngine.getInstance().post(MASTER_COLLECTION_CONFIRM,map2Ciphertext(paramsMap),typeOfT,callback);
     }
 
     @Override
     public void indexGetCityList(ActionCallbackListener<Void> callback) {
         paramsMap.clear();
         Type typeOfT = Void.class;
-        HttpEngine.getInstance().get(INDEX_GET_CITY_LIST,map2Ciphertext(paramsMap),typeOfT,callback);
+        HttpEngine.getInstance().post(INDEX_GET_CITY_LIST,map2Ciphertext(paramsMap),typeOfT,callback);
     }
 
     @Override
@@ -155,7 +167,7 @@ public class ApiImpl implements Api {
         Type typeOfT = Verify.class;
         paramsMap.put("mobilePhone",mobilePhone);
         paramsMap.put("type",type);
-        HttpEngine.getInstance().get(USER_SEND_SMS,map2Ciphertext(paramsMap),typeOfT,callback);
+        HttpEngine.getInstance().post(USER_SEND_SMS,map2Ciphertext(paramsMap),typeOfT,callback);
     }
 
     @Override
@@ -164,7 +176,7 @@ public class ApiImpl implements Api {
         Type typeOfT = Void.class;
         paramsMap.put("mobilePhone",mobilePhone);
         paramsMap.put("password",password);
-        HttpEngine.getInstance().get(USER_RESET_PASSWORD,map2Ciphertext(paramsMap),typeOfT,callback);
+        HttpEngine.getInstance().post(USER_RESET_PASSWORD,map2Ciphertext(paramsMap),typeOfT,callback);
     }
 
     @Override
@@ -174,7 +186,7 @@ public class ApiImpl implements Api {
         paramsMap.put("mobilePhone",mobilePhone);
         paramsMap.put("oldPassword",oldPassword);
         paramsMap.put("newPassword",newPassword);
-        HttpEngine.getInstance().get(USER_UPDATE_PASSWORD, map2Ciphertext(paramsMap), typeOfT, callback);
+        HttpEngine.getInstance().post(USER_UPDATE_PASSWORD, map2Ciphertext(paramsMap), typeOfT, callback);
     }
 
     @Override
@@ -191,7 +203,7 @@ public class ApiImpl implements Api {
         paramsMap.put("pageNum", pageNum);
         paramsMap.put("pageSize",pageSize);
         Type type = new TypeToken<BaseListModel<ArrayList<Lecture>>>(){}.getType();
-        HttpEngine.getInstance().get(LECTURES_LIST,map2Ciphertext(paramsMap),type,callback);
+        HttpEngine.getInstance().post(LECTURES_LIST,map2Ciphertext(paramsMap),type,callback);
     }
 
     @Override
@@ -200,7 +212,7 @@ public class ApiImpl implements Api {
         paramsMap.put("lecturesCode", lectureCode);
         paramsMap.put("userCode", userCode);
         Type type = Lecture.class;
-        HttpEngine.getInstance().get(LECTURES_DETAIL,map2Ciphertext(paramsMap),type,callback);
+        HttpEngine.getInstance().post(LECTURES_DETAIL,map2Ciphertext(paramsMap),type,callback);
     }
 
     @Override
@@ -209,14 +221,14 @@ public class ApiImpl implements Api {
         paramsMap.put("pageNum", pageNum);
         paramsMap.put("pageSize",pageSize);
         Type type = new TypeToken<BaseListModel<ArrayList<Topic>>>(){}.getType();
-        HttpEngine.getInstance().get(TOPIC_LIST,map2Ciphertext(paramsMap),type,callback);
+        HttpEngine.getInstance().post(TOPIC_LIST,map2Ciphertext(paramsMap),type,callback);
     }
 
     @Override
     public void topicTypeList(ActionCallbackListener<BaseListModel<ArrayList<TopicType>>> callback) {
         paramsMap.clear();
         Type type = new TypeToken<BaseListModel<ArrayList<TopicType>>>(){}.getType();
-        HttpEngine.getInstance().get(TOPIC_TYPE_LIST,map2Ciphertext(paramsMap),type,callback);
+        HttpEngine.getInstance().post(TOPIC_TYPE_LIST,map2Ciphertext(paramsMap),type,callback);
     }
 
     @Override
@@ -225,7 +237,7 @@ public class ApiImpl implements Api {
         paramsMap.put("token",token);
         paramsMap.put("phone",phone);
         paramsMap.put("tokenType",tokenType);
-        HttpEngine.getInstance().get(USER_THIRD_LOGIN,map2Ciphertext(paramsMap),User.class,callback);
+        HttpEngine.getInstance().post(USER_THIRD_LOGIN,map2Ciphertext(paramsMap),User.class,callback);
     }
 
     @Override
@@ -233,7 +245,7 @@ public class ApiImpl implements Api {
         paramsMap.clear();
         paramsMap.put("masterCode", masterCode);
         paramsMap.put("userCode",userCode);
-        HttpEngine.getInstance().get(MASTER_POINT_OF_PRAISE,map2Ciphertext(paramsMap),Void.class,callback);
+        HttpEngine.getInstance().post(MASTER_POINT_OF_PRAISE,map2Ciphertext(paramsMap),Void.class,callback);
     }
 
     @Override
@@ -243,14 +255,14 @@ public class ApiImpl implements Api {
         paramsMap.put("pageSize",pageSize);
         paramsMap.put("masterCode",masterCode);
         Type type = new TypeToken<BaseListModel<ArrayList<Article>>>(){}.getType();
-        HttpEngine.getInstance().get(MASTER_ARTICLE_LIST,map2Ciphertext(paramsMap),type,callback);
+        HttpEngine.getInstance().post(MASTER_ARTICLE_LIST,map2Ciphertext(paramsMap),type,callback);
     }
 
     @Override
     public void masterArticleDetail(String articleCode, ActionCallbackListener<Article> callback) {
         paramsMap.clear();
         paramsMap.put("articleCode", articleCode);
-        HttpEngine.getInstance().get(MASTER_ARTICLE_DETAIL,map2Ciphertext(paramsMap),Article.class,callback);
+        HttpEngine.getInstance().post(MASTER_ARTICLE_DETAIL,map2Ciphertext(paramsMap),Article.class,callback);
     }
 
     @Override
@@ -259,7 +271,7 @@ public class ApiImpl implements Api {
         paramsMap.put("masterCode", masterCode);
         paramsMap.put("userCode", userCode);
         paramsMap.put("type", type);
-        HttpEngine.getInstance().get(MASTER_COLLECTION_CONFIRM,map2Ciphertext(paramsMap),Void.class,callback);
+        HttpEngine.getInstance().post(MASTER_COLLECTION_CONFIRM,map2Ciphertext(paramsMap),Void.class,callback);
     }
 
     @Override
@@ -271,7 +283,7 @@ public class ApiImpl implements Api {
         paramsMap.put("serviceAttitude", serviceAttitude);
         paramsMap.put("professionalLevel", professionalLevel);
         paramsMap.put("content", content);
-        HttpEngine.getInstance().get(MASTER_EVALUATE_CONFIRM,map2Ciphertext(paramsMap),Void.class,callback);
+        HttpEngine.getInstance().post(MASTER_EVALUATE_CONFIRM,map2Ciphertext(paramsMap),Void.class,callback);
     }
 
     @Override
@@ -280,7 +292,7 @@ public class ApiImpl implements Api {
         paramsMap.put("userCode", userCode);
         paramsMap.put("lectCode", lectCode);
         paramsMap.put("type", type);
-        HttpEngine.getInstance().get(LECTURE_COLLECTION_COLLECT,map2Ciphertext(paramsMap),Void.class,callback);
+        HttpEngine.getInstance().post(LECTURE_COLLECTION_COLLECT,map2Ciphertext(paramsMap),Void.class,callback);
     }
 
     @Override
@@ -290,7 +302,7 @@ public class ApiImpl implements Api {
         paramsMap.put("pageNum", pageNum);
         paramsMap.put("pageSize", pageSize);
         Type type = new TypeToken<BaseListModel<ArrayList<Lecture>>>(){}.getType();
-        HttpEngine.getInstance().get(LECTURE_COLLECTION_LIST,map2Ciphertext(paramsMap),type,callback);
+        HttpEngine.getInstance().post(LECTURE_COLLECTION_LIST,map2Ciphertext(paramsMap),type,callback);
     }
 
     @Override
@@ -299,7 +311,7 @@ public class ApiImpl implements Api {
         paramsMap.put("userCode", userCode);
         paramsMap.put("lectCode", lectCode);
         paramsMap.put("type", type);
-        HttpEngine.getInstance().get(LECTURE_SIGN_UP_SIGN,map2Ciphertext(paramsMap),Void.class,callback);
+        HttpEngine.getInstance().post(LECTURE_SIGN_UP_SIGN,map2Ciphertext(paramsMap),Void.class,callback);
     }
 
     @Override
@@ -309,7 +321,7 @@ public class ApiImpl implements Api {
         paramsMap.put("pageNum", pageNum);
         paramsMap.put("pageSize", pageSize);
         Type type = new TypeToken<BaseListModel<ArrayList<Lecture>>>(){}.getType();
-        HttpEngine.getInstance().get(LECTURE_SIGN_PU_LIST,map2Ciphertext(paramsMap),type,callback);
+        HttpEngine.getInstance().post(LECTURE_SIGN_PU_LIST,map2Ciphertext(paramsMap),type,callback);
     }
 
     @Override

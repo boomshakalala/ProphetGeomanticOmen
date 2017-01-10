@@ -1,5 +1,7 @@
 package com.xianzhifengshui.ui.initiatetopic;
 
+import com.xianzhifengshui.api.model.Topic;
+import com.xianzhifengshui.api.model.TopicType;
 import com.xianzhifengshui.base.IPresenter;
 import com.xianzhifengshui.base.IView;
 
@@ -13,10 +15,14 @@ import java.util.List;
  */
 public interface InitiateTopicContract {
     interface View extends IView<Presenter>{
-
+        void loadTopicTypes(List<TopicType> data);
+        void loadTagStr(List<String> tagStr);
+        void showError();
+        void showEmpty();
     }
 
     interface Presenter extends IPresenter{
-        void uploadFiles(List<String> files);
+        void topicIssueConfirm(String title,String content,String typeCode,List<String> picList);
+        void getTopicTypes();
     }
 }
