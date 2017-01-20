@@ -16,7 +16,7 @@ import com.xianzhifengshui.base.BaseActivity;
  * 描述：
  */
 
-public class ResetPasswordActivity extends BaseActivity implements ResetPasswordContract.View {
+public class ResetPasswordActivity extends BaseActivity implements ResetPasswordContract.View, View.OnClickListener {
 
     /*======= 控件声明区 =======*/
     private EditText phoneNumEt;
@@ -38,6 +38,8 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
         passwordEt = (EditText) findViewById(R.id.edit_reset_password_new_password);
         verifyCodeBtn = (TextView) findViewById(R.id.btn_reset_password_get_verify_code);
         resetBtn = (Button) findViewById(R.id.btn_reset_password);
+        verifyCodeBtn.setOnClickListener(this);
+        resetBtn.setOnClickListener(this);
     }
 
     @Override
@@ -81,5 +83,36 @@ public class ResetPasswordActivity extends BaseActivity implements ResetPassword
     @Override
     public void showTip(String text) {
         showToast(text);
+    }
+
+    @Override
+    public void showResetSuccess() {
+        showTip("修改成功");
+        finish();
+    }
+
+    @Override
+    public void setTimeCount(String timeCount) {
+        verifyCodeBtn.setText(timeCount);
+    }
+
+    @Override
+    public void setClickble(boolean clickble) {
+        verifyCodeBtn.setClickable(clickble);
+    }
+
+    @Override
+    public void onClick(View view) {
+        String phoneNum = phoneNumEt.getText().toString().trim();
+        switch (view.getId()){
+            case R.id.btn_reset_password_get_verify_code:
+                presenter.getVerifyCode(phoneNum);
+                break;
+            case R.id.btn_reset_password:
+                String verifyCode = verifyCodeEt.getText().toString().trim();
+                String password = passwordEt.getText().toString().trim();
+                presenter.resetPassword(phoneNum,password,verifyCode);
+                break;
+        }
     }
 }

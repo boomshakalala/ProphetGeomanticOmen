@@ -1,5 +1,6 @@
 package com.xianzhifengshui.ui.mybill;
 
+import com.xianzhifengshui.api.model.Bill;
 import com.xianzhifengshui.api.model.Topic;
 import com.xianzhifengshui.base.IPresenter;
 import com.xianzhifengshui.base.IView;

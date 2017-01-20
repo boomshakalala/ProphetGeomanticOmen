@@ -8,14 +8,16 @@
     tools:context="com.xianzhifengshui.ui.index.home.HomeFragment">
     <include
         layout="@layout/layout_base_toolbar"/>
-    <!--<com.xianzhifengshui.widget.auto.AutoScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!-->-->
+
+    <com.xianzhifengshui.widget.auto.AutoScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:id="@+id/btn_mine_login"
                 android:clickable="true"
@@ -46,76 +48,165 @@
                     android:text="登陆更精彩哦~"
                     />
             </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/btn_mine_my_master"
-                android:clickable="true"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="88px"
-                android:background="@drawable/selector_commen_btn"
-                android:paddingLeft="40px"
-                android:paddingRight="40px"
-                android:layout_marginTop="8px">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:layout_centerVertical="true"
-                    android:textSize="@dimen/text_size_normal"
-                    android:text="@string/text_my_master"/>
-                <ImageView
-                    android:layout_width="16px"
-                    android:layout_height="30px"
-                    android:src="@drawable/arrow_right_icon"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"/>
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:paddingRight="40px"
-                android:paddingLeft="40px">
-                <View
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/layout_mine_user"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/spline_height_normal"
-                    android:background="@color/spline_color"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/btn_mine_my_lecture"
-                android:clickable="true"
-                android:layout_width="match_parent"
-                android:layout_height="88px"
-                android:background="@drawable/selector_commen_btn"
-                android:paddingLeft="40px"
-                android:paddingRight="40px"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:layout_centerVertical="true"
-                    android:textSize="@dimen/text_size_normal"
-                    android:text="@string/text_my_lecture"/>
-                <ImageView
-                    android:layout_width="16px"
-                    android:layout_height="30px"
-                    android:src="@drawable/arrow_right_icon"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"/>
+                    android:visibility="gone"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:id="@+id/btn_mine_my_master"
+                        android:clickable="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="88px"
+                        android:background="@drawable/selector_commen_btn"
+                        android:paddingLeft="40px"
+                        android:paddingRight="40px"
+                        android:layout_marginTop="8px">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:textSize="@dimen/text_size_normal"
+                            android:text="@string/text_my_master"/>
+                        <ImageView
+                            android:layout_width="16px"
+                            android:layout_height="30px"
+                            android:src="@drawable/arrow_right_icon"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"/>
 
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/selector_commen_btn"
-                android:paddingRight="40px"
-                android:paddingLeft="40px">
-                <View
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:paddingRight="40px"
+                        android:paddingLeft="40px">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/spline_height_normal"
+                            android:background="@color/spline_color"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/btn_mine_my_lecture"
+                        android:clickable="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="88px"
+                        android:background="@drawable/selector_commen_btn"
+                        android:paddingLeft="40px"
+                        android:paddingRight="40px"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:textSize="@dimen/text_size_normal"
+                            android:text="@string/text_my_lecture"/>
+                        <ImageView
+                            android:layout_width="16px"
+                            android:layout_height="30px"
+                            android:src="@drawable/arrow_right_icon"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selector_commen_btn"
+                        android:paddingRight="40px"
+                        android:paddingLeft="40px">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/spline_height_normal"
+                            android:background="@color/spline_color"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout_mine_master"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/spline_height_normal"
-                    android:background="@color/spline_color"/>
-            </RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:id="@+id/btn_mine_my_server"
+                        android:clickable="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="88px"
+                        android:background="@drawable/selector_commen_btn"
+                        android:paddingLeft="40px"
+                        android:paddingRight="40px"
+                        android:layout_marginTop="8px">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:textSize="@dimen/text_size_normal"
+                            android:text="@string/text_my_server"/>
+                        <ImageView
+                            android:layout_width="16px"
+                            android:layout_height="30px"
+                            android:src="@drawable/arrow_right_icon"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:paddingRight="40px"
+                        android:paddingLeft="40px">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/spline_height_normal"
+                            android:background="@color/spline_color"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/btn_mine_my_order"
+                        android:clickable="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="88px"
+                        android:background="@drawable/selector_commen_btn"
+                        android:paddingLeft="40px"
+                        android:paddingRight="40px"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:textSize="@dimen/text_size_normal"
+                            android:text="@string/text_my_order"/>
+                        <ImageView
+                            android:layout_width="16px"
+                            android:layout_height="30px"
+                            android:src="@drawable/arrow_right_icon"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selector_commen_btn"
+                        android:paddingRight="40px"
+                        android:paddingLeft="40px">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/spline_height_normal"
+                            android:background="@color/spline_color"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </FrameLayout>
             <RelativeLayout
                 android:id="@+id/btn_mine_my_topic"
                 android:clickable="true"
@@ -295,8 +386,7 @@
             </RelativeLayout>
         </LinearLayout>
 
-    <!--</com.xianzhifengshui.widget.auto.AutoScrollView>-->
-
+    </com.xianzhifengshui.widget.auto.AutoScrollView>
 
 
 </LinearLayout>

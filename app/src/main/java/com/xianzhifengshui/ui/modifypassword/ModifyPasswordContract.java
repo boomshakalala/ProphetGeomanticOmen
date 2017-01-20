@@ -10,10 +10,10 @@ import com.xianzhifengshui.base.IView;
  */
 public interface ModifyPasswordContract{
     interface View extends IView<Presenter>{
-
+        void showUpdatetSuccess();
     }
 
     interface Presenter extends IPresenter{
-
+        void updatePassword(String oldPassword,String newPassword);
     }
 }

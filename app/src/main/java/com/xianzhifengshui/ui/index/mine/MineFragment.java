@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -44,6 +45,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
     public static final int OPT_SETTING = 6;//跳转到设置页
     public static final int OPT_MY_ACCOUNT = 7;//跳转到我的账户页
     public static final int OPT_MY_COUPON = 8;//跳转到我的优惠券页
+    public static final int OPT_MY_SERVER = 9;//跳转到大师端我的服务项目
+    public static final int OPT_MY_ORDER = 10;//跳转到大师端我的订单
     /*======= 控件声明区 =======*/
     private RelativeLayout loginBtn;
     private RelativeLayout myMastBtn;
@@ -54,6 +57,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
     private RelativeLayout settingBtn;
     private RelativeLayout myAccountBtn;
     private RelativeLayout myCouponBtn;
+    private RelativeLayout myServerBtn;
+    private RelativeLayout myOrderBtn;
+    private LinearLayout userLayout;
+    private LinearLayout masterLayout;
     private CircleImageView avatarIv;
     private TextView userNameTv;
     /*=========================*/
@@ -66,6 +73,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
 
     @Override
     protected void initViews() {
+        userLayout = (LinearLayout) rootView.findViewById(R.id.layout_mine_user);
+        masterLayout = (LinearLayout) rootView.findViewById(R.id.layout_mine_master);
         loginBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_login);
         myMastBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_my_master);
         myLectureBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_my_lecture);
@@ -77,6 +86,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
         userNameTv = (TextView) rootView.findViewById(R.id.text_mine_user_name);
         myAccountBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_my_account);
         myCouponBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_my_coupon);
+        myServerBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_my_server);
+        myOrderBtn = (RelativeLayout) rootView.findViewById(R.id.btn_mine_my_order);
+        myServerBtn.setOnClickListener(this);
+        myOrderBtn.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
         myMastBtn.setOnClickListener(this);
         myLectureBtn.setOnClickListener(this);
@@ -144,6 +157,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
                     //跳转到我的优惠券页面
                     opt = OPT_MY_COUPON;
                     break;
+                case R.id.btn_mine_my_server:
+                    //跳转到大师端我的服务
+                    opt = OPT_MY_SERVER;
+                    break;
+                case R.id.btn_mine_my_order:
+                    //跳转到大师端我的订单
+                    opt = OPT_MY_ORDER;
+                    break;
                 default:
                     opt = 0;
                     break;
@@ -177,6 +198,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
     public void showDefaultInfo() {
         userNameTv.setText("登录后更精彩哦~");
         avatarIv.setImageResource(R.drawable.avatar_not_login_icon);
+        showUser();
     }
 
     @Override
@@ -206,9 +228,25 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,M
             case OPT_MY_COUPON:
                 MyCouponActivity.launcher(activity);
                 break;
+            case OPT_MY_SERVER:
+                //TODO:跳转到大师端我的服务
+                break;
+            case OPT_MY_ORDER:
+                //TODO:跳转到大师端我的订单
+                break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void showUser() {
+
+    }
+
+    @Override
+    public void showMaster() {
+
     }
 
     @Override

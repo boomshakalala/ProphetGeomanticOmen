@@ -1,9 +1,14 @@
 package com.xianzhifengshui.ui.mybill;
 
+import android.content.Context;
 import android.os.Handler;
 
+import com.xianzhifengshui.api.BaseListModel;
 import com.xianzhifengshui.api.model.Bill;
+import com.xianzhifengshui.api.net.ActionCallbackListener;
+import com.xianzhifengshui.base.AppConfig;
 import com.xianzhifengshui.base.BasePresenter;
+import com.xianzhifengshui.utils.KLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,34 +20,73 @@ import java.util.List;
  */
 public class MyBillPresenter extends BasePresenter implements MyBillContract.Presenter{
 
-    MyBillContract.View view;
+    private MyBillContract.View view;
+    private int currentPage = 1;
 
     public MyBillPresenter(MyBillContract.View view) {
         this.view = view;
     }
 
-    @Override
-    public void refreshData() {
+
+    private void requestData(){
+        if (!isLogin()){
+            view.toLoginActivity((Context)view);
+        }
+        String userCode = getUserCode();
         view.showWaiting();
-        new Handler().postDelayed(new Runnable() {
+        api.payOrderList(userCode, currentPage, AppConfig.PAGE_SIZE, new ActionCallbackListener<BaseListModel<ArrayList<Bill>>>() {
             @Override
-            public void run() {
-                List<Object> data = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    if (i==1 || i==5){
-                        data.add("");
+            public void onProgress(long bytesWritten, long totalSize) {
+
+            }
+
+            @Override
+            public void onSuccess(BaseListModel<ArrayList<Bill>> data) {
+                if (data.getPageNum()==currentPage){
+                    //关闭记载更多
+                    view.closeLoadMore();
+                }
+                ArrayList<Bill> dataList = data.getList();
+                ArrayList<Object> totalList = new ArrayList<>();
+                
+                totalList.addAll(dataList);
+                if (dataList != null && dataList.size()>0) {
+                    if (currentPage == 1){
+                        view.refreshData(totalList);
                     }else {
-                        data.add(new Bill());
+                        view.loadMore(totalList);
+                    }
+                }else {
+                    if (currentPage == 1){
+                        view.showEmpty();
+                    }else {
+                        view.showTip("没有更多了");
                     }
                 }
-                view.refreshData(data);
                 view.closeWait();
             }
-        },1500);
+
+            @Override
+            public void onFailure(int errorEvent, String message) {
+                view.closeWait();
+                if (currentPage == 1){
+                    view.showFailure();
+                }
+                KLog.d(getClass().getSimpleName(),message);
+                view.showTip(message);
+            }
+        });
+    }
+
+    @Override
+    public void refreshData() {
+        currentPage = 1;
+        requestData();
     }
 
     @Override
     public void loadMore() {
-
+        currentPage++;
+        requestData();
     }
 }

@@ -12,6 +12,8 @@ public class User implements Serializable{
 
     private String accessType;
 
+    private String userCode;
+
     private int type;
 
     private String accessToken;
@@ -137,6 +139,14 @@ public class User implements Serializable{
     }
     public long getLastModifyTime(){
         return this.lastModifyTime;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
     @Override

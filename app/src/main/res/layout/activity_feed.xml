@@ -55,6 +55,7 @@
         android:background="@drawable/shape_white_corner8"
         android:layout_marginTop="20px"/>
     <Button
+        android:id="@+id/btn_feed_back"
         android:layout_width="match_parent"
         android:layout_height="90px"
         android:layout_marginTop="90px"

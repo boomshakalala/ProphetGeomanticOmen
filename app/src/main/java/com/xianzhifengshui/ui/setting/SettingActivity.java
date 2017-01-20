@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.base.AppConfig;
@@ -24,6 +25,7 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
     private RelativeLayout phoneNumBtn;
     private RelativeLayout modifyPasswordBtn;
     private Button logoutBtn;
+    private TextView phoneNumTv;
     /*========================*/
 
     private SettingContract.Presenter presenter;
@@ -38,9 +40,11 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
     @Override
     protected void initViews() {
         phoneNumBtn = (RelativeLayout) findViewById(R.id.btn_setting_phone_number);
+        phoneNumTv = (TextView) findViewById(R.id.text_setting_phone_number);
+        phoneNumTv.setText(getMobilePhone());
         modifyPasswordBtn = (RelativeLayout) findViewById(R.id.btn_setting_modify_password);
         logoutBtn = (Button) findViewById(R.id.btn_setting_logout);
-        phoneNumBtn.setOnClickListener(this);
+//        phoneNumBtn.setOnClickListener(this);
         modifyPasswordBtn.setOnClickListener(this);
         logoutBtn.setOnClickListener(this);
     }

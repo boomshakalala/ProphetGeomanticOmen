@@ -207,10 +207,23 @@ public abstract   class BaseActivity extends AutoLayoutActivity {
     public String getUserCode(){
         User user = getUserInfo();
         if (user!=null){
-            return user.getBizCode();
+            return user.getUserCode();
         }else {
             return "";
         }
+    }
+
+    public String getMobilePhone(){
+        User user = getUserInfo();
+        if (user != null) {
+            return user.getMobilePhone();
+        }else {
+            return "";
+        }
+    }
+
+    public boolean isLogin(){
+        return sp.getBoolean(AppConfig.IS_LOGIN);
     }
 
     public void toLoginActivity(Context context){

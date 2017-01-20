@@ -12,9 +12,12 @@ import com.xianzhifengshui.base.IView;
 public class ResetPasswordContract {
     interface View extends IView<Presenter> {
         void showResetSuccess();
+        void setTimeCount(String timeCount);
+        void setClickble(boolean clickble);
     }
 
     interface Presenter extends IPresenter{
-        void resetPassword(String phoneNum,String newPassword);
+        void resetPassword(String phoneNum,String newPassword,String verifyCode);
+        void getVerifyCode(String phoneNum);
     }
 }

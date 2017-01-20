@@ -10,7 +10,7 @@
         android:id="@+id/btn_setting_phone_number"
         android:layout_width="match_parent"
         android:layout_height="80px"
-        android:background="@drawable/selector_commen_btn"
+        android:background="@color/white"
         android:paddingLeft="40px"
         android:paddingRight="40px"
         android:layout_marginTop="8px">
@@ -38,6 +38,7 @@
             android:layout_height="39px"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:visibility="gone"
             android:src="@drawable/arrow_right_icon"
             />
 

@@ -168,6 +168,10 @@
     <string name="text_to_pay">去支付</string>
     <string name="text_verify_code">验证码</string>
     <string name="text_reset_password">重置密码</string>
+    <string name="text_my_server">我的服务项目</string>
+    <string name="text_my_order">我的订单</string>
+    <string name="text_start_level">评价星级</string>
+    <string name="text_volume_rate">成交率</string>
 
     <array name="tag_search">
         <item>商务风水</item>

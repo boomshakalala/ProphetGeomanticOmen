@@ -23,6 +23,7 @@ import com.xianzhifengshui.api.model.ImageFloder;
 import com.xianzhifengshui.api.model.WXApiResponse;
 import com.xianzhifengshui.api.utils.JsonFormatTool;
 import com.xianzhifengshui.api.utils.PicUtils;
+import com.xianzhifengshui.api.utils.StringUtils;
 
 
 import org.apache.http.conn.ssl.SSLSocketFactory;
@@ -142,9 +143,11 @@ public class HttpEngine {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                KLog.e(TAG,e.getMessage());
                 com.xianzhifengshui.api.net.Response<T> resp = new com.xianzhifengshui.api.net.Response<>();
                 resp.code = NETWORK_FAILURE_ERROR;
                 resp.json = NETWORK_FAILURE_INFO;
+
                 resp.callback = callback;
                 EventBus.getDefault().post(resp);
             }

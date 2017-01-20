@@ -13,6 +13,6 @@ public interface FeedContract {
 
     }
     interface Presenter extends IPresenter{
-
+        void feedBack(String email,String content);
     }
 }

@@ -3,6 +3,7 @@ package com.xianzhifengshui.api;
 import android.app.Notification;
 
 import com.xianzhifengshui.api.model.Article;
+import com.xianzhifengshui.api.model.Bill;
 import com.xianzhifengshui.api.model.HomeItemModle;
 import com.xianzhifengshui.api.model.Lecture;
 import com.xianzhifengshui.api.model.Master;
@@ -41,7 +42,7 @@ public interface Api {
     String USER_SEND_SMS = "user/sendSMS";// 发送手机验证码接口
     String USER_RESET_PASSWORD = "user/resetPassword";// 找回（重置）密码接口
     String USER_UPDATE_PASSWORD = "user/updatePassword";// 修改密码接口
-    String FEEDBACK_FEEDBACK = "feedback/feedback";// 用户反馈
+    String MINE_FEEDBACK = "mine/feedback";// 用户反馈
     String LECTURES_LIST = "lectures/list";//获取讲座列表接口
     String LECTURES_DETAIL = "lectures/detail";//获取讲座详情接口
     String TOPIC_LIST = "topic/list";//获取话题列表接口
@@ -50,7 +51,7 @@ public interface Api {
     String MASTER_POINT_OF_PRAISE = "master/pointOfPraise";// 用户给大师点赞接口
     String MASTER_ARTICLE_LIST = "master/article/list";// 获取大师下的文章列表接口
     String MASTER_ARTICLE_DETAIL = "master/article/detail";// 获取大师下的文章详情接口
-    String LECTURE_COLLECTION_COLLECT = "lectures/collection/list";//收藏（取消）讲座
+    String LECTURE_COLLECTION_COLLECT = "lectures/collection/collect";//收藏（取消）讲座
     String LECTURE_COLLECTION_LIST = "lectures/collection/list";// 我的收藏讲座列表
     String LECTURE_SIGN_UP_SIGN = "lectures/signUp/sign";// 报名（取消）讲座
     String LECTURE_SIGN_PU_LIST = "lectures/signUp/list";// 我报名的讲座列表
@@ -58,6 +59,15 @@ public interface Api {
     String TOPIC_DETAIL = "topic/detail";// 获取话题详情接口
     String File_UPLOAD = "file/upload";// 文件上传
     String TOPIC_ISSUE_CONFIRM = "topic/issue/confirm";//用户发布话题接口
+    String PAY_ORDER_LIST = "pay/order/list";//账单列表
+
+    /**
+     * 调用本接口获取账单列表
+     * @param userCode 用户编号
+     * @param pageNum 当前第几页
+     * @param pageSize 每页最多显示多少条
+     */
+    void payOrderList(String userCode, int pageNum, int pageSize, ActionCallbackListener<BaseListModel<ArrayList<Bill>>> callback);
 
     /**
      * 调用本接口用户可以发布话题。
@@ -154,7 +164,7 @@ public interface Api {
      * @param password 新密码
      * @param callback 回调
      */
-    void userResetPassword(int mobilePhone,int password,ActionCallbackListener<Void> callback);
+    void userResetPassword(String mobilePhone,String password,ActionCallbackListener<Void> callback);
 
     /**
      * 调用本接口修改用户登录密码
@@ -171,7 +181,7 @@ public interface Api {
      * @param content 反馈内容
      * @param callback 回调
      */
-    void feedBack(String uid,String content,ActionCallbackListener<Void> callback);
+    void feedBack(String userCode,String email,String content,ActionCallbackListener<Void> callback);
 
     /**
      * 调用本接口获取讲座列表数据

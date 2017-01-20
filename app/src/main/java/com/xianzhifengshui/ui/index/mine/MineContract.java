@@ -15,6 +15,8 @@ public interface MineContract {
         void showLoginInfo();
         void showDefaultInfo();
         void jumpToActivity(int id);
+        void showUser();
+        void showMaster();
     }
 
     interface Presenter extends IPresenter{

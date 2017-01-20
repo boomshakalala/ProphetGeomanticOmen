@@ -6,6 +6,7 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xianzhifengshui.api.model.Article;
+import com.xianzhifengshui.api.model.Bill;
 import com.xianzhifengshui.api.model.HomeItemModle;
 import com.xianzhifengshui.api.model.Lecture;
 import com.xianzhifengshui.api.model.Master;
@@ -67,6 +68,16 @@ public class ApiImpl implements Api {
         KLog.json(TAG,json);
         return json;
 
+    }
+
+    @Override
+    public void payOrderList(String userCode, int pageNum, int pageSize, ActionCallbackListener<BaseListModel<ArrayList<Bill>>> callback) {
+        paramsMap.clear();
+        paramsMap.put("usercode",userCode);
+        paramsMap.put("pageNum",pageNum);
+        paramsMap.put("pageSize",pageSize);
+        Type type = new TypeToken<BaseListModel<ArrayList<Bill>>>(){}.getType();
+        HttpEngine.getInstance().post(PAY_ORDER_LIST,map2Ciphertext(paramsMap),type,callback);
     }
 
     @Override
@@ -171,7 +182,7 @@ public class ApiImpl implements Api {
     }
 
     @Override
-    public void userResetPassword(int mobilePhone, int password, ActionCallbackListener<Void> callback) {
+    public void userResetPassword(String mobilePhone, String password, ActionCallbackListener<Void> callback) {
         paramsMap.clear();
         Type typeOfT = Void.class;
         paramsMap.put("mobilePhone",mobilePhone);
@@ -190,11 +201,14 @@ public class ApiImpl implements Api {
     }
 
     @Override
-    public void feedBack(String uid, String content, ActionCallbackListener<Void> callback) {
+    public void feedBack(String userCode, String email, String content, ActionCallbackListener<Void> callback) {
         paramsMap.clear();
         Type tpyeOfT = Void.class;
-        paramsMap.put("uid",uid);
+        paramsMap.put("usercode",userCode);
         paramsMap.put("content",content);
+        paramsMap.put("email",email);
+        Type type = Void.class;
+        HttpEngine.getInstance().post(MINE_FEEDBACK,map2Ciphertext(paramsMap),type,callback);
     }
 
     @Override
@@ -327,7 +341,7 @@ public class ApiImpl implements Api {
     @Override
     public void lectureOrderPay(String userCode, String ip, int totalFee, String body, String lectCode, String payType, ActionCallbackListener<PayOrder> callback) {
         paramsMap.clear();
-        paramsMap.put("usercode", "123");
+        paramsMap.put("usercode", userCode);
         paramsMap.put("ip", ip);
         paramsMap.put("totalFee", totalFee);
         paramsMap.put("body", body);

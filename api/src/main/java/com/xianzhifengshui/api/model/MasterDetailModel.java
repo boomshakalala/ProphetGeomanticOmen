@@ -12,7 +12,7 @@ public class MasterDetailModel extends Master {
     private static final long serialVersionUID = 8513107300364273847L;
 
     private List<Evaluate> evaluateList;
-    private List<ServiceType> serviceType;
+    private List<ServiceType> serviceTypeList;
     private List<Article> articleList;
 
     public List<Evaluate> getEvaluateList() {
@@ -32,10 +32,10 @@ public class MasterDetailModel extends Master {
     }
 
     public List<ServiceType> getServiceType() {
-        return serviceType;
+        return serviceTypeList;
     }
 
     public void setServiceType(List<ServiceType> serviceType) {
-        this.serviceType = serviceType;
+        this.serviceTypeList = serviceType;
     }
 }

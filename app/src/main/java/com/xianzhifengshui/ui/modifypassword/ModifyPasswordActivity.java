@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.base.BaseActivity;
+import com.xianzhifengshui.utils.StringUtils;
 
 /**
  * 作者: chengx
@@ -22,6 +23,7 @@ public class ModifyPasswordActivity extends BaseActivity implements ModifyPasswo
     EditText confirmPasswordEt;
     Button modifyPasswordBtn;
     /*========================*/
+    ModifyPasswordContract.Presenter presenter;
 
     public static void launcher(Context context){
         Intent intent = new Intent();
@@ -52,7 +54,7 @@ public class ModifyPasswordActivity extends BaseActivity implements ModifyPasswo
 
     @Override
     protected void initData() {
-
+        presenter = new ModifyPasswordPresenter(this);
     }
 
     @Override
@@ -72,7 +74,7 @@ public class ModifyPasswordActivity extends BaseActivity implements ModifyPasswo
 
     @Override
     public void setPresenter(ModifyPasswordContract.Presenter presenter) {
-
+        this.presenter = presenter;
     }
 
     @Override
@@ -89,9 +91,29 @@ public class ModifyPasswordActivity extends BaseActivity implements ModifyPasswo
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_modify_password:
+                String oldPassword = orignalPasswordEt.getText().toString().trim();
+                String newPassword = newPasswordEt.getText().toString().trim();
+                String confirmPassword = confirmPasswordEt.getText().toString().trim();
+                if (!confirmPassword.equals(newPassword)){
+                    showTip("两次输入的密码不同");
+                    return;
+                }
+                if (StringUtils.isEmpty(confirmPassword)){
+                    showTip("请确认新密码");
+                    return;
+                }
+                presenter.updatePassword(oldPassword,newPassword);
                 break;
             default:
                 break;
         }
     }
+
+    @Override
+    public void showUpdatetSuccess() {
+        showTip("密码修改成功");
+        finish();
+    }
+
+
 }
