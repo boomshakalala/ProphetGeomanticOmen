@@ -29,7 +29,7 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener 
 
     private final int INDEX_HOME = 0;
     private final int INDEX_DISCOVER = 1;
-    private final int INDEX_SHOP = 2;
+//    private final int INDEX_SHOP = 2;
     private final int INDEX_MINE = 4;
     /*======= 控件声明区 =======*/
     TextView homeBtn;
@@ -86,14 +86,14 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener 
                 ft.show(discoverFragment);
                 discoverBtn.setSelected(true);
                 break;
-            case INDEX_SHOP:
-                if (shopFragment == null) {
-                    shopFragment = new ShopFragment();
-                    ft.add(R.id.layout_container,shopFragment);
-                }
-                ft.show(shopFragment);
-                shopBtn.setSelected(true);
-                break;
+//            case INDEX_SHOP:
+//                if (shopFragment == null) {
+//                    shopFragment = new ShopFragment();
+//                    ft.add(R.id.layout_container,shopFragment);
+//                }
+//                ft.show(shopFragment);
+//                shopBtn.setSelected(true);
+//                break;
             case INDEX_MINE:
                 if (mineFragment == null) {
                     mineFragment = new MineFragment();
@@ -158,10 +158,10 @@ public class IndexActivity extends BaseActivity implements View.OnClickListener 
                 //切换到发现
                 setSelected(INDEX_DISCOVER);
                 break;
-            case R.id.btn_index_shop:
-                //切换到商城
-                setSelected(INDEX_SHOP);
-                break;
+//            case R.id.btn_index_shop:
+//                //切换到商城
+//                setSelected(INDEX_SHOP);
+//                break;
             case R.id.btn_index_mine:
                 //切换到我
                 setSelected(INDEX_MINE);

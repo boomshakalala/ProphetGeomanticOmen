@@ -41,7 +41,7 @@ public class RecordDialog {
             View dialogView = inflater.inflate(R.layout.widget_dialog_audio,null);
             dialog.setContentView(dialogView);
             voiceIv = (ImageView) dialog.findViewById(R.id.jmui_volume_hint_iv);
-            labelTv = (TextView) dialog.findViewById(R.id.jmui_record_voice_tv);
+            labelTv = (TextView) dialog.findViewById(R.id.jmui_record_voice_tv) ;
         }
         dialog.show();
         recording();

@@ -55,7 +55,7 @@
                     android:id="@+id/layout_mine_user"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:orientation="vertical">
                     <RelativeLayout
                         android:id="@+id/btn_mine_my_master"
@@ -133,6 +133,7 @@
                     android:id="@+id/layout_mine_master"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:orientation="vertical">
                     <RelativeLayout
                         android:id="@+id/btn_mine_my_server"

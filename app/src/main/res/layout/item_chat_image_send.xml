@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <include
         layout="@layout/layout_chat_time"/>
@@ -13,9 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="28px"
-        android:gravity="right"
-        >
-
+        android:gravity="right">
         <ImageButton
             android:id="@+id/jmui_fail_resend_btn"
             android:layout_width="wrap_content"
@@ -28,34 +26,18 @@
             android:visibility="gone" />
         <com.xianzhifengshui.widget.dialog.BarView
             android:id="@+id/jmui_sending_iv"
-            android:layout_width="5dp"
+            android:layout_width="15dp"
             android:layout_height="5dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="6px"
             android:visibility="gone"/>
-        <TextView
-            android:id="@+id/jmui_msg_length"
+        <com.github.siyamed.shapeimageview.BubbleImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_gray"
-            android:layout_marginRight="10px"
-            android:textSize="@dimen/text_size_super_small"
-            android:layout_gravity="center_vertical"
-            android:text="15s"/>
-        <ImageView
-            android:id="@+id/jmui_msg_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/jmui_voice_send"
-            android:maxWidth="450px"
-            android:scaleType="fitEnd"
-            android:layout_marginRight="6px"
-            android:paddingLeft="20px"
-            android:paddingRight="30px"
-            android:paddingTop="20px"
-            android:paddingBottom="20px"
-            android:background="@drawable/jmui_msg_send_bg"/>
-
+            app:siArrowPosition="right"
+            app:siTriangleHeight="5dp"
+            app:siSquare="true"
+            android:src="@drawable/pic"/>
         <com.xianzhifengshui.widget.CircleImageView
             android:id="@+id/jmui_msg_avatar"
             android:layout_width="78px"
@@ -64,7 +46,6 @@
             app:layout_auto_baseheight="width"
             android:src="@drawable/pic1"
             />
-
     </LinearLayout>
 
 </LinearLayout>

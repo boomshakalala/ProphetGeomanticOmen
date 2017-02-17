@@ -43,6 +43,7 @@ public class MyMasterActivity extends BaseActivity implements TabLayout.OnTabSel
     List<BaseFragment> fragments;
     String[] titles;
     TabPagerAdapter pagerAdapter;
+    boolean isCurrentDated = true;
 
 
     public static void launcher(Context context){
@@ -116,7 +117,7 @@ public class MyMasterActivity extends BaseActivity implements TabLayout.OnTabSel
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-
+        isCurrentDated = tab.getPosition() == 0;
     }
 
     @Override
@@ -132,16 +133,23 @@ public class MyMasterActivity extends BaseActivity implements TabLayout.OnTabSel
     @Override
     public void onClick(View v) {
         int pos = (int) v.getTag();
-        TabLayout.Tab tab = tabLayout.getTabAt(pos);
+            TabLayout.Tab tab = tabLayout.getTabAt(pos);
         if (tab != null) {
-            tab.select();
-        }
-        if (pos == 0){
-            if (popupWindow != null) {
-                popupWindow.showAsDropDown(v);
+            if (pos == 0){
+                if (isCurrentDated){
+                    if (popupWindow != null) {
+                        popupWindow.showAsDropDown(v);
+                    }
+                }else {
+                    tab.select();
+                    viewPager.setCurrentItem(0);
+                }
+
+            }else {
+                tab.select();
+                viewPager.setCurrentItem(1);
             }
         }
-
     }
 
     @Override

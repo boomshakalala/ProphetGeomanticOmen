@@ -28,8 +28,6 @@ public class User implements Serializable{
 
     private String mobilePhone; //手机号
 
-    private String bizCode;
-
     private String creater;
 
     private String lastUpdater;
@@ -110,12 +108,6 @@ public class User implements Serializable{
     public String getMobilePhone(){
         return this.mobilePhone;
     }
-    public void setBizCode(String bizCode){
-        this.bizCode = bizCode;
-    }
-    public String getBizCode(){
-        return this.bizCode;
-    }
     public void setCreater(String creater){
         this.creater = creater;
     }
@@ -152,16 +144,20 @@ public class User implements Serializable{
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "accessType='" + accessType + '\'' +
+                ", userCode='" + userCode + '\'' +
+                ", type=" + type +
+                ", accessToken='" + accessToken + '\'' +
+                ", id=" + id +
                 ", createTime=" + createTime +
                 ", username='" + username + '\'' +
                 ", isDel=" + isDel +
                 ", mobilePhone='" + mobilePhone + '\'' +
-                ", bizCode='" + bizCode + '\'' +
                 ", creater='" + creater + '\'' +
                 ", lastUpdater='" + lastUpdater + '\'' +
                 ", isLock=" + isLock +
                 ", lastModifyTime=" + lastModifyTime +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

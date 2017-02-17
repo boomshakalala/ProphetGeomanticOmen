@@ -80,13 +80,13 @@ class ChatPresenter extends BasePresenter implements ChatContract.Presenter,Reco
     }
 
     @Override
-    public void sendImageMessage(String userName, String imagePath) {
+    public void sendImageMessage(String imagePath) {
         try {
             Message msg = JMessageClient.createSingleImageMessage(userName, new File(imagePath));
             msg.setOnSendCompleteCallback(new BasicCallback() {
                 @Override
                 public void gotResult(int i, String s) {
-                    KLog.d(TAG, "响应吗：" + i + "反馈信息：" + s);
+                   log("响应吗：" + i + "反馈信息：" + s);
                 }
             });
             JMessageClient.sendMessage(msg);
@@ -96,7 +96,7 @@ class ChatPresenter extends BasePresenter implements ChatContract.Presenter,Reco
     }
 
     @Override
-    public void sendTextMessage(String userName, String content) {
+    public void sendTextMessage(String content) {
         TextContent textContent = new TextContent(content);
         if (conversation == null){
             KLog.d(TAG,"conversation=null");
@@ -189,16 +189,14 @@ class ChatPresenter extends BasePresenter implements ChatContract.Presenter,Reco
                 }catch (IOException e){
                     e.printStackTrace();
                 }
-                if (mp!=null){
-                    int duration = mp.getDuration()/ConstUtils.SEC;
-                    if (duration<1)
-                        duration = 1;
-                    else if (duration>60){
-                        duration = 60;
-                    }
-                    sendVoiceMessage(duration);
-                    mp.release();
+                int duration = mp.getDuration()/ConstUtils.SEC;
+                if (duration<1)
+                    duration = 1;
+                else if (duration>60){
+                    duration = 60;
                 }
+                sendVoiceMessage(duration);
+                mp.release();
             }
         }
 
@@ -238,6 +236,7 @@ class ChatPresenter extends BasePresenter implements ChatContract.Presenter,Reco
                     break;
                 }
                 try {
+                    assert recorder != null;
                     int x = recorder.getMaxAmplitude();
                     if (x!=0) {
                         int f = (int) (10 * Math.log(x) / Math.log(10));

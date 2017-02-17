@@ -80,7 +80,7 @@ public class ListSelectDropDownPopupWindow extends PopupWindow implements View.O
             TextView textView = (TextView) itemView.findViewById(R.id.text_select_pop_item);
             textView.setText(items.get(i));
             final int pos = i;
-            textView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (onItemSelectedListener != null) {

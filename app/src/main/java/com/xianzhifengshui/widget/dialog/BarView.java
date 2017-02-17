@@ -2,6 +2,7 @@ package com.xianzhifengshui.widget.dialog;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -20,20 +21,22 @@ public class BarView extends ImageView {
     private Runnable updateViewRunnable;
     private int frameTime;
     private boolean needToUpdateView;
+    private int src = R.drawable.progress_bar;
 
 
     public BarView(Context context) {
-        super(context);
-        init();
+        this(context,null,0);
     }
 
     public BarView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
+        this(context,attrs,0);
     }
 
     public BarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BarView, defStyleAttr, 0);
+        this.src = a.getInt(R.styleable.BarView_bar_src,R.drawable.progress_bar);
+        a.recycle();
         init();
     }
 
@@ -44,7 +47,8 @@ public class BarView extends ImageView {
     }
 
     private void init(){
-        this.setImageResource(R.drawable.progress_bar);
+
+        this.setImageResource(src);
         this.updateViewRunnable = new Runnable() {
             @Override
             public void run() {

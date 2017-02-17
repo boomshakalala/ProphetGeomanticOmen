@@ -14,6 +14,9 @@ import com.bumptech.glide.Glide;
 import com.xianzhifengshui.widget.pull2refresh.PullToRefreshBase;
 import com.zhy.autolayout.utils.AutoUtils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 /**
  * 作者: chengx
  * 日期: 2016/10/11.
@@ -106,7 +109,15 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder{
 
     public RecyclerViewHolder setImageUrlBtimap(int viewId,Bitmap bitmap){
         ImageView imageView = getView(viewId);
-        Glide.with(context).load(bitmap).centerCrop().into(imageView);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,bos);
+        byte[] bytes = bos.toByteArray();
+        try {
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Glide.with(context).load(bytes).centerCrop().into(imageView);
         return this;
     }
 

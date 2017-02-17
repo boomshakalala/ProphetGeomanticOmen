@@ -1,7 +1,6 @@
 package com.xianzhifengshui.api;
 
 
-import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

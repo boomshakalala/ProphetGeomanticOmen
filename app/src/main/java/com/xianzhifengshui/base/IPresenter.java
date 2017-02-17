@@ -6,4 +6,5 @@ package com.xianzhifengshui.base;
  * 描述: Presenter公共接口
  */
 public interface IPresenter {
+
 }

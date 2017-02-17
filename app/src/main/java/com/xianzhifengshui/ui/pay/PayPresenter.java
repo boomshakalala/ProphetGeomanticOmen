@@ -5,9 +5,6 @@ import android.content.Context;
 import com.xianzhifengshui.api.model.PayOrder;
 import com.xianzhifengshui.api.net.ActionCallbackListener;
 import com.xianzhifengshui.base.BasePresenter;
-import com.xianzhifengshui.utils.EncodeUtils;
-import com.xianzhifengshui.utils.KLog;
-import com.xianzhifengshui.utils.NetworkUtils;
 import com.xianzhifengshui.wxapi.WXAPI;
 
 /**
@@ -40,14 +37,13 @@ public class PayPresenter extends BasePresenter implements PayContract.Presenter
             @Override
             public void onSuccess(PayOrder data) {
                 log(data);
-                log(EncodeUtils.base64Decode("aHR0cDovL2hkLmZ1dWxpaS5pbmZvL2UvYWN0aW9uL1Nob3dJbmZvLnBocD9jbGFzc2lkPTEmaWQ9MTE0OQ=="));
                 WXAPI.pay((Context)view,data.getPrepayId(),data.getSign());
             }
 
             @Override
             public void onFailure(int errorEvent, String message) {
                 log(message);
-            }
+            } 
         });
     }
 }

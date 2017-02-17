@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.xianzhifengshui.R;
 import com.xianzhifengshui.adapter.ChatAdapter;
 import com.xianzhifengshui.base.BaseActivity;
+import com.xianzhifengshui.ui.photopicker.PhotoPickerActivity;
 import com.xianzhifengshui.utils.KLog;
 import com.xianzhifengshui.utils.KeyboardUtils;
 import com.xianzhifengshui.widget.RecordVoiceButton;
@@ -56,9 +57,11 @@ public class ChatActivity extends BaseActivity implements ChatContract.View, Vie
 
     private ChatContract.Presenter presenter;
     private boolean softInputShowing = false;
-    private boolean isInputBykeyBoard = true;
+    private boolean isInputBykeyBoard = false;
     private ChatAdapter adapter;
     private List<Message> data;
+    private final int REQUEST_CAMERA = 0x00;
+    private final int REQUEST_PICTURE = 0xa1;
 
 
     public static void launcher(Context context){
@@ -101,6 +104,8 @@ public class ChatActivity extends BaseActivity implements ChatContract.View, Vie
         chatEt.setOnFocusChangeListener(this);
         chatEt.addTextChangedListener(this);
         sendBtn.setOnClickListener(this);
+        pickImageBtn.setOnClickListener(this);
+        takePhotoBtn.setOnClickListener(this);
         presenter.init();
     }
 
@@ -108,7 +113,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View, Vie
     protected void initData() {
         data = new ArrayList<>();
         adapter = new ChatAdapter(this,data);
-        presenter = new ChatPresenter(this,"admin");
+        presenter = new ChatPresenter(this,getUserCode());
     }
 
     @Override
@@ -203,11 +208,17 @@ public class ChatActivity extends BaseActivity implements ChatContract.View, Vie
 
     private void hideSendBtn(){
         sendBtn.setVisibility(View.GONE);
+        addFileBtn.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.jmui_pick_from_local_btn:
+                PhotoPickerActivity.launcher(this,REQUEST_PICTURE,0);
+                break;
+            case R.id.jmui_pick_from_camera_btn:
+                break;
             case R.id.jmui_switch_voice_ib:
                 dismissMoreMenu();
                 isInputBykeyBoard = !isInputBykeyBoard;
@@ -248,7 +259,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View, Vie
                 break;
             case R.id.jmui_send_btn:
                 String content = chatEt.getText().toString();
-                presenter.sendTextMessage("admin",content);
+                presenter.sendTextMessage(content);
                 chatEt.setText("");
                 break;
         }
@@ -279,4 +290,18 @@ public class ChatActivity extends BaseActivity implements ChatContract.View, Vie
     public void afterTextChanged(Editable s) {
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode){
+            case REQUEST_PICTURE:
+//                presenter.sendImageMessage();
+                break;
+            case REQUEST_CAMERA:
+                break;
+        }
+    }
+
+
 }

@@ -15,7 +15,6 @@ public class JsonLog {
     public static void printJson(String tag, String msg, String headString) {
 
         String message;
-
         try {
             if (msg.startsWith("{")) {
                 JSONObject jsonObject = new JSONObject(msg);

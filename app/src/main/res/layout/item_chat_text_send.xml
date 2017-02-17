@@ -23,13 +23,12 @@
             android:clickable="true"
             android:scaleType="fitCenter"
             android:visibility="gone" />
-        <ImageView
+        <com.xianzhifengshui.widget.dialog.BarView
             android:id="@+id/jmui_sending_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="6px"
-            android:src="@drawable/jmui_sending_img"
             android:visibility="gone"/>
         <TextView
             android:id="@+id/jmui_msg_content"

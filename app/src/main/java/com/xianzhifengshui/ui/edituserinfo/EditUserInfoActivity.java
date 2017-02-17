@@ -19,6 +19,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * 作者: chengx
@@ -62,10 +63,10 @@ public class EditUserInfoActivity extends BaseActivity implements EditUserInfoCo
                 genderBtn.setText(genderList.get(options1));
             }
         });
-        agePicker = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH);
-        agePicker.setTitle("出生年月");
+        agePicker = new TimePickerView(this, TimePickerView.Type.ALL);
+        agePicker.setTitle("开始时间");
         agePicker.setCyclic(false);
-        agePicker.setRange(1900,2016);
+        agePicker.setRange(1900,2017);
         agePicker.setTime(new Date(System.currentTimeMillis()));
         agePicker.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
             @Override
@@ -81,6 +82,13 @@ public class EditUserInfoActivity extends BaseActivity implements EditUserInfoCo
         ageBtn.setOnClickListener(this);
         areaBtn.setOnClickListener(this);
         presenter.loadAreaData();
+    }
+
+    public static void main(String[] args){
+        for (int i = 0; i < 6; i++) {
+            System.out.println(new Random().nextInt(33));
+        }
+
     }
 
     @Override

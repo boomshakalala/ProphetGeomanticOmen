@@ -58,8 +58,7 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
 
             @Override
             public void onSuccess(User data) {
-                loginChatService("admin", "123456");
-                data.setPassword(password);
+                loginChatService(data.getUserCode(), data.getUserCode());
                 saveLoginInfo(data);
             }
 

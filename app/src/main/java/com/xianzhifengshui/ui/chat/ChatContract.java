@@ -22,8 +22,8 @@ public interface ChatContract {
     interface Presenter extends IPresenter{
         void init();
         void destroy();
-        void sendImageMessage(String userName,String imagePath);
-        void sendTextMessage(String userName,String content);
+        void sendImageMessage(String imagePath);
+        void sendTextMessage(String content);
     }
 
 }

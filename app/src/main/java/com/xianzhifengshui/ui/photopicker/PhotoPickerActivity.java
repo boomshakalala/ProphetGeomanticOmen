@@ -50,6 +50,7 @@ public class PhotoPickerActivity extends BaseActivity implements PhotoPickerCont
         context.startActivityForResult(intent,requestCode);
     }
 
+
     @Override
     protected void initToolbar() {
         super.initToolbar();

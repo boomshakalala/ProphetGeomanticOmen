@@ -96,6 +96,9 @@
         <attr name="border_color" format="color" />
         <attr name="border_overlay" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="BarView">
+        <attr name="bar_src" format="reference" />
+    </declare-styleable>
     <declare-styleable name="AutoTabLayout">
             <attr name="auto_textSize_base_width" format="boolean"/>
     </declare-styleable>
