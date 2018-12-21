@@ -2,14 +2,6 @@ apply plugin: 'com.android.application'
 //apply plugin: 'android-apt'
 
 android {
-    signingConfigs {
-        config {
-            storeFile file('D:/ProphetGeomanticOmen/keyStore.jks')
-            storePassword '123456'
-            keyAlias 'xianzhiapp'
-            keyPassword '123456789'
-        }
-    }
     compileSdkVersion 23
     buildToolsVersion '23.0.1'
     defaultConfig {
